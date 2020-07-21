@@ -25,7 +25,7 @@ public class Main extends Application {
         Thread readyAll = new Thread(() -> initialing());
         readyAll.setPriority(Thread.MAX_PRIORITY);
         //initialing();
-        dbConn = ConnectDB.getConn();
+        //dbConn = ConnectDB.getConn();
         if (dbConn != null) {
             //System.out.println("Connection success...!");
             //Toolkit.getDefaultToolkit().beep();
