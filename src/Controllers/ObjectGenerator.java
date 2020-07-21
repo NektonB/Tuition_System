@@ -12,6 +12,8 @@ public class ObjectGenerator {
     private static BackupData backupData;
     private static ConnectionInfo connectionInfo;
     private static AutoBackup autoBackup;
+    private static User user;
+    private static UserType userType;
     private static ComponentSwitcher componentSwitcher;
     private static DateFormatConverter dateFormatConverter;
 
@@ -38,6 +40,20 @@ public class ObjectGenerator {
             alerts = new Alerts();
         }
         return alerts;
+    }
+
+    public static synchronized User getUser() {
+        if (user == null) {
+            user = new User();
+        }
+        return user;
+    }
+
+    public static synchronized UserType getUserType() {
+        if (userType == null) {
+            userType = new UserType();
+        }
+        return userType;
     }
 
     public static synchronized DataReader getDataReader() {
