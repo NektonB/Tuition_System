@@ -31,31 +31,9 @@ public class MainController implements Initializable {
 
     AnchorPane pnlGRN;
     AnchorPane pnlInvoice;
-    @FXML
-    private AnchorPane apParent;
-    @FXML
-    private AnchorPane apStatus;
-    @FXML
-    private MenuItem miRetail;
     ReportViewer reportViewer;
-    @FXML
-    private MenuItem miProductRegistration;
-    @FXML
-    private MenuItem mi_employee_manegment;
-    @FXML
-    private MenuItem mi_customer_manegment;
     Alerts alerts;
     User user;
-    @FXML
-    private MenuItem miInvoiceView;
-    @FXML
-    private BorderPane rootpane;
-    @FXML
-    private MenuItem miCurrentStock;
-    @FXML
-    private MenuItem miStockLog;
-    @FXML
-    private MenuItem miDISummary;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
