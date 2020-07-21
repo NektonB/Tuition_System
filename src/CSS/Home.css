@@ -1,4 +1,8 @@
 .topMenu{
-    -fx-border-width: 0px 0px 5px 0px;
-    -fx-border-color: #9850c6;
+    -fx-border-width: 0px 0px 2px 0px;
+    -fx-border-color: #a584c6;
+}
+
+.footer{
+    -fx-background-color: skyblue;
 }
