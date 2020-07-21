@@ -58,7 +58,8 @@ public class Main extends Application {
         //Font.loadFont(getClass().getClassLoader().getResource("Fonts/SriBhashitha.ttf").toExternalForm(), 15);
         //mainScene.getStylesheets().add(getClass().getClassLoader().getResource("CSS/Decorator.css").toExternalForm());
         primaryStage.setScene(mainScene);
-        primaryStage.initStyle(StageStyle.UNDECORATED);
+        primaryStage.initStyle(StageStyle.DECORATED);
+        primaryStage.setResizable(false);
         //primaryStage.getIcons().add(new Image("/Graphics/Main_01.png"));
         primaryStage.setOnCloseRequest(event -> {
             System.exit(0);
