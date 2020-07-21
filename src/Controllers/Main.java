@@ -60,7 +60,7 @@ public class Main extends Application {
         primaryStage.setScene(mainScene);
         primaryStage.initStyle(StageStyle.DECORATED);
         primaryStage.setResizable(false);
-        //primaryStage.getIcons().add(new Image("/Graphics/Main_01.png"));
+        primaryStage.getIcons().add(new Image("/Graphics/Main_01.png"));
         primaryStage.setOnCloseRequest(event -> {
             System.exit(0);
         });
