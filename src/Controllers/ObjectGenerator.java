@@ -1,0 +1,112 @@
+package Controllers;
+
+import DataControllers.DataReader;
+import DataControllers.DataWriter;
+import Modules.*;
+
+public class ObjectGenerator {
+
+    private static DataReader dataReader;
+    private static DataWriter dataWriter;
+    private static Alerts alerts;
+    private static BackupData backupData;
+    private static ConnectionInfo connectionInfo;
+    private static AutoBackup autoBackup;
+    private static ComponentSwitcher componentSwitcher;
+    private static DateFormatConverter dateFormatConverter;
+
+    private static TextValidator textValidator;
+    private static TimeFormatConverter timeFormatConverter;
+    private static ReportViewer reportViewer;
+
+    public static synchronized void readyAll() {
+        try {
+            String ready = "ready";
+            alerts = new Alerts();
+            dataReader = new DataReader();
+            dataWriter = new DataWriter();
+            backupData = new BackupData();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            alerts.getWarningAlert("Error Alert", "Something went wrong..", e.toString());
+        }
+    }
+
+    public static synchronized Alerts getAlerts() {
+        if (alerts == null) {
+            alerts = new Alerts();
+        }
+        return alerts;
+    }
+
+    public static synchronized DataReader getDataReader() {
+        if (dataReader == null) {
+            dataReader = new DataReader();
+        }
+        return dataReader;
+    }
+
+    public static synchronized DataWriter getDataWriter() {
+        if (dataWriter == null) {
+            dataWriter = new DataWriter();
+        }
+        return dataWriter;
+    }
+
+    public static synchronized BackupData getBackupData() {
+        if (backupData == null) {
+            backupData = new BackupData();
+        }
+        return backupData;
+    }
+
+    public static synchronized ConnectionInfo getConnectionInfo() {
+        if (connectionInfo == null) {
+            connectionInfo = new ConnectionInfo();
+        }
+        return connectionInfo;
+    }
+
+    public static synchronized AutoBackup getAutoBackup() {
+        if (autoBackup == null) {
+            autoBackup = new AutoBackup();
+        }
+        return autoBackup;
+    }
+
+    public static synchronized ComponentSwitcher getComponentSwitcher() {
+        if (componentSwitcher == null) {
+            componentSwitcher = new ComponentSwitcher();
+        }
+        return componentSwitcher;
+    }
+
+    public static synchronized DateFormatConverter getDateFormatConverter() {
+        if (dateFormatConverter == null) {
+            dateFormatConverter = new DateFormatConverter();
+        }
+        return dateFormatConverter;
+    }
+
+    public static synchronized TextValidator getTextValidator() {
+        if (textValidator == null) {
+            textValidator = new TextValidator();
+        }
+        return textValidator;
+    }
+
+    public static synchronized TimeFormatConverter getTimeFormatConverter() {
+        if (timeFormatConverter == null) {
+            timeFormatConverter = new TimeFormatConverter();
+        }
+        return timeFormatConverter;
+    }
+
+    public static synchronized ReportViewer getReportViewer() {
+        if (reportViewer == null) {
+            reportViewer = new ReportViewer();
+        }
+        return reportViewer;
+    }
+}
