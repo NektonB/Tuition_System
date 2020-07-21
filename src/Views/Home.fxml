@@ -138,6 +138,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </JFXButton>
+                  <ImageView fitHeight="78.0" fitWidth="155.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </HBox>
          </top>
