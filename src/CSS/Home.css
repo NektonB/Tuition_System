@@ -1,8 +1,18 @@
 .topMenu{
     -fx-border-width: 0px 0px 2px 0px;
-    -fx-border-color: #a584c6;
+    -fx-border-color: #b399c6;
 }
 
 .footer{
     -fx-background-color: skyblue;
+}
+
+.btnSelect{
+
+}
+
+.btnSelect:pressed{
+    -fx-border-width: 0px 0px 7px 0px;
+    -fx-border-color: transparent;
+
 }
