@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="524.0" prefWidth="800.0" styleClass="parant" stylesheets="@../CSS/Login.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="524.0" prefWidth="800.0" styleClass="parant" stylesheets="@../CSS/Login.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.LoginController">
    <children>
       <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="524.0" prefWidth="400.0" styleClass="sidebar">
          <children>
@@ -64,7 +64,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Label>
-            <JFXButton fx:id="btn_login" buttonType="RAISED" layoutX="58.0" layoutY="414.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="300.0" ripplerFill="#0777ff" styleClass="loginBtn" text="Login">
+            <JFXButton fx:id="btn_login" buttonType="RAISED" layoutX="58.0" layoutY="414.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#loadContact" prefHeight="50.0" prefWidth="300.0" ripplerFill="#0777ff" styleClass="loginBtn" text="Login">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
