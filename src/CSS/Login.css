@@ -1,0 +1,36 @@
+.parant{
+    -fx-background-color: white;
+}
+
+.sidebar{
+    -fx-background-color: #6747CD;
+}
+
+.contentbar{
+    -fx-background-color: #fff;
+}
+
+.forgotBtn{
+    -fx-text-fill: #a3a3a3;
+}
+
+.forgotBtn:hover{
+    -fx-text-fill: #6747CD;
+    -fx-underline: true;
+}
+
+.loginBtn{
+    -fx-background-color: #6747CD;
+    -fx-text-fill: #fff;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+}
+
+.loginBtn:hover{
+    -fx-background-color: transparent;
+    -fx-text-fill: #6747CD;
+    -fx-border-color: #6747CD;
+    -fx-border-style: solid;
+    -fx-background-radius: 5px;
+}
+
