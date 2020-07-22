@@ -59,7 +59,9 @@ public class Main extends Application {
         //mainScene.getStylesheets().add(getClass().getClassLoader().getResource("CSS/Decorator.css").toExternalForm());
         primaryStage.setScene(mainScene);
         primaryStage.initStyle(StageStyle.DECORATED);
-        primaryStage.setResizable(false);
+        //primaryStage.setResizable(false);
+        primaryStage.setFullScreen(true);
+
         primaryStage.getIcons().add(new Image("Graphics/Main_01.png"));
         primaryStage.setOnCloseRequest(event -> {
             System.exit(0);
