@@ -15,12 +15,14 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -35,9 +37,14 @@ public class MainController implements Initializable {
     Alerts alerts;
     User user;
 
+
+
+    @FXML
+    private StackPane rootPane;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        try {
+        /*try {
             Thread readyData = new Thread(() -> {
                 ObjectGenerator.getAutoBackup().AutoGet();
             });
@@ -48,7 +55,7 @@ public class MainController implements Initializable {
             user = ObjectGenerator.getUser();
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     public void exitNow(ActionEvent event) {
@@ -62,6 +69,13 @@ public class MainController implements Initializable {
         } else {
 
         }
+    }
+
+
+        public void loardScence(ActionEvent event) throws IOException {
+        StackPane pane=FXMLLoader.load(getClass().getResource("/Views/User.fxml"));
+        rootPane.getChildren().setAll(pane);
+
     }
 
 }

@@ -13,7 +13,7 @@
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0" stylesheets="@../CSS/Home.css">
          <bottom>
-            <HBox prefHeight="36.0" prefWidth="1223.0" BorderPane.alignment="CENTER" />
+            <HBox prefHeight="23.0" prefWidth="1200.0" BorderPane.alignment="CENTER" />
          </bottom>
          <top>
             <StackPane prefHeight="85.0" prefWidth="1300.0" styleClass="topMenu" BorderPane.alignment="CENTER">
@@ -120,7 +120,7 @@
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </JFXButton>
-                              <JFXButton alignment="BOTTOM_CENTER" buttonType="RAISED" contentDisplay="TOP" graphicTextGap="7.0" minHeight="60.0" minWidth="60.0" prefHeight="70.0" prefWidth="105.0" ripplerFill="WHITE" style="-fx-background-color: #dd4b39;" styleClass="btnSelect" text="USER" textFill="WHITE">
+                              <JFXButton alignment="BOTTOM_CENTER" buttonType="RAISED" contentDisplay="TOP" graphicTextGap="7.0" minHeight="60.0" minWidth="60.0" onAction="#loardScence" prefHeight="70.0" prefWidth="105.0" ripplerFill="WHITE" style="-fx-background-color: #dd4b39;" styleClass="btnSelect" text="USER" textFill="WHITE">
                                  <graphic>
                                     <FontAwesomeIconView fill="WHITE" glyphName="USER" size="20" />
                                  </graphic>
@@ -147,6 +147,9 @@
                </children>
             </StackPane>
          </top>
+         <center>
+            <StackPane fx:id="rootPane" prefHeight="453.0" prefWidth="1200.0" BorderPane.alignment="CENTER" />
+         </center>
       </BorderPane>
    </children>
 </StackPane>
