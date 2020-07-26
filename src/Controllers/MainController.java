@@ -1,31 +1,23 @@
 package Controllers;
 
 import Modules.User;
-import eu.hansolo.enzo.notification.Notification;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.util.Duration;
-import org.controlsfx.control.Notifications;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -72,10 +64,22 @@ public class MainController implements Initializable {
     }
 
 
-        public void loardScence(ActionEvent event) throws IOException {
-        StackPane pane=FXMLLoader.load(getClass().getResource("/Views/User.fxml"));
-        rootPane.getChildren().setAll(pane);
-
+    //Load User form (PopUp)**********************
+    public void loadUser() {
+        try {
+            Stage productsStage = new Stage();
+            Parent user = FXMLLoader.load(getClass().getClassLoader().getResource("Views/User.fxml"));
+            productsStage.setTitle("User Management");
+            Scene scene = new Scene(user);
+            productsStage.setScene(scene);
+            productsStage.initStyle(StageStyle.UTILITY);
+            //productsStage.getIcons().add(new Image("/images/Main_01.png"));
+            productsStage.setResizable(false);
+            productsStage.initModality(Modality.APPLICATION_MODAL);
+            productsStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

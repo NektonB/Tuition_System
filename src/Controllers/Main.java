@@ -53,7 +53,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Views/Login.fxml"));
-        //primaryStage.setTitle("Inventory Master v2.0");
+        primaryStage.setTitle("Login");
         Scene mainScene = new Scene(root);
         //Font.loadFont(getClass().getClassLoader().getResource("Fonts/SriBhashitha.ttf").toExternalForm(), 15);
         //mainScene.getStylesheets().add(getClass().getClassLoader().getResource("CSS/Decorator.css").toExternalForm());

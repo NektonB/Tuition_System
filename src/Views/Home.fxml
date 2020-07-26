@@ -120,7 +120,7 @@
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </JFXButton>
-                              <JFXButton alignment="BOTTOM_CENTER" buttonType="RAISED" contentDisplay="TOP" graphicTextGap="7.0" minHeight="60.0" minWidth="60.0" onAction="#loardScence" prefHeight="70.0" prefWidth="105.0" ripplerFill="WHITE" style="-fx-background-color: #dd4b39;" styleClass="btnSelect" text="USER" textFill="WHITE">
+                              <JFXButton alignment="BOTTOM_CENTER" buttonType="RAISED" contentDisplay="TOP" graphicTextGap="7.0" minHeight="60.0" minWidth="60.0" onAction="#loadUser" prefHeight="70.0" prefWidth="105.0" ripplerFill="WHITE" style="-fx-background-color: #dd4b39;" styleClass="btnSelect" text="USER" textFill="WHITE">
                                  <graphic>
                                     <FontAwesomeIconView fill="WHITE" glyphName="USER" size="20" />
                                  </graphic>

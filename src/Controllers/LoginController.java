@@ -38,7 +38,7 @@ public class LoginController implements Initializable {
         try {
             Stage productsStage = new Stage();
             Parent frmCustomer = FXMLLoader.load(getClass().getClassLoader().getResource("Views/Home.fxml"));
-            productsStage.setTitle("Class Menagment System");
+            productsStage.setTitle("Class Management System");
             Scene scene = new Scene(frmCustomer);
             productsStage.setScene(scene);
             productsStage.initStyle(StageStyle.DECORATED);
