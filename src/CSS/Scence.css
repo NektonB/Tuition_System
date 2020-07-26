@@ -1,3 +1,22 @@
 .header{
     -fx-background-color: rgba(180, 190, 236, 0.51);
 }
+
+.fieldAria{
+    -fx-background-color: #f9f6ff;
+}
+
+.Btn{
+    -fx-background-color: #6747CD;
+    -fx-text-fill: #fff;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+}
+
+.Btn:hover{
+    -fx-background-color: transparent;
+    -fx-text-fill: #6747CD;
+    -fx-border-color: #6747CD;
+    -fx-border-style: solid;
+    -fx-background-radius: 5px;
+}

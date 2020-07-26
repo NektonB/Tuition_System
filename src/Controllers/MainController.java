@@ -9,7 +9,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
@@ -63,6 +62,12 @@ public class MainController implements Initializable {
         }
     }
 
+
+        public void loardEmployee(ActionEvent event) throws IOException {
+        StackPane pane=FXMLLoader.load(getClass().getResource("/Views/Employee.fxml"));
+        rootPane.getChildren().setAll(pane);
+
+    }
 
     //Load User form (PopUp)**********************
     public void loadUser() {
