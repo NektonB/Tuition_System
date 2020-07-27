@@ -83,8 +83,6 @@ public class LoginController implements Initializable {
             Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Views/frmMain.fxml"));
             primaryStage.setTitle("Class Management System");
             Scene mainScene = new Scene(root);
-//            Font.loadFont(getClass().getClassLoader().getResource("Fonts/SriBhashitha.ttf").toExternalForm(), 15);
-//            mainScene.getStylesheets().add(getClass().getClassLoader().getResource("CSS/Decorator.css").toExternalForm());
             primaryStage.setScene(mainScene);
             primaryStage.initStyle(StageStyle.DECORATED);
             primaryStage.initModality(Modality.APPLICATION_MODAL);
@@ -103,12 +101,10 @@ public class LoginController implements Initializable {
         try {
             Stage primaryStage = new Stage();
             Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Views/frmLogin.fxml"));
-            //primaryStage.setTitle("Inventory Master v2.0");
             Scene mainScene = new Scene(root);
-//            Font.loadFont(getClass().getClassLoader().getResource("Fonts/SriBhashitha.ttf").toExternalForm(), 15);
-//            mainScene.getStylesheets().add(getClass().getClassLoader().getResource("CSS/Decorator.css").toExternalForm());
             primaryStage.setScene(mainScene);
-            primaryStage.initStyle(StageStyle.UNDECORATED);
+            primaryStage.initStyle(StageStyle.UTILITY);
+            primaryStage.setResizable(false);
             primaryStage.getIcons().add(new Image("/Graphics/Main_01.png"));
             primaryStage.setOnCloseRequest(event -> {
                 System.exit(0);
@@ -128,23 +124,6 @@ public class LoginController implements Initializable {
     public void exitKey(KeyEvent event) {
         if (event.getCode().equals(KeyCode.ESCAPE)) {
             System.exit(0);
-        }
-    }
-
-    // this code part is Load contact form*****************************
-    public void loadContact() {
-        try {
-            Stage productsStage = new Stage();
-            Parent frmCustomer = FXMLLoader.load(getClass().getClassLoader().getResource("Views/frm"));
-            productsStage.setTitle("Class Management System");
-            Scene scene = new Scene(frmCustomer);
-            productsStage.setScene(scene);
-            productsStage.initStyle(StageStyle.DECORATED);
-            productsStage.initModality(Modality.APPLICATION_MODAL);
-            productsStage.getIcons().add(new Image("Graphics/Main_01.png"));
-            productsStage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 }
