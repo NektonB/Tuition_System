@@ -16,6 +16,8 @@ public class ObjectGenerator {
     private static UserType userType;
     private static ComponentSwitcher componentSwitcher;
     private static DateFormatConverter dateFormatConverter;
+    private static Employee employee;
+    private static Status status;
 
     private static TextValidator textValidator;
     private static TimeFormatConverter timeFormatConverter;
@@ -124,5 +126,19 @@ public class ObjectGenerator {
             reportViewer = new ReportViewer();
         }
         return reportViewer;
+    }
+
+    public static synchronized Employee getEmployee() {
+        if (employee == null) {
+            employee = new Employee();
+        }
+        return employee;
+    }
+
+    public static synchronized Status getStatus() {
+        if (status == null) {
+            status = new Status();
+        }
+        return status;
     }
 }
