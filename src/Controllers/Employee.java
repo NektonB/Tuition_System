@@ -13,6 +13,7 @@ public class Employee implements Initializable {
     DataReader dataReader;
     Alerts alerts;
     Employee employee;
+    DateFormatConverter dateFormatConverter;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -20,5 +21,6 @@ public class Employee implements Initializable {
         dataWriter = ObjectGenerator.getDataWriter();
         dataReader = ObjectGenerator.getDataReader();
         employee = ObjectGenerator.getEmployee();
+        dateFormatConverter = ObjectGenerator.getDateFormatConverter();
     }
 }
