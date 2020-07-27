@@ -29,7 +29,6 @@ public class MainController implements Initializable {
     User user;
 
 
-
     @FXML
     private StackPane rootPane;
 
@@ -63,8 +62,8 @@ public class MainController implements Initializable {
     }
 
 
-        public void loardEmployee(ActionEvent event) throws IOException {
-        StackPane pane=FXMLLoader.load(getClass().getResource("/Views/Employee.fxml"));
+    public void loardEmployee(ActionEvent event) throws IOException {
+        StackPane pane = FXMLLoader.load(getClass().getResource("/Views/Employee.fxml"));
         rootPane.getChildren().setAll(pane);
 
     }
