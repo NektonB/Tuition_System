@@ -2,6 +2,8 @@
   <dictionary name="buddh">
     <words>
       <w>bhashitha</w>
+      <w>fname</w>
+      <w>lname</w>
     </words>
   </dictionary>
 </component>
