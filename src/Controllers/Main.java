@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import javax.swing.*;
+import java.awt.*;
 import java.sql.Connection;
 
 public class Main extends Application {
@@ -24,11 +25,11 @@ public class Main extends Application {
     public static void main(String[] args) {
         Thread readyAll = new Thread(() -> initialing());
         readyAll.setPriority(Thread.MAX_PRIORITY);
-        //initialing();
+        ////initialing();
         dbConn = ConnectDB.getConn();
         if (dbConn != null) {
-            //System.out.println("Connection success...!");
-            //Toolkit.getDefaultToolkit().beep();
+            ////System.out.println("Connection success...!");
+            ////Toolkit.getDefaultToolkit().beep();
            /* Platform.runLater(() -> {
                 ///notifications.show();
                 ObjectGenerator.getAlerts().getSuccessNotify("Connection", "Database connection success...!");
