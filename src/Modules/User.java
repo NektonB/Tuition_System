@@ -6,14 +6,12 @@ public class User {
     private String userName = "";
     private String password = "";
     private String email = "";
-    private String mobile = "";
 
     public void resetAll() {
         id = 0;
         userName = "";
         password = "";
         email = "";
-        mobile = "";
     }
 
     public int getId() {
@@ -46,13 +44,5 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getMobile() {
-        return mobile;
-    }
-
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
     }
 }

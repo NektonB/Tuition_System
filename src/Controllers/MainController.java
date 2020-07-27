@@ -35,7 +35,7 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        /*try {
+        try {
             Thread readyData = new Thread(() -> {
                 ObjectGenerator.getAutoBackup().AutoGet();
             });
@@ -46,7 +46,7 @@ public class MainController implements Initializable {
             user = ObjectGenerator.getUser();
         } catch (Exception e) {
             e.printStackTrace();
-        }*/
+        }
     }
 
     public void exitNow(ActionEvent event) {

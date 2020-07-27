@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="tuition_db" uuid="fa69ca92-dfa8-4b15-a926-b7508d98034e">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/tuition_db</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="server_connection.db" uuid="904b9217-8b95-492b-98ef-add780ed7f20">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/Tuition_System/server_connection.db</jdbc-url>
+    </data-source>
+  </component>
+</project>

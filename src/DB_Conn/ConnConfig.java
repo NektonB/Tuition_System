@@ -22,7 +22,7 @@ public class ConnConfig {
         if (ConfigConn == null) {
             try {
                 Class.forName("org.sqlite.JDBC");
-                ConfigConn = DriverManager.getConnection("jdbc:sqlite:C:\\Program Files\\Common Files\\ICSv2\\server_connection.db");
+                ConfigConn = DriverManager.getConnection("jdbc:sqlite:C:\\Program Files\\Common Files\\Tuition_System\\server_connection.db");
             } catch (ClassNotFoundException e) {
                 JOptionPane.showMessageDialog(null, "No Database Driver found", "Database Driver Error", JOptionPane.ERROR_MESSAGE);
                 Toolkit.getDefaultToolkit().beep();
