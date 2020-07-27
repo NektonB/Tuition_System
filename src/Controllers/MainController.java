@@ -62,8 +62,8 @@ public class MainController implements Initializable {
     }
 
 
-    public void loardEmployee(ActionEvent event) throws IOException {
-        StackPane pane = FXMLLoader.load(getClass().getResource("/Views/Employee.fxml"));
+    public void loadEmployee(ActionEvent event) throws IOException {
+        StackPane pane = FXMLLoader.load(getClass().getClassLoader().getResource("Views/pnlEmployee.fxml"));
         rootPane.getChildren().setAll(pane);
 
     }
@@ -72,7 +72,7 @@ public class MainController implements Initializable {
     public void loadUser() {
         try {
             Stage productsStage = new Stage();
-            Parent user = FXMLLoader.load(getClass().getClassLoader().getResource("Views/User.fxml"));
+            Parent user = FXMLLoader.load(getClass().getClassLoader().getResource("Views/frmUser.fxml"));
             productsStage.setTitle("User Management");
             Scene scene = new Scene(user);
             productsStage.setScene(scene);

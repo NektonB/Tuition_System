@@ -81,6 +81,7 @@ public class LoginController implements Initializable {
         try {
             Stage primaryStage = new Stage();
             Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Views/frmMain.fxml"));
+//            Parent root = FXMLLoader.load(getClass().getResource("/Views/frmMain.fxml"));
             primaryStage.setTitle("Class Management System");
             Scene mainScene = new Scene(root);
             primaryStage.setScene(mainScene);
@@ -101,6 +102,7 @@ public class LoginController implements Initializable {
         try {
             Stage primaryStage = new Stage();
             Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Views/frmLogin.fxml"));
+//            Parent root = FXMLLoader.load(getClass().getResource("/Views/frmLogin.fxml"));
             Scene mainScene = new Scene(root);
             primaryStage.setScene(mainScene);
             primaryStage.initStyle(StageStyle.UTILITY);

@@ -21,7 +21,7 @@ public class UserRegistration implements Initializable {
     public void loadUserUpdate() {
         try {
             Stage productsStage = new Stage();
-            Parent user = FXMLLoader.load(getClass().getClassLoader().getResource("Views/User_Update.fxml"));
+            Parent user = FXMLLoader.load(getClass().getClassLoader().getResource("Views/frmUser_Update.fxml"));
             productsStage.setTitle("User Update");
             Scene scene = new Scene(user);
             productsStage.setScene(scene);
