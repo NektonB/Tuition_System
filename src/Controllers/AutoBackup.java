@@ -142,6 +142,7 @@ public class AutoBackup {
                 prepareBackup();
                 try {
                     Thread.sleep(300000);//
+                    //Thread.sleep(2000);//
                 } catch (Exception ex) {
                     ex.printStackTrace();
                     Platform.runLater(() -> {
