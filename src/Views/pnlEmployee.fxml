@@ -96,7 +96,7 @@
                         <JFXComboBox fx:id="cmbStatus" layoutX="94.0" layoutY="326.0" prefHeight="31.0" prefWidth="231.0" />
                      </children>
                   </Pane>
-                  <TableView fx:id="tblEmployee" layoutX="357.0" layoutY="63.0" prefHeight="296.0" prefWidth="840.0" AnchorPane.leftAnchor="360.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="63.0">
+                  <TableView fx:id="tblEmployee" layoutX="357.0" layoutY="63.0" prefHeight="339.0" prefWidth="825.0" AnchorPane.leftAnchor="360.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="63.0">
                     <columns>
                       <TableColumn fx:id="tc_first_name" prefWidth="270.0" resizable="false" text="First name" />
                       <TableColumn fx:id="tc_last_name" maxWidth="1000.0" minWidth="0.0" prefWidth="270.0" resizable="false" text="Last name" />
@@ -108,12 +108,12 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
-                  <JFXButton fx:id="btnUpdate" buttonType="RAISED" layoutX="969.0" layoutY="365.0" prefHeight="45.0" prefWidth="226.0" ripplerFill="#0777ff" styleClass="Btn" text="Update" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="365.0">
+                  <JFXButton fx:id="btnUpdate" buttonType="RAISED" layoutX="969.0" layoutY="411.0" prefHeight="45.0" prefWidth="226.0" ripplerFill="#0777ff" styleClass="Btn" text="Update" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="411.0">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </JFXButton>
-                  <JFXTextField fx:id="txtEmployeeNIC_Search" focusColor="#4464c6" layoutX="1048.0" layoutY="33.0" prefHeight="29.0" prefWidth="147.0" promptText="Search by Employee NIC" unFocusColor="#a3a3a3" AnchorPane.rightAnchor="5.0">
+                  <JFXTextField fx:id="txtEmployeeNIC_Search" focusColor="#4464c6" layoutX="1044.0" layoutY="31.0" prefHeight="29.0" prefWidth="153.0" promptText="Search by Employee NIC" unFocusColor="#a3a3a3" AnchorPane.rightAnchor="16.0">
                      <font>
                         <Font size="13.0" />
                      </font>

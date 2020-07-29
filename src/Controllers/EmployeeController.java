@@ -42,6 +42,7 @@ public class EmployeeController implements Initializable {
     @FXML
     private JFXComboBox<String> cmbStatus;
 
+
     @FXML
     private JFXTextField txtEmployeeNIC_Search;
 
