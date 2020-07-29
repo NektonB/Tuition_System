@@ -7,6 +7,7 @@ public class Employee {
     private String lname = "";
     private String nic_number = "";
     private String address = "";
+    private String contact_number = "";
 
     public void resetAll() {
         id = 0;
@@ -14,6 +15,7 @@ public class Employee {
         lname = "";
         nic_number = "";
         address = "";
+        contact_number = "";
     }
 
     public int getId() {
@@ -54,5 +56,13 @@ public class Employee {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getContact_number() {
+        return contact_number;
+    }
+
+    public void setContact_number(String contact_number) {
+        this.contact_number = contact_number;
     }
 }
