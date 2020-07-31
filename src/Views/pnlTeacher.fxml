@@ -14,13 +14,13 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane prefHeight="568.0" prefWidth="1200.0" stylesheets="@../CSS/Scence.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.EmployeeController">
+<StackPane prefHeight="515.0" prefWidth="1200.0" stylesheets="@../CSS/Scence.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.EmployeeController">
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0">
          <top>
             <AnchorPane prefHeight="45.0" prefWidth="1200.0" styleClass="header" stylesheets="@../CSS/Scence.css" BorderPane.alignment="CENTER">
                <children>
-                  <Label layoutX="13.0" layoutY="10.0" text="Employee Managment &gt;&gt;" textFill="#796a6a">
+                  <Label layoutX="13.0" layoutY="10.0" text="Teacher Management&gt;&gt;" textFill="#796a6a">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -83,12 +83,12 @@
                               <Font size="13.0" />
                            </font>
                         </TextField>
-                        <Label layoutX="29.0" layoutY="343.0" text="Status:">
+                        <Label layoutX="26.0" layoutY="332.0" text="Status:">
                            <font>
                               <Font size="13.0" />
                            </font>
                         </Label>
-                        <JFXButton fx:id="btnSave" buttonType="RAISED" layoutX="96.0" layoutY="393.0" onAction="#saveEmployee" prefHeight="45.0" prefWidth="226.0" ripplerFill="#0777ff" styleClass="Btn" text="Save">
+                        <JFXButton fx:id="btnSave" buttonType="RAISED" layoutX="95.0" layoutY="373.0" onAction="#saveEmployee" prefHeight="45.0" prefWidth="226.0" ripplerFill="#0777ff" styleClass="Btn" text="Save">
                            <font>
                               <Font size="13.0" />
                            </font>
@@ -96,19 +96,19 @@
                         <JFXComboBox fx:id="cmbStatus" layoutX="94.0" layoutY="326.0" prefHeight="31.0" prefWidth="231.0" />
                      </children>
                   </Pane>
-                  <TableView fx:id="tblEmployee" layoutX="357.0" layoutY="63.0" prefHeight="387.0" prefWidth="825.0" AnchorPane.leftAnchor="360.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="63.0">
-                    <columns>
-                      <TableColumn fx:id="tc_first_name" prefWidth="270.0" resizable="false" text="First name" />
-                      <TableColumn fx:id="tc_last_name" maxWidth="1000.0" minWidth="0.0" prefWidth="270.0" resizable="false" text="Last name" />
+                  <TableView fx:id="tblEmployee" layoutX="357.0" layoutY="63.0" prefHeight="339.0" prefWidth="825.0" AnchorPane.leftAnchor="360.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="63.0">
+                     <columns>
+                        <TableColumn fx:id="tc_first_name" prefWidth="270.0" resizable="false" text="First name" />
+                        <TableColumn fx:id="tc_last_name" maxWidth="1000.0" minWidth="0.0" prefWidth="270.0" resizable="false" text="Last name" />
                         <TableColumn fx:id="tc_nic" prefWidth="150.0" resizable="false" text="NIC" />
                         <TableColumn fx:id="tc_contact" prefWidth="150.0" resizable="false" text="Contact No" />
                         <TableColumn fx:id="tc_status" prefWidth="10.0" resizable="false" text="Status" />
-                    </columns>
+                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
-                  <JFXButton fx:id="btnUpdate" buttonType="RAISED" layoutX="959.0" layoutY="455.0" prefHeight="45.0" prefWidth="226.0" ripplerFill="#0777ff" styleClass="Btn" text="Update" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="455.0">
+                  <JFXButton fx:id="btnUpdate" buttonType="RAISED" layoutX="969.0" layoutY="411.0" prefHeight="45.0" prefWidth="226.0" ripplerFill="#0777ff" styleClass="Btn" text="Update" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="411.0">
                      <font>
                         <Font size="13.0" />
                      </font>
