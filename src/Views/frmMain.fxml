@@ -1,155 +1,133 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTabPane?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="1200.0" stylesheets="@../CSS/Home.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MainController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="967.0" prefHeight="649.0" prefWidth="1183.0" stylesheets="@../CSS/Home.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MainController">
    <children>
-      <BorderPane prefHeight="200.0" prefWidth="200.0" stylesheets="@../CSS/Home.css">
-         <bottom>
-            <HBox prefHeight="23.0" prefWidth="1200.0" BorderPane.alignment="CENTER" />
-         </bottom>
-         <top>
-            <StackPane prefHeight="85.0" prefWidth="1300.0" styleClass="topMenu" BorderPane.alignment="CENTER">
+      <SplitPane dividerPositions="0.21422523285351397" prefHeight="160.0" prefWidth="200.0">
+        <items>
+          <AnchorPane maxWidth="230.0" minWidth="90.0" prefHeight="647.0" prefWidth="336.0" SplitPane.resizableWithParent="false">
                <children>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                  <BorderPane maxWidth="250.0" prefHeight="200.0" prefWidth="250.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <top>
+                        <VBox prefHeight="213.0" prefWidth="250.0" BorderPane.alignment="CENTER" />
+                     </top>
                      <center>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="94.0" prefWidth="697.0" stylesheets="@../CSS/Home.css" BorderPane.alignment="CENTER">
+                        <VBox prefHeight="373.0" prefWidth="250.0" styleClass="sideMenu" BorderPane.alignment="CENTER">
                            <children>
-                              <JFXButton fx:id="btn_attend" alignment="BOTTOM_CENTER" buttonType="RAISED" contentDisplay="TOP" graphicTextGap="7.0" minHeight="60.0" minWidth="60.0" prefHeight="70.0" prefWidth="105.0" ripplerFill="WHITE" style="-fx-background-color: #55acee;" styleClass="btnSelect" text="ATTANDENT" textFill="WHITE">
+                              <Button alignment="BASELINE_LEFT" graphicTextGap="30.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="48.0" prefWidth="251.0" styleClass="sideMenuButton" text="Button">
                                  <graphic>
-                                    <FontAwesomeIconView fill="WHITE" glyphName="CHECK" size="20" />
+                                    <FontAwesomeIconView glyphName="TH" size="20" styleClass="glyph-icon1" />
                                  </graphic>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                                 <HBox.margin>
-                                    <Insets left="5.0" />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="System Bold" size="14.0" />
-                                 </font>
-                              </JFXButton>
-                              <JFXButton fx:id="btn_teacher" alignment="BOTTOM_CENTER" buttonType="RAISED" contentDisplay="TOP" graphicTextGap="7.0" minHeight="60.0" minWidth="60.0" prefHeight="70.0" prefWidth="105.0" ripplerFill="WHITE" style="-fx-background-color: #FF3547;" styleClass="btnSelect" text="TEACHER PAY" textFill="WHITE">
+                                 <padding>
+                                    <Insets left="40.0" />
+                                 </padding>
+                              </Button>
+                              <Button alignment="BASELINE_LEFT" graphicTextGap="30.0" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="48.0" prefWidth="251.0" styleClass="sideMenuButton" text="Button">
                                  <graphic>
-                                    <FontAwesomeIconView fill="WHITE" glyphName="CREDIT_CARD" size="20" />
+                                    <FontAwesomeIconView glyphName="TH" size="20" styleClass="glyph-icon1" />
                                  </graphic>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                                 <HBox.margin>
-                                    <Insets left="5.0" />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="System Bold" size="14.0" />
-                                 </font>
-                              </JFXButton>
-                              <JFXButton alignment="BOTTOM_CENTER" buttonType="RAISED" contentDisplay="TOP" graphicTextGap="7.0" minHeight="60.0" minWidth="60.0" prefHeight="70.0" prefWidth="105.0" ripplerFill="WHITE" style="-fx-background-color: #FF8800;" styleClass="btnSelect" text="ClLASS FEES" textFill="WHITE">
+                                 <padding>
+                                    <Insets left="40.0" />
+                                 </padding>
+                              </Button>
+                              <Button alignment="BASELINE_LEFT" graphicTextGap="30.0" layoutX="10.0" layoutY="58.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="48.0" prefWidth="251.0" styleClass="sideMenuButton" text="Button">
                                  <graphic>
-                                    <FontAwesomeIconView fill="WHITE" glyphName="MONEY" size="20" />
+                                    <FontAwesomeIconView glyphName="TH" size="20" styleClass="glyph-icon1" />
                                  </graphic>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                                 <HBox.margin>
-                                    <Insets left="5.0" />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="System Bold" size="14.0" />
-                                 </font>
-                              </JFXButton>
-                              <JFXButton alignment="BOTTOM_CENTER" buttonType="RAISED" contentDisplay="TOP" graphicTextGap="7.0" minHeight="60.0" minWidth="60.0" prefHeight="70.0" prefWidth="105.0" ripplerFill="WHITE" style="-fx-background-color: #AA66CC;" styleClass="btnSelect" text="TEACHER" textFill="WHITE">
+                                 <padding>
+                                    <Insets left="40.0" />
+                                 </padding>
+                              </Button>
+                              <Button alignment="BASELINE_LEFT" graphicTextGap="30.0" layoutX="10.0" layoutY="106.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="48.0" prefWidth="251.0" styleClass="sideMenuButton" text="Button">
                                  <graphic>
-                                    <FontAwesomeIconView fill="WHITE" glyphName="MALE" size="20" />
+                                    <FontAwesomeIconView glyphName="TH" size="20" styleClass="glyph-icon1" />
                                  </graphic>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                                 <HBox.margin>
-                                    <Insets left="5.0" />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="System Bold" size="14.0" />
-                                 </font>
-                              </JFXButton>
-                              <JFXButton alignment="BOTTOM_CENTER" buttonType="RAISED" contentDisplay="TOP" graphicTextGap="7.0" minHeight="60.0" minWidth="60.0" prefHeight="70.0" prefWidth="105.0" ripplerFill="WHITE" style="-fx-background-color: #279C8F;" styleClass="btnSelect" text="STUDENT" textFill="WHITE">
+                                 <padding>
+                                    <Insets left="40.0" />
+                                 </padding>
+                              </Button>
+                              <Button alignment="BASELINE_LEFT" graphicTextGap="30.0" layoutX="10.0" layoutY="154.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="48.0" prefWidth="251.0" styleClass="sideMenuButton" text="Button">
                                  <graphic>
-                                    <FontAwesomeIconView fill="WHITE" glyphName="CHILD" size="20" />
+                                    <FontAwesomeIconView glyphName="TH" size="20" styleClass="glyph-icon1" />
                                  </graphic>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                                 <HBox.margin>
-                                    <Insets left="5.0" />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="System Bold" size="14.0" />
-                                 </font>
-                              </JFXButton>
-                              <JFXButton alignment="BOTTOM_CENTER" buttonType="RAISED" contentDisplay="TOP" graphicTextGap="7.0" minHeight="60.0" minWidth="60.0" prefHeight="70.0" prefWidth="105.0" ripplerFill="WHITE" style="-fx-background-color: #BB1371;" styleClass="btnSelect" text="SUBJECT" textFill="WHITE">
+                                 <padding>
+                                    <Insets left="40.0" />
+                                 </padding>
+                              </Button>
+                              <Button alignment="BASELINE_LEFT" graphicTextGap="30.0" layoutX="10.0" layoutY="202.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#loadEmployee" prefHeight="48.0" prefWidth="251.0" styleClass="sideMenuButton" text="Employee">
                                  <graphic>
-                                    <FontAwesomeIconView fill="WHITE" glyphName="BOOK" size="20" />
+                                    <FontAwesomeIconView glyphName="USERS" size="20" styleClass="glyph-icon1" />
                                  </graphic>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                                 <HBox.margin>
-                                    <Insets left="5.0" />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="System Bold" size="14.0" />
-                                 </font>
-                              </JFXButton>
-                              <JFXButton alignment="BOTTOM_CENTER" buttonType="RAISED" contentDisplay="TOP" graphicTextGap="7.0" minHeight="60.0" minWidth="60.0" onAction="#loadEmployee" prefHeight="70.0" prefWidth="105.0" ripplerFill="WHITE" style="-fx-background-color: #00BCD4;" styleClass="btnSelect" text="EMPLOYEE" textFill="WHITE">
+                                 <padding>
+                                    <Insets left="40.0" />
+                                 </padding>
+                              </Button>
+                              <Button alignment="BASELINE_LEFT" graphicTextGap="30.0" layoutX="10.0" layoutY="250.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="48.0" prefWidth="251.0" styleClass="sideMenuButton" text="Button">
                                  <graphic>
-                                    <FontAwesomeIconView fill="WHITE" glyphName="USER_MD" size="20" />
+                                    <FontAwesomeIconView glyphName="USER" size="20" styleClass="glyph-icon1" />
                                  </graphic>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                                 <HBox.margin>
-                                    <Insets left="5.0" />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="System Bold" size="14.0" />
-                                 </font>
-                              </JFXButton>
-                              <JFXButton alignment="BOTTOM_CENTER" buttonType="RAISED" contentDisplay="TOP" graphicTextGap="7.0" minHeight="60.0" minWidth="60.0" onAction="#loadUser" prefHeight="70.0" prefWidth="105.0" ripplerFill="WHITE" style="-fx-background-color: #dd4b39;" styleClass="btnSelect" text="USER" textFill="WHITE">
-                                 <graphic>
-                                    <FontAwesomeIconView fill="WHITE" glyphName="USER" size="20" />
-                                 </graphic>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                                 <HBox.margin>
-                                    <Insets left="5.0" />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="System Bold" size="14.0" />
-                                 </font>
-                              </JFXButton>
+                                 <padding>
+                                    <Insets left="40.0" />
+                                 </padding>
+                              </Button>
                            </children>
-                        </HBox>
+                           <BorderPane.margin>
+                              <Insets top="6.0" />
+                           </BorderPane.margin>
+                           <padding>
+                              <Insets top="30.0" />
+                           </padding>
+                        </VBox>
                      </center>
-                     <left>
-                        <HBox prefHeight="76.0" prefWidth="195.0" BorderPane.alignment="CENTER" />
-                     </left>
-                     <right>
-                        <HBox prefHeight="76.0" prefWidth="112.0" BorderPane.alignment="CENTER" />
-                     </right>
                   </BorderPane>
                </children>
-            </StackPane>
-         </top>
-         <center>
-            <StackPane fx:id="rootPane" prefHeight="453.0" prefWidth="1200.0" BorderPane.alignment="CENTER" />
-         </center>
-      </BorderPane>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <top>
+                        <AnchorPane prefHeight="80.0" prefWidth="925.0" styleClass="headerAria" BorderPane.alignment="CENTER">
+                           <children>
+                              <HBox alignment="CENTER_RIGHT" layoutX="14.0" layoutY="6.0" prefHeight="80.0" prefWidth="945.0" styleClass="headerAria" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" prefHeight="80.0" prefWidth="104.0" styleClass="logOutButton">
+                                       <graphic>
+                                          <FontAwesomeIconView fill="#d3caca" glyphName="SIGN_OUT" size="35" />
+                                       </graphic>
+                                    </Button>
+                                 </children></HBox>
+                           </children>
+                        </AnchorPane>
+                     </top>
+                     <center>
+                        <StackPane fx:id="rootPane" prefHeight="532.0" prefWidth="925.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <JFXTabPane fx:id="tabpane" tabClosingPolicy="ALL_TABS" />
+                           </children>
+                        </StackPane>
+                     </center>
+                     <bottom>
+                        <HBox alignment="CENTER" prefHeight="26.0" prefWidth="925.0" styleClass="homeFooter" BorderPane.alignment="CENTER">
+                           <children>
+                              <Text fill="WHITE" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="\@Copyright Power by HNDIT/2018/P Batch" textAlignment="CENTER" />
+                           </children>
+                        </HBox>
+                     </bottom>
+                  </BorderPane>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
    </children>
 </StackPane>

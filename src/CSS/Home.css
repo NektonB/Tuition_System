@@ -1,18 +1,72 @@
-.topMenu{
-    -fx-border-width: 0px 0px 2px 0px;
-    -fx-border-color: #b399c6;
+.sideMenu {
+    -fx-background-color: rgba(68, 62, 116, 0.96);
 }
 
-.footer{
-    -fx-background-color: skyblue;
-}
-
-.btnSelect{
+.headerAria{
+    -fx-background-color: rgba(68, 62, 116, 0.96);
 
 }
 
-.btnSelect:pressed{
-    -fx-border-width: 0px 0px 7px 0px;
-    -fx-border-color: transparent;
-
+.homeFooter{
+    -fx-background-color: rgba(68, 62, 116, 0.96);
 }
+
+.logOutButton{
+    -fx-cursor: hand;
+    -fx-background-radius: 0;
+    -fx-font-weight: bold;
+    -fx-text-fill: transparent;
+    -fx-background-color: transparent;
+}
+
+.logOutButton:hover {
+    -fx-background-color: rgba(107, 59, 156, 0.82);
+}
+
+.logOutButton:pressed {
+    -fx-background-color: rgba(117, 76, 143, 0.78);
+    -fx-text-fill: white;
+}
+
+
+/*------------------------------------------------------*/
+
+.sideMenuButton {
+    -fx-cursor: hand;
+    -fx-background-radius: 0;
+    -fx-pref-width: 250px;
+    -fx-min-height: 48px;
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+    -fx-font-weight: bold;
+    -fx-text-fill: #f9f6ff;
+    -fx-background-color: transparent;
+}
+
+.sideMenuButton:hover {
+    -fx-background-color: #2A1C42;
+}
+
+.sideMenuButton:pressed {
+    -fx-background-color: #7156DD;
+    -fx-text-fill: white;
+}
+
+.glyph-icon1 {
+    -fx-fill: #f9f6ff;
+}
+
+.sideMenuButton:pressed .glyph-icon1 {
+    -fx-fill: white;
+}
+
+.glyph-icon1:hover {
+    -fx-fill: #e4eaff;
+    -fx-scale-x: 1.3;
+    -fx-scale-y: 1.3;
+    -fx-scale-z: 1.3;
+}
+
+
+
+

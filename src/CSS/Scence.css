@@ -6,17 +6,20 @@
     -fx-background-color: #f9f6ff;
 }
 
-.Btn{
+.button{
     -fx-background-color: #6747CD;
     -fx-text-fill: #fff;
     -fx-background-radius: 5px;
     -fx-border-radius: 5px;
+
 }
 
-.Btn:hover{
+.button:hover{
     -fx-background-color: transparent;
     -fx-text-fill: #6747CD;
     -fx-border-color: #6747CD;
     -fx-border-style: solid;
     -fx-background-radius: 5px;
 }
+
+
