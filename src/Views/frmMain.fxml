@@ -73,7 +73,7 @@
                                     <Insets left="40.0" />
                                  </padding>
                               </Button>
-                              <Button alignment="BASELINE_LEFT" graphicTextGap="30.0" layoutX="10.0" layoutY="250.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="48.0" prefWidth="251.0" styleClass="sideMenuButton" text="Button">
+                              <Button alignment="BASELINE_LEFT" graphicTextGap="30.0" layoutX="10.0" layoutY="250.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#loadUser" prefHeight="48.0" prefWidth="251.0" styleClass="sideMenuButton" text="User">
                                  <graphic>
                                     <FontAwesomeIconView glyphName="USER" size="20" styleClass="glyph-icon1" />
                                  </graphic>
