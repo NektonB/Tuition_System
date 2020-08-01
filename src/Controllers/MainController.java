@@ -68,6 +68,12 @@ public class MainController implements Initializable {
 
     }
 
+    public void loadTeacher(ActionEvent event) throws IOException {
+        StackPane pane = FXMLLoader.load(getClass().getClassLoader().getResource("Views/pnlTeacher.fxml"));
+        rootPane.getChildren().setAll(pane);
+
+    }
+
     //Load User form (PopUp)**********************
     public void loadUser() {
         try {

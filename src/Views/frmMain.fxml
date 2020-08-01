@@ -57,15 +57,15 @@
                                     <Insets left="40.0" />
                                  </padding>
                               </Button>
-                              <Button alignment="BASELINE_LEFT" graphicTextGap="30.0" layoutX="10.0" layoutY="154.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="48.0" prefWidth="251.0" styleClass="sideMenuButton" text="Button">
+                              <Button alignment="BASELINE_LEFT" graphicTextGap="30.0" layoutX="10.0" layoutY="154.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#loadTeacher" prefHeight="48.0" prefWidth="251.0" styleClass="sideMenuButton" text="Teacher">
                                  <graphic>
-                                    <FontAwesomeIconView glyphName="TH" size="20" styleClass="glyph-icon1" />
+                                    <FontAwesomeIconView glyphName="MALE" size="20" styleClass="glyph-icon1" />
                                  </graphic>
                                  <padding>
                                     <Insets left="40.0" />
                                  </padding>
                               </Button>
-                              <Button alignment="BASELINE_LEFT" graphicTextGap="30.0" layoutX="10.0" layoutY="202.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#loadEmployee" prefHeight="48.0" prefWidth="251.0" styleClass="sideMenuButton" text="Employee">
+                              <Button alignment="BASELINE_LEFT" graphicTextGap="25.0" layoutX="10.0" layoutY="202.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#loadEmployee" prefHeight="48.0" prefWidth="251.0" styleClass="sideMenuButton" text="Employee">
                                  <graphic>
                                     <FontAwesomeIconView glyphName="USERS" size="20" styleClass="glyph-icon1" />
                                  </graphic>
