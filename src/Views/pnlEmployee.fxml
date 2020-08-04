@@ -46,13 +46,13 @@
                      </padding>
                      <children>
                         <FontAwesomeIconView fill="#503ec6" glyphName="SEARCH" size="17" wrappingWidth="21.142857551574707" />
-                        <TextField fx:id="txt_search" prefHeight="30.0" prefWidth="372.0" style="-fx-border-color: #3F2B63;" />
-                        <ComboBox fx:id="cmb_option" prefHeight="32.0" prefWidth="150.0">
+                        <TextField fx:id="txtSearch" onKeyReleased="#filterEmployeeTableByNic" prefHeight="30.0" prefWidth="372.0" style="-fx-border-color: #3F2B63;" />
+                        <ComboBox fx:id="cmbOption" prefHeight="32.0" prefWidth="178.0" promptText="Select to search">
                            <HBox.margin>
                               <Insets left="5.0" />
                            </HBox.margin>
                         </ComboBox>
-                        <JFXButton onAction="#loadAU_Employee" prefHeight="35.0" prefWidth="163.0" ripplerFill="#0777ff" text="Add Employee">
+                        <JFXButton fx:id="btnAddEmployee" onAction="#loadAU_Employee" prefHeight="35.0" prefWidth="163.0" ripplerFill="#0777ff" text="Add Employee">
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin>

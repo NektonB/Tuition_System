@@ -75,7 +75,7 @@ public class AU_EmployeeController implements Initializable {
 
             dataReader.fillStatusCombo(cmbStatus);
             loadContent();
-
+            cmbStatus.setValue("ACTIVE");
         } catch (Exception e) {
             e.printStackTrace();
         }

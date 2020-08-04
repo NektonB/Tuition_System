@@ -9,17 +9,17 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import javafx.beans.property.ListPropertyBase;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
@@ -30,12 +30,17 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class EmployeeController implements Initializable {
 
     @FXML
-    private JFXTextField txtEmployeeNIC_Search;
+    private TextField txtSearch;
+
+    @FXML
+    private ComboBox<String> cmbOption;
 
     @FXML
     private TableView<EmployeeList> tblEmployee;
@@ -75,6 +80,8 @@ public class EmployeeController implements Initializable {
             employee = ObjectGenerator.getEmployee();
             readyEmployeeTable();
             dataReader.fillEmployeeTable(tblEmployee);
+            cmbOption.setItems(FXCollections.observableArrayList("First Name", "NIC Number"));
+            cmbOption.setValue("First Name");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -105,9 +112,9 @@ public class EmployeeController implements Initializable {
             AU_EmployeeController au = loader.getController();
 
             if (employee.getId() == 0) {
-                au.setWindowData("Add New Employee", "Save",tblEmployee);
+                au.setWindowData("Add New Employee", "Save", tblEmployee);
             } else if (employee.getId() > 0) {
-                au.setWindowData("Update Employee", "Update",tblEmployee);
+                au.setWindowData("Update Employee", "Update", tblEmployee);
             }
 
             productsStage.show();
@@ -133,6 +140,18 @@ public class EmployeeController implements Initializable {
         if (event.getCode().equals(KeyCode.ENTER)) {
             selectEmployee();
             loadAU_Employee();
+        } else {
+
+        }
+    }
+
+    public void filterEmployeeTableByNic(KeyEvent event) {
+        try {
+            employee.setNic_number(txtSearch.getText());
+            dataReader.fillEmployeeTableByNIC(tblEmployee);
+            //employee.resetAll();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
