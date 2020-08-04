@@ -86,7 +86,7 @@ public class EmployeeController implements Initializable {
             productsStage.initModality(Modality.APPLICATION_MODAL);
 
             AU_EmployeeController au = loader.getController();
-            au.setWindowData("Add New Employee", "Save Employee");
+            au.setWindowData("Add New Employee", "Save");
 
             productsStage.show();
 

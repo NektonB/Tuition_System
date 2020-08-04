@@ -14,6 +14,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -103,25 +105,41 @@ public class AU_EmployeeController implements Initializable {
         }
     }
 
+    public boolean checkValidate() {
+        boolean validate = false;
+        if (!txtFirstName.getText().isEmpty() && !txtLastName.getText().isEmpty() && !txtNIC.getText().isEmpty() && !cmbStatus.getValue().isEmpty()) {
+            validate = true;
+        } else {
+            txtFirstName.setStyle("-fx-border-color: crimson");
+            txtLastName.setStyle("-fx-border-color: crimson");
+            txtNIC.setStyle("-fx-border-color: crimson");
+            cmbStatus.setStyle("-fx-border-color: crimson");
+            alerts.getErrorNotify("Error", "Please fill required fields *");
+        }
+        return validate;
+    }
+
     public void saveEmployee() {
         try {
-            employee.setFname(txtFirstName.getText());
-            employee.setLname(txtLastName.getText());
-            employee.setNic_number(txtNIC.getText());
-            employee.setAddress(txtAddress.getText());
-            employee.setContact_number(txtContactNum.getText());
+            if (checkValidate()) {
+                employee.setFname(txtFirstName.getText());
+                employee.setLname(txtLastName.getText());
+                employee.setNic_number(txtNIC.getText());
+                employee.setAddress(txtAddress.getText());
+                employee.setContact_number(txtContactNum.getText());
 
-            status.setStatus(cmbStatus.getValue());
-            dataReader.getStatusDetailsByStatus();
+                status.setStatus(cmbStatus.getValue());
+                dataReader.getStatusDetailsByStatus();
 
-            int saveEmployee = dataWriter.saveEmployee();
-            if (saveEmployee > 0) {
-                employee.resetAll();
-                status.resetAll();
+                int saveEmployee = dataWriter.saveEmployee();
+                if (saveEmployee > 0) {
+                    employee.resetAll();
+                    status.resetAll();
 
-                //alerts.getInformationAlert("Information", "Employee Registration", "Congratulation Chief..!\nEmployee registration successful");
-                alerts.getSuccessNotify("Employee Registration", "Congratulation Chief..!\nEmployee registration successful");
-                closeMe();
+                    //alerts.getInformationAlert("Information", "Employee Registration", "Congratulation Chief..!\nEmployee registration successful");
+                    alerts.getSuccessNotify("Employee Registration", "Congratulation Chief..!\nEmployee registration successful");
+                    closeMe();
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -132,6 +150,13 @@ public class AU_EmployeeController implements Initializable {
         if (event.isControlDown() && event.getCode().equals(KeyCode.S)) {
             saveEmployee();
         }
+    }
+
+    public void resetBoarders() {
+        txtFirstName.setStyle("-fx-border-color: none");
+        txtLastName.setStyle("-fx-border-color: none");
+        txtNIC.setStyle("-fx-border-color: none");
+        cmbStatus.setStyle("-fx-border-color: none");
     }
 
     public void closeMe() {
