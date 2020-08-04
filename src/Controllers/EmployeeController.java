@@ -6,7 +6,9 @@ import Modules.Employee;
 import Modules.Status;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -30,28 +32,6 @@ import java.util.ResourceBundle;
 public class EmployeeController implements Initializable {
 
     @FXML
-    private TextField txtFirstName;
-
-    @FXML
-    private TextField txtLastName;
-
-    @FXML
-    private TextField txtNIC;
-
-    @FXML
-    private TextArea txtAddress;
-
-    @FXML
-    private TextField txtContactNum;
-
-    @FXML
-    private JFXButton btnSave;
-
-    @FXML
-    private JFXComboBox<String> cmbStatus;
-
-
-    @FXML
     private JFXTextField txtEmployeeNIC_Search;
 
     @FXML
@@ -72,75 +52,21 @@ public class EmployeeController implements Initializable {
     @FXML
     private TableColumn<?, ?> tc_status;
 
-    @FXML
-    private JFXButton btnUpdate;
 
-    DataWriter dataWriter;
     DataReader dataReader;
     Alerts alerts;
     DateFormatConverter dateFormatConverter;
 
     Employee employee;
-    Status status;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        alerts = ObjectGenerator.getAlerts();
-        dataWriter = ObjectGenerator.getDataWriter();
-        dataReader = ObjectGenerator.getDataReader();
-        dateFormatConverter = ObjectGenerator.getDateFormatConverter();
-
-        employee = ObjectGenerator.getEmployee();
-        status = ObjectGenerator.getStatus();
-
-       // dataReader.fillStatusCombo(cmbStatus);
-    }
-
-    public void searchStatusDetailsByStatus() {
         try {
-            if (!cmbStatus.getValue().isEmpty()) {
-                status.setStatus(cmbStatus.getValue());
-                dataReader.getStatusDetailsByStatus();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            alerts.getErrorAlert(e);
-        }
-    }
+            alerts = ObjectGenerator.getAlerts();
+            dataReader = ObjectGenerator.getDataReader();
+            dateFormatConverter = ObjectGenerator.getDateFormatConverter();
 
-    public void searchStatusDetailsByStatus_Key(KeyEvent event) {
-        if (event.getCode().equals(KeyCode.ENTER)) {
-            try {
-                if (!cmbStatus.getValue().isEmpty()) {
-                    status.setStatus(cmbStatus.getValue());
-                    dataReader.getStatusDetailsByStatus();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-                alerts.getErrorAlert(e);
-            }
-        }
-    }
-
-    public void saveEmployee() {
-        try {
-            employee.setFname(txtFirstName.getText());
-            employee.setLname(txtLastName.getText());
-            employee.setNic_number(txtNIC.getText());
-            employee.setAddress(txtAddress.getText());
-            employee.setContact_number(txtContactNum.getText());
-
-            status.setStatus(cmbStatus.getValue());
-            dataReader.getStatusDetailsByStatus();
-
-            int saveEmployee = dataWriter.saveEmployee();
-            if (saveEmployee > 0) {
-                employee.resetAll();
-                status.resetAll();
-
-                alerts.getInformationAlert("Information", "Employee Registration", "Congratulation Chief..!\nEmployee registration successful");
-                //alerts.getSuccessNotify("Employee Registration", "Congratulation Chief..!\nEmployee registration successful");
-            }
+            employee = ObjectGenerator.getEmployee();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -149,14 +75,21 @@ public class EmployeeController implements Initializable {
     public void openNewEmployee() {
         try {
             Stage productsStage = new Stage();
-            Parent frmCustomer = FXMLLoader.load(getClass().getClassLoader().getResource("Views/frmAddEmployee.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Views/frmAddEmployee.fxml"));
+            Parent frmEmployee = loader.load();
             //productsStage.setTitle("Add New Employee");
-            Scene scene = new Scene(frmCustomer);
+
+            Scene scene = new Scene(frmEmployee);
             productsStage.setScene(scene);
             productsStage.initStyle(StageStyle.UNDECORATED);
             productsStage.setResizable(false);
             productsStage.initModality(Modality.APPLICATION_MODAL);
+
+            AU_EmployeeController au = loader.getController();
+            au.setWindowData("Add New Employee", "Save Employee");
+
             productsStage.show();
+
         } catch (Exception e) {
             e.printStackTrace();
         }

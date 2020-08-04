@@ -60,14 +60,6 @@
                               <FontAwesomeIconView fill="WHITE" glyphName="PLUS" />
                            </graphic>
                         </JFXButton>
-                        <JFXButton onAction="#openUpdateEmployee" prefHeight="35.0" prefWidth="169.0" ripplerFill="#0777ff" text="Update">
-                           <graphic>
-                              <FontAwesomeIconView fill="WHITE" glyphName="EDIT" />
-                           </graphic>
-                           <HBox.margin>
-                              <Insets left="10.0" />
-                           </HBox.margin>
-                        </JFXButton>
                      </children>
                   </HBox>
                </children>
