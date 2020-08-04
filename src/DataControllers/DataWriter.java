@@ -71,4 +71,31 @@ public class DataWriter {
         return operation;
     }
 
+    public int updateEmployee() {
+        int operation = 0;
+        try {
+            pst = conn.prepareStatement("UPDATE employee SET fname = ?, lname = ?, nic_number = ?, address = ?, contact_number = ?, status_id = ? WHERE id = ?");
+            pst.setString(1, employee.getFname());
+            pst.setString(2, employee.getLname());
+            pst.setString(3, employee.getNic_number());
+            pst.setString(4, employee.getAddress());
+            pst.setString(5, employee.getContact_number());
+            pst.setInt(6, status.getId());
+            pst.setInt(7,employee.getId());
+
+            operation = pst.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return operation;
+    }
+
 }

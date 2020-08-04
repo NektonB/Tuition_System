@@ -131,14 +131,26 @@ public class AU_EmployeeController implements Initializable {
                 status.setStatus(cmbStatus.getValue());
                 dataReader.getStatusDetailsByStatus();
 
-                int saveEmployee = dataWriter.saveEmployee();
-                if (saveEmployee > 0) {
-                    employee.resetAll();
-                    status.resetAll();
+                if (btnSave.getText().equals("Save")) {
+                    int saveEmployee = dataWriter.saveEmployee();
+                    if (saveEmployee > 0) {
+                        employee.resetAll();
+                        status.resetAll();
 
-                    //alerts.getInformationAlert("Information", "Employee Registration", "Congratulation Chief..!\nEmployee registration successful");
-                    alerts.getSuccessNotify("Employee Registration", "Congratulation Chief..!\nEmployee registration successful");
-                    closeMe();
+                        //alerts.getInformationAlert("Information", "Employee Registration", "Congratulation Chief..!\nEmployee registration successful");
+                        alerts.getSuccessNotify("Employee Registration", "Congratulation Chief..!\nEmployee registration successful");
+                        closeMe();
+                    }
+                } else if (btnSave.getText().equals("Update")) {
+                    int updateEmployee = dataWriter.updateEmployee();
+                    if (updateEmployee > 0) {
+                        employee.resetAll();
+                        status.resetAll();
+
+                        //alerts.getInformationAlert("Information", "Employee Registration", "Congratulation Chief..!\nEmployee registration successful");
+                        alerts.getSuccessNotify("Employee Update", "Congratulation Chief..!\nEmployee update successful");
+                        closeMe();
+                    }
                 }
             }
         } catch (Exception e) {
