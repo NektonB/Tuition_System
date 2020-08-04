@@ -12,6 +12,7 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Background;
@@ -59,6 +60,8 @@ public class AU_EmployeeController implements Initializable {
     Employee employee;
     Status status;
 
+    TableView tblEmployee;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
@@ -71,15 +74,30 @@ public class AU_EmployeeController implements Initializable {
             status = ObjectGenerator.getStatus();
 
             dataReader.fillStatusCombo(cmbStatus);
+            loadContent();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void setWindowData(String title, String actionName) {
+    private void loadContent() {
+        if (employee.getId() > 0) {
+            txtFirstName.setText(employee.getFname());
+            txtLastName.setText(employee.getLname());
+            txtNIC.setText(employee.getNic_number());
+            txtAddress.setText(employee.getAddress());
+            txtContactNum.setText(employee.getContact_number());
+            cmbStatus.setValue(status.getStatus());
+            //employee.resetAll();
+            //status.resetAll();
+        }
+    }
+
+    public void setWindowData(String title, String actionName, TableView tblEmployee) {
         lblFrameTitle.setText(title);
         btnSave.setText(actionName);
+        this.tblEmployee = tblEmployee;
     }
 
     public void searchStatusDetailsByStatus() {
@@ -137,8 +155,10 @@ public class AU_EmployeeController implements Initializable {
                         employee.resetAll();
                         status.resetAll();
 
+                        dataReader.fillEmployeeTable(tblEmployee);
                         //alerts.getInformationAlert("Information", "Employee Registration", "Congratulation Chief..!\nEmployee registration successful");
                         alerts.getSuccessNotify("Employee Registration", "Congratulation Chief..!\nEmployee registration successful");
+
                         closeMe();
                     }
                 } else if (btnSave.getText().equals("Update")) {
@@ -147,8 +167,10 @@ public class AU_EmployeeController implements Initializable {
                         employee.resetAll();
                         status.resetAll();
 
+                        dataReader.fillEmployeeTable(tblEmployee);
                         //alerts.getInformationAlert("Information", "Employee Registration", "Congratulation Chief..!\nEmployee registration successful");
                         alerts.getSuccessNotify("Employee Update", "Congratulation Chief..!\nEmployee update successful");
+
                         closeMe();
                     }
                 }
@@ -172,6 +194,8 @@ public class AU_EmployeeController implements Initializable {
     }
 
     public void closeMe() {
+        employee.resetAll();
+        status.resetAll();
         Stage stage = (Stage) btnClose.getScene().getWindow();
         stage.close();
     }

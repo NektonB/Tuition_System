@@ -29,6 +29,7 @@ public class DataReader {
     Alerts alerts;
 
     Status status;
+    Employee employee;
 
     public DataReader() {
         try {
@@ -37,7 +38,10 @@ public class DataReader {
                 backupData = ObjectGenerator.getBackupData();
                 connectionInfo = ObjectGenerator.getConnectionInfo();
                 alerts = ObjectGenerator.getAlerts();
+
                 status = ObjectGenerator.getStatus();
+                employee = ObjectGenerator.getEmployee();
+
             });
             readyData.setName("DataReader");
             readyData.start();
@@ -145,8 +149,86 @@ public class DataReader {
             e.printStackTrace();
         } finally {
             try {
-                pst.close();
-                rs.close();
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void fillEmployeeTable(TableView tblEmployee) {
+        ResultSet rs = null;
+        ObservableList<EmployeeController.EmployeeList> employeeList = FXCollections.observableArrayList();
+        try {
+            pst = conn.prepareStatement("SELECT employee.id, employee.fname, employee.lname, employee.nic_number,employee.address, employee.contact_number, status.status FROM employee INNER JOIN status on employee.status_id = status.id");
+            rs = pst.executeQuery();
+            if (!rs.isBeforeFirst()) {
+                //userType.resetAll();
+            }
+            while (rs.next()) {
+                employeeList.add(
+                        new EmployeeController.EmployeeList(
+                                rs.getInt("employee.id"),
+                                rs.getString("employee.fname") + " " + rs.getString("employee.lname"),
+                                rs.getString("employee.nic_number"),
+                                rs.getString("employee.address"),
+                                rs.getString("employee.contact_number"),
+                                rs.getString("status.status")
+                        )
+                );
+                tblEmployee.setItems(employeeList);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void getEmployeeDetailsById() {
+        ResultSet rs = null;
+        try {
+            pst = conn.prepareStatement("SELECT employee.id, employee.fname, employee.lname, employee.nic_number, employee.address, employee.contact_number, status.status FROM employee INNER JOIN status on employee.status_id = status.id WHERE employee.id = ?");
+            pst.setInt(1, employee.getId());
+            rs = pst.executeQuery();
+
+            if (!rs.isBeforeFirst()) {
+                employee.resetAll();
+                status.resetAll();
+            }
+            while (rs.next()) {
+                //employee.setId(rs.getInt(1));
+                employee.setFname(rs.getString(2));
+                employee.setLname(rs.getString(3));
+                employee.setNic_number(rs.getString(4));
+                employee.setAddress(rs.getString(5));
+                employee.setContact_number(rs.getString(6));
+                status.setStatus(rs.getString(7));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }

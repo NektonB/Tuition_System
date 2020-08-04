@@ -52,7 +52,7 @@
                               <Insets left="5.0" />
                            </HBox.margin>
                         </ComboBox>
-                        <JFXButton onAction="#openNewEmployee" prefHeight="35.0" prefWidth="163.0" ripplerFill="#0777ff" text="Add Employee">
+                        <JFXButton onAction="#loadAU_Employee" prefHeight="35.0" prefWidth="163.0" ripplerFill="#0777ff" text="Add Employee">
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin>
@@ -74,14 +74,14 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TableView prefHeight="251.0" prefWidth="925.0">
+                  <TableView fx:id="tblEmployee" onKeyReleased="#selectEmployee_Key" onMouseClicked="#selectEmployee" prefHeight="251.0" prefWidth="925.0">
                      <columns>
-                        <TableColumn prefWidth="75.0" text="First Name" />
-                        <TableColumn prefWidth="75.0" text="Last Name" />
-                        <TableColumn prefWidth="75.0" text="NIC number" />
-                        <TableColumn prefWidth="75.0" text="Address" />
-                        <TableColumn prefWidth="75.0" text="Contact Number" />
-                        <TableColumn prefWidth="75.0" text="Status" />
+                        <TableColumn fx:id="tcId" editable="false" prefWidth="75.0" resizable="false" text="Id" visible="false" />
+                        <TableColumn fx:id="tcName" editable="false" prefWidth="270.0" text="Name" />
+                        <TableColumn fx:id="tcNIC" editable="false" prefWidth="150.0" text="NIC number" />
+                        <TableColumn fx:id="tcAddress" editable="false" prefWidth="250.0" text="Address" />
+                        <TableColumn fx:id="tcContact" editable="false" prefWidth="150.0" text="Contact Number" />
+                        <TableColumn fx:id="tcStatus" editable="false" prefWidth="101.0" text="Status" />
                      </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
