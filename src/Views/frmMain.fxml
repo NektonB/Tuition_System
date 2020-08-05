@@ -25,25 +25,25 @@
                      <center>
                         <VBox prefHeight="373.0" prefWidth="250.0" styleClass="sideMenu" BorderPane.alignment="CENTER">
                            <children>
-                              <Button alignment="BASELINE_LEFT" graphicTextGap="30.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="48.0" prefWidth="251.0" styleClass="sideMenuButton" text="Button">
+                              <Button alignment="BASELINE_LEFT" graphicTextGap="25.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="48.0" prefWidth="251.0" styleClass="sideMenuButton" text="Attendent">
                                  <graphic>
-                                    <FontAwesomeIconView glyphName="TH" size="20" styleClass="glyph-icon1" />
+                                    <FontAwesomeIconView glyphName="LIST" size="20" styleClass="glyph-icon1" />
                                  </graphic>
                                  <padding>
                                     <Insets left="40.0" />
                                  </padding>
                               </Button>
-                              <Button alignment="BASELINE_LEFT" graphicTextGap="30.0" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="48.0" prefWidth="251.0" styleClass="sideMenuButton" text="Button">
+                              <Button alignment="BASELINE_LEFT" graphicTextGap="25.0" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="48.0" prefWidth="251.0" styleClass="sideMenuButton" text="Class Fees">
                                  <graphic>
-                                    <FontAwesomeIconView glyphName="TH" size="20" styleClass="glyph-icon1" />
+                                    <FontAwesomeIconView glyphName="EXCHANGE" size="20" styleClass="glyph-icon1" />
                                  </graphic>
                                  <padding>
                                     <Insets left="40.0" />
                                  </padding>
                               </Button>
-                              <Button alignment="BASELINE_LEFT" graphicTextGap="30.0" layoutX="10.0" layoutY="58.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="48.0" prefWidth="251.0" styleClass="sideMenuButton" text="Button">
+                              <Button alignment="BASELINE_LEFT" graphicTextGap="23.0" layoutX="10.0" layoutY="58.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="48.0" prefWidth="251.0" styleClass="sideMenuButton" text="Teacher Payment">
                                  <graphic>
-                                    <FontAwesomeIconView glyphName="TH" size="20" styleClass="glyph-icon1" />
+                                    <FontAwesomeIconView glyphName="MONEY" size="20" styleClass="glyph-icon1" />
                                  </graphic>
                                  <padding>
                                     <Insets left="40.0" />

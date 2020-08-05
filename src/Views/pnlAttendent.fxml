@@ -6,8 +6,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -18,7 +16,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane prefHeight="532.0" prefWidth="925.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.StudentController">
+<StackPane prefHeight="532.0" prefWidth="925.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.TeacherController">
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0">
          <top>
@@ -33,7 +31,7 @@
                <children>
                   <Pane prefHeight="50.0" prefWidth="925.0" style="-fx-background-color: #2D75E8;">
                      <children>
-                        <Label layoutX="13.0" layoutY="5.0" text="Home/Student" textFill="WHITE">
+                        <Label layoutX="13.0" layoutY="5.0" text="Home/Teacher" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -52,7 +50,7 @@
                               <Insets left="5.0" />
                            </HBox.margin>
                         </ComboBox>
-                        <JFXButton onAction="#openStudent" prefHeight="35.0" prefWidth="163.0" ripplerFill="#0777ff" text="Add Student">
+                        <JFXButton onAction="#openAddTeacher" prefHeight="35.0" prefWidth="163.0" ripplerFill="#0777ff" text="Add Teacher">
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin>
@@ -66,30 +64,14 @@
             </GridPane>
          </top>
          <center>
-            <GridPane prefHeight="436.0" prefWidth="925.0" BorderPane.alignment="CENTER">
+            <GridPane BorderPane.alignment="CENTER">
               <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
-               <children>
-                  <TableView prefHeight="251.0" prefWidth="925.0">
-                     <columns>
-                        <TableColumn prefWidth="75.0" text="First Name" />
-                        <TableColumn prefWidth="75.0" text="Last Name" />
-                        <TableColumn prefWidth="75.0" text="NIC number" />
-                        <TableColumn prefWidth="75.0" text="Address" />
-                        <TableColumn prefWidth="75.0" text="Home Number" />
-                        <TableColumn prefWidth="75.0" text="Contact Number" />
-                        <TableColumn prefWidth="75.0" text="Email" />
-                        <TableColumn prefWidth="75.0" text="Status" />
-                     </columns>
-                     <columnResizePolicy>
-                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                     </columnResizePolicy>
-                  </TableView>
-               </children>
             </GridPane>
          </center>
       </BorderPane>

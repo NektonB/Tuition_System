@@ -65,8 +65,8 @@
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="793.0" minWidth="10.0" prefWidth="461.0" />
                     </columnConstraints>
                     <rowConstraints>
-                      <RowConstraints maxHeight="416.0" minHeight="10.0" prefHeight="366.0" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="249.0" minHeight="10.0" prefHeight="202.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="416.0" minHeight="10.0" prefHeight="305.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="263.0" minHeight="10.0" prefHeight="263.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
                         <VBox prefHeight="200.0" prefWidth="100.0">
@@ -117,11 +117,6 @@
                                                       <Insets top="20.0" />
                                                    </VBox.margin>
                                                 </JFXTextField>
-                                                <JFXTextField focusColor="#6981c9" labelFloat="true" layoutX="20.0" layoutY="167.0" promptText="Home Phone Number" unFocusColor="#a3a3a3">
-                                                   <VBox.margin>
-                                                      <Insets top="20.0" />
-                                                   </VBox.margin>
-                                                </JFXTextField>
                                              </children>
                                              <padding>
                                                 <Insets left="20.0" right="5.0" />
@@ -129,9 +124,14 @@
                                           </VBox>
                                           <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
                                              <children>
+                                                <JFXTextField focusColor="#6981c9" labelFloat="true" promptText="Home Phone Number" unFocusColor="#a3a3a3">
+                                                   <VBox.margin>
+                                                      <Insets top="16.0" />
+                                                   </VBox.margin>
+                                                </JFXTextField>
                                                 <JFXTextField focusColor="#6981c9" labelFloat="true" promptText="Email" unFocusColor="#a3a3a3">
                                                    <VBox.margin>
-                                                      <Insets top="15.0" />
+                                                      <Insets top="19.0" />
                                                    </VBox.margin>
                                                 </JFXTextField>
                                                 <HBox alignment="BOTTOM_LEFT" prefHeight="42.0" prefWidth="264.0">
@@ -154,7 +154,10 @@
                                                 </JFXTextField>
                                                 <HBox alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="53.0" prefHeight="42.0" prefWidth="264.0">
                                                    <children>
-                                                      <JFXComboBox editable="true" focusColor="#6981c9" labelFloat="true" prefHeight="25.0" prefWidth="241.0" promptText="Near City" unFocusColor="#a3a3a3" />
+                                                      <JFXComboBox editable="true" focusColor="#6981c9" labelFloat="true" prefHeight="25.0" prefWidth="241.0" promptText="Near City" unFocusColor="#a3a3a3">
+                                                         <HBox.margin>
+                                                            <Insets top="8.0" />
+                                                         </HBox.margin></JFXComboBox>
                                                       <JFXButton alignment="BOTTOM_CENTER" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" prefHeight="25.0" prefWidth="50.0" ripplerFill="#285fcd">
                                                          <graphic>
                                                             <FontAwesomeIconView fill="#191a1b" glyphName="PLUS" size="15" />
@@ -162,7 +165,7 @@
                                                       </JFXButton>
                                                    </children>
                                                    <VBox.margin>
-                                                      <Insets top="3.0" />
+                                                      <Insets top="5.0" />
                                                    </VBox.margin>
                                                 </HBox>
                                                 <HBox alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="145.0" prefHeight="42.0" prefWidth="264.0">
@@ -237,12 +240,12 @@
                               </Label>
                               <HBox alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="264.0">
                                  <children>
-                                    <JFXComboBox editable="true" focusColor="#6981c9" labelFloat="true" prefHeight="25.0" prefWidth="213.0" promptText="Select School" unFocusColor="#a3a3a3" />
-                                    <JFXComboBox editable="true" focusColor="#6981c9" labelFloat="true" prefHeight="25.0" prefWidth="225.0" promptText="Select School" unFocusColor="#a3a3a3">
-                                       <HBox.margin>
-                                          <Insets left="10.0" />
-                                       </HBox.margin>
-                                    </JFXComboBox>
+                                    <JFXComboBox editable="true" focusColor="#6981c9" labelFloat="true" prefHeight="25.0" prefWidth="213.0" promptText="Subject" unFocusColor="#a3a3a3" />
+                                    <JFXButton alignment="BOTTOM_CENTER" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" prefHeight="25.0" prefWidth="50.0" ripplerFill="#285fcd">
+                                       <graphic>
+                                          <FontAwesomeIconView fill="#191a1b" glyphName="PLUS" size="15" />
+                                       </graphic>
+                                    </JFXButton>
                                  </children>
                                  <padding>
                                     <Insets left="15.0" />
@@ -251,7 +254,7 @@
                                     <Insets top="6.0" />
                                  </VBox.margin>
                               </HBox>
-                              <TableView prefHeight="286.0" prefWidth="450.0">
+                              <TableView prefHeight="218.0" prefWidth="450.0">
                                 <columns>
                                   <TableColumn prefWidth="75.0" text="Subject ID" />
                                   <TableColumn prefWidth="75.0" text="Subject" />
@@ -271,29 +274,57 @@
                               <Insets left="15.0" />
                            </padding>
                         </VBox>
-                        <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <children>
-                              <JFXButton buttonType="RAISED" prefHeight="53.0" prefWidth="185.0" style="-fx-background-color: #6747CD;" text="Update" textFill="WHITE">
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                                 <HBox.margin>
-                                    <Insets right="15.0" />
-                                 </HBox.margin>
-                              </JFXButton>
-                              <JFXButton buttonType="RAISED" prefHeight="53.0" prefWidth="185.0" style="-fx-background-color: #6747CD;" text="Save" textFill="WHITE">
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
+                              <Label text="Parent Info" textFill="#4e505e">
+                                 <font>
+                                    <Font name="System Bold Italic" size="12.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets left="15.0" top="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <HBox alignment="BOTTOM_LEFT" prefHeight="42.0" prefWidth="264.0">
+                                 <children>
+                                    <JFXComboBox editable="true" focusColor="#6981c9" labelFloat="true" prefHeight="25.0" prefWidth="213.0" promptText="Name" unFocusColor="#a3a3a3" />
+                                    <JFXButton alignment="BOTTOM_CENTER" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" prefHeight="25.0" prefWidth="50.0" ripplerFill="#285fcd">
+                                       <graphic>
+                                          <FontAwesomeIconView fill="#191a1b" glyphName="PLUS" size="15" />
+                                       </graphic>
+                                       <HBox.margin>
+                                          <Insets left="20.0" />
+                                       </HBox.margin>
+                                    </JFXButton>
+                                 </children>
+                                 <padding>
+                                    <Insets left="15.0" />
+                                 </padding>
+                              </HBox>
+                              <TableView prefHeight="110.0" prefWidth="429.0">
+                                 <columns>
+                                    <TableColumn prefWidth="75.0" text="ID" />
+                                    <TableColumn prefWidth="75.0" text="First Name" />
+                                    <TableColumn prefWidth="75.0" text="Last Name" />
+                                    <TableColumn prefWidth="75.0" text="Home phone" />
+                                    <TableColumn prefWidth="75.0" text="Mobile" />
+                                 </columns>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                                 <VBox.margin>
+                                    <Insets left="10.0" top="10.0" />
+                                 </VBox.margin>
+                              </TableView>
+                              <JFXButton prefHeight="35.0" prefWidth="163.0" ripplerFill="WHITE" style="-fx-background-color: #6747CD;" text="Save" textFill="WHITE">
+                                 <VBox.margin>
+                                    <Insets left="300.0" top="20.0" />
+                                 </VBox.margin>
                               </JFXButton>
                            </children>
                            <padding>
                               <Insets left="15.0" right="15.0" />
                            </padding>
-                           <GridPane.margin>
-                              <Insets bottom="15.0" />
-                           </GridPane.margin>
-                        </HBox>
+                        </VBox>
                      </children>
                   </GridPane>
                </children>
