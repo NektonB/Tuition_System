@@ -80,11 +80,16 @@ public class EmployeeController implements Initializable {
             employee = ObjectGenerator.getEmployee();
             readyEmployeeTable();
             dataReader.fillEmployeeTable(tblEmployee);
-            cmbOption.setItems(FXCollections.observableArrayList("First Name", "NIC Number"));
-            cmbOption.setValue("First Name");
+            fillcmbOption();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void fillcmbOption() {
+        cmbOption.setItems(FXCollections.observableArrayList("First Name", "NIC Number"));
+        cmbOption.setValue("First Name");
     }
 
     private void readyEmployeeTable() {
@@ -140,8 +145,6 @@ public class EmployeeController implements Initializable {
         if (event.getCode().equals(KeyCode.ENTER)) {
             selectEmployee();
             loadAU_Employee();
-        } else {
-
         }
     }
 
@@ -149,9 +152,31 @@ public class EmployeeController implements Initializable {
         try {
             employee.setNic_number(txtSearch.getText());
             dataReader.fillEmployeeTableByNIC(tblEmployee);
-            //employee.resetAll();
+            employee.resetAll();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public void filterEmployeeTableByFirstName(KeyEvent event) {
+        try {
+            employee.setFname(txtSearch.getText());
+            dataReader.fillEmployeeTableByFirstName(tblEmployee);
+            employee.resetAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void txtSearchKeyReleased(KeyEvent event) {
+        if (event.getCode().equals(KeyCode.ENTER)) {
+            selectEmployee_Key(event);
+        } else {
+            if (cmbOption.getValue().equals("First Name")) {
+                filterEmployeeTableByFirstName(event);
+            } else if (cmbOption.getValue().equals("NIC Number")) {
+                filterEmployeeTableByNic(event);
+            }
         }
     }
 

@@ -168,7 +168,7 @@ public class DataReader {
             pst = conn.prepareStatement("SELECT employee.id, employee.fname, employee.lname, employee.nic_number,employee.address, employee.contact_number, status.status FROM employee INNER JOIN status on employee.status_id = status.id");
             rs = pst.executeQuery();
             if (!rs.isBeforeFirst()) {
-                //userType.resetAll();
+                employee.resetAll();
             }
             while (rs.next()) {
                 employeeList.add(
@@ -181,8 +181,8 @@ public class DataReader {
                                 rs.getString("status.status")
                         )
                 );
-                tblEmployee.setItems(employeeList);
             }
+            tblEmployee.setItems(employeeList);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -275,11 +275,11 @@ public class DataReader {
         ResultSet rs = null;
         ObservableList<EmployeeController.EmployeeList> employeeList = FXCollections.observableArrayList();
         try {
-            pst = conn.prepareStatement("SELECT employee.id, employee.fname, employee.lname, employee.nic_number,employee.address, employee.contact_number, status.status FROM employee INNER JOIN status on employee.status_id = status.id WHERE employee.fname LIKE ?");
+            pst = conn.prepareStatement("SELECT employee.id, employee.fname, employee.lname, employee.nic_number,employee.address, employee.contact_number, status.status FROM employee INNER JOIN status on employee.status_id = status.id WHERE employee.nic_number LIKE ?");
             pst.setString(1, employee.getNic_number() + "%");
             rs = pst.executeQuery();
             if (!rs.isBeforeFirst()) {
-                //userType.resetAll();
+                employee.resetAll();
             }
             while (rs.next()) {
                 employeeList.add(
@@ -292,8 +292,49 @@ public class DataReader {
                                 rs.getString("status.status")
                         )
                 );
-                tblEmployee.setItems(employeeList);
             }
+            tblEmployee.setItems(employeeList);
+//            System.out.println("Called");
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void fillEmployeeTableByFirstName(TableView tblEmployee) {
+        ResultSet rs = null;
+        ObservableList<EmployeeController.EmployeeList> employeeList = FXCollections.observableArrayList();
+        try {
+            pst = conn.prepareStatement("SELECT employee.id, employee.fname, employee.lname, employee.nic_number,employee.address, employee.contact_number, status.status FROM employee INNER JOIN status on employee.status_id = status.id WHERE employee.fname LIKE ?");
+            pst.setString(1, employee.getFname() + "%");
+            rs = pst.executeQuery();
+            if (!rs.isBeforeFirst()) {
+                employee.resetAll();
+            }
+            while (rs.next()) {
+                employeeList.add(
+                        new EmployeeController.EmployeeList(
+                                rs.getInt("employee.id"),
+                                rs.getString("employee.fname") + " " + rs.getString("employee.lname"),
+                                rs.getString("employee.nic_number"),
+                                rs.getString("employee.address"),
+                                rs.getString("employee.contact_number"),
+                                rs.getString("status.status")
+                        )
+                );
+            }
+            tblEmployee.setItems(employeeList);
+//            System.out.println("Called");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
