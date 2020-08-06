@@ -50,7 +50,7 @@
                               <Insets left="5.0" />
                            </HBox.margin>
                         </ComboBox>
-                        <JFXButton onAction="#openAddTeacher" prefHeight="35.0" prefWidth="163.0" ripplerFill="#0777ff" text="Add Teacher">
+                        <JFXButton onAction="#loadAU_Teacher" prefHeight="35.0" prefWidth="163.0" ripplerFill="#0777ff" text="Add Teacher">
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin>

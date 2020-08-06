@@ -23,7 +23,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="460.0" prefWidth="956.0" style="-fx-border-color: #2D75E8; -fx-border-width: 2px;" stylesheets="@../CSS/Table.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.TeacherController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="460.0" prefWidth="956.0" style="-fx-border-color: #2D75E8; -fx-border-width: 2px;" stylesheets="@../CSS/Table.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AU_TeacherController">
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0">
          <center>
@@ -42,7 +42,7 @@
                               <Insets left="8.0" />
                            </HBox.margin>
                         </ImageView>
-                        <Label prefHeight="25.0" prefWidth="174.0" text="Add / Update Teacher" textFill="#5b5454">
+                        <Label fx:id="lblTitle" prefHeight="25.0" prefWidth="174.0" text="Add Teacher" textFill="#5b5454">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
@@ -50,7 +50,7 @@
                               <Insets left="10.0" />
                            </HBox.margin>
                         </Label>
-                        <FontAwesomeIconView fx:id="btnCloss" fill="#756f6f" glyphName="CLOSE" onMouseClicked="#clossScen" size="18">
+                        <FontAwesomeIconView fx:id="btnClose" fill="#756f6f" glyphName="CLOSE" onMouseClicked="#closeMe" size="18">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -72,7 +72,7 @@
                      <children>
                         <VBox prefHeight="200.0" prefWidth="100.0">
                            <children>
-                              <JFXTextField focusColor="#6981c9" labelFloat="true" promptText="First Name" unFocusColor="#a3a3a3">
+                              <JFXTextField fx:id="txtFname" focusColor="#6981c9" labelFloat="true" promptText="First Name" unFocusColor="#a3a3a3">
                                  <font>
                                     <Font size="13.0" />
                                  </font>
@@ -80,7 +80,7 @@
                                     <Insets top="10.0" />
                                  </VBox.margin>
                               </JFXTextField>
-                              <JFXTextField focusColor="#6981c9" labelFloat="true" layoutX="18.0" layoutY="15.0" promptText="NIC Number" unFocusColor="#a3a3a3">
+                              <JFXTextField fx:id="txtNIC" focusColor="#6981c9" labelFloat="true" layoutX="18.0" layoutY="15.0" promptText="NIC Number" unFocusColor="#a3a3a3">
                                  <font>
                                     <Font size="13.0" />
                                  </font>
@@ -88,7 +88,7 @@
                                     <Insets top="25.0" />
                                  </VBox.margin>
                               </JFXTextField>
-                              <JFXTextField focusColor="#6981c9" labelFloat="true" layoutX="18.0" layoutY="64.0" promptText="Mobile Number" unFocusColor="#a3a3a3">
+                              <JFXTextField fx:id="txtMobileNum" focusColor="#6981c9" labelFloat="true" layoutX="18.0" layoutY="64.0" promptText="Mobile Number" unFocusColor="#a3a3a3">
                                  <font>
                                     <Font size="13.0" />
                                  </font>
@@ -96,7 +96,7 @@
                                     <Insets top="25.0" />
                                  </VBox.margin>
                               </JFXTextField>
-                              <JFXTextArea focusColor="#6981c9" labelFloat="true" prefHeight="105.0" prefWidth="245.0" promptText="Address" unFocusColor="#a3a3a3">
+                              <JFXTextArea fx:id="txtAddress" focusColor="#6981c9" labelFloat="true" prefHeight="105.0" prefWidth="245.0" promptText="Address" unFocusColor="#a3a3a3">
                                  <VBox.margin>
                                     <Insets top="25.0" />
                                  </VBox.margin>
@@ -111,7 +111,7 @@
                               <Insets left="8.0" right="3.0" />
                            </padding>
                            <children>
-                              <JFXTextField focusColor="#6981c9" labelFloat="true" promptText="Last Name" unFocusColor="#a3a3a3">
+                              <JFXTextField fx:id="txtLName" focusColor="#6981c9" labelFloat="true" promptText="Last Name" unFocusColor="#a3a3a3">
                                  <font>
                                     <Font size="13.0" />
                                  </font>
@@ -119,7 +119,7 @@
                                     <Insets top="10.0" />
                                  </VBox.margin>
                               </JFXTextField>
-                              <JFXTextField focusColor="#6981c9" labelFloat="true" promptText="Home Number" unFocusColor="#a3a3a3">
+                              <JFXTextField fx:id="txtHomeNum" focusColor="#6981c9" labelFloat="true" promptText="Home Number" unFocusColor="#a3a3a3">
                                  <font>
                                     <Font size="13.0" />
                                  </font>
@@ -127,7 +127,7 @@
                                     <Insets top="25.0" />
                                  </VBox.margin>
                               </JFXTextField>
-                              <JFXTextField focusColor="#6981c9" labelFloat="true" promptText="Email" unFocusColor="#a3a3a3">
+                              <JFXTextField fx:id="txtEmail" focusColor="#6981c9" labelFloat="true" promptText="Email" unFocusColor="#a3a3a3">
                                  <font>
                                     <Font size="13.0" />
                                  </font>
@@ -135,7 +135,7 @@
                                     <Insets top="25.0" />
                                  </VBox.margin>
                               </JFXTextField>
-                              <JFXComboBox focusColor="#6981c9" labelFloat="true" prefHeight="25.0" prefWidth="258.0" promptText="Status" unFocusColor="#a3a3a3">
+                              <JFXComboBox fx:id="cmbStatus" focusColor="#6981c9" labelFloat="true" prefHeight="25.0" prefWidth="258.0" promptText="Status" unFocusColor="#a3a3a3">
                                  <VBox.margin>
                                     <Insets top="25.0" />
                                  </VBox.margin>
@@ -144,15 +144,15 @@
                         </VBox>
                         <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2">
                            <children>
-                              <JFXComboBox focusColor="#6981c9" labelFloat="true" prefHeight="25.0" prefWidth="258.0" promptText="Select Subject" unFocusColor="#a3a3a3">
+                              <JFXComboBox fx:id="cmbSubjects" focusColor="#6981c9" labelFloat="true" prefHeight="25.0" prefWidth="258.0" promptText="Select Subject" unFocusColor="#a3a3a3">
                                  <VBox.margin>
                                     <Insets top="14.0" />
                                  </VBox.margin>
                               </JFXComboBox>
-                              <TableView prefHeight="240.0" prefWidth="224.0">
+                              <TableView fx:id="tblTeacher_Subjects" prefHeight="240.0" prefWidth="224.0">
                                 <columns>
-                                  <TableColumn prefWidth="75.0" text="Subject ID" />
-                                  <TableColumn prefWidth="102.0" text="Subject Name" />
+                                  <TableColumn fx:id="tcSubjectId" prefWidth="50.0" text="Subject ID" visible="false" />
+                                  <TableColumn fx:id="tcSubjectName" prefWidth="170.0" text="Subject Name" />
                                 </columns>
                                  <VBox.margin>
                                     <Insets top="30.0" />
@@ -171,7 +171,7 @@
                         </VBox>
                      </children>
                   </GridPane>
-                  <JFXButton buttonType="RAISED" layoutX="20.0" layoutY="392.0" prefHeight="50.0" prefWidth="452.0" style="-fx-background-color: #6747CD;" text="Save" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="240.0">
+                  <JFXButton fx:id="btnSU" buttonType="RAISED" layoutX="20.0" layoutY="392.0" prefHeight="50.0" prefWidth="452.0" style="-fx-background-color: #6747CD;" text="Save" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="240.0">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
