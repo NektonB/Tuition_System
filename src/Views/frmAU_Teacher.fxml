@@ -23,7 +23,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="460.0" prefWidth="956.0" style="-fx-border-color: #2D75E8; -fx-border-width: 2px;" stylesheets="@../CSS/Table.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AU_TeacherController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseMoved="#resetBoarders" prefHeight="460.0" prefWidth="956.0" style="-fx-border-color: #2D75E8; -fx-border-width: 2px;" stylesheets="@../CSS/Table.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AU_TeacherController">
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0">
          <center>
@@ -149,7 +149,7 @@
                                     <Insets top="14.0" />
                                  </VBox.margin>
                               </JFXComboBox>
-                              <TableView fx:id="tblTeacher_Subjects" prefHeight="240.0" prefWidth="224.0">
+                              <TableView fx:id="tblTeacher_Subjects" onKeyReleased="#TblTeacher_Subjects_KeyReleased" prefHeight="240.0" prefWidth="224.0">
                                 <columns>
                                   <TableColumn fx:id="tcSubjectId" prefWidth="50.0" text="Subject ID" visible="false" />
                                   <TableColumn fx:id="tcSubjectName" prefWidth="170.0" text="Subject Name" />
@@ -171,7 +171,7 @@
                         </VBox>
                      </children>
                   </GridPane>
-                  <JFXButton fx:id="btnSU" buttonType="RAISED" layoutX="20.0" layoutY="392.0" prefHeight="50.0" prefWidth="452.0" style="-fx-background-color: #6747CD;" text="Save" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="240.0">
+                  <JFXButton fx:id="btnSU" buttonType="RAISED" layoutX="20.0" layoutY="392.0" onAction="#saveTeacher" prefHeight="50.0" prefWidth="452.0" style="-fx-background-color: #6747CD;" text="Save" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="240.0">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>

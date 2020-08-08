@@ -403,7 +403,7 @@ public class DataReader {
                 subject.setName(rs.getString(2));
             }
 
-            if (name == subject.getName()) {
+            if (name.contentEquals(subject.getName())) {
                 isAvailable = true;
             } else {
                 isAvailable = false;

@@ -2,9 +2,12 @@ package Controllers;
 
 import eu.hansolo.enzo.notification.Notification;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
+import javafx.stage.StageStyle;
 
 import java.awt.*;
+import java.util.Optional;
 
 public class Alerts {
 
@@ -58,13 +61,13 @@ public class Alerts {
         Notification.Notifier.INSTANCE.notifyError(title, message);
     }
 
-    public void getWarningDialog(String title, String hearder, String content) {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        Dialog dialog = new Dialog();
+    public Optional<ButtonType> getConfirmationDialog(String title, String hearder, String content) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle(title);
-        //alert.initStyle(StageStyle.UNDECORATED);
+        alert.initStyle(StageStyle.UTILITY);
         alert.setHeaderText(hearder);
         alert.setContentText(content);
-        alert.showAndWait();
+        Optional<ButtonType> result = alert.showAndWait();
+        return result;
     }
 }

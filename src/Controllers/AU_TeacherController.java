@@ -10,16 +10,21 @@ import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class AU_TeacherController implements Initializable {
@@ -58,7 +63,7 @@ public class AU_TeacherController implements Initializable {
     private JFXComboBox<String> cmbSubjects;
 
     @FXML
-    private TableView<?> tblTeacher_Subjects;
+    private TableView<TeacherSubjectsList> tblTeacher_Subjects;
 
     @FXML
     private TableColumn<TeacherSubjectsList, Integer> tcSubjectId;
@@ -79,6 +84,8 @@ public class AU_TeacherController implements Initializable {
     Teacher teacher;
     TeacherHasSubject teacherHasSubject;
     Subject subject;
+    User user;
+    UserType userType;
 
     TableView tblEmployee;
 
@@ -94,6 +101,10 @@ public class AU_TeacherController implements Initializable {
             teacherHasSubject = ObjectGenerator.getTeacherHasSubject();
             status = ObjectGenerator.getStatus();
             subject = ObjectGenerator.getSubject();
+            user = ObjectGenerator.getUser();
+            userType = ObjectGenerator.getUserType();
+
+            readySubjectTable();
 
             dataReader.fillStatusCombo(cmbStatus);
             dataReader.fillSubjectCombo(cmbSubjects);
@@ -102,6 +113,11 @@ public class AU_TeacherController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void readySubjectTable() {
+        tcSubjectId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        tcSubjectName.setCellValueFactory(new PropertyValueFactory<>("name"));
     }
 
     public void searchStatusDetailsByStatus() {
@@ -139,8 +155,10 @@ public class AU_TeacherController implements Initializable {
 
     public void searchSubjectDetailsByName() {
         try {
-            subject.setName(cmbSubjects.getValue());
-            dataReader.getSubjectDetailsByName();
+            if (!cmbSubjects.getValue().isEmpty()) {
+                subject.setName(cmbSubjects.getValue());
+                dataReader.getSubjectDetailsByName();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -149,8 +167,9 @@ public class AU_TeacherController implements Initializable {
     public void saveSubjects() {
         if (!cmbSubjects.getValue().isEmpty()) {
             boolean isAvailable = dataReader.checkSubjectIsAvailable(cmbSubjects.getValue());
-
+            System.out.println(isAvailable);
             if (isAvailable) {
+                Toolkit.getDefaultToolkit().beep();
                 alerts.getWarningNotify("Subject Registration", "Careful Chief..!\n" + cmbSubjects.getValue() + " is already available");
             } else {
                 subject.setName(cmbSubjects.getValue());
@@ -180,22 +199,92 @@ public class AU_TeacherController implements Initializable {
 
     public void deleteSubjects() {
         if (!cmbSubjects.getValue().isEmpty()) {
-            int deleteSubject = dataWriter.deleteSubject();
-            if (deleteSubject > 0) {
-                subject.resetAll();
+            if (userType.getType().equals("Super Admin")) {
+                int deleteSubject = 0;
+                subject.setName(cmbSubjects.getValue());
 
-                dataReader.fillSubjectCombo(cmbSubjects);
-                alerts.getSuccessNotify("Subject Delete", "Congratulation Chief..!\nSubject delete successful");
+                Optional<ButtonType> dialog = alerts.getConfirmationDialog("Warning", "Subject Delete", "Are you sure, you want to delete " + cmbSubjects.getValue() + " ?");
+                if (dialog.get().equals(ButtonType.OK)) {
+                    deleteSubject = dataWriter.deleteSubject();
+                } else {
+
+                }
+
+                if (deleteSubject > 0) {
+                    subject.resetAll();
+
+                    dataReader.fillSubjectCombo(cmbSubjects);
+                    alerts.getSuccessNotify("Subject Delete", "Congratulation Chief..!\nSubject delete successful");
+                }
             }
         }
     }
 
+    public void addSubjectToTable() {
+        try {
+            searchSubjectDetailsByName();
+
+            ObservableList<TeacherSubjectsList> subjectsList;
+            subjectsList = tblTeacher_Subjects.getItems();
+            subjectsList.add(new TeacherSubjectsList(subject.getId(), subject.getName()));
+            tblTeacher_Subjects.setItems(subjectsList);
+            subject.resetAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void removeSubjectFromTable() {
+        try {
+            if (tblTeacher_Subjects.getItems().isEmpty()) {
+                alerts.getWarningNotify("Warning !", "No more rows here...");
+            } else {
+                TeacherSubjectsList subject = tblTeacher_Subjects.getSelectionModel().getSelectedItem();
+                tblTeacher_Subjects.getItems().remove(subject);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void TblTeacher_Subjects_KeyReleased(KeyEvent event) {
+        if (event.getCode().equals(KeyCode.DELETE)) {
+            removeSubjectFromTable();
+        }
+    }
+
     public void setCmbSubjectsKeyReleased(KeyEvent event) {
-        if (event.isControlDown() && event.getCode().equals(KeyCode.S)) {
+        if (event.getCode().equals(KeyCode.ENTER)) {
+            addSubjectToTable();
+        } else if (event.isControlDown() && event.getCode().equals(KeyCode.S)) {
             saveSubjects();
         } else if (event.isControlDown() && event.getCode().equals(KeyCode.U)) {
             updateSubjects();
+        } else if (event.getCode().equals(KeyCode.DELETE)) {
+            deleteSubjects();
         }
+    }
+
+    private int saveSubjectList(int saveTeacher) {
+        int saveSubjectList = 0;
+        try {
+            if (saveTeacher > 0) {
+                if (!tblTeacher_Subjects.getItems().isEmpty()) {
+                    ObservableList<? extends TableColumn<?, ?>> columns = tblTeacher_Subjects.getColumns();
+                    for (int i = 0; i < tblTeacher_Subjects.getItems().size(); i++) {
+                        subject.setId(Integer.parseInt(columns.get(0).getCellObservableValue(i).getValue().toString()));
+
+                        saveSubjectList = dataWriter.saveTeacherSubjectList();
+                        if (saveSubjectList > 0) {
+                            subject.resetAll();
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return saveSubjectList;
     }
 
     public void saveTeacher() {
@@ -214,16 +303,20 @@ public class AU_TeacherController implements Initializable {
                 dataReader.getStatusDetailsByStatus();
 
                 if (btnSU.getText().equals("Save")) {
-                    int saveEmployee = dataWriter.saveEmployee();
-                    if (saveEmployee > 0) {
-                        teacher.resetAll();
-                        status.resetAll();
+                    int saveTeacher = dataWriter.saveTeacher();
+                    if (saveTeacher > 0) {
 
-                        dataReader.fillEmployeeTable(tblEmployee);
-                        //alerts.getInformationAlert("Information", "Employee Registration", "Congratulation Chief..!\nEmployee registration successful");
-                        alerts.getSuccessNotify("Employee Registration", "Congratulation Chief..!\nEmployee registration successful");
+                        int saveSubjectList = saveSubjectList(saveTeacher);
 
-                        closeMe();
+                        if (saveSubjectList > 0) {
+                            teacher.resetAll();
+                            status.resetAll();
+
+                            //dataReader.fillEmployeeTable(tblEmployee);
+                            alerts.getSuccessNotify("Teacher Registration", "Congratulation Chief..!\nTeacher registration successful");
+
+                            closeMe();
+                        }
                     }
                 } else if (btnSU.getText().equals("Update")) {
                     int updateEmployee = dataWriter.updateEmployee();
@@ -242,6 +335,13 @@ public class AU_TeacherController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void closeMe() {
+        /*employee.resetAll();
+        status.resetAll();*/
+        Stage stage = (Stage) btnClose.getScene().getWindow();
+        stage.close();
     }
 
     public static class TeacherSubjectsList {
@@ -276,12 +376,5 @@ public class AU_TeacherController implements Initializable {
         public void setName(String name) {
             this.name.set(name);
         }
-    }
-
-    public void closeMe() {
-        /*employee.resetAll();
-        status.resetAll();*/
-        Stage stage = (Stage) btnClose.getScene().getWindow();
-        stage.close();
     }
 }

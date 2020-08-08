@@ -168,4 +168,77 @@ public class DataWriter {
         return operation;
     }
 
+    public int deleteTeacherSubject() {
+        int operation = 0;
+        try {
+            pst = conn.prepareStatement("DELETE FROM teacher_has_subject WHERE teacher_id = ? AND  subject_id = ?");
+            pst.setInt(1, teacher.getId());
+            pst.setInt(2, subject.getId());
+
+            operation = pst.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return operation;
+    }
+
+    public int saveTeacher() {
+        int operation = 0;
+        try {
+            pst = conn.prepareStatement("INSERT INTO teacher(fname, lname, nic_number, address, home_number, mobile_number, email, status_id) VALUES (?,?,?,?,?,?,?,?)", pst.RETURN_GENERATED_KEYS);
+            pst.setString(1, teacher.getFname());
+            pst.setString(2, teacher.getLname());
+            pst.setString(3, teacher.getNic_number());
+            pst.setString(4, teacher.getAddress());
+            pst.setString(5, teacher.getHome_number());
+            pst.setString(6, teacher.getMobile_number());
+            pst.setString(7, teacher.getEmail());
+            pst.setInt(8, status.getId());
+
+            operation = pst.executeUpdate();
+            teacher.setId(pst.RETURN_GENERATED_KEYS);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return operation;
+    }
+
+    public int saveTeacherSubjectList() {
+        int operation = 0;
+        try {
+            pst = conn.prepareStatement("INSERT INTO teacher_has_subject(teacher_id, subject_id) VALUES (?,?)");
+            pst.setInt(1, teacher.getId());
+            pst.setInt(2, subject.getId());
+
+            operation = pst.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return operation;
+    }
+
 }
