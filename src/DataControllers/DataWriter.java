@@ -194,7 +194,7 @@ public class DataWriter {
         int operation = 0;
         ResultSet rs = null;
         try {
-            pst = conn.prepareStatement("INSERT INTO teacher(fname, lname, nic_number, address, home_number, mobile_number, email, status_id) VALUES (?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            pst = conn.prepareStatement("INSERT INTO teacher(fname, lname, nic_number, address, home_number, mobile_number, email, status_id) VALUES (?,?,?,?,?,?,?,?)", pst.RETURN_GENERATED_KEYS);
             pst.setString(1, teacher.getFname());
             pst.setString(2, teacher.getLname());
             pst.setString(3, teacher.getNic_number());
