@@ -55,7 +55,6 @@ public class AU_EmployeeController implements Initializable {
     DataWriter dataWriter;
     DataReader dataReader;
     Alerts alerts;
-    DateFormatConverter dateFormatConverter;
 
     Employee employee;
     Status status;
@@ -68,7 +67,6 @@ public class AU_EmployeeController implements Initializable {
             alerts = ObjectGenerator.getAlerts();
             dataWriter = ObjectGenerator.getDataWriter();
             dataReader = ObjectGenerator.getDataReader();
-            dateFormatConverter = ObjectGenerator.getDateFormatConverter();
 
             employee = ObjectGenerator.getEmployee();
             status = ObjectGenerator.getStatus();

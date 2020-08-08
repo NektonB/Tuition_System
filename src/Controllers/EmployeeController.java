@@ -66,7 +66,6 @@ public class EmployeeController implements Initializable {
 
     DataReader dataReader;
     Alerts alerts;
-    DateFormatConverter dateFormatConverter;
 
     Employee employee;
 
@@ -75,7 +74,6 @@ public class EmployeeController implements Initializable {
         try {
             alerts = ObjectGenerator.getAlerts();
             dataReader = ObjectGenerator.getDataReader();
-            dateFormatConverter = ObjectGenerator.getDateFormatConverter();
 
             employee = ObjectGenerator.getEmployee();
             readyEmployeeTable();

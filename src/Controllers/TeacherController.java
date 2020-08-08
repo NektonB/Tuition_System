@@ -1,5 +1,8 @@
 package Controllers;
 
+import DataControllers.DataReader;
+import Modules.Employee;
+import Modules.Teacher;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
@@ -7,12 +10,14 @@ import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -58,10 +63,40 @@ public class TeacherController implements Initializable {
     @FXML
     private TableColumn<TeachersList, String> tcStatus;
 
+    DataReader dataReader;
+    Alerts alerts;
+
+    Teacher teacher;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        try {
+            alerts = ObjectGenerator.getAlerts();
+            dataReader = ObjectGenerator.getDataReader();
 
+            teacher = ObjectGenerator.getTeacher();
+            readyEmployeeTable();
+//            dataReader.fillEmployeeTable(tblEmployee);
+            fillcmbOption();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void fillcmbOption() {
+        cmbOption.setItems(FXCollections.observableArrayList("First Name", "NIC Number"));
+        cmbOption.setValue("First Name");
+    }
+
+    private void readyEmployeeTable() {
+        tcId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        tcName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        tcNIC.setCellValueFactory(new PropertyValueFactory<>("nic"));
+        tcAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
+        tcContact.setCellValueFactory(new PropertyValueFactory<>("mobile"));
+        tcEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+        tcSubject.setCellValueFactory(new PropertyValueFactory<>("subjects"));
+        tcStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
     }
 
 

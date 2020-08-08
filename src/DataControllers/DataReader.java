@@ -453,4 +453,44 @@ public class DataReader {
         }
     }
 
+    public void fillTeacherTable(TableView tblTeacher) {
+        ResultSet rs = null;
+        ObservableList<TeacherController.TeachersList> employeeList = FXCollections.observableArrayList();
+        try {
+            pst = conn.prepareStatement("SELECT teacher.id,teacher.fname,teacher.lname,teacher.address,teacher.mobile_number,teacher.email,subject.name FROM teacher INNER JOIN teacher_has_subject ths on teacher.id = ths.teacher_id INNER JOIN subject on ths.subject_id = subject.id INNER JOIN status on teacher.status_id = status.id");
+            rs = pst.executeQuery();
+            if (!rs.isBeforeFirst()) {
+                employee.resetAll();
+            }
+            while (rs.next()) {
+                employeeList.add(
+                        new TeacherController.TeachersList(
+                                rs.getInt("employee.id"),
+                                rs.getString("employee.fname") + " " + rs.getString("employee.lname"),
+                                rs.getString("employee.nic_number"),
+                                rs.getString("employee.address"),
+                                rs.getString("employee.contact_number"),
+                                rs.getString(""),
+                                rs.getString(""),
+                                rs.getString("status.status")
+                        )
+                );
+            }
+            tblTeacher.setItems(employeeList);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 }
