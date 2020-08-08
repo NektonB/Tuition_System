@@ -21,6 +21,9 @@ public class DataWriter {
 
     Employee employee;
     Status status;
+    Teacher teacher;
+    TeacherHasSubject teacherHasSubject;
+    Subject subject;
 
 
     /**
@@ -36,6 +39,9 @@ public class DataWriter {
                 alerts = ObjectGenerator.getAlerts();
                 employee = ObjectGenerator.getEmployee();
                 status = ObjectGenerator.getStatus();
+                teacher = ObjectGenerator.getTeacher();
+                teacherHasSubject = ObjectGenerator.getTeacherHasSubject();
+                subject = ObjectGenerator.getSubject();
             });
             readyData.setName("Data Writer");
             readyData.start();
@@ -81,7 +87,71 @@ public class DataWriter {
             pst.setString(4, employee.getAddress());
             pst.setString(5, employee.getContact_number());
             pst.setInt(6, status.getId());
-            pst.setInt(7,employee.getId());
+            pst.setInt(7, employee.getId());
+
+            operation = pst.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return operation;
+    }
+
+    public int saveSubject() {
+        int operation = 0;
+        try {
+            pst = conn.prepareStatement("INSERT INTO subject(name) VALUES (?)");
+            pst.setString(1, subject.getName());
+
+            operation = pst.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return operation;
+    }
+
+    public int updateSubject() {
+        int operation = 0;
+        try {
+            pst = conn.prepareStatement("UPDATE subject SET name = ? WHERE id = ?");
+            pst.setString(1, subject.getName());
+            pst.setInt(2, subject.getId());
+
+            operation = pst.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return operation;
+    }
+
+    public int deleteSubject() {
+        int operation = 0;
+        try {
+            pst = conn.prepareStatement("DELETE FROM subject WHERE id = ?");
+            pst.setInt(1, subject.getId());
 
             operation = pst.executeUpdate();
         } catch (Exception e) {

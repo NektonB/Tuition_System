@@ -30,6 +30,9 @@ public class DataReader {
 
     Status status;
     Employee employee;
+    Teacher teacher;
+    TeacherHasSubject teacherHasSubject;
+    Subject subject;
 
     public DataReader() {
         try {
@@ -41,6 +44,9 @@ public class DataReader {
 
                 status = ObjectGenerator.getStatus();
                 employee = ObjectGenerator.getEmployee();
+                teacher = ObjectGenerator.getTeacher();
+                teacherHasSubject = ObjectGenerator.getTeacherHasSubject();
+                subject = ObjectGenerator.getSubject();
 
             });
             readyData.setName("DataReader");
@@ -335,6 +341,102 @@ public class DataReader {
             }
             tblEmployee.setItems(employeeList);
 //            System.out.println("Called");
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void getSubjectDetailsByName() {
+        ResultSet rs = null;
+        try {
+            pst = conn.prepareStatement("SELECT id, name FROM subject WHERE name = ?");
+            pst.setString(1, subject.getName());
+            rs = pst.executeQuery();
+
+            if (!rs.isBeforeFirst()) {
+                subject.resetAll();
+            }
+            while (rs.next()) {
+                subject.setId(rs.getInt(1));
+                subject.setName(rs.getString(2));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public boolean checkSubjectIsAvailable(String name) {
+        ResultSet rs = null;
+        boolean isAvailable = false;
+        try {
+            pst = conn.prepareStatement("SELECT id, name FROM subject WHERE name = ?");
+            pst.setString(1, name);
+            rs = pst.executeQuery();
+
+            if (!rs.isBeforeFirst()) {
+                subject.resetAll();
+            }
+            while (rs.next()) {
+                subject.setId(rs.getInt(1));
+                subject.setName(rs.getString(2));
+            }
+
+            if (name == subject.getName()) {
+                isAvailable = true;
+            } else {
+                isAvailable = false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return isAvailable;
+    }
+
+    public void fillSubjectCombo(JFXComboBox cmbSubject) {
+        ResultSet rs = null;
+        cmbSubject.getItems().clear();
+        try {
+            pst = conn.prepareStatement("SELECT name FROM subject");
+            rs = pst.executeQuery();
+            if (!rs.isBeforeFirst()) {
+
+            }
+            while (rs.next()) {
+                cmbSubject.getItems().add(rs.getString(1));
+            }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

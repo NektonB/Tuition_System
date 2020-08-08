@@ -18,6 +18,9 @@ public class ObjectGenerator {
     private static DateFormatConverter dateFormatConverter;
     private static Employee employee;
     private static Status status;
+    private static Teacher teacher;
+    private static TeacherHasSubject teacherHasSubject;
+    private static Subject subject;
 
     private static TextValidator textValidator;
     private static TimeFormatConverter timeFormatConverter;
@@ -140,5 +143,26 @@ public class ObjectGenerator {
             status = new Status();
         }
         return status;
+    }
+
+    public static synchronized Teacher getTeacher() {
+        if (teacher == null) {
+            teacher = new Teacher();
+        }
+        return teacher;
+    }
+
+    public static synchronized TeacherHasSubject getTeacherHasSubject() {
+        if (teacherHasSubject == null) {
+            teacherHasSubject = new TeacherHasSubject();
+        }
+        return teacherHasSubject;
+    }
+
+    public static synchronized Subject getSubject() {
+        if (subject == null) {
+            subject = new Subject();
+        }
+        return subject;
     }
 }

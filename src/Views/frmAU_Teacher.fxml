@@ -144,7 +144,7 @@
                         </VBox>
                         <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2">
                            <children>
-                              <JFXComboBox fx:id="cmbSubjects" focusColor="#6981c9" labelFloat="true" prefHeight="25.0" prefWidth="258.0" promptText="Select Subject" unFocusColor="#a3a3a3">
+                              <JFXComboBox fx:id="cmbSubjects" editable="true" focusColor="#6981c9" labelFloat="true" onHidden="#searchSubjectDetailsByName" onKeyReleased="#setCmbSubjectsKeyReleased" prefHeight="25.0" prefWidth="258.0" promptText="Select Subject" unFocusColor="#a3a3a3">
                                  <VBox.margin>
                                     <Insets top="14.0" />
                                  </VBox.margin>

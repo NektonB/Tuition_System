@@ -2,6 +2,7 @@ package Controllers;
 
 import eu.hansolo.enzo.notification.Notification;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Dialog;
 
 import java.awt.*;
 
@@ -55,5 +56,15 @@ public class Alerts {
 
     public void getErrorNotify(String title, String message) {
         Notification.Notifier.INSTANCE.notifyError(title, message);
+    }
+
+    public void getWarningDialog(String title, String hearder, String content) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        Dialog dialog = new Dialog();
+        alert.setTitle(title);
+        //alert.initStyle(StageStyle.UNDECORATED);
+        alert.setHeaderText(hearder);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 }
