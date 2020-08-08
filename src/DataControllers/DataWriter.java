@@ -192,8 +192,9 @@ public class DataWriter {
 
     public int saveTeacher() {
         int operation = 0;
+        ResultSet rs = null;
         try {
-            pst = conn.prepareStatement("INSERT INTO teacher(fname, lname, nic_number, address, home_number, mobile_number, email, status_id) VALUES (?,?,?,?,?,?,?,?)", pst.RETURN_GENERATED_KEYS);
+            pst = conn.prepareStatement("INSERT INTO teacher(fname, lname, nic_number, address, home_number, mobile_number, email, status_id) VALUES (?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
             pst.setString(1, teacher.getFname());
             pst.setString(2, teacher.getLname());
             pst.setString(3, teacher.getNic_number());
@@ -204,11 +205,17 @@ public class DataWriter {
             pst.setInt(8, status.getId());
 
             operation = pst.executeUpdate();
-            teacher.setId(pst.RETURN_GENERATED_KEYS);
+            rs = pst.getGeneratedKeys();
+            if (rs.next()) {
+                teacher.setId(rs.getInt(1));
+            }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
                 if (!pst.isClosed()) {
                     pst.close();
                 }

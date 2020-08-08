@@ -337,6 +337,12 @@ public class AU_TeacherController implements Initializable {
         }
     }
 
+    public void setFrmTeacher_KeyReleased(KeyEvent event) {
+        if (event.isControlDown() && event.getCode().equals(KeyCode.S) && !(cmbSubjects.isFocused())) {
+            saveTeacher();
+        }
+    }
+
     public void closeMe() {
         /*employee.resetAll();
         status.resetAll();*/
