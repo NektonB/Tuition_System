@@ -13,9 +13,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="524.0" prefWidth="800.0" styleClass="parant" stylesheets="@../CSS/Login.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.UserRegistration">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="566.0" prefWidth="800.0" styleClass="parant" stylesheets="@../CSS/Login.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.UserRegistration">
    <children>
-      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="524.0" prefWidth="400.0" styleClass="sidebar">
+      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="566.0" prefWidth="400.0" styleClass="sidebar">
          <children>
             <ImageView fitHeight="132.0" fitWidth="134.0" pickOnBounds="true" smooth="false">
                <image>
@@ -29,7 +29,7 @@
             </Label>
          </children>
       </VBox>
-      <Pane layoutX="400.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="524.0" prefWidth="400.0">
+      <Pane layoutX="400.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="566.0" prefWidth="400.0">
          <children>
             <ImageView fitHeight="104.0" fitWidth="86.0" layoutX="22.0" layoutY="16.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -51,12 +51,12 @@
                   <Font size="13.0" />
                </font>
             </JFXTextField>
-            <JFXPasswordField fx:id="txt_password" focusColor="#6767cd" labelFloat="true" layoutX="57.0" layoutY="294.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="300.0" promptText="Password" unFocusColor="#a3a3a3">
+            <JFXPasswordField fx:id="txt_password" focusColor="#6767cd" labelFloat="true" layoutX="55.0" layoutY="345.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="300.0" promptText="Password" unFocusColor="#a3a3a3">
                <font>
                   <Font size="13.0" />
                </font>
             </JFXPasswordField>
-            <Label fx:id="lbl_update_user" layoutX="215.0" layoutY="415.0" onMouseClicked="#loadUserUpdate" styleClass="forgotBtn" text="Update exiting User" textFill="#a3a3a3">
+            <Label fx:id="lbl_update_user" layoutX="215.0" layoutY="465.0" onMouseClicked="#loadUserUpdate" styleClass="forgotBtn" text="Update exiting User" textFill="#a3a3a3">
                <font>
                   <Font name="Ebrima Bold" size="14.0" />
                </font>
@@ -64,7 +64,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Label>
-            <JFXButton fx:id="btn_login" buttonType="RAISED" layoutX="58.0" layoutY="448.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="300.0" ripplerFill="#0777ff" styleClass="loginBtn" text="Register">
+            <JFXButton fx:id="btn_login" buttonType="RAISED" layoutX="58.0" layoutY="498.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="300.0" ripplerFill="#0777ff" styleClass="loginBtn" text="Register">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -74,7 +74,8 @@
                   <Font size="13.0" />
                </font>
             </JFXTextField>
-            <JFXComboBox fx:id="cmb_status" labelFloat="true" layoutX="58.0" layoutY="353.0" prefHeight="35.0" prefWidth="300.0" promptText="Status" />
+            <JFXComboBox fx:id="cmb_status" focusColor="#6767cd" labelFloat="true" layoutX="58.0" layoutY="403.0" prefHeight="35.0" prefWidth="300.0" promptText="Status" unFocusColor="#a3a3a3" />
+            <JFXComboBox fx:id="txt_userType" focusColor="#6747cd" labelFloat="true" layoutX="57.0" layoutY="295.0" prefHeight="25.0" prefWidth="300.0" promptText="User Type" unFocusColor="#a3a3a3" />
          </children>
       </Pane>
    </children>
