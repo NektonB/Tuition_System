@@ -18,6 +18,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -111,16 +113,32 @@ public class TeacherController implements Initializable {
         }
     }
 
+    public void selectEmployee_Key(KeyEvent event) {
+        if (event.getCode().equals(KeyCode.ENTER)) {
+            selectTeacher();
+            loadAU_Teacher();
+        }
+    }
+
     public void loadAU_Teacher() {
         try {
             Stage productsStage = new Stage();
-            Parent frmCustomer = FXMLLoader.load(getClass().getClassLoader().getResource("Views/frmAU_Teacher.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Views/frmAU_Teacher.fxml"));
+            Parent frmCustomer = loader.load();
             //productsStage.setTitle("Add New Employee");
             Scene scene = new Scene(frmCustomer);
             productsStage.setScene(scene);
             productsStage.initStyle(StageStyle.UNDECORATED);
             productsStage.setResizable(false);
             productsStage.initModality(Modality.APPLICATION_MODAL);
+
+            AU_TeacherController au = loader.getController();
+            if (teacher.getId() == 0) {
+                au.setWindowData("Add New Teacher", "Save", tblTeacher);
+            } else if (teacher.getId() > 0) {
+                au.setWindowData("Update Teacher", "Update", tblTeacher);
+            }
+
             productsStage.show();
         } catch (Exception e) {
             e.printStackTrace();

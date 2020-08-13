@@ -87,7 +87,7 @@ public class AU_TeacherController implements Initializable {
     User user;
     UserType userType;
 
-    TableView tblEmployee;
+    TableView tblTeacher;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -108,11 +108,32 @@ public class AU_TeacherController implements Initializable {
 
             dataReader.fillStatusCombo(cmbStatus);
             dataReader.fillSubjectCombo(cmbSubjects);
-//            loadContent();
             cmbStatus.setValue("ACTIVE");
+            loadContent();
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void loadContent() {
+        if (teacher.getId() > 0) {
+            txtFname.setText(teacher.getFname());
+            txtLName.setText(teacher.getLname());
+            txtNIC.setText(teacher.getNic_number());
+            txtHomeNum.setText(teacher.getHome_number());
+            txtMobileNum.setText(teacher.getMobile_number());
+            txtEmail.setText(teacher.getEmail());
+            txtAddress.setText(teacher.getAddress());
+            cmbStatus.setValue(status.getStatus());
+
+
+        }
+    }
+
+    public void setWindowData(String title, String actionName, TableView tblTeacher) {
+        lblTitle.setText(title);
+        btnSU.setText(actionName);
+        this.tblTeacher = tblTeacher;
     }
 
     private void readySubjectTable() {
@@ -324,7 +345,7 @@ public class AU_TeacherController implements Initializable {
                         teacher.resetAll();
                         status.resetAll();
 
-                        dataReader.fillEmployeeTable(tblEmployee);
+                        dataReader.fillEmployeeTable(tblTeacher);
                         //alerts.getInformationAlert("Information", "Employee Registration", "Congratulation Chief..!\nEmployee registration successful");
                         alerts.getSuccessNotify("Employee Update", "Congratulation Chief..!\nEmployee update successful");
 
@@ -344,8 +365,10 @@ public class AU_TeacherController implements Initializable {
     }
 
     public void closeMe() {
-        /*employee.resetAll();
-        status.resetAll();*/
+        teacher.resetAll();
+        status.resetAll();
+        teacherHasSubject.resetAll();
+        subject.resetAll();
         Stage stage = (Stage) btnClose.getScene().getWindow();
         stage.close();
     }
