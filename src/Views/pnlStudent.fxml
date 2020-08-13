@@ -52,7 +52,7 @@
                               <Insets left="5.0" />
                            </HBox.margin>
                         </ComboBox>
-                        <JFXButton onAction="#openStudent" prefHeight="35.0" prefWidth="163.0" ripplerFill="#0777ff" text="Add Student">
+                        <JFXButton fx:id="btnAdd" onAction="#openStudent" prefHeight="35.0" prefWidth="163.0" ripplerFill="#0777ff" text="Add Student">
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin>
@@ -74,16 +74,15 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TableView prefHeight="251.0" prefWidth="925.0">
+                  <TableView fx:id="tblStudent" prefHeight="251.0" prefWidth="925.0">
                      <columns>
-                        <TableColumn prefWidth="75.0" text="First Name" />
-                        <TableColumn prefWidth="75.0" text="Last Name" />
-                        <TableColumn prefWidth="75.0" text="NIC number" />
-                        <TableColumn prefWidth="75.0" text="Address" />
-                        <TableColumn prefWidth="75.0" text="Home Number" />
-                        <TableColumn prefWidth="75.0" text="Contact Number" />
-                        <TableColumn prefWidth="75.0" text="Email" />
-                        <TableColumn prefWidth="75.0" text="Status" />
+                        <TableColumn fx:id="tcId" prefWidth="75.0" text="Id" visible="false" />
+                        <TableColumn fx:id="tcName" prefWidth="75.0" text="Name" />
+                        <TableColumn fx:id="tcNIC" prefWidth="75.0" text="NIC number" />
+                        <TableColumn fx:id="tcAddress" prefWidth="75.0" text="Address" />
+                        <TableColumn fx:id="tcMobile" prefWidth="75.0" text="Mobile Number" />
+                        <TableColumn fx:id="tcEmail" prefWidth="75.0" text="Email" />
+                        <TableColumn fx:id="tcStatus" prefWidth="75.0" text="Status" />
                      </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

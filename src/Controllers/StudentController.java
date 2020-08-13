@@ -22,7 +22,7 @@ public class StudentController implements Initializable {
 
     }
 
-    public void openStudent() {
+    public void loadAU_Teacher() {
         try {
             Stage productsStage = new Stage();
             Parent frmCustomer = FXMLLoader.load(getClass().getClassLoader().getResource("Views/frmAddStudent.fxml"));
@@ -38,7 +38,7 @@ public class StudentController implements Initializable {
         }
     }
 
-    public void clossScen(){
+    public void closeMe(){
         Stage stage = (Stage) btnCloss.getScene().getWindow();
         stage.close();
     }
