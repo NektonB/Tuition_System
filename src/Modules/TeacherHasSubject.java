@@ -1,10 +1,11 @@
 package Modules;
 
+import java.util.HashMap;
 import java.util.Vector;
 
 public class TeacherHasSubject {
     private int id;
-    private Vector<Subject> subjectList = new Vector<>();
+    private HashMap<Integer, String> subjectList = new HashMap<>();
 
     public void resetAll() {
         setId(0);
@@ -19,11 +20,11 @@ public class TeacherHasSubject {
         this.id = id;
     }
 
-    public Vector<Subject> getSubjectList() {
+    public HashMap<Integer, String> getSubjectList() {
         return subjectList;
     }
 
-    public void setSubjectList(Vector<Subject> subjectList) {
+    public void setSubjectList(HashMap<Integer, String> subjectList) {
         this.subjectList = subjectList;
     }
 }

@@ -519,12 +519,10 @@ public class DataReader {
 
                 String[] subjectIds = rs.getString("GROUP_CONCAT(subject.id)").split(",");
                 String[] subjectNames = rs.getString("GROUP_CONCAT(subject.name)").split(",");
-                Vector<Subject> subjectList = new Vector<>();
+                HashMap<Integer, String> subjectList = new HashMap<>();
 
                 for (int i = 0; i < subjectIds.length; ++i) {
-                    subject.setId(Integer.parseInt(subjectIds[i]));
-                    subject.setName(subjectIds[i]);
-                    subjectList.add(subject);
+                    subjectList.put(Integer.parseInt(subjectIds[i]), subjectNames[i]);
                 }
                 teacherHasSubject.setSubjectList(subjectList);
             }

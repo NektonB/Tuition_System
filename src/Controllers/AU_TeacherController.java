@@ -24,8 +24,7 @@ import javafx.stage.Stage;
 
 import java.awt.*;
 import java.net.URL;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class AU_TeacherController implements Initializable {
 
@@ -126,7 +125,17 @@ public class AU_TeacherController implements Initializable {
             txtAddress.setText(teacher.getAddress());
             cmbStatus.setValue(status.getStatus());
 
+            ObservableList<TeacherSubjectsList> subjectsList = null;
+            HashMap<Integer, String> subjects = teacherHasSubject.getSubjectList();
+            Set<Integer> keySet = subjects.keySet();
 
+            for (int key : keySet) {
+                subjectsList = tblTeacher_Subjects.getItems();
+                System.out.println("Sub ID : " + key);
+                System.out.println("Sub Name : " + subjects.get(key));
+                subjectsList.add(new TeacherSubjectsList(key, subjects.get(key)));
+            }
+            tblTeacher_Subjects.setItems(subjectsList);
         }
     }
 
