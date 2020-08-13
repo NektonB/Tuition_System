@@ -78,11 +78,11 @@
                      <columns>
                         <TableColumn fx:id="tcId" prefWidth="75.0" text="Id" visible="false" />
                         <TableColumn fx:id="tcName" prefWidth="200.0" text="Full Name" />
-                        <TableColumn fx:id="tcNIC" prefWidth="150.0" text="NIC number" />
+                        <TableColumn fx:id="tcNIC" prefWidth="100.0" text="NIC number" />
                         <TableColumn fx:id="tcAddress" prefWidth="200.0" text="Address" />
-                        <TableColumn fx:id="tcContact" prefWidth="150.0" text="Contact Number" />
+                        <TableColumn fx:id="tcContact" prefWidth="100.0" text="Contact Number" />
                         <TableColumn fx:id="tcEmail" prefWidth="150.0" text="Email" />
-                        <TableColumn fx:id="tcSubject" prefWidth="75.0" text="Subjects" />
+                        <TableColumn fx:id="tcSubject" prefWidth="175.0" text="Subjects" />
                         <TableColumn fx:id="tcStatus" prefWidth="75.0" text="Status" />
                      </columns>
                      <columnResizePolicy>

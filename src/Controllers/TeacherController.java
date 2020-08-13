@@ -76,7 +76,7 @@ public class TeacherController implements Initializable {
 
             teacher = ObjectGenerator.getTeacher();
             readyEmployeeTable();
-//            dataReader.fillEmployeeTable(tblEmployee);
+            dataReader.fillTeacherTable(tblTeacher);
             fillcmbOption();
         } catch (Exception e) {
             e.printStackTrace();
@@ -99,6 +99,17 @@ public class TeacherController implements Initializable {
         tcStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
     }
 
+    public void selectTeacher() {
+        try {
+            if (!tblTeacher.getItems().isEmpty()) {
+                TeachersList teachersList = tblTeacher.getSelectionModel().getSelectedItem();
+                teacher.setId(teachersList.getId());
+                dataReader.getTeacherDetailsById();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public void loadAU_Teacher() {
         try {

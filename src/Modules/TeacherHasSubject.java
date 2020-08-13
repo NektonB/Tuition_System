@@ -1,9 +1,12 @@
 package Modules;
 
+import java.util.Vector;
+
 public class TeacherHasSubject {
     private int id;
+    private Vector<Subject> subjectList = new Vector<>();
 
-    public void resetAll(){
+    public void resetAll() {
         setId(0);
     }
 
@@ -14,5 +17,13 @@ public class TeacherHasSubject {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Vector<Subject> getSubjectList() {
+        return subjectList;
+    }
+
+    public void setSubjectList(Vector<Subject> subjectList) {
+        this.subjectList = subjectList;
     }
 }

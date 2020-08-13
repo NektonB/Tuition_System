@@ -18,6 +18,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Vector;
 
 public class DataReader {
 
@@ -455,28 +456,78 @@ public class DataReader {
 
     public void fillTeacherTable(TableView tblTeacher) {
         ResultSet rs = null;
-        ObservableList<TeacherController.TeachersList> employeeList = FXCollections.observableArrayList();
+        ObservableList<TeacherController.TeachersList> subjectList = FXCollections.observableArrayList();
         try {
-            pst = conn.prepareStatement("SELECT teacher.id,teacher.fname,teacher.lname,teacher.address,teacher.mobile_number,teacher.email,subject.name FROM teacher INNER JOIN teacher_has_subject ths on teacher.id = ths.teacher_id INNER JOIN subject on ths.subject_id = subject.id INNER JOIN status on teacher.status_id = status.id");
+            pst = conn.prepareStatement("SELECT teacher.id, teacher.fname, teacher.lname, teacher.nic_number, teacher.address, teacher.mobile_number, teacher.email, GROUP_CONCAT(subject.name) subjectlist, status.status FROM teacher INNER JOIN teacher_has_subject ths on teacher.id = ths.teacher_id INNER JOIN subject on ths.subject_id = subject.id INNER JOIN status on teacher.status_id = status.id GROUP BY teacher.id");
             rs = pst.executeQuery();
             if (!rs.isBeforeFirst()) {
-                employee.resetAll();
+                teacher.resetAll();
             }
             while (rs.next()) {
-                employeeList.add(
+                subjectList.add(
                         new TeacherController.TeachersList(
-                                rs.getInt("employee.id"),
-                                rs.getString("employee.fname") + " " + rs.getString("employee.lname"),
-                                rs.getString("employee.nic_number"),
-                                rs.getString("employee.address"),
-                                rs.getString("employee.contact_number"),
-                                rs.getString(""),
-                                rs.getString(""),
+                                rs.getInt("teacher.id"),
+                                rs.getString("teacher.fname") + " " + rs.getString("teacher.lname"),
+                                rs.getString("teacher.nic_number"),
+                                rs.getString("teacher.address"),
+                                rs.getString("teacher.mobile_number"),
+                                rs.getString("teacher.email"),
+                                rs.getString("subjectlist"),
                                 rs.getString("status.status")
                         )
                 );
             }
-            tblTeacher.setItems(employeeList);
+            tblTeacher.setItems(subjectList);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void getTeacherDetailsById() {
+        ResultSet rs = null;
+        try {
+            pst = conn.prepareStatement("SELECT teacher.id, teacher.fname, teacher.lname, teacher.nic_number, teacher.home_number, teacher.mobile_number, teacher.email, teacher.address, status.status, GROUP_CONCAT(subject.id), GROUP_CONCAT(subject.name) FROM teacher INNER JOIN teacher_has_subject ths on teacher.id = ths.teacher_id INNER JOIN subject on ths.subject_id = subject.id INNER JOIN status on teacher.status_id = status.id WHERE teacher.id = ? GROUP BY teacher.id");
+            pst.setInt(1, teacher.getId());
+            rs = pst.executeQuery();
+
+            if (!rs.isBeforeFirst()) {
+                teacher.resetAll();
+                status.resetAll();
+                teacherHasSubject.resetAll();
+            }
+            while (rs.next()) {
+                teacher.setId(rs.getInt(1));
+                teacher.setFname(rs.getString(2));
+                teacher.setLname(rs.getString(3));
+                teacher.setNic_number(rs.getString(4));
+                teacher.setHome_number(rs.getString(5));
+                teacher.setMobile_number(rs.getString(6));
+                teacher.setEmail(rs.getString(7));
+                teacher.setAddress(rs.getString(8));
+                status.setStatus(rs.getString(9));
+
+                String[] subjectIds = rs.getString("GROUP_CONCAT(subject.id)").split(",");
+                String[] subjectNames = rs.getString("GROUP_CONCAT(subject.name)").split(",");
+                Vector<Subject> subjectList = new Vector<>();
+
+                for (int i = 0; i < subjectIds.length; ++i) {
+                    subject.setId(Integer.parseInt(subjectIds[i]));
+                    subject.setName(subjectIds[i]);
+                    subjectList.add(subject);
+                }
+                teacherHasSubject.setSubjectList(subjectList);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
