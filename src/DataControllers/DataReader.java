@@ -722,4 +722,83 @@ public class DataReader {
         }
     }
 
+    public void fillUserTable(TableView tblUser) {
+        ResultSet rs = null;
+        ObservableList<UserUpdate.UserList> userLists = FXCollections.observableArrayList();
+        try {
+            pst = conn.prepareStatement("SELECT user.id, employee.nic_number, user.name, status.status FROM user INNER JOIN user_type ut on user.user_type_id = ut.id INNER JOIN employee on user.employee_id = employee.id INNER JOIN status on user.status_id = status.id");
+            rs = pst.executeQuery();
+            if (!rs.isBeforeFirst()) {
+                teacher.resetAll();
+            }
+            while (rs.next()) {
+                userLists.add(
+                        new UserUpdate.UserList(
+                                rs.getInt("user.id"),
+                                rs.getString("employee.nic_number"),
+                                rs.getString("user.name"),
+                                rs.getString("status.status")
+                        )
+                );
+            }
+            tblUser.setItems(userLists);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void getUserDetailsById() {
+        ResultSet rs = null;
+        try {
+            pst = conn.prepareStatement("SELECT user.id, user.name, user.password, ut.id, ut.type, employee.id, employee.nic_number, status.id, status.status FROM user INNER JOIN user_type ut on user.user_type_id = ut.id INNER JOIN employee on user.employee_id = employee.id INNER JOIN status on user.status_id = status.id WHERE user.id = ?");
+            pst.setInt(1, user.getId());
+            rs = pst.executeQuery();
+
+            if (!rs.isBeforeFirst()) {
+                user.resetAll();
+                userType.resetAll();
+                status.resetAll();
+                employee.resetAll();
+            }
+            while (rs.next()) {
+                user.setId(rs.getInt(1));
+                user.setUserName(rs.getString(2));
+                user.setPassword(rs.getString(3));
+
+                userType.setId(rs.getInt(4));
+                userType.setType(rs.getString(5));
+
+                employee.setId(rs.getInt(6));
+                employee.setNic_number(rs.getString(7));
+
+                status.setId(rs.getInt(8));
+                status.setStatus(rs.getString(9));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 }
