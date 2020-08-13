@@ -34,6 +34,8 @@ public class DataReader {
     Teacher teacher;
     TeacherHasSubject teacherHasSubject;
     Subject subject;
+    User user;
+    UserType userType;
 
     public DataReader() {
         try {
@@ -48,6 +50,8 @@ public class DataReader {
                 teacher = ObjectGenerator.getTeacher();
                 teacherHasSubject = ObjectGenerator.getTeacherHasSubject();
                 subject = ObjectGenerator.getSubject();
+                user = ObjectGenerator.getUser();
+                userType = ObjectGenerator.getUserType();
 
             });
             readyData.setName("DataReader");
@@ -247,6 +251,42 @@ public class DataReader {
         try {
             pst = conn.prepareStatement("SELECT employee.id, employee.fname, employee.lname, employee.nic_number, employee.address, employee.contact_number, status.status FROM employee INNER JOIN status on employee.status_id = status.id WHERE employee.fname LIKE ?");
             pst.setString(1, employee.getFname() + "%");
+            rs = pst.executeQuery();
+
+            if (!rs.isBeforeFirst()) {
+                employee.resetAll();
+                status.resetAll();
+            }
+            while (rs.next()) {
+                employee.setId(rs.getInt(1));
+                employee.setFname(rs.getString(2));
+                employee.setLname(rs.getString(3));
+                employee.setNic_number(rs.getString(4));
+                employee.setAddress(rs.getString(5));
+                employee.setContact_number(rs.getString(6));
+                status.setStatus(rs.getString(7));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void getEmployeeDetailsByNIC() {
+        ResultSet rs = null;
+        try {
+            pst = conn.prepareStatement("SELECT employee.id, employee.fname, employee.lname, employee.nic_number, employee.address, employee.contact_number, status.status FROM employee INNER JOIN status on employee.status_id = status.id WHERE employee.nic_number = ?");
+            pst.setString(1, employee.getNic_number());
             rs = pst.executeQuery();
 
             if (!rs.isBeforeFirst()) {
@@ -607,6 +647,64 @@ public class DataReader {
                     subjectList.put(Integer.parseInt(subjectIds[i]), subjectNames[i]);
                 }
                 teacherHasSubject.setSubjectList(subjectList);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void filluserTypeCombo(JFXComboBox cmbUserType) {
+        ResultSet rs = null;
+        cmbUserType.getItems().clear();
+        try {
+            pst = conn.prepareStatement("SELECT type FROM user_type");
+            rs = pst.executeQuery();
+            if (!rs.isBeforeFirst()) {
+
+            }
+            while (rs.next()) {
+                cmbUserType.getItems().add(rs.getString(1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void getUserTypeByType() {
+        ResultSet rs = null;
+        try {
+            pst = conn.prepareStatement("SELECT * FROM user_type WHERE type = ?");
+            pst.setString(1, userType.getType());
+            rs = pst.executeQuery();
+
+            if (!rs.isBeforeFirst()) {
+                userType.resetAll();
+            }
+            while (rs.next()) {
+                userType.setId(rs.getInt(1));
+                userType.setType(rs.getString(2));
             }
         } catch (Exception e) {
             e.printStackTrace();

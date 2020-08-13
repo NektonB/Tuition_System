@@ -24,6 +24,8 @@ public class DataWriter {
     Teacher teacher;
     TeacherHasSubject teacherHasSubject;
     Subject subject;
+    User user;
+    UserType userType;
 
 
     /**
@@ -42,6 +44,8 @@ public class DataWriter {
                 teacher = ObjectGenerator.getTeacher();
                 teacherHasSubject = ObjectGenerator.getTeacherHasSubject();
                 subject = ObjectGenerator.getSubject();
+                user = ObjectGenerator.getUser();
+                userType = ObjectGenerator.getUserType();
             });
             readyData.setName("Data Writer");
             readyData.start();
@@ -283,6 +287,57 @@ public class DataWriter {
             pst.setString(7, teacher.getEmail());
             pst.setInt(8, status.getId());
             pst.setInt(9, teacher.getId());
+
+            operation = pst.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return operation;
+    }
+
+    public int saveUser() {
+        int operation = 0;
+        try {
+            pst = conn.prepareStatement("INSERT INTO user(name, password, user_type_id, employee_id, status_id) VALUES (?,?,?,?,?)");
+            pst.setString(1, user.getUserName());
+            pst.setString(2, user.getPassword());
+            pst.setInt(3, userType.getId());
+            pst.setInt(4, employee.getId());
+            pst.setInt(5, status.getId());
+
+            operation = pst.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return operation;
+    }
+
+    public int updateUser() {
+        int operation = 0;
+        try {
+            pst = conn.prepareStatement("UPDATE user SET name = ?, password = ?, user_type_id = ?, employee_id = ?, status_id = ? WHERE id  = ?");
+            pst.setString(1, user.getUserName());
+            pst.setString(2, user.getPassword());
+            pst.setInt(3, userType.getId());
+            pst.setInt(4, employee.getId());
+            pst.setInt(5, status.getId());
+            pst.setInt(6, user.getId());
 
             operation = pst.executeUpdate();
         } catch (Exception e) {
