@@ -62,8 +62,7 @@ public class EmployeeController implements Initializable {
 
     @FXML
     private TableColumn<EmployeeList, String> tcStatus;
-
-
+    
     DataReader dataReader;
     Alerts alerts;
 
