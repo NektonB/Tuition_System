@@ -1,9 +1,15 @@
 package Controllers;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXTextField;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -12,6 +18,25 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class UserRegistration implements Initializable {
+
+    @FXML
+    private JFXTextField txt_nic;
+
+    @FXML
+    private JFXPasswordField txt_password;
+
+    @FXML
+    private Label lbl_update_user;
+
+    @FXML
+    private JFXButton btn_login;
+
+    @FXML
+    private JFXTextField txt_userName;
+
+    @FXML
+    private JFXComboBox<String> cmb_status;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -26,7 +51,6 @@ public class UserRegistration implements Initializable {
             Scene scene = new Scene(user);
             productsStage.setScene(scene);
             productsStage.initStyle(StageStyle.UTILITY);
-            //productsStage.getIcons().add(new Image("/images/Main_01.png"));
             productsStage.setResizable(false);
             productsStage.initModality(Modality.APPLICATION_MODAL);
             productsStage.show();

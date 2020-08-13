@@ -14,9 +14,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="524.0" prefWidth="800.0" styleClass="parant" stylesheets="@../CSS/Login.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.UserUpdate">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="524.0" prefWidth="992.0" styleClass="parant" stylesheets="@../CSS/Login.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.UserUpdate">
    <children>
-      <Pane layoutX="400.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="524.0" prefWidth="400.0">
+      <Pane layoutX="590.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="524.0" prefWidth="400.0">
          <children>
             <ImageView fitHeight="104.0" fitWidth="86.0" layoutX="22.0" layoutY="8.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -64,13 +64,12 @@
             <JFXComboBox fx:id="cmb_nic" labelFloat="true" layoutX="58.0" layoutY="349.0" prefHeight="35.0" prefWidth="300.0" promptText="Status" />
          </children>
       </Pane>
-      <Pane layoutX="-1.0" prefHeight="524.0" prefWidth="415.0" styleClass="Register_form" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane layoutX="-1.0" prefHeight="524.0" prefWidth="590.0" styleClass="Register_form" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <TableView layoutX="-1.0" prefHeight="524.0" prefWidth="415.0" style="-fx-background-color: transparent;">
+            <TableView layoutX="-1.0" prefHeight="524.0" prefWidth="590.0" style="-fx-background-color: transparent;">
               <columns>
                 <TableColumn prefWidth="75.0" text="Employee NIC" />
                 <TableColumn prefWidth="75.0" text="User Name" />
-                  <TableColumn prefWidth="75.0" text="Password" />
                   <TableColumn prefWidth="75.0" text="Status" />
               </columns>
                <columnResizePolicy>

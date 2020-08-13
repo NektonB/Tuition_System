@@ -56,7 +56,7 @@
                   <Font size="13.0" />
                </font>
             </JFXPasswordField>
-            <Label layoutX="215.0" layoutY="415.0" onMouseClicked="#loadUserUpdate" styleClass="forgotBtn" text="Update exiting User" textFill="#a3a3a3">
+            <Label fx:id="lbl_update_user" layoutX="215.0" layoutY="415.0" onMouseClicked="#loadUserUpdate" styleClass="forgotBtn" text="Update exiting User" textFill="#a3a3a3">
                <font>
                   <Font name="Ebrima Bold" size="14.0" />
                </font>
