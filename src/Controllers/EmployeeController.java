@@ -167,14 +167,10 @@ public class EmployeeController implements Initializable {
     }
 
     public void txtSearchKeyReleased(KeyEvent event) {
-        if (event.getCode().equals(KeyCode.ENTER)) {
-            selectEmployee_Key(event);
-        } else {
-            if (cmbOption.getValue().equals("First Name")) {
-                filterEmployeeTableByFirstName(event);
-            } else if (cmbOption.getValue().equals("NIC Number")) {
-                filterEmployeeTableByNic(event);
-            }
+        if (cmbOption.getValue().equals("First Name")) {
+            filterEmployeeTableByFirstName(event);
+        } else if (cmbOption.getValue().equals("NIC Number")) {
+            filterEmployeeTableByNic(event);
         }
     }
 

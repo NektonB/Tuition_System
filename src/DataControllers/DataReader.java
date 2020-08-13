@@ -494,6 +494,88 @@ public class DataReader {
         }
     }
 
+    public void filterTeacherTableByNIC(TableView tblTeacher) {
+        ResultSet rs = null;
+        ObservableList<TeacherController.TeachersList> subjectList = FXCollections.observableArrayList();
+        try {
+            pst = conn.prepareStatement("SELECT teacher.id, teacher.fname, teacher.lname, teacher.nic_number, teacher.address, teacher.mobile_number, teacher.email, GROUP_CONCAT(subject.name) subjectlist, status.status FROM teacher INNER JOIN teacher_has_subject ths on teacher.id = ths.teacher_id INNER JOIN subject on ths.subject_id = subject.id INNER JOIN status on teacher.status_id = status.id WHERE teacher.nic_number LIKE ? GROUP BY teacher.id");
+            pst.setString(1, teacher.getNic_number() + "%");
+            rs = pst.executeQuery();
+            if (!rs.isBeforeFirst()) {
+                teacher.resetAll();
+            }
+            while (rs.next()) {
+                subjectList.add(
+                        new TeacherController.TeachersList(
+                                rs.getInt("teacher.id"),
+                                rs.getString("teacher.fname") + " " + rs.getString("teacher.lname"),
+                                rs.getString("teacher.nic_number"),
+                                rs.getString("teacher.address"),
+                                rs.getString("teacher.mobile_number"),
+                                rs.getString("teacher.email"),
+                                rs.getString("subjectlist"),
+                                rs.getString("status.status")
+                        )
+                );
+            }
+            tblTeacher.setItems(subjectList);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void filterTeacherTableByName(TableView tblTeacher) {
+        ResultSet rs = null;
+        ObservableList<TeacherController.TeachersList> subjectList = FXCollections.observableArrayList();
+        try {
+            pst = conn.prepareStatement("SELECT teacher.id, teacher.fname, teacher.lname, teacher.nic_number, teacher.address, teacher.mobile_number, teacher.email, GROUP_CONCAT(subject.name) subjectlist, status.status FROM teacher INNER JOIN teacher_has_subject ths on teacher.id = ths.teacher_id INNER JOIN subject on ths.subject_id = subject.id INNER JOIN status on teacher.status_id = status.id WHERE teacher.fname LIKE ? GROUP BY teacher.id");
+            pst.setString(1, teacher.getFname() + "%");
+            rs = pst.executeQuery();
+            if (!rs.isBeforeFirst()) {
+                teacher.resetAll();
+            }
+            while (rs.next()) {
+                subjectList.add(
+                        new TeacherController.TeachersList(
+                                rs.getInt("teacher.id"),
+                                rs.getString("teacher.fname") + " " + rs.getString("teacher.lname"),
+                                rs.getString("teacher.nic_number"),
+                                rs.getString("teacher.address"),
+                                rs.getString("teacher.mobile_number"),
+                                rs.getString("teacher.email"),
+                                rs.getString("subjectlist"),
+                                rs.getString("status.status")
+                        )
+                );
+            }
+            tblTeacher.setItems(subjectList);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     public void getTeacherDetailsById() {
         ResultSet rs = null;
         try {

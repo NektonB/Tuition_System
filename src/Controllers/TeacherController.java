@@ -120,6 +120,34 @@ public class TeacherController implements Initializable {
         }
     }
 
+    public void filterTeacherTableByNic(KeyEvent event) {
+        try {
+            teacher.setNic_number(txtSearch.getText());
+            dataReader.filterTeacherTableByNIC(tblTeacher);
+            teacher.resetAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void filterTeacherTableByName(KeyEvent event) {
+        try {
+            teacher.setFname(txtSearch.getText());
+            dataReader.filterTeacherTableByName(tblTeacher);
+            teacher.resetAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void txtSearchKeyReleased(KeyEvent event) {
+        if (cmbOption.getValue().equals("First Name")) {
+            filterTeacherTableByName(event);
+        } else if (cmbOption.getValue().equals("NIC Number")) {
+            filterTeacherTableByNic(event);
+        }
+    }
+
     public void loadAU_Teacher() {
         try {
             Stage productsStage = new Stage();
@@ -144,7 +172,6 @@ public class TeacherController implements Initializable {
             e.printStackTrace();
         }
     }
-
 
     public static class TeachersList {
 

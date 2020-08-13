@@ -87,6 +87,8 @@ public class AU_TeacherController implements Initializable {
     UserType userType;
 
     TableView tblTeacher;
+    HashMap<Integer, String> actionList = new HashMap<>();
+    HashMap<Integer, String> subList = new HashMap<>();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -131,8 +133,8 @@ public class AU_TeacherController implements Initializable {
 
             for (int key : keySet) {
                 subjectsList = tblTeacher_Subjects.getItems();
-                System.out.println("Sub ID : " + key);
-                System.out.println("Sub Name : " + subjects.get(key));
+                /*System.out.println("Sub ID : " + key);
+                System.out.println("Sub Name : " + subjects.get(key));*/
                 subjectsList.add(new TeacherSubjectsList(key, subjects.get(key)));
             }
             tblTeacher_Subjects.setItems(subjectsList);
@@ -258,6 +260,10 @@ public class AU_TeacherController implements Initializable {
             subjectsList = tblTeacher_Subjects.getItems();
             subjectsList.add(new TeacherSubjectsList(subject.getId(), subject.getName()));
             tblTeacher_Subjects.setItems(subjectsList);
+
+            subList.put(subject.getId(), subject.getName());
+            actionList.put(subject.getId(), "Save");
+
             subject.resetAll();
         } catch (Exception e) {
             e.printStackTrace();
@@ -270,6 +276,10 @@ public class AU_TeacherController implements Initializable {
                 alerts.getWarningNotify("Warning !", "No more rows here...");
             } else {
                 TeacherSubjectsList subject = tblTeacher_Subjects.getSelectionModel().getSelectedItem();
+
+                subList.put(subject.getId(), subject.getName());
+                actionList.put(subject.getId(), "Delete");
+
                 tblTeacher_Subjects.getItems().remove(subject);
             }
         } catch (Exception e) {
@@ -342,23 +352,37 @@ public class AU_TeacherController implements Initializable {
                             teacher.resetAll();
                             status.resetAll();
 
-                            //dataReader.fillEmployeeTable(tblEmployee);
+                            dataReader.fillTeacherTable(tblTeacher);
                             alerts.getSuccessNotify("Teacher Registration", "Congratulation Chief..!\nTeacher registration successful");
 
                             closeMe();
                         }
                     }
                 } else if (btnSU.getText().equals("Update")) {
-                    int updateEmployee = dataWriter.updateEmployee();
-                    if (updateEmployee > 0) {
-                        teacher.resetAll();
-                        status.resetAll();
+                    int updateTeacher = dataWriter.updateTeacher();
+                    if (updateTeacher > 0) {
+                        int operation = 0;
 
-                        dataReader.fillEmployeeTable(tblTeacher);
-                        //alerts.getInformationAlert("Information", "Employee Registration", "Congratulation Chief..!\nEmployee registration successful");
-                        alerts.getSuccessNotify("Employee Update", "Congratulation Chief..!\nEmployee update successful");
+                        for (int key : actionList.keySet()) {
+                            if (actionList.get(key).equals("Save")) {
+                                subject.setId(key);
+                                operation = dataWriter.saveTeacherSubjectList();
 
-                        closeMe();
+                            } else if (actionList.get(key).equals("Delete")) {
+                                subject.setId(key);
+                                operation = dataWriter.deleteTeacherSubject();
+                            }
+                        }
+
+                        if (operation > 0) {
+                            teacher.resetAll();
+                            status.resetAll();
+
+                            dataReader.fillTeacherTable(tblTeacher);
+                            alerts.getSuccessNotify("Teacher Update", "Congratulation Chief..!\nTeacher update successful");
+
+                            closeMe();
+                        }
                     }
                 }
             }

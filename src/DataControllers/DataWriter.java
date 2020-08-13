@@ -248,4 +248,55 @@ public class DataWriter {
         return operation;
     }
 
+    public int deleteTeacherSubjectListItem() {
+        int operation = 0;
+        try {
+            pst = conn.prepareStatement("DELETE FROM teacher_has_subject WHERE teacher_id = ? AND subject_id = ?");
+            pst.setInt(1, teacher.getId());
+            pst.setInt(2, subject.getId());
+
+            operation = pst.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return operation;
+    }
+
+    public int updateTeacher() {
+        int operation = 0;
+        try {
+            pst = conn.prepareStatement("UPDATE teacher SET fname = ?, lname = ?, nic_number = ?, address = ?, home_number = ?, mobile_number = ?, email = ?, status_id = ? WHERE id = ?");
+            pst.setString(1, teacher.getFname());
+            pst.setString(2, teacher.getLname());
+            pst.setString(3, teacher.getNic_number());
+            pst.setString(4, teacher.getAddress());
+            pst.setString(5, teacher.getHome_number());
+            pst.setString(6, teacher.getMobile_number());
+            pst.setString(7, teacher.getEmail());
+            pst.setInt(8, status.getId());
+            pst.setInt(9, teacher.getId());
+
+            operation = pst.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return operation;
+    }
+
 }
