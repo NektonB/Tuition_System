@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane prefHeight="532.0" prefWidth="925.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane prefHeight="532.0" prefWidth="925.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AttendanceController">
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0">
          <top>
@@ -35,28 +35,28 @@
                   <Insets left="10.0" right="10.0" top="25.0" />
                </padding>
                <children>
-                  <JFXDatePicker defaultColor="#6981c9" overLay="true" prefHeight="25.0" prefWidth="340.0" promptText="Date" />
-                  <JFXTimePicker defaultColor="#6981c9" prefHeight="25.0" prefWidth="320.0" promptText="Time">
+                  <JFXDatePicker fx:id="dpDate" defaultColor="#6981c9" overLay="true" prefHeight="25.0" prefWidth="340.0" promptText="Date" />
+                  <JFXTimePicker fx:id="tpTime" defaultColor="#6981c9" prefHeight="25.0" prefWidth="320.0" promptText="Time">
                      <VBox.margin>
                         <Insets top="30.0" />
                      </VBox.margin>
                   </JFXTimePicker>
-                  <JFXComboBox focusColor="#6981c9" labelFloat="true" prefHeight="25.0" prefWidth="386.0" promptText="Student" unFocusColor="#a3a3a3">
+                  <JFXComboBox fx:id="cmbStudent" focusColor="#6981c9" labelFloat="true" prefHeight="25.0" prefWidth="386.0" promptText="Student" unFocusColor="#a3a3a3">
                      <VBox.margin>
                         <Insets top="30.0" />
                      </VBox.margin>
                   </JFXComboBox>
-                  <JFXComboBox focusColor="#6981c9" labelFloat="true" layoutX="20.0" layoutY="115.0" prefHeight="25.0" prefWidth="386.0" promptText="Status" unFocusColor="#a3a3a3">
+                  <JFXComboBox fx:id="cmbStatus" focusColor="#6981c9" labelFloat="true" layoutX="20.0" layoutY="115.0" prefHeight="25.0" prefWidth="386.0" promptText="Status" unFocusColor="#a3a3a3">
                      <VBox.margin>
                         <Insets top="30.0" />
                      </VBox.margin>
                   </JFXComboBox>
-                  <JFXButton prefHeight="46.0" prefWidth="280.0" text="Add">
+                  <JFXButton fx:id="btnAdd" prefHeight="46.0" prefWidth="280.0" text="Add">
                      <VBox.margin>
                         <Insets top="30.0" />
                      </VBox.margin>
                   </JFXButton>
-                  <JFXButton layoutX="20.0" layoutY="255.0" prefHeight="46.0" prefWidth="280.0" text="Save">
+                  <JFXButton fx:id="btnSave" layoutX="20.0" layoutY="255.0" prefHeight="46.0" prefWidth="280.0" text="Save">
                      <VBox.margin>
                         <Insets top="20.0" />
                      </VBox.margin>

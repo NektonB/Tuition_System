@@ -81,9 +81,8 @@ public class MainController implements Initializable {
     }
 
     public void loadAttendant(ActionEvent event) throws IOException {
-        StackPane pane = FXMLLoader.load(getClass().getClassLoader().getResource("View/pnlAttendans.fxml"));
+        StackPane pane = FXMLLoader.load(getClass().getClassLoader().getResource("Views/pnlAttendans.fxml"));
         rootPane.getChildren().setAll(pane);
-
     }
 
 
