@@ -22,7 +22,7 @@ public class StudentController implements Initializable {
 
     }
 
-    public void loadAU_Teacher() {
+    public void loadAU_Student() {
         try {
             Stage productsStage = new Stage();
             Parent frmCustomer = FXMLLoader.load(getClass().getClassLoader().getResource("Views/frmAddStudent.fxml"));
