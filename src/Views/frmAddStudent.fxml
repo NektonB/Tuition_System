@@ -22,7 +22,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="627.0" prefWidth="1077.0" style="-fx-border-color: #2D75E8; -fx-border-width: 2px;" stylesheets="@../CSS/Table.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.StudentController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="641.0" prefWidth="1077.0" style="-fx-border-color: #2D75E8; -fx-border-width: 2px;" stylesheets="@../CSS/Table.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.StudentController">
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0">
          <center>
@@ -49,7 +49,7 @@
                               <Insets left="10.0" />
                            </HBox.margin>
                         </Label>
-                        <FontAwesomeIconView fx:id="btnCloss" fill="#756f6f" glyphName="CLOSE" onMouseClicked="#clossScen" size="18">
+                        <FontAwesomeIconView fx:id="btnCloss" fill="#756f6f" glyphName="CLOSE" onMouseClicked="#closeMe" size="18">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -212,7 +212,12 @@
                               </Label>
                               <HBox alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="264.0">
                                  <children>
-                                    <JFXComboBox editable="true" focusColor="#6981c9" labelFloat="true" prefHeight="25.0" prefWidth="449.0" promptText="Subject" unFocusColor="#a3a3a3" />
+                                    <JFXComboBox editable="true" focusColor="#6981c9" labelFloat="true" prefHeight="25.0" prefWidth="224.0" promptText="Subject" unFocusColor="#a3a3a3" />
+                                    <JFXComboBox editable="true" focusColor="#6981c9" labelFloat="true" layoutX="25.0" layoutY="19.0" prefHeight="25.0" prefWidth="215.0" promptText="Teacher" unFocusColor="#a3a3a3">
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                    </JFXComboBox>
                                  </children>
                                  <padding>
                                     <Insets left="15.0" />
@@ -254,7 +259,7 @@
                               <HBox alignment="BOTTOM_LEFT" prefHeight="42.0" prefWidth="264.0">
                                  <children>
                                     <JFXComboBox editable="true" focusColor="#6981c9" labelFloat="true" prefHeight="25.0" prefWidth="213.0" promptText="Name" unFocusColor="#a3a3a3" />
-                                    <JFXButton alignment="BOTTOM_CENTER" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" prefHeight="25.0" prefWidth="50.0" ripplerFill="#285fcd">
+                                    <JFXButton alignment="BOTTOM_CENTER" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" onAction="#load_parant" prefHeight="25.0" prefWidth="50.0" ripplerFill="#285fcd">
                                        <graphic>
                                           <FontAwesomeIconView fill="#191a1b" glyphName="PLUS" size="15" />
                                        </graphic>

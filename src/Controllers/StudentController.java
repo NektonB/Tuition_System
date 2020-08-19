@@ -38,6 +38,22 @@ public class StudentController implements Initializable {
         }
     }
 
+    public void load_parant() {
+        try {
+            Stage productsStage = new Stage();
+            Parent frmCustomer = FXMLLoader.load(getClass().getClassLoader().getResource("Views/frmParant.fxml"));
+            //productsStage.setTitle("Add New Employee");
+            Scene scene = new Scene(frmCustomer);
+            productsStage.setScene(scene);
+            productsStage.initStyle(StageStyle.UNDECORATED);
+            productsStage.setResizable(false);
+            productsStage.initModality(Modality.APPLICATION_MODAL);
+            productsStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void closeMe(){
         Stage stage = (Stage) btnCloss.getScene().getWindow();
         stage.close();
