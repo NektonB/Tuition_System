@@ -25,7 +25,7 @@
                      <center>
                         <VBox prefHeight="373.0" prefWidth="250.0" styleClass="sideMenu" BorderPane.alignment="CENTER">
                            <children>
-                              <Button alignment="BASELINE_LEFT" graphicTextGap="25.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="48.0" prefWidth="251.0" styleClass="sideMenuButton" text="Attendent">
+                              <Button alignment="BASELINE_LEFT" graphicTextGap="25.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#loadAttendant" prefHeight="48.0" prefWidth="251.0" styleClass="sideMenuButton" text="Attendent">
                                  <graphic>
                                     <FontAwesomeIconView glyphName="LIST" size="20" styleClass="glyph-icon1" />
                                  </graphic>
