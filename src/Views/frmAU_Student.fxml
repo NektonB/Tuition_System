@@ -22,7 +22,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="641.0" prefWidth="1077.0" style="-fx-border-color: #2D75E8; -fx-border-width: 2px;" stylesheets="@../CSS/Table.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.StudentController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="641.0" prefWidth="1077.0" style="-fx-border-color: #2D75E8; -fx-border-width: 2px;" stylesheets="@../CSS/Table.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AU_StudentController">
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0">
          <center>
@@ -41,7 +41,7 @@
                               <Insets left="8.0" />
                            </HBox.margin>
                         </ImageView>
-                        <Label prefHeight="25.0" prefWidth="174.0" text="Add / Update Student" textFill="#5b5454">
+                        <Label fx:id="lblTitle" prefHeight="25.0" prefWidth="174.0" text="Add Student" textFill="#5b5454">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
@@ -49,7 +49,7 @@
                               <Insets left="10.0" />
                            </HBox.margin>
                         </Label>
-                        <FontAwesomeIconView fx:id="btnCloss" fill="#756f6f" glyphName="CLOSE" onMouseClicked="#closeMe" size="18">
+                        <FontAwesomeIconView fx:id="btnClose" fill="#756f6f" glyphName="CLOSE" onMouseClicked="#closeMe" size="18">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -259,7 +259,7 @@
                               <HBox alignment="BOTTOM_LEFT" prefHeight="42.0" prefWidth="264.0">
                                  <children>
                                     <JFXComboBox fx:id="cmbParents" editable="true" focusColor="#6981c9" labelFloat="true" prefHeight="25.0" prefWidth="213.0" promptText="Name" unFocusColor="#a3a3a3" />
-                                    <JFXButton alignment="BOTTOM_CENTER" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" onAction="#load_parant" prefHeight="25.0" prefWidth="50.0" ripplerFill="#285fcd">
+                                    <JFXButton alignment="BOTTOM_CENTER" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" onAction="#load_parent" prefHeight="25.0" prefWidth="50.0" ripplerFill="#285fcd">
                                        <graphic>
                                           <FontAwesomeIconView fx:id="btnAddParent" fill="#191a1b" glyphName="PLUS" size="15" />
                                        </graphic>
