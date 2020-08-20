@@ -25,7 +25,7 @@ public class StudentController implements Initializable {
     public void loadAU_Student() {
         try {
             Stage productsStage = new Stage();
-            Parent frmCustomer = FXMLLoader.load(getClass().getClassLoader().getResource("Views/frmAddStudent.fxml"));
+            Parent frmCustomer = FXMLLoader.load(getClass().getClassLoader().getResource("Views/frmAU_Student.fxml"));
             //productsStage.setTitle("Add New Employee");
             Scene scene = new Scene(frmCustomer);
             productsStage.setScene(scene);

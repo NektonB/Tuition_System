@@ -22,7 +22,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="627.0" prefWidth="1077.0" style="-fx-border-color: #2D75E8; -fx-border-width: 2px;" stylesheets="@../CSS/Table.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.StudentController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="641.0" prefWidth="1077.0" style="-fx-border-color: #2D75E8; -fx-border-width: 2px;" stylesheets="@../CSS/Table.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.StudentController">
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0">
          <center>
@@ -49,7 +49,7 @@
                               <Insets left="10.0" />
                            </HBox.margin>
                         </Label>
-                        <FontAwesomeIconView fx:id="btnCloss" fill="#756f6f" glyphName="CLOSE" onMouseClicked="#clossScen" size="18">
+                        <FontAwesomeIconView fx:id="btnCloss" fill="#756f6f" glyphName="CLOSE" onMouseClicked="#closeMe" size="18">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -107,16 +107,11 @@
                                                       <Insets top="20.0" />
                                                    </VBox.margin>
                                                 </JFXTextField>
-                                                <JFXTextArea fx:id="txtAddress" focusColor="#6981c9" labelFloat="true" prefHeight="72.0" prefWidth="240.0" promptText="Address" unFocusColor="#a3a3a3">
+                                                <JFXTextArea fx:id="txtAddress" focusColor="#6981c9" labelFloat="true" prefHeight="114.0" prefWidth="264.0" promptText="Address" unFocusColor="#a3a3a3">
                                                    <VBox.margin>
                                                       <Insets top="20.0" />
                                                    </VBox.margin>
                                                 </JFXTextArea>
-                                                <JFXTextField fx:id="txtMobile" focusColor="#6981c9" labelFloat="true" layoutX="20.0" layoutY="75.0" promptText="Mobile Number" unFocusColor="#a3a3a3">
-                                                   <VBox.margin>
-                                                      <Insets top="20.0" />
-                                                   </VBox.margin>
-                                                </JFXTextField>
                                              </children>
                                              <padding>
                                                 <Insets left="20.0" right="5.0" />
@@ -129,56 +124,25 @@
                                                       <Insets top="16.0" />
                                                    </VBox.margin>
                                                 </JFXTextField>
+                                                <JFXTextField fx:id="txtMobile" focusColor="#6981c9" labelFloat="true" promptText="Mobile Number" unFocusColor="#a3a3a3">
+                                                   <VBox.margin>
+                                                      <Insets top="20.0" />
+                                                   </VBox.margin>
+                                                </JFXTextField>
                                                 <JFXTextField fx:id="txtEmail" focusColor="#6981c9" labelFloat="true" promptText="Email" unFocusColor="#a3a3a3">
                                                    <VBox.margin>
                                                       <Insets top="19.0" />
                                                    </VBox.margin>
                                                 </JFXTextField>
-                                                <HBox alignment="BOTTOM_LEFT" prefHeight="42.0" prefWidth="264.0">
-                                                   <VBox.margin>
-                                                      <Insets top="3.0" />
-                                                   </VBox.margin>
-                                                   <children>
-                                                      <JFXComboBox fx:id="cmbSchool" editable="true" focusColor="#6981c9" labelFloat="true" prefHeight="25.0" prefWidth="241.0" promptText="Select School" unFocusColor="#a3a3a3" />
-                                                      <JFXButton alignment="BOTTOM_CENTER" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" prefHeight="25.0" prefWidth="50.0" ripplerFill="#285fcd">
-                                                         <graphic>
-                                                            <FontAwesomeIconView fill="#191a1b" glyphName="PLUS" size="15" />
-                                                         </graphic>
-                                                      </JFXButton>
-                                                   </children>
-                                                </HBox>
-                                                <JFXTextField fx:id="txtGrade" focusColor="#6981c9" labelFloat="true" layoutX="10.0" layoutY="25.0" promptText="Grade" unFocusColor="#a3a3a3">
-                                                   <VBox.margin>
-                                                      <Insets top="20.0" />
-                                                   </VBox.margin>
-                                                </JFXTextField>
                                                 <HBox alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="53.0" prefHeight="42.0" prefWidth="264.0">
                                                    <children>
-                                                      <JFXComboBox fx:id="cmbNearCity" editable="true" focusColor="#6981c9" labelFloat="true" prefHeight="25.0" prefWidth="241.0" promptText="Near City" unFocusColor="#a3a3a3">
+                                                      <JFXComboBox fx:id="cmbNearCity" editable="true" focusColor="#6981c9" labelFloat="true" prefHeight="25.0" prefWidth="284.0" promptText="Near City" unFocusColor="#a3a3a3">
                                                          <HBox.margin>
                                                             <Insets top="8.0" />
                                                          </HBox.margin></JFXComboBox>
-                                                      <JFXButton alignment="BOTTOM_CENTER" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" prefHeight="25.0" prefWidth="50.0" ripplerFill="#285fcd">
-                                                         <graphic>
-                                                            <FontAwesomeIconView fill="#191a1b" glyphName="PLUS" size="15" />
-                                                         </graphic>
-                                                      </JFXButton>
                                                    </children>
                                                    <VBox.margin>
                                                       <Insets top="5.0" />
-                                                   </VBox.margin>
-                                                </HBox>
-                                                <HBox alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="145.0" prefHeight="42.0" prefWidth="264.0">
-                                                   <children>
-                                                      <JFXComboBox editable="true" focusColor="#6981c9" labelFloat="true" prefHeight="25.0" prefWidth="241.0" promptText="Gardien" unFocusColor="#a3a3a3" />
-                                                      <JFXButton alignment="BOTTOM_CENTER" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" prefHeight="25.0" prefWidth="50.0" ripplerFill="#285fcd">
-                                                         <graphic>
-                                                            <FontAwesomeIconView fill="#191a1b" glyphName="PLUS" size="15" />
-                                                         </graphic>
-                                                      </JFXButton>
-                                                   </children>
-                                                   <VBox.margin>
-                                                      <Insets top="3.0" />
                                                    </VBox.margin>
                                                 </HBox>
                                              </children>
@@ -202,7 +166,7 @@
                                     <Insets left="15.0" top="15.0" />
                                  </VBox.margin>
                               </Label>
-                              <JFXComboBox editable="true" focusColor="#6981c9" labelFloat="true" prefHeight="35.0" prefWidth="582.0" promptText="Select School" unFocusColor="#a3a3a3">
+                              <JFXComboBox fx:id="cmbSchool" editable="true" focusColor="#6981c9" labelFloat="true" prefHeight="35.0" prefWidth="582.0" promptText="Select School" unFocusColor="#a3a3a3">
                                  <padding>
                                     <Insets left="20.0" top="10.0" />
                                  </padding>
@@ -210,7 +174,7 @@
                                     <Insets top="10.0" />
                                  </VBox.margin>
                               </JFXComboBox>
-                              <JFXComboBox editable="true" focusColor="#6981c9" labelFloat="true" layoutX="10.0" layoutY="42.0" prefHeight="35.0" prefWidth="584.0" promptText="Steam" unFocusColor="#a3a3a3">
+                              <JFXComboBox fx:id="cmbStream" editable="true" focusColor="#6981c9" labelFloat="true" layoutX="10.0" layoutY="42.0" prefHeight="35.0" prefWidth="584.0" promptText="Steam" unFocusColor="#a3a3a3">
                                  <padding>
                                     <Insets left="20.0" top="10.0" />
                                  </padding>
@@ -218,7 +182,15 @@
                                     <Insets top="20.0" />
                                  </VBox.margin>
                               </JFXComboBox>
-                              <JFXComboBox editable="true" focusColor="#6981c9" labelFloat="true" layoutX="10.0" layoutY="77.0" prefHeight="35.0" prefWidth="585.0" promptText="Exam Year" unFocusColor="#a3a3a3">
+                              <JFXComboBox fx:id="cmbGrade" editable="true" focusColor="#6981c9" labelFloat="true" layoutX="10.0" layoutY="107.0" prefHeight="35.0" prefWidth="584.0" promptText="Grade" unFocusColor="#a3a3a3">
+                                 <padding>
+                                    <Insets left="20.0" top="10.0" />
+                                 </padding>
+                                 <VBox.margin>
+                                    <Insets top="20.0" />
+                                 </VBox.margin>
+                              </JFXComboBox>
+                              <JFXComboBox fx:id="cmbExamYear" editable="true" focusColor="#6981c9" labelFloat="true" layoutX="10.0" layoutY="77.0" prefHeight="35.0" prefWidth="585.0" promptText="Exam Year" unFocusColor="#a3a3a3">
                                  <padding>
                                     <Insets left="20.0" top="10.0" />
                                  </padding>
@@ -240,12 +212,12 @@
                               </Label>
                               <HBox alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="264.0">
                                  <children>
-                                    <JFXComboBox editable="true" focusColor="#6981c9" labelFloat="true" prefHeight="25.0" prefWidth="213.0" promptText="Subject" unFocusColor="#a3a3a3" />
-                                    <JFXButton alignment="BOTTOM_CENTER" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" prefHeight="25.0" prefWidth="50.0" ripplerFill="#285fcd">
-                                       <graphic>
-                                          <FontAwesomeIconView fill="#191a1b" glyphName="PLUS" size="15" />
-                                       </graphic>
-                                    </JFXButton>
+                                    <JFXComboBox fx:id="cmbSubject" editable="true" focusColor="#6981c9" labelFloat="true" prefHeight="25.0" prefWidth="224.0" promptText="Subject" unFocusColor="#a3a3a3" />
+                                    <JFXComboBox fx:id="cmbTeacher" editable="true" focusColor="#6981c9" labelFloat="true" layoutX="25.0" layoutY="19.0" prefHeight="25.0" prefWidth="215.0" promptText="Teacher" unFocusColor="#a3a3a3">
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                    </JFXComboBox>
                                  </children>
                                  <padding>
                                     <Insets left="15.0" />
@@ -254,9 +226,9 @@
                                     <Insets top="6.0" />
                                  </VBox.margin>
                               </HBox>
-                              <TableView prefHeight="218.0" prefWidth="450.0">
+                              <TableView fx:id="tblSubjectInfo" prefHeight="218.0" prefWidth="450.0">
                                 <columns>
-                                  <TableColumn prefWidth="75.0" text="ID" visible="false" />
+                                  <TableColumn prefWidth="75.0" text="Subject ID" />
                                   <TableColumn prefWidth="75.0" text="Subject" />
                                     <TableColumn prefWidth="75.0" text="Teacher" />
                                     <TableColumn prefWidth="75.0" text="Theory" />
@@ -286,10 +258,10 @@
                               </Label>
                               <HBox alignment="BOTTOM_LEFT" prefHeight="42.0" prefWidth="264.0">
                                  <children>
-                                    <JFXComboBox editable="true" focusColor="#6981c9" labelFloat="true" prefHeight="25.0" prefWidth="213.0" promptText="Name" unFocusColor="#a3a3a3" />
-                                    <JFXButton alignment="BOTTOM_CENTER" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" prefHeight="25.0" prefWidth="50.0" ripplerFill="#285fcd">
+                                    <JFXComboBox fx:id="cmbParents" editable="true" focusColor="#6981c9" labelFloat="true" prefHeight="25.0" prefWidth="213.0" promptText="Name" unFocusColor="#a3a3a3" />
+                                    <JFXButton alignment="BOTTOM_CENTER" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" onAction="#load_parant" prefHeight="25.0" prefWidth="50.0" ripplerFill="#285fcd">
                                        <graphic>
-                                          <FontAwesomeIconView fill="#191a1b" glyphName="PLUS" size="15" />
+                                          <FontAwesomeIconView fx:id="btnAddParent" fill="#191a1b" glyphName="PLUS" size="15" />
                                        </graphic>
                                        <HBox.margin>
                                           <Insets left="20.0" />
@@ -300,9 +272,9 @@
                                     <Insets left="15.0" />
                                  </padding>
                               </HBox>
-                              <TableView prefHeight="110.0" prefWidth="429.0">
+                              <TableView fx:id="tblParent" prefHeight="110.0" prefWidth="429.0">
                                  <columns>
-                                    <TableColumn prefWidth="75.0" text="ID" visible="false" />
+                                    <TableColumn prefWidth="75.0" text="ID" />
                                     <TableColumn prefWidth="75.0" text="First Name" />
                                     <TableColumn prefWidth="75.0" text="Last Name" />
                                     <TableColumn prefWidth="75.0" text="Home phone" />
@@ -315,7 +287,7 @@
                                     <Insets left="10.0" top="10.0" />
                                  </VBox.margin>
                               </TableView>
-                              <JFXButton prefHeight="35.0" prefWidth="163.0" ripplerFill="WHITE" style="-fx-background-color: #6747CD;" text="Save" textFill="WHITE">
+                              <JFXButton fx:id="btnSave" prefHeight="35.0" prefWidth="163.0" ripplerFill="WHITE" style="-fx-background-color: #6747CD;" text="Save" textFill="WHITE">
                                  <VBox.margin>
                                     <Insets left="300.0" top="20.0" />
                                  </VBox.margin>
