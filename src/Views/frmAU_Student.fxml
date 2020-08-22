@@ -136,7 +136,7 @@
                                                 </JFXTextField>
                                                 <HBox alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="53.0" prefHeight="42.0" prefWidth="264.0">
                                                    <children>
-                                                      <JFXComboBox fx:id="cmbNearCity" editable="true" focusColor="#6981c9" labelFloat="true" prefHeight="25.0" prefWidth="284.0" promptText="Near City" unFocusColor="#a3a3a3">
+                                                      <JFXComboBox fx:id="cmbNearCity" editable="true" focusColor="#6981c9" labelFloat="true" onKeyReleased="#saveCity_Key" prefHeight="25.0" prefWidth="284.0" promptText="Near City" unFocusColor="#a3a3a3">
                                                          <HBox.margin>
                                                             <Insets top="8.0" />
                                                          </HBox.margin></JFXComboBox>

@@ -36,6 +36,7 @@ public class DataReader {
     Subject subject;
     User user;
     UserType userType;
+    NearCity nearCity;
 
     public DataReader() {
         try {
@@ -52,6 +53,7 @@ public class DataReader {
                 subject = ObjectGenerator.getSubject();
                 user = ObjectGenerator.getUser();
                 userType = ObjectGenerator.getUserType();
+                nearCity = ObjectGenerator.getNearCity();
 
             });
             readyData.setName("DataReader");
@@ -784,6 +786,36 @@ public class DataReader {
 
                 status.setId(rs.getInt(8));
                 status.setStatus(rs.getString(9));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void getNearCityByCity() {
+        ResultSet rs = null;
+        try {
+            pst = conn.prepareStatement("SELECT * FROM near_city WHERE city = ?");
+            pst.setString(1, nearCity.getCity());
+            rs = pst.executeQuery();
+
+            if (!rs.isBeforeFirst()) {
+                nearCity.resetAll();
+            }
+            while (rs.next()) {
+                nearCity.setId(rs.getInt(1));
+                nearCity.setCity(rs.getString(2));
             }
         } catch (Exception e) {
             e.printStackTrace();

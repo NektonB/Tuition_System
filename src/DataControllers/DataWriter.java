@@ -26,6 +26,7 @@ public class DataWriter {
     Subject subject;
     User user;
     UserType userType;
+    NearCity nearCity;
 
 
     /**
@@ -46,6 +47,7 @@ public class DataWriter {
                 subject = ObjectGenerator.getSubject();
                 user = ObjectGenerator.getUser();
                 userType = ObjectGenerator.getUserType();
+                nearCity = ObjectGenerator.getNearCity();
             });
             readyData.setName("Data Writer");
             readyData.start();
@@ -338,6 +340,70 @@ public class DataWriter {
             pst.setInt(4, employee.getId());
             pst.setInt(5, status.getId());
             pst.setInt(6, user.getId());
+
+            operation = pst.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return operation;
+    }
+
+    public int saveNearCity() {
+        int operation = 0;
+        try {
+            pst = conn.prepareStatement("INSERT INTO near_city(city) VALUES (?)");
+            pst.setString(1, nearCity.getCity());
+
+            operation = pst.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return operation;
+    }
+
+    public int updateNearCity() {
+        int operation = 0;
+        try {
+            pst = conn.prepareStatement("UPDATE near_city SET city = ? WHERE id = ?");
+            pst.setString(1, nearCity.getCity());
+            pst.setInt(2, nearCity.getId());
+
+            operation = pst.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return operation;
+    }
+
+    public int deleteNearCity() {
+        int operation = 0;
+        try {
+            pst = conn.prepareStatement("DELETE FROM near_city WHERE id = ?");
+            pst.setInt(1, nearCity.getId());
 
             operation = pst.executeUpdate();
         } catch (Exception e) {

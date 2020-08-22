@@ -1,6 +1,8 @@
 package Controllers;
 
 import DataControllers.DataReader;
+import DataControllers.DataWriter;
+import Modules.NearCity;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
@@ -17,6 +19,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -118,13 +122,19 @@ public class AU_StudentController implements Initializable {
 
 
     DataReader dataReader;
+    DataWriter dataWriter;
     Alerts alerts;
+
+    NearCity nearCity;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
             alerts = ObjectGenerator.getAlerts();
             dataReader = ObjectGenerator.getDataReader();
+            dataWriter = ObjectGenerator.getDataWriter();
+
+            nearCity = ObjectGenerator.getNearCity();
 
             readySubjectInfoTable();
             readyParentTable();
@@ -146,6 +156,53 @@ public class AU_StudentController implements Initializable {
         tcName.setCellValueFactory(new PropertyValueFactory<>("name"));
         tcHome.setCellValueFactory(new PropertyValueFactory<>("home"));
         tcMobile.setCellValueFactory(new PropertyValueFactory<>("mobile"));
+    }
+
+    public void saveCity_Key(KeyEvent event) {
+        try {
+            if (!cmbNearCity.getValue().isEmpty()) {
+
+                nearCity.setCity(cmbNearCity.getValue());
+                dataReader.getNearCityByCity();
+
+                if (event.isControlDown() && event.getCode().equals(KeyCode.S)) {
+
+                    int saveNearCity = dataWriter.saveNearCity();
+                    if (saveNearCity > 0) {
+                        nearCity.resetAll();
+
+                        //dataReader.fillEmployeeTable(tblEmployee);
+                        alerts.getSuccessNotify("City Update", "Congratulation Chief..!\nCity update successful");
+
+                        closeMe();
+                    }
+                } else if (event.isControlDown() && event.getCode().equals(KeyCode.U)) {
+
+                    int updateNearCity = dataWriter.updateNearCity();
+                    if (updateNearCity > 0) {
+                        nearCity.resetAll();
+
+                        //dataReader.fillEmployeeTable(tblEmployee);
+                        alerts.getSuccessNotify("City Registration", "Congratulation Chief..!\nCity registration successful");
+
+                        closeMe();
+                    }
+                } else if (event.getCode().equals(KeyCode.DELETE)) {
+
+                    int deleteNearCity = dataWriter.deleteNearCity();
+                    if (deleteNearCity > 0) {
+                        nearCity.resetAll();
+
+                        //dataReader.fillEmployeeTable(tblEmployee);
+                        alerts.getSuccessNotify("City Delete", "Congratulation Chief..!\nCity delete successful");
+
+                        closeMe();
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void load_parent() {
