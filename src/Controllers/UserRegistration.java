@@ -68,7 +68,7 @@ public class UserRegistration implements Initializable {
             employee = ObjectGenerator.getEmployee();
             status = ObjectGenerator.getStatus();
 
-            dataReader.filluserTypeCombo(cmb_userType);
+            dataReader.fillUserTypeCombo(cmb_userType);
             dataReader.fillStatusCombo(cmb_status);
             cmb_status.setValue("ACTIVE");
         } catch (Exception e) {

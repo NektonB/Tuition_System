@@ -20,7 +20,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import org.omg.PortableInterceptor.INACTIVE;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -86,7 +85,7 @@ public class UserUpdate implements Initializable {
             readyUserTable();
             dataReader.fillUserTable(tblUser);
 
-            dataReader.filluserTypeCombo(cmb_userType);
+            dataReader.fillUserTypeCombo(cmb_userType);
             dataReader.fillStatusCombo(cmb_status);
             cmb_status.setValue("ACTIVE");
         } catch (Exception e) {

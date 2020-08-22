@@ -358,11 +358,16 @@ public class DataWriter {
 
     public int saveNearCity() {
         int operation = 0;
+        ResultSet rs = null;
         try {
-            pst = conn.prepareStatement("INSERT INTO near_city(city) VALUES (?)");
+            pst = conn.prepareStatement("INSERT INTO near_city(city) VALUES (?)", pst.RETURN_GENERATED_KEYS);
             pst.setString(1, nearCity.getCity());
 
             operation = pst.executeUpdate();
+            rs = pst.getGeneratedKeys();
+            if (rs.next()) {
+                nearCity.setId(rs.getInt(1));
+            }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
