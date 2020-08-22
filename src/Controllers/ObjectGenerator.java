@@ -22,6 +22,7 @@ public class ObjectGenerator {
     private static TeacherHasSubject teacherHasSubject;
     private static Subject subject;
     private static NearCity nearCity;
+    private static School school;
 
     private static TextValidator textValidator;
     private static TimeFormatConverter timeFormatConverter;
@@ -172,5 +173,12 @@ public class ObjectGenerator {
             nearCity = new NearCity();
         }
         return nearCity;
+    }
+
+    public static synchronized School getSchool() {
+        if (school == null) {
+            school = new School();
+        }
+        return school;
     }
 }

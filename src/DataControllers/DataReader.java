@@ -37,6 +37,7 @@ public class DataReader {
     User user;
     UserType userType;
     NearCity nearCity;
+    School school;
 
     public DataReader() {
         try {
@@ -54,6 +55,7 @@ public class DataReader {
                 user = ObjectGenerator.getUser();
                 userType = ObjectGenerator.getUserType();
                 nearCity = ObjectGenerator.getNearCity();
+                school = ObjectGenerator.getSchool();
 
             });
             readyData.setName("DataReader");
@@ -844,6 +846,64 @@ public class DataReader {
             }
             while (rs.next()) {
                 cmbNearCity.getItems().add(rs.getString(1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void fillSchoolCombo(JFXComboBox cmbSchool) {
+        ResultSet rs = null;
+        cmbSchool.getItems().clear();
+        try {
+            pst = conn.prepareStatement("SELECT name FROM school");
+            rs = pst.executeQuery();
+            if (!rs.isBeforeFirst()) {
+
+            }
+            while (rs.next()) {
+                cmbSchool.getItems().add(rs.getString(1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void getSchoolByName() {
+        ResultSet rs = null;
+        try {
+            pst = conn.prepareStatement("SELECT * FROM school WHERE name = ?");
+            pst.setString(1, school.getName());
+            rs = pst.executeQuery();
+
+            if (!rs.isBeforeFirst()) {
+                school.resetAll();
+            }
+            while (rs.next()) {
+                school.setId(rs.getInt(1));
+                school.setName(rs.getString(2));
             }
         } catch (Exception e) {
             e.printStackTrace();

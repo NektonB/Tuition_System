@@ -166,7 +166,7 @@
                                     <Insets left="15.0" top="15.0" />
                                  </VBox.margin>
                               </Label>
-                              <JFXComboBox fx:id="cmbSchool" editable="true" focusColor="#6981c9" labelFloat="true" prefHeight="35.0" prefWidth="582.0" promptText="Select School" unFocusColor="#a3a3a3">
+                              <JFXComboBox fx:id="cmbSchool" editable="true" focusColor="#6981c9" labelFloat="true" onHidden="#searchSchoolDetailsByName" onKeyReleased="#saveSchool_Key" prefHeight="35.0" prefWidth="582.0" promptText="Select School" unFocusColor="#a3a3a3">
                                  <padding>
                                     <Insets left="20.0" top="10.0" />
                                  </padding>

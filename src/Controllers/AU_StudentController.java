@@ -3,6 +3,7 @@ package Controllers;
 import DataControllers.DataReader;
 import DataControllers.DataWriter;
 import Modules.NearCity;
+import Modules.School;
 import Modules.UserType;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -128,6 +129,7 @@ public class AU_StudentController implements Initializable {
 
     NearCity nearCity;
     UserType userType;
+    School school;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -138,10 +140,13 @@ public class AU_StudentController implements Initializable {
 
             nearCity = ObjectGenerator.getNearCity();
             userType = ObjectGenerator.getUserType();
+            school = ObjectGenerator.getSchool();
 
             readySubjectInfoTable();
             readyParentTable();
+
             dataReader.fillNearCityCombo(cmbNearCity);
+            dataReader.fillSchoolCombo(cmbSchool);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -202,11 +207,62 @@ public class AU_StudentController implements Initializable {
         }
     }
 
+    public void saveSchool_Key(KeyEvent event) {
+        try {
+            if (!cmbSchool.getValue().isEmpty()) {
+
+                if (event.isControlDown() && event.getCode().equals(KeyCode.S)) {
+
+                    school.setName(cmbSchool.getValue());
+                    int saveSchool = dataWriter.saveSchool();
+                    if (saveSchool > 0) {
+                        school.resetAll();
+
+                        dataReader.fillSchoolCombo(cmbSchool);
+                        alerts.getSuccessNotify("School Registration", "School Registration successful");
+                    }
+                } else if (event.isControlDown() && event.getCode().equals(KeyCode.U)) {
+
+                    school.setName(cmbSchool.getValue());
+                    int updateSchool = dataWriter.updateSchool();
+                    if (updateSchool > 0) {
+                        school.resetAll();
+
+                        dataReader.fillSchoolCombo(cmbSchool);
+                        alerts.getSuccessNotify("School Update", "School update successful");
+                    }
+                } else if (event.getCode().equals(KeyCode.DELETE) && userType.getType().equals("SUPER ADMIN")) {
+
+                    int deleteSchool = dataWriter.deleteSchool();
+                    if (deleteSchool > 0) {
+                        school.resetAll();
+
+                        dataReader.fillSchoolCombo(cmbSchool);
+                        alerts.getSuccessNotify("School Delete", "School delete successful");
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void searchCityDetailsByCity() {
         try {
             if (!cmbNearCity.getValue().isEmpty()) {
                 nearCity.setCity(cmbNearCity.getValue());
                 dataReader.getNearCityByCity();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void searchSchoolDetailsByName() {
+        try {
+            if (!cmbSchool.getValue().isEmpty()) {
+                school.setName(cmbSchool.getValue());
+                dataReader.getSchoolByName();
             }
         } catch (Exception e) {
             e.printStackTrace();

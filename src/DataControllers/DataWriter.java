@@ -27,6 +27,7 @@ public class DataWriter {
     User user;
     UserType userType;
     NearCity nearCity;
+    School school;
 
 
     /**
@@ -48,6 +49,7 @@ public class DataWriter {
                 user = ObjectGenerator.getUser();
                 userType = ObjectGenerator.getUserType();
                 nearCity = ObjectGenerator.getNearCity();
+                school = ObjectGenerator.getSchool();
             });
             readyData.setName("Data Writer");
             readyData.start();
@@ -409,6 +411,78 @@ public class DataWriter {
         try {
             pst = conn.prepareStatement("DELETE FROM near_city WHERE id = ?");
             pst.setInt(1, nearCity.getId());
+
+            operation = pst.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return operation;
+    }
+
+    public int saveSchool() {
+        int operation = 0;
+        ResultSet rs = null;
+        try {
+            pst = conn.prepareStatement("INSERT INTO school(name) VALUES (?)", pst.RETURN_GENERATED_KEYS);
+            pst.setString(1, school.getName());
+
+            operation = pst.executeUpdate();
+            rs = pst.getGeneratedKeys();
+            if (rs.next()) {
+                school.setId(rs.getInt(1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return operation;
+    }
+
+    public int updateSchool() {
+        int operation = 0;
+        try {
+            pst = conn.prepareStatement("UPDATE school SET name = ? WHERE id = ?");
+            pst.setString(1, school.getName());
+            pst.setInt(2, school.getId());
+
+            operation = pst.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return operation;
+    }
+
+    public int deleteSchool() {
+        int operation = 0;
+        try {
+            pst = conn.prepareStatement("DELETE FROM school WHERE id = ?");
+            pst.setInt(1, school.getId());
 
             operation = pst.executeUpdate();
         } catch (Exception e) {
