@@ -28,6 +28,7 @@ public class DataWriter {
     UserType userType;
     NearCity nearCity;
     School school;
+    Stream stream;
 
 
     /**
@@ -50,6 +51,7 @@ public class DataWriter {
                 userType = ObjectGenerator.getUserType();
                 nearCity = ObjectGenerator.getNearCity();
                 school = ObjectGenerator.getSchool();
+                stream = ObjectGenerator.getStream();
             });
             readyData.setName("Data Writer");
             readyData.start();
@@ -483,6 +485,78 @@ public class DataWriter {
         try {
             pst = conn.prepareStatement("DELETE FROM school WHERE id = ?");
             pst.setInt(1, school.getId());
+
+            operation = pst.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return operation;
+    }
+
+    public int saveStream() {
+        int operation = 0;
+        ResultSet rs = null;
+        try {
+            pst = conn.prepareStatement("INSERT INTO stream(stream) VALUES (?)", pst.RETURN_GENERATED_KEYS);
+            pst.setString(1, stream.getStream());
+
+            operation = pst.executeUpdate();
+            rs = pst.getGeneratedKeys();
+            if (rs.next()) {
+                stream.setId(rs.getInt(1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return operation;
+    }
+
+    public int updateStream() {
+        int operation = 0;
+        try {
+            pst = conn.prepareStatement("UPDATE stream SET stream = ? WHERE id = ?");
+            pst.setString(1, stream.getStream());
+            pst.setInt(2, stream.getId());
+
+            operation = pst.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return operation;
+    }
+
+    public int deleteStream() {
+        int operation = 0;
+        try {
+            pst = conn.prepareStatement("DELETE FROM stream WHERE id = ?");
+            pst.setInt(1, stream.getId());
 
             operation = pst.executeUpdate();
         } catch (Exception e) {

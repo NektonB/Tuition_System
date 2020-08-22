@@ -174,7 +174,7 @@
                                     <Insets top="10.0" />
                                  </VBox.margin>
                               </JFXComboBox>
-                              <JFXComboBox fx:id="cmbStream" editable="true" focusColor="#6981c9" labelFloat="true" layoutX="10.0" layoutY="42.0" prefHeight="35.0" prefWidth="584.0" promptText="Steam" unFocusColor="#a3a3a3">
+                              <JFXComboBox fx:id="cmbStream" editable="true" focusColor="#6981c9" labelFloat="true" layoutX="10.0" layoutY="42.0" onHidden="#searchStreamDetailsByName" onKeyReleased="#saveStream_Key" prefHeight="35.0" prefWidth="584.0" promptText="Steam" unFocusColor="#a3a3a3">
                                  <padding>
                                     <Insets left="20.0" top="10.0" />
                                  </padding>

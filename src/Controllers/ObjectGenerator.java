@@ -23,6 +23,8 @@ public class ObjectGenerator {
     private static Subject subject;
     private static NearCity nearCity;
     private static School school;
+    private static Stream stream;
+    private static Exam exam;
 
     private static TextValidator textValidator;
     private static TimeFormatConverter timeFormatConverter;
@@ -180,5 +182,12 @@ public class ObjectGenerator {
             school = new School();
         }
         return school;
+    }
+
+    public static synchronized Stream getStream() {
+        if (stream == null) {
+            stream = new Stream();
+        }
+        return stream;
     }
 }

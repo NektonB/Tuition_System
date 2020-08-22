@@ -4,6 +4,7 @@ import DataControllers.DataReader;
 import DataControllers.DataWriter;
 import Modules.NearCity;
 import Modules.School;
+import Modules.Stream;
 import Modules.UserType;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -17,6 +18,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -28,6 +30,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class AU_StudentController implements Initializable {
@@ -130,6 +133,7 @@ public class AU_StudentController implements Initializable {
     NearCity nearCity;
     UserType userType;
     School school;
+    Stream stream;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -141,12 +145,14 @@ public class AU_StudentController implements Initializable {
             nearCity = ObjectGenerator.getNearCity();
             userType = ObjectGenerator.getUserType();
             school = ObjectGenerator.getSchool();
+            stream = ObjectGenerator.getStream();
 
             readySubjectInfoTable();
             readyParentTable();
 
             dataReader.fillNearCityCombo(cmbNearCity);
             dataReader.fillSchoolCombo(cmbSchool);
+            dataReader.fillStreamCombo(cmbStream);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -167,32 +173,45 @@ public class AU_StudentController implements Initializable {
         tcMobile.setCellValueFactory(new PropertyValueFactory<>("mobile"));
     }
 
-    public void saveCity_Key(KeyEvent event) {
+    public void saveCity() {
         try {
             if (!cmbNearCity.getValue().isEmpty()) {
+                nearCity.setCity(cmbNearCity.getValue());
+                int saveNearCity = dataWriter.saveNearCity();
+                if (saveNearCity > 0) {
+                    nearCity.resetAll();
 
-                if (event.isControlDown() && event.getCode().equals(KeyCode.S)) {
+                    dataReader.fillNearCityCombo(cmbNearCity);
+                    alerts.getSuccessNotify("City Registration", "City Registration successful");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-                    nearCity.setCity(cmbNearCity.getValue());
-                    int saveNearCity = dataWriter.saveNearCity();
-                    if (saveNearCity > 0) {
-                        nearCity.resetAll();
+    public void updateCity() {
+        try {
+            if (!cmbNearCity.getValue().isEmpty()) {
+                nearCity.setCity(cmbNearCity.getValue());
+                int updateNearCity = dataWriter.updateNearCity();
+                if (updateNearCity > 0) {
+                    nearCity.resetAll();
 
-                        dataReader.fillNearCityCombo(cmbNearCity);
-                        alerts.getSuccessNotify("City Registration", "City Registration successful");
-                    }
-                } else if (event.isControlDown() && event.getCode().equals(KeyCode.U)) {
+                    dataReader.fillNearCityCombo(cmbNearCity);
+                    alerts.getSuccessNotify("City Update", "City update successful");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-                    nearCity.setCity(cmbNearCity.getValue());
-                    int updateNearCity = dataWriter.updateNearCity();
-                    if (updateNearCity > 0) {
-                        nearCity.resetAll();
-
-                        dataReader.fillNearCityCombo(cmbNearCity);
-                        alerts.getSuccessNotify("City Update", "City update successful");
-                    }
-                } else if (event.getCode().equals(KeyCode.DELETE) && userType.getType().equals("SUPER ADMIN")) {
-
+    public void deleteCity() {
+        try {
+            if (!cmbNearCity.getValue().isEmpty()) {
+                Optional<ButtonType> dialog = alerts.getConfirmationDialog("Warning", "City Delete", "Are you sure, you want to delete " + cmbNearCity.getValue() + " ?");
+                if (dialog.get().equals(ButtonType.OK)) {
                     int deleteNearCity = dataWriter.deleteNearCity();
                     if (deleteNearCity > 0) {
                         nearCity.resetAll();
@@ -200,6 +219,73 @@ public class AU_StudentController implements Initializable {
                         dataReader.fillNearCityCombo(cmbNearCity);
                         alerts.getSuccessNotify("City Delete", "City delete successful");
                     }
+                } else {
+
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void saveCity_Key(KeyEvent event) {
+        if (event.isControlDown() && event.getCode().equals(KeyCode.S)) {
+            saveCity();
+        } else if (event.isControlDown() && event.getCode().equals(KeyCode.U)) {
+            updateCity();
+        } else if (event.getCode().equals(KeyCode.DELETE) && userType.getType().equals("SUPER ADMIN")) {
+            deleteCity();
+        }
+    }
+
+    public void saveSchool() {
+        try {
+            if (!cmbSchool.getValue().isEmpty()) {
+                school.setName(cmbSchool.getValue());
+                int saveSchool = dataWriter.saveSchool();
+                if (saveSchool > 0) {
+                    school.resetAll();
+
+                    dataReader.fillSchoolCombo(cmbSchool);
+                    alerts.getSuccessNotify("School Registration", "School Registration successful");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateSchool() {
+        try {
+            if (!cmbSchool.getValue().isEmpty()) {
+                school.setName(cmbSchool.getValue());
+                int updateSchool = dataWriter.updateSchool();
+                if (updateSchool > 0) {
+                    school.resetAll();
+
+                    dataReader.fillSchoolCombo(cmbSchool);
+                    alerts.getSuccessNotify("School Update", "School update successful");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteSchool() {
+        try {
+            if (!cmbSchool.getValue().isEmpty()) {
+                Optional<ButtonType> dialog = alerts.getConfirmationDialog("Warning", "School Delete", "Are you sure, you want to delete " + cmbSchool.getValue() + " ?");
+                if (dialog.get().equals(ButtonType.OK)) {
+                    int deleteSchool = dataWriter.deleteSchool();
+                    if (deleteSchool > 0) {
+                        school.resetAll();
+
+                        dataReader.fillSchoolCombo(cmbSchool);
+                        alerts.getSuccessNotify("School Delete", "School delete successful");
+                    }
+                } else {
+
                 }
             }
         } catch (Exception e) {
@@ -208,42 +294,77 @@ public class AU_StudentController implements Initializable {
     }
 
     public void saveSchool_Key(KeyEvent event) {
+        if (event.isControlDown() && event.getCode().equals(KeyCode.S)) {
+            saveSchool();
+        } else if (event.isControlDown() && event.getCode().equals(KeyCode.U)) {
+            updateSchool();
+        } else if (event.getCode().equals(KeyCode.DELETE) && userType.getType().equals("SUPER ADMIN")) {
+            deleteSchool();
+        }
+    }
+
+    public void saveStream() {
         try {
-            if (!cmbSchool.getValue().isEmpty()) {
+            if (!cmbStream.getValue().isEmpty()) {
+                stream.setStream(cmbStream.getValue());
+                int saveStream = dataWriter.saveStream();
+                if (saveStream > 0) {
+                    stream.resetAll();
 
-                if (event.isControlDown() && event.getCode().equals(KeyCode.S)) {
-
-                    school.setName(cmbSchool.getValue());
-                    int saveSchool = dataWriter.saveSchool();
-                    if (saveSchool > 0) {
-                        school.resetAll();
-
-                        dataReader.fillSchoolCombo(cmbSchool);
-                        alerts.getSuccessNotify("School Registration", "School Registration successful");
-                    }
-                } else if (event.isControlDown() && event.getCode().equals(KeyCode.U)) {
-
-                    school.setName(cmbSchool.getValue());
-                    int updateSchool = dataWriter.updateSchool();
-                    if (updateSchool > 0) {
-                        school.resetAll();
-
-                        dataReader.fillSchoolCombo(cmbSchool);
-                        alerts.getSuccessNotify("School Update", "School update successful");
-                    }
-                } else if (event.getCode().equals(KeyCode.DELETE) && userType.getType().equals("SUPER ADMIN")) {
-
-                    int deleteSchool = dataWriter.deleteSchool();
-                    if (deleteSchool > 0) {
-                        school.resetAll();
-
-                        dataReader.fillSchoolCombo(cmbSchool);
-                        alerts.getSuccessNotify("School Delete", "School delete successful");
-                    }
+                    dataReader.fillStreamCombo(cmbStream);
+                    alerts.getSuccessNotify("Stream Registration", "Stream Registration successful");
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public void updateStream() {
+        try {
+            if (!cmbStream.getValue().isEmpty()) {
+                stream.setStream(cmbStream.getValue());
+                int updateStream = dataWriter.updateStream();
+                if (updateStream > 0) {
+                    stream.resetAll();
+
+                    dataReader.fillStreamCombo(cmbStream);
+                    alerts.getSuccessNotify("Stream Update", "Stream update successful");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteStream() {
+        try {
+            if (!cmbStream.getValue().isEmpty()) {
+                Optional<ButtonType> dialog = alerts.getConfirmationDialog("Warning", "Stream Delete", "Are you sure, you want to delete " + cmbStream.getValue() + " ?");
+                if (dialog.get().equals(ButtonType.OK)) {
+                    int deleteStream = dataWriter.deleteStream();
+                    if (deleteStream > 0) {
+                        stream.resetAll();
+
+                        dataReader.fillStreamCombo(cmbStream);
+                        alerts.getSuccessNotify("Stream Delete", "Stream delete successful");
+                    }
+                } else {
+
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void saveStream_Key(KeyEvent event) {
+        if (event.isControlDown() && event.getCode().equals(KeyCode.S)) {
+            saveStream();
+        } else if (event.isControlDown() && event.getCode().equals(KeyCode.U)) {
+            updateStream();
+        } else if (event.getCode().equals(KeyCode.DELETE) && userType.getType().equals("SUPER ADMIN")) {
+            deleteStream();
         }
     }
 
@@ -263,6 +384,17 @@ public class AU_StudentController implements Initializable {
             if (!cmbSchool.getValue().isEmpty()) {
                 school.setName(cmbSchool.getValue());
                 dataReader.getSchoolByName();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void searchStreamDetailsByName() {
+        try {
+            if (!cmbStream.getValue().isEmpty()) {
+                stream.setStream(cmbStream.getValue());
+                dataReader.getStreamByName();
             }
         } catch (Exception e) {
             e.printStackTrace();

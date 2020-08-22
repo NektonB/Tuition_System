@@ -38,6 +38,7 @@ public class DataReader {
     UserType userType;
     NearCity nearCity;
     School school;
+    Stream stream;
 
     public DataReader() {
         try {
@@ -56,6 +57,7 @@ public class DataReader {
                 userType = ObjectGenerator.getUserType();
                 nearCity = ObjectGenerator.getNearCity();
                 school = ObjectGenerator.getSchool();
+                stream = ObjectGenerator.getStream();
 
             });
             readyData.setName("DataReader");
@@ -904,6 +906,64 @@ public class DataReader {
             while (rs.next()) {
                 school.setId(rs.getInt(1));
                 school.setName(rs.getString(2));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void fillStreamCombo(JFXComboBox cmbStream) {
+        ResultSet rs = null;
+        cmbStream.getItems().clear();
+        try {
+            pst = conn.prepareStatement("SELECT stream FROM stream");
+            rs = pst.executeQuery();
+            if (!rs.isBeforeFirst()) {
+
+            }
+            while (rs.next()) {
+                cmbStream.getItems().add(rs.getString(1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void getStreamByName() {
+        ResultSet rs = null;
+        try {
+            pst = conn.prepareStatement("SELECT * FROM stream WHERE stream = ?");
+            pst.setString(1, stream.getStream());
+            rs = pst.executeQuery();
+
+            if (!rs.isBeforeFirst()) {
+                school.resetAll();
+            }
+            while (rs.next()) {
+                stream.setId(rs.getInt(1));
+                stream.setStream(rs.getString(2));
             }
         } catch (Exception e) {
             e.printStackTrace();
