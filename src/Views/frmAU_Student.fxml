@@ -22,11 +22,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="641.0" prefWidth="1077.0" style="-fx-border-color: #2D75E8; -fx-border-width: 2px;" stylesheets="@../CSS/Table.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AU_StudentController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="659.0" prefWidth="1160.0" style="-fx-border-color: #2D75E8; -fx-border-width: 2px;" stylesheets="@../CSS/Table.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AU_StudentController">
    <children>
-      <BorderPane prefHeight="200.0" prefWidth="200.0">
+      <BorderPane prefHeight="653.0" prefWidth="1073.0">
          <center>
-            <AnchorPane prefHeight="200.0" prefWidth="1283.0" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="732.0" prefWidth="1073.0" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets />
                </BorderPane.margin>
@@ -54,22 +54,22 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                            <HBox.margin>
-                              <Insets left="810.0" />
+                              <Insets left="890.0" />
                            </HBox.margin>
                         </FontAwesomeIconView>
                      </children>
                   </HBox>
-                  <GridPane layoutX="-2.0" layoutY="55.0" prefHeight="576.0" prefWidth="1073.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="55.0">
+                  <GridPane layoutX="-2.0" layoutY="55.0" prefHeight="719.0" prefWidth="1073.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="55.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="916.0" minWidth="10.0" prefWidth="543.0" />
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="793.0" minWidth="10.0" prefWidth="461.0" />
                     </columnConstraints>
                     <rowConstraints>
-                      <RowConstraints maxHeight="416.0" minHeight="10.0" prefHeight="305.0" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="263.0" minHeight="10.0" prefHeight="263.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="416.0" minHeight="10.0" prefHeight="287.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="392.0" minHeight="10.0" prefHeight="331.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <VBox prefHeight="200.0" prefWidth="100.0">
+                        <VBox prefHeight="382.0" prefWidth="578.0">
                            <children>
                               <Label text="Personal Info" textFill="#4e505e">
                                  <VBox.margin>
@@ -90,7 +90,7 @@
                                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                        <children>
-                                          <VBox prefHeight="200.0" prefWidth="100.0">
+                                          <VBox prefHeight="257.0" prefWidth="310.0">
                                              <children>
                                                 <JFXTextField fx:id="txtFName" focusColor="#6981c9" labelFloat="true" promptText="First Name" unFocusColor="#a3a3a3">
                                                    <VBox.margin>
@@ -107,7 +107,7 @@
                                                       <Insets top="20.0" />
                                                    </VBox.margin>
                                                 </JFXTextField>
-                                                <JFXTextArea fx:id="txtAddress" focusColor="#6981c9" labelFloat="true" prefHeight="114.0" prefWidth="264.0" promptText="Address" unFocusColor="#a3a3a3">
+                                                <JFXTextArea fx:id="txtAddress" focusColor="#6981c9" labelFloat="true" prefHeight="94.0" prefWidth="285.0" promptText="Address" unFocusColor="#a3a3a3">
                                                    <VBox.margin>
                                                       <Insets top="20.0" />
                                                    </VBox.margin>
@@ -136,7 +136,7 @@
                                                 </JFXTextField>
                                                 <HBox alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="53.0" prefHeight="42.0" prefWidth="264.0">
                                                    <children>
-                                                      <JFXComboBox fx:id="cmbNearCity" editable="true" focusColor="#6981c9" labelFloat="true" onHidden="#searchCityDetailsByCity" onKeyReleased="#saveCity_Key" prefHeight="25.0" prefWidth="284.0" promptText="Near City" unFocusColor="#a3a3a3">
+                                                      <JFXComboBox fx:id="cmbNearCity" editable="true" focusColor="#6981c9" labelFloat="true" onHidden="#searchCityDetailsByCity" onKeyReleased="#saveCity_Key" prefHeight="25.0" prefWidth="301.0" promptText="Near City" unFocusColor="#a3a3a3">
                                                          <HBox.margin>
                                                             <Insets top="8.0" />
                                                          </HBox.margin></JFXComboBox>
@@ -172,6 +172,14 @@
                                  </padding>
                                  <VBox.margin>
                                     <Insets top="10.0" />
+                                 </VBox.margin>
+                              </JFXComboBox>
+                              <JFXComboBox fx:id="cmbSchool1" editable="true" focusColor="#6981c9" labelFloat="true" layoutX="10.0" layoutY="52.0" onHidden="#searchSchoolDetailsByName" onKeyReleased="#saveSchool_Key" prefHeight="35.0" prefWidth="582.0" promptText="Exam" unFocusColor="#a3a3a3">
+                                 <padding>
+                                    <Insets left="20.0" top="10.0" />
+                                 </padding>
+                                 <VBox.margin>
+                                    <Insets top="20.0" />
                                  </VBox.margin>
                               </JFXComboBox>
                               <JFXComboBox fx:id="cmbStream" editable="true" focusColor="#6981c9" labelFloat="true" layoutX="10.0" layoutY="42.0" onHidden="#searchStreamDetailsByName" onKeyReleased="#saveStream_Key" prefHeight="35.0" prefWidth="584.0" promptText="Steam" unFocusColor="#a3a3a3">
@@ -246,7 +254,7 @@
                               <Insets left="15.0" />
                            </padding>
                         </VBox>
-                        <VBox prefHeight="263.0" prefWidth="501.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <VBox prefHeight="282.0" prefWidth="495.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <children>
                               <Label text="Parent Info" textFill="#4e505e">
                                  <font>
@@ -272,7 +280,7 @@
                                     <Insets left="15.0" />
                                  </padding>
                               </HBox>
-                              <TableView fx:id="tblParent" prefHeight="110.0" prefWidth="429.0">
+                              <TableView fx:id="tblParent" prefHeight="165.0" prefWidth="497.0">
                                  <columns>
                                     <TableColumn fx:id="tcId" prefWidth="75.0" text="ID" visible="false" />
                                     <TableColumn fx:id="tcName" prefWidth="75.0" text="Name" />
@@ -288,7 +296,7 @@
                               </TableView>
                               <JFXButton fx:id="btnSave" prefHeight="35.0" prefWidth="163.0" ripplerFill="WHITE" style="-fx-background-color: #6747CD;" text="Save" textFill="WHITE">
                                  <VBox.margin>
-                                    <Insets left="300.0" top="20.0" />
+                                    <Insets left="340.0" top="20.0" />
                                  </VBox.margin>
                               </JFXButton>
                            </children>
