@@ -39,6 +39,7 @@ public class DataReader {
     NearCity nearCity;
     School school;
     Stream stream;
+    Guardian guardian;
 
     public DataReader() {
         try {
@@ -58,6 +59,7 @@ public class DataReader {
                 nearCity = ObjectGenerator.getNearCity();
                 school = ObjectGenerator.getSchool();
                 stream = ObjectGenerator.getStream();
+                guardian = ObjectGenerator.getGuardian();
 
             });
             readyData.setName("DataReader");
@@ -1070,6 +1072,68 @@ public class DataReader {
             }
             while (rs.next()) {
                 cmbTeacher.getItems().add(rs.getString(1) + " " + rs.getString(2));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void getGuardianDetailsByName() {
+        ResultSet rs = null;
+        try {
+            pst = conn.prepareStatement("SELECT * FROM gardien WHERE fname = ? AND lname = ?");
+            pst.setString(1, guardian.getF_name());
+            pst.setString(2, guardian.getL_name());
+            rs = pst.executeQuery();
+
+            if (!rs.isBeforeFirst()) {
+                guardian.resetAll();
+            }
+            while (rs.next()) {
+                guardian.setId(rs.getInt(1));
+                guardian.setF_name(rs.getString(2));
+                guardian.setL_name(rs.getString(3));
+                guardian.setHome_number(rs.getString(4));
+                guardian.setMobile_number(rs.getString(5));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void fillParentCombo(JFXComboBox cmbParent) {
+        ResultSet rs = null;
+        cmbParent.getItems().clear();
+        try {
+            pst = conn.prepareStatement("SELECT fname,lname FROM gardien ");
+            rs = pst.executeQuery();
+            if (!rs.isBeforeFirst()) {
+
+            }
+            while (rs.next()) {
+                cmbParent.getItems().add(rs.getString(1) + " " + rs.getString(2));
             }
         } catch (Exception e) {
             e.printStackTrace();

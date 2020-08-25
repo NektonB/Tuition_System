@@ -48,9 +48,6 @@ public class AU_StudentController implements Initializable {
     private JFXTextArea txtAddress;
 
     @FXML
-    private JFXTextField txtHome;
-
-    @FXML
     private JFXTextField txtMobile;
 
     @FXML
@@ -81,6 +78,9 @@ public class AU_StudentController implements Initializable {
     private JFXComboBox<String> cmbExam;
 
     @FXML
+    private JFXComboBox<String> cmbStatus;
+
+    @FXML
     private TableView<SubjectList> tblSubjectInfo;
 
     @FXML
@@ -100,6 +100,9 @@ public class AU_StudentController implements Initializable {
 
     @FXML
     private TableColumn<SubjectList, JFXCheckBox> tcRevision;
+
+    @FXML
+    private TableColumn<SubjectList, JFXCheckBox> tcPaper;
 
     @FXML
     private JFXComboBox<String> cmbParents;
@@ -136,9 +139,15 @@ public class AU_StudentController implements Initializable {
     Stream stream;
     Subject subject;
     Teacher teacher;
+    Guardian guardian;
+    Status status;
+    Student student;
 
-    HashMap<Integer, String> actionList = new HashMap<>();
-    HashMap<Integer, String> subList = new HashMap<>();
+    HashMap<String, String> actionList = new HashMap<>();
+    HashMap<String, SubjectList> subList = new HashMap<>();
+
+    HashMap<Integer, String> actionListP = new HashMap<>();
+    HashMap<Integer, ParentList> guaList = new HashMap<>();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -153,6 +162,9 @@ public class AU_StudentController implements Initializable {
             stream = ObjectGenerator.getStream();
             subject = ObjectGenerator.getSubject();
             teacher = ObjectGenerator.getTeacher();
+            guardian = ObjectGenerator.getGuardian();
+            status = ObjectGenerator.getStatus();
+            student = ObjectGenerator.getStudent();
 
             readySubjectInfoTable();
             readyParentTable();
@@ -162,8 +174,11 @@ public class AU_StudentController implements Initializable {
             dataReader.fillStreamCombo(cmbStream);
             dataReader.fillExamCombo(cmbExam);
             dataReader.fillSubjectCombo(cmbSubject);
+            dataReader.fillParentCombo(cmbParents);
+            dataReader.fillStatusCombo(cmbStatus);
             readyGradeCombo();
             readyYearCombo();
+            loadContent();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -176,6 +191,7 @@ public class AU_StudentController implements Initializable {
         tcTeacher.setCellValueFactory(new PropertyValueFactory<>("teacher"));
         tcTheory.setCellValueFactory(new PropertyValueFactory<>("cbTheory"));
         tcRevision.setCellValueFactory(new PropertyValueFactory<>("cbRevision"));
+        tcPaper.setCellValueFactory(new PropertyValueFactory<>("cbPaper"));
     }
 
     private void readyParentTable() {
@@ -199,6 +215,37 @@ public class AU_StudentController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void loadContent() {
+        if (teacher.getId() > 0) {
+            /*txtFname.setText(teacher.getFname());
+            txtLName.setText(teacher.getLname());
+            txtNIC.setText(teacher.getNic_number());
+            txtHomeNum.setText(teacher.getHome_number());
+            txtMobileNum.setText(teacher.getMobile_number());
+            txtEmail.setText(teacher.getEmail());
+            txtAddress.setText(teacher.getAddress());
+            cmbStatus.setValue(status.getStatus());
+
+            ObservableList<AU_TeacherController.TeacherSubjectsList> subjectsList = null;
+            HashMap<Integer, String> subjects = teacherHasSubject.getSubjectList();
+            Set<Integer> keySet = subjects.keySet();
+
+            for (int key : keySet) {
+                subjectsList = tblTeacher_Subjects.getItems();
+                *//*System.out.println("Sub ID : " + key);
+                System.out.println("Sub Name : " + subjects.get(key));*//*
+                subjectsList.add(new AU_TeacherController.TeacherSubjectsList(key, subjects.get(key)));
+            }
+            tblTeacher_Subjects.setItems(subjectsList);*/
+        }
+    }
+
+    public void setWindowData(String title, String actionName, TableView tblStudent) {
+        lblTitle.setText(title);
+        btnSave.setText(actionName);
+        //this.tblTeacher = tblTeacher;
     }
 
     public void saveCity() {
@@ -490,18 +537,23 @@ public class AU_StudentController implements Initializable {
 
                     JFXCheckBox cbTheory = new JFXCheckBox();
                     JFXCheckBox cbRevision = new JFXCheckBox();
+                    JFXCheckBox cbPaper = new JFXCheckBox();
                     cbTheory.setSelected(true);
                     cbRevision.setSelected(false);
+                    cbPaper.setSelected(false);
 
-                    subjectsList.add(new AU_StudentController.SubjectList(subject.getId(), subject.getName(), teacher.getId(), (teacher.getFname() + " " + teacher.getLname()), cbTheory, cbRevision));
+                    SubjectList subjectList = new AU_StudentController.SubjectList(subject.getId(), subject.getName(), teacher.getId(), (teacher.getFname() + " " + teacher.getLname()), cbTheory, cbRevision, cbPaper);
+
+                    subjectsList.add(subjectList);
                     tblSubjectInfo.setItems(subjectsList);
 
-                    subList.put(subject.getId(), subject.getName());
-                    actionList.put(subject.getId(), "Save");
+                    subList.put(subject.getId() + " " + teacher.getId(), subjectList);
+                    actionList.put(subject.getId() + " " + teacher.getId(), "Save");
 
                     subject.resetAll();
+                    teacher.resetAll();
                 } else {
-                    alerts.getWarningNotify("Warning", "This company already in the table.");
+                    alerts.getWarningNotify("Warning", "This Subject and Teacher already in the table.");
                 }
             }
         } catch (Exception e) {
@@ -512,6 +564,119 @@ public class AU_StudentController implements Initializable {
     public void addSubjectToTable_Key(KeyEvent event) {
         if (event.getCode().equals(KeyCode.ENTER)) {
             addSubjectToTable();
+        }
+    }
+
+    public void removeSubjectListFromTable() {
+        try {
+            if (tblSubjectInfo.getItems().isEmpty()) {
+                alerts.getWarningNotify("Warning !", "No more rows here...");
+            } else {
+                AU_StudentController.SubjectList subjectList = tblSubjectInfo.getSelectionModel().getSelectedItem();
+
+                actionList.remove(subjectList.getSubId() + " " + subjectList.getTeacherId());
+                actionList.put(subjectList.getSubId() + " " + subjectList.getTeacherId(), "Delete");
+
+                subList.put(subjectList.getSubId() + " " + subjectList.getTeacherId(), subjectList);
+
+                tblSubjectInfo.getItems().remove(subjectList);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void TblSubjectInfo_KeyReleased(KeyEvent event) {
+        if (event.getCode().equals(KeyCode.DELETE)) {
+            removeSubjectListFromTable();
+        }
+    }
+
+    public void searchParentDetailsByName() {
+        try {
+            if (!cmbParents.getValue().isEmpty()) {
+                String[] name = cmbParents.getValue().split(" ");
+                guardian.setF_name(name[0]);
+                guardian.setL_name(name[1]);
+                dataReader.getGuardianDetailsByName();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void addParentToTable() {
+        try {
+            if (!cmbParents.getValue().isEmpty()) {
+                searchParentDetailsByName();
+
+                boolean already = false;
+                ObservableList<? extends TableColumn<?, ?>> columns = tblParent.getColumns();
+                /*
+                 * Search duplicates in the tblSubjectInfo */
+                if (!tblParent.getItems().isEmpty()) {
+                    for (int i = 0; i < tblParent.getItems().size(); ++i) {
+                        if (columns.get(1).getCellObservableValue(i).getValue().equals(cmbParents.getValue())) {
+                            already = true;
+                            if (already) {
+                                break;
+                            }
+                        } else {
+                            already = false;
+                        }
+                    }
+                }
+
+                if (!already) {
+                    ObservableList<AU_StudentController.ParentList> parentLists;
+                    parentLists = tblParent.getItems();
+
+                    ParentList subjectList = new AU_StudentController.ParentList(guardian.getId(), guardian.getF_name() + " " + guardian.getL_name(), guardian.getHome_number(), guardian.getMobile_number());
+
+                    parentLists.add(subjectList);
+                    tblParent.setItems(parentLists);
+
+                    guaList.put(guardian.getId(), subjectList);
+                    actionListP.put(guardian.getId(), "Save");
+
+                    guardian.resetAll();
+                } else {
+                    alerts.getWarningNotify("Warning", "This Parent already in the table.");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void addParentToTable_Key(KeyEvent event) {
+        if (event.getCode().equals(KeyCode.ENTER)) {
+            addParentToTable();
+        }
+    }
+
+    public void removeParentFromTable() {
+        try {
+            if (tblParent.getItems().isEmpty()) {
+                alerts.getWarningNotify("Warning !", "No more rows here...");
+            } else {
+                AU_StudentController.ParentList parentList = tblParent.getSelectionModel().getSelectedItem();
+
+                actionListP.remove(parentList.getId());
+                actionListP.put(parentList.getId(), "Delete");
+
+                guaList.put(parentList.getId(), parentList);
+
+                tblParent.getItems().remove(parentList);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void TblParent_KeyReleased(KeyEvent event) {
+        if (event.getCode().equals(KeyCode.DELETE)) {
+            removeParentFromTable();
         }
     }
 
@@ -531,6 +696,63 @@ public class AU_StudentController implements Initializable {
         }
     }
 
+    public boolean checkValidate() {
+        boolean validate = false;
+        if (!txtFName.getText().isEmpty() && !txtLName.getText().isEmpty() && !txtNIC.getText().isEmpty() && !cmbStatus.getValue().isEmpty() && !cmbSchool.getValue().isEmpty() && !cmbNearCity.getValue().isEmpty()) {
+            validate = true;
+        } else {
+            txtFName.setStyle("-fx-border-color: crimson");
+            txtLName.setStyle("-fx-border-color: crimson");
+            txtNIC.setStyle("-fx-border-color: crimson");
+            cmbStatus.setStyle("-fx-border-color: crimson");
+            cmbSchool.setStyle("-fx-border-color: crimson");
+            cmbNearCity.setStyle("-fx-border-color: crimson");
+            alerts.getErrorNotify("Error", "Please fill required fields *");
+        }
+        return validate;
+    }
+
+    public void resetBoarders() {
+        txtFName.setStyle("-fx-border-color: none");
+        txtLName.setStyle("-fx-border-color: none");
+        txtNIC.setStyle("-fx-border-color: none");
+        cmbStatus.setStyle("-fx-border-color: none");
+        cmbSchool.setStyle("-fx-border-color: none");
+        cmbNearCity.setStyle("-fx-border-color: none");
+    }
+
+    public void saveTeacher() {
+        try {
+            if (checkValidate()) {
+                searchSchoolDetailsByName();
+                searchCityDetailsByCity();
+
+                status.setStatus(cmbStatus.getValue());
+                dataReader.getStatusDetailsByStatus();
+
+                ObservableList<? extends TableColumn<?, ?>> columns = tblParent.getColumns();
+                /*
+                 * Search duplicates in the tblSubjectInfo */
+                if (!tblParent.getItems().isEmpty()) {
+                    for (int i = 0; i < tblParent.getItems().size(); ++i) {
+                        guardian.setId(Integer.parseInt(columns.get(0).getCellObservableValue(0).getValue().toString()));
+                    }
+                }
+
+                student.setF_name(txtFName.getText());
+                student.setL_name(txtLName.getText());
+                student.setNic_number(txtNIC.getText());
+                student.setAddress(txtAddress.getText());
+                student.setContact_number(txtMobile.getText());
+                student.setEmail(txtEmail.getText());
+
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void closeMe() {
         Stage stage = (Stage) btnClose.getScene().getWindow();
         stage.close();
@@ -543,14 +765,16 @@ public class AU_StudentController implements Initializable {
         SimpleStringProperty teacher;
         JFXCheckBox cbTheory;
         JFXCheckBox cbRevision;
+        JFXCheckBox cbPaper;
 
-        public SubjectList(int subId, String subject, int teacherId, String teacher, JFXCheckBox cbTheory, JFXCheckBox cbRevision) {
+        public SubjectList(int subId, String subject, int teacherId, String teacher, JFXCheckBox cbTheory, JFXCheckBox cbRevision, JFXCheckBox cbPaper) {
             this.subId = new SimpleIntegerProperty(subId);
             this.subject = new SimpleStringProperty(subject);
             this.teacherId = new SimpleIntegerProperty(teacherId);
             this.teacher = new SimpleStringProperty(teacher);
             this.cbTheory = cbTheory;
             this.cbRevision = cbRevision;
+            this.cbPaper = cbPaper;
         }
 
         public int getSubId() {
@@ -615,6 +839,14 @@ public class AU_StudentController implements Initializable {
 
         public void setCbRevision(JFXCheckBox cbRevision) {
             this.cbRevision = cbRevision;
+        }
+
+        public JFXCheckBox getCbPaper() {
+            return cbPaper;
+        }
+
+        public void setCbPaper(JFXCheckBox cbPaper) {
+            this.cbPaper = cbPaper;
         }
     }
 

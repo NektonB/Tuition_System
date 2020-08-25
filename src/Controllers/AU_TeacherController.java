@@ -277,7 +277,9 @@ public class AU_TeacherController implements Initializable {
             } else {
                 TeacherSubjectsList subject = tblTeacher_Subjects.getSelectionModel().getSelectedItem();
 
-                subList.put(subject.getId(), subject.getName());
+//                subList.remove(subject.getId(), subject.getName());
+                subList.remove(subject.getId());
+                actionList.remove(subject.getId());
                 actionList.put(subject.getId(), "Delete");
 
                 tblTeacher_Subjects.getItems().remove(subject);
@@ -312,9 +314,11 @@ public class AU_TeacherController implements Initializable {
                 if (!tblTeacher_Subjects.getItems().isEmpty()) {
                     ObservableList<? extends TableColumn<?, ?>> columns = tblTeacher_Subjects.getColumns();
                     for (int i = 0; i < tblTeacher_Subjects.getItems().size(); i++) {
+
                         subject.setId(Integer.parseInt(columns.get(0).getCellObservableValue(i).getValue().toString()));
 
                         saveSubjectList = dataWriter.saveTeacherSubjectList();
+
                         if (saveSubjectList > 0) {
                             subject.resetAll();
                         }
@@ -355,6 +359,9 @@ public class AU_TeacherController implements Initializable {
                             dataReader.fillTeacherTable(tblTeacher);
                             alerts.getSuccessNotify("Teacher Registration", "Congratulation Chief..!\nTeacher registration successful");
 
+                            subList.clear();
+                            actionList.clear();
+
                             closeMe();
                         }
                     }
@@ -380,6 +387,9 @@ public class AU_TeacherController implements Initializable {
 
                             dataReader.fillTeacherTable(tblTeacher);
                             alerts.getSuccessNotify("Teacher Update", "Congratulation Chief..!\nTeacher update successful");
+
+                            subList.clear();
+                            actionList.clear();
 
                             closeMe();
                         }

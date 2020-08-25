@@ -1,5 +1,8 @@
 package Controllers;
 
+import DataControllers.DataReader;
+import Modules.Guardian;
+import Modules.Student;
 import com.jfoenix.controls.JFXButton;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.fxml.FXML;
@@ -53,22 +56,46 @@ public class StudentController implements Initializable {
     @FXML
     private TableColumn<?, ?> tcStatus;
 
+    DataReader dataReader;
+    Alerts alerts;
+
+    Student student;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        try {
+            alerts = ObjectGenerator.getAlerts();
+            dataReader = ObjectGenerator.getDataReader();
 
+            student = ObjectGenerator.getStudent();
+            //readyEmployeeTable();
+            //dataReader.fillTeacherTable(tblTeacher);
+            //fillcmbOption();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void loadAU_Student() {
         try {
             Stage productsStage = new Stage();
-            Parent frmCustomer = FXMLLoader.load(getClass().getClassLoader().getResource("Views/frmAU_Student.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Views/frmAU_Student.fxml"));
+            Parent frmCustomer = loader.load();
             //productsStage.setTitle("Add New Employee");
             Scene scene = new Scene(frmCustomer);
             productsStage.setScene(scene);
             productsStage.initStyle(StageStyle.UNDECORATED);
             productsStage.setResizable(false);
             productsStage.initModality(Modality.APPLICATION_MODAL);
+
+            AU_StudentController au = loader.getController();
+            if (student.getId() == 0) {
+                au.setWindowData("Add New Student", "Save", tblStudent);
+            } else if (student.getId() > 0) {
+                au.setWindowData("Update Student", "Update", tblStudent);
+            }
+
             productsStage.show();
         } catch (Exception e) {
             e.printStackTrace();

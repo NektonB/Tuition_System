@@ -25,6 +25,8 @@ public class ObjectGenerator {
     private static School school;
     private static Stream stream;
     private static Exam exam;
+    private static Guardian guardian;
+    private static Student student;
 
     private static TextValidator textValidator;
     private static TimeFormatConverter timeFormatConverter;
@@ -189,5 +191,26 @@ public class ObjectGenerator {
             stream = new Stream();
         }
         return stream;
+    }
+
+    public static synchronized Exam getExam() {
+        if (exam == null) {
+            exam = new Exam();
+        }
+        return exam;
+    }
+
+    public static synchronized Guardian getGuardian() {
+        if (guardian == null) {
+            guardian = new Guardian();
+        }
+        return guardian;
+    }
+
+    public static Student getStudent() {
+        if (student == null) {
+            student = new Student();
+        }
+        return student;
     }
 }
