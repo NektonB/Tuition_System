@@ -2,14 +2,8 @@ package Controllers;
 
 import DataControllers.DataReader;
 import DataControllers.DataWriter;
-import Modules.NearCity;
-import Modules.School;
-import Modules.Stream;
-import Modules.UserType;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXTextArea;
-import com.jfoenix.controls.JFXTextField;
+import Modules.*;
+import com.jfoenix.controls.*;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -31,10 +25,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class AU_StudentController implements Initializable {
 
@@ -99,13 +90,16 @@ public class AU_StudentController implements Initializable {
     private TableColumn<SubjectList, String> tcSubject;
 
     @FXML
+    private TableColumn<SubjectList, Integer> tcTeacherId;
+
+    @FXML
     private TableColumn<SubjectList, String> tcTeacher;
 
     @FXML
-    private TableColumn<SubjectList, String> tcTheory;
+    private TableColumn<SubjectList, JFXCheckBox> tcTheory;
 
     @FXML
-    private TableColumn<SubjectList, String> tcRevision;
+    private TableColumn<SubjectList, JFXCheckBox> tcRevision;
 
     @FXML
     private JFXComboBox<String> cmbParents;
@@ -140,6 +134,11 @@ public class AU_StudentController implements Initializable {
     UserType userType;
     School school;
     Stream stream;
+    Subject subject;
+    Teacher teacher;
+
+    HashMap<Integer, String> actionList = new HashMap<>();
+    HashMap<Integer, String> subList = new HashMap<>();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -152,6 +151,8 @@ public class AU_StudentController implements Initializable {
             userType = ObjectGenerator.getUserType();
             school = ObjectGenerator.getSchool();
             stream = ObjectGenerator.getStream();
+            subject = ObjectGenerator.getSubject();
+            teacher = ObjectGenerator.getTeacher();
 
             readySubjectInfoTable();
             readyParentTable();
@@ -160,6 +161,7 @@ public class AU_StudentController implements Initializable {
             dataReader.fillSchoolCombo(cmbSchool);
             dataReader.fillStreamCombo(cmbStream);
             dataReader.fillExamCombo(cmbExam);
+            dataReader.fillSubjectCombo(cmbSubject);
             readyGradeCombo();
             readyYearCombo();
         } catch (Exception e) {
@@ -168,11 +170,12 @@ public class AU_StudentController implements Initializable {
     }
 
     private void readySubjectInfoTable() {
-        tcSubId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        tcSubId.setCellValueFactory(new PropertyValueFactory<>("subId"));
         tcSubject.setCellValueFactory(new PropertyValueFactory<>("subject"));
+        tcTeacherId.setCellValueFactory(new PropertyValueFactory<>("teacherId"));
         tcTeacher.setCellValueFactory(new PropertyValueFactory<>("teacher"));
-        tcTheory.setCellValueFactory(new PropertyValueFactory<>("theory"));
-        tcRevision.setCellValueFactory(new PropertyValueFactory<>("revision"));
+        tcTheory.setCellValueFactory(new PropertyValueFactory<>("cbTheory"));
+        tcRevision.setCellValueFactory(new PropertyValueFactory<>("cbRevision"));
     }
 
     private void readyParentTable() {
@@ -426,6 +429,92 @@ public class AU_StudentController implements Initializable {
         }
     }
 
+    public void fillTeacherCombo() {
+        try {
+            dataReader.fillTeacherCombo(cmbTeacher, cmbSubject);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void searchSubjectDetailsByName() {
+        try {
+            if (!cmbSubject.getValue().isEmpty()) {
+                subject.setName(cmbSubject.getValue());
+                dataReader.getSubjectDetailsByName();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void searchTeacherDetailsByName() {
+        try {
+            if (!cmbTeacher.getValue().isEmpty()) {
+                String[] name = cmbTeacher.getValue().split(" ");
+                teacher.setFname(name[0]);
+                teacher.setLname(name[1]);
+                dataReader.getTeacherDetailsByName();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void addSubjectToTable() {
+        try {
+            if (!cmbSubject.getValue().isEmpty() && !cmbTeacher.getValue().isEmpty()) {
+                searchSubjectDetailsByName();
+                searchTeacherDetailsByName();
+
+                boolean already = false;
+                ObservableList<? extends TableColumn<?, ?>> columns = tblSubjectInfo.getColumns();
+                /*
+                 * Search duplicates in the tblSubjectInfo */
+                if (!tblSubjectInfo.getItems().isEmpty()) {
+                    for (int i = 0; i < tblSubjectInfo.getItems().size(); ++i) {
+                        if (columns.get(1).getCellObservableValue(i).getValue().equals(cmbSubject.getValue()) && columns.get(3).getCellObservableValue(i).getValue().equals(cmbTeacher.getValue())) {
+                            already = true;
+                            if (already) {
+                                break;
+                            }
+                        } else {
+                            already = false;
+                        }
+                    }
+                }
+
+                if (!already) {
+                    ObservableList<AU_StudentController.SubjectList> subjectsList;
+                    subjectsList = tblSubjectInfo.getItems();
+
+                    JFXCheckBox cbTheory = new JFXCheckBox();
+                    JFXCheckBox cbRevision = new JFXCheckBox();
+                    cbTheory.setSelected(true);
+                    cbRevision.setSelected(false);
+
+                    subjectsList.add(new AU_StudentController.SubjectList(subject.getId(), subject.getName(), teacher.getId(), (teacher.getFname() + " " + teacher.getLname()), cbTheory, cbRevision));
+                    tblSubjectInfo.setItems(subjectsList);
+
+                    subList.put(subject.getId(), subject.getName());
+                    actionList.put(subject.getId(), "Save");
+
+                    subject.resetAll();
+                } else {
+                    alerts.getWarningNotify("Warning", "This company already in the table.");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void addSubjectToTable_Key(KeyEvent event) {
+        if (event.getCode().equals(KeyCode.ENTER)) {
+            addSubjectToTable();
+        }
+    }
+
     public void load_parent() {
         try {
             Stage productsStage = new Stage();
@@ -448,30 +537,32 @@ public class AU_StudentController implements Initializable {
     }
 
     public static class SubjectList {
-        SimpleIntegerProperty id;
+        SimpleIntegerProperty subId;
         SimpleStringProperty subject;
+        SimpleIntegerProperty teacherId;
         SimpleStringProperty teacher;
-        SimpleStringProperty theory;
-        SimpleStringProperty revision;
+        JFXCheckBox cbTheory;
+        JFXCheckBox cbRevision;
 
-        public SubjectList(int id, String subject, String teacher, String theory, String revision) {
-            this.id = new SimpleIntegerProperty(id);
+        public SubjectList(int subId, String subject, int teacherId, String teacher, JFXCheckBox cbTheory, JFXCheckBox cbRevision) {
+            this.subId = new SimpleIntegerProperty(subId);
             this.subject = new SimpleStringProperty(subject);
+            this.teacherId = new SimpleIntegerProperty(teacherId);
             this.teacher = new SimpleStringProperty(teacher);
-            this.theory = new SimpleStringProperty(theory);
-            this.revision = new SimpleStringProperty(revision);
+            this.cbTheory = cbTheory;
+            this.cbRevision = cbRevision;
         }
 
-        public int getId() {
-            return id.get();
+        public int getSubId() {
+            return subId.get();
         }
 
-        public SimpleIntegerProperty idProperty() {
-            return id;
+        public SimpleIntegerProperty subIdProperty() {
+            return subId;
         }
 
-        public void setId(int id) {
-            this.id.set(id);
+        public void setSubId(int subId) {
+            this.subId.set(subId);
         }
 
         public String getSubject() {
@@ -486,6 +577,18 @@ public class AU_StudentController implements Initializable {
             this.subject.set(subject);
         }
 
+        public int getTeacherId() {
+            return teacherId.get();
+        }
+
+        public SimpleIntegerProperty teacherIdProperty() {
+            return teacherId;
+        }
+
+        public void setTeacherId(int teacherId) {
+            this.teacherId.set(teacherId);
+        }
+
         public String getTeacher() {
             return teacher.get();
         }
@@ -498,28 +601,20 @@ public class AU_StudentController implements Initializable {
             this.teacher.set(teacher);
         }
 
-        public String getTheory() {
-            return theory.get();
+        public JFXCheckBox getCbTheory() {
+            return cbTheory;
         }
 
-        public SimpleStringProperty theoryProperty() {
-            return theory;
+        public void setCbTheory(JFXCheckBox cbTheory) {
+            this.cbTheory = cbTheory;
         }
 
-        public void setTheory(String theory) {
-            this.theory.set(theory);
+        public JFXCheckBox getCbRevision() {
+            return cbRevision;
         }
 
-        public String getRevision() {
-            return revision.get();
-        }
-
-        public SimpleStringProperty revisionProperty() {
-            return revision;
-        }
-
-        public void setRevision(String revision) {
-            this.revision.set(revision);
+        public void setCbRevision(JFXCheckBox cbRevision) {
+            this.cbRevision = cbRevision;
         }
     }
 

@@ -670,6 +670,55 @@ public class DataReader {
         }
     }
 
+    public void getTeacherDetailsByName() {
+        ResultSet rs = null;
+        try {
+            pst = conn.prepareStatement("SELECT teacher.id, teacher.fname, teacher.lname, teacher.nic_number, teacher.home_number, teacher.mobile_number, teacher.email, teacher.address, status.status, GROUP_CONCAT(subject.id), GROUP_CONCAT(subject.name) FROM teacher INNER JOIN teacher_has_subject ths on teacher.id = ths.teacher_id INNER JOIN subject on ths.subject_id = subject.id INNER JOIN status on teacher.status_id = status.id WHERE teacher.fname = ? AND teacher.lname = ? GROUP BY teacher.id");
+            pst.setString(1, teacher.getFname());
+            pst.setString(2, teacher.getLname());
+            rs = pst.executeQuery();
+
+            if (!rs.isBeforeFirst()) {
+                teacher.resetAll();
+                status.resetAll();
+                teacherHasSubject.resetAll();
+            }
+            while (rs.next()) {
+                teacher.setId(rs.getInt(1));
+                teacher.setFname(rs.getString(2));
+                teacher.setLname(rs.getString(3));
+                teacher.setNic_number(rs.getString(4));
+                teacher.setHome_number(rs.getString(5));
+                teacher.setMobile_number(rs.getString(6));
+                teacher.setEmail(rs.getString(7));
+                teacher.setAddress(rs.getString(8));
+                status.setStatus(rs.getString(9));
+
+                String[] subjectIds = rs.getString("GROUP_CONCAT(subject.id)").split(",");
+                String[] subjectNames = rs.getString("GROUP_CONCAT(subject.name)").split(",");
+                HashMap<Integer, String> subjectList = new HashMap<>();
+
+                for (int i = 0; i < subjectIds.length; ++i) {
+                    subjectList.put(Integer.parseInt(subjectIds[i]), subjectNames[i]);
+                }
+                teacherHasSubject.setSubjectList(subjectList);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     public void fillUserTypeCombo(JFXComboBox cmbUserType) {
         ResultSet rs = null;
         cmbUserType.getItems().clear();
@@ -992,6 +1041,35 @@ public class DataReader {
             }
             while (rs.next()) {
                 cmbExam.getItems().add(rs.getString(1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void fillTeacherCombo(JFXComboBox cmbTeacher, JFXComboBox<String> cmbSubject) {
+        ResultSet rs = null;
+        cmbTeacher.getItems().clear();
+        try {
+            pst = conn.prepareStatement("SELECT teacher.fname,teacher.lname FROM teacher INNER JOIN teacher_has_subject ths on teacher.id = ths.teacher_id INNER JOIN subject s on ths.subject_id = s.id WHERE s.name = ?");
+            pst.setString(1, cmbSubject.getValue());
+            rs = pst.executeQuery();
+            if (!rs.isBeforeFirst()) {
+
+            }
+            while (rs.next()) {
+                cmbTeacher.getItems().add(rs.getString(1) + " " + rs.getString(2));
             }
         } catch (Exception e) {
             e.printStackTrace();
