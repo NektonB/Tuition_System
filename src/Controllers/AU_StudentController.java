@@ -13,6 +13,7 @@ import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -30,6 +31,8 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -82,6 +85,9 @@ public class AU_StudentController implements Initializable {
 
     @FXML
     private JFXComboBox<String> cmbTeacher;
+
+    @FXML
+    private JFXComboBox<String> cmbExam;
 
     @FXML
     private TableView<SubjectList> tblSubjectInfo;
@@ -153,6 +159,9 @@ public class AU_StudentController implements Initializable {
             dataReader.fillNearCityCombo(cmbNearCity);
             dataReader.fillSchoolCombo(cmbSchool);
             dataReader.fillStreamCombo(cmbStream);
+            dataReader.fillExamCombo(cmbExam);
+            readyGradeCombo();
+            readyYearCombo();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -171,6 +180,22 @@ public class AU_StudentController implements Initializable {
         tcName.setCellValueFactory(new PropertyValueFactory<>("name"));
         tcHome.setCellValueFactory(new PropertyValueFactory<>("home"));
         tcMobile.setCellValueFactory(new PropertyValueFactory<>("mobile"));
+    }
+
+    public void readyGradeCombo() {
+        try {
+            cmbGrade.getItems().addAll("6", "7", "8", "9", "10", "11", "12", "13");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void readyYearCombo() {
+        try {
+            cmbExamYear.getItems().addAll("2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void saveCity() {

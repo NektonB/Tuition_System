@@ -981,4 +981,32 @@ public class DataReader {
         }
     }
 
+    public void fillExamCombo(JFXComboBox cmbExam) {
+        ResultSet rs = null;
+        cmbExam.getItems().clear();
+        try {
+            pst = conn.prepareStatement("SELECT exam FROM exam");
+            rs = pst.executeQuery();
+            if (!rs.isBeforeFirst()) {
+
+            }
+            while (rs.next()) {
+                cmbExam.getItems().add(rs.getString(1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 }

@@ -174,22 +174,6 @@
                                     <Insets top="10.0" />
                                  </VBox.margin>
                               </JFXComboBox>
-                              <JFXComboBox fx:id="cmbSchool1" editable="true" focusColor="#6981c9" labelFloat="true" layoutX="10.0" layoutY="52.0" onHidden="#searchSchoolDetailsByName" onKeyReleased="#saveSchool_Key" prefHeight="35.0" prefWidth="582.0" promptText="Exam" unFocusColor="#a3a3a3">
-                                 <padding>
-                                    <Insets left="20.0" top="10.0" />
-                                 </padding>
-                                 <VBox.margin>
-                                    <Insets top="20.0" />
-                                 </VBox.margin>
-                              </JFXComboBox>
-                              <JFXComboBox fx:id="cmbStream" editable="true" focusColor="#6981c9" labelFloat="true" layoutX="10.0" layoutY="42.0" onHidden="#searchStreamDetailsByName" onKeyReleased="#saveStream_Key" prefHeight="35.0" prefWidth="584.0" promptText="Steam" unFocusColor="#a3a3a3">
-                                 <padding>
-                                    <Insets left="20.0" top="10.0" />
-                                 </padding>
-                                 <VBox.margin>
-                                    <Insets top="20.0" />
-                                 </VBox.margin>
-                              </JFXComboBox>
                               <JFXComboBox fx:id="cmbGrade" editable="true" focusColor="#6981c9" labelFloat="true" layoutX="10.0" layoutY="107.0" prefHeight="35.0" prefWidth="584.0" promptText="Grade" unFocusColor="#a3a3a3">
                                  <padding>
                                     <Insets left="20.0" top="10.0" />
@@ -198,7 +182,23 @@
                                     <Insets top="20.0" />
                                  </VBox.margin>
                               </JFXComboBox>
+                              <JFXComboBox fx:id="cmbExam" editable="true" focusColor="#6981c9" labelFloat="true" layoutX="10.0" layoutY="52.0" prefHeight="35.0" prefWidth="582.0" promptText="Exam" unFocusColor="#a3a3a3">
+                                 <padding>
+                                    <Insets left="20.0" top="10.0" />
+                                 </padding>
+                                 <VBox.margin>
+                                    <Insets top="20.0" />
+                                 </VBox.margin>
+                              </JFXComboBox>
                               <JFXComboBox fx:id="cmbExamYear" editable="true" focusColor="#6981c9" labelFloat="true" layoutX="10.0" layoutY="77.0" prefHeight="35.0" prefWidth="585.0" promptText="Exam Year" unFocusColor="#a3a3a3">
+                                 <padding>
+                                    <Insets left="20.0" top="10.0" />
+                                 </padding>
+                                 <VBox.margin>
+                                    <Insets top="20.0" />
+                                 </VBox.margin>
+                              </JFXComboBox>
+                              <JFXComboBox fx:id="cmbStream" editable="true" focusColor="#6981c9" labelFloat="true" layoutX="10.0" layoutY="42.0" onHidden="#searchStreamDetailsByName" onKeyReleased="#saveStream_Key" prefHeight="35.0" prefWidth="584.0" promptText="Steam" unFocusColor="#a3a3a3">
                                  <padding>
                                     <Insets left="20.0" top="10.0" />
                                  </padding>
