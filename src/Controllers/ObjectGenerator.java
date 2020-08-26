@@ -27,6 +27,10 @@ public class ObjectGenerator {
     private static Exam exam;
     private static Guardian guardian;
     private static Student student;
+    private static AcademicCourse academicCourse;
+    private static AC_Class ac_class;
+    private static AC_TypeDetails ac_typeDetails;
+    private static ACC_Type acc_type;
 
     private static TextValidator textValidator;
     private static TimeFormatConverter timeFormatConverter;
@@ -207,10 +211,38 @@ public class ObjectGenerator {
         return guardian;
     }
 
-    public static Student getStudent() {
+    public static synchronized Student getStudent() {
         if (student == null) {
             student = new Student();
         }
         return student;
+    }
+
+    public static synchronized AcademicCourse getAcademicCourse() {
+        if (academicCourse == null) {
+            academicCourse = new AcademicCourse();
+        }
+        return academicCourse;
+    }
+
+    public static synchronized AC_Class getAc_class() {
+        if (ac_class == null) {
+            ac_class = new AC_Class();
+        }
+        return ac_class;
+    }
+
+    public static synchronized AC_TypeDetails getAc_typeDetails() {
+        if (ac_typeDetails == null) {
+            ac_typeDetails = new AC_TypeDetails();
+        }
+        return ac_typeDetails;
+    }
+
+    public static ACC_Type getAcc_type() {
+        if (acc_type == null) {
+            acc_type = new ACC_Type();
+        }
+        return acc_type;
     }
 }

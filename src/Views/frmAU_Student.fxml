@@ -296,7 +296,7 @@
                                     <Insets left="10.0" top="10.0" />
                                  </VBox.margin>
                               </TableView>
-                              <JFXButton fx:id="btnSave" prefHeight="35.0" prefWidth="163.0" ripplerFill="WHITE" style="-fx-background-color: #6747CD;" text="Save" textFill="WHITE">
+                              <JFXButton fx:id="btnSave" onAction="#saveStudent" prefHeight="35.0" prefWidth="163.0" ripplerFill="WHITE" style="-fx-background-color: #6747CD;" text="Save" textFill="WHITE">
                                  <VBox.margin>
                                     <Insets left="340.0" top="20.0" />
                                  </VBox.margin>

@@ -1,14 +1,19 @@
 package DataControllers;
 
+import Controllers.AU_StudentController;
 import Controllers.Alerts;
 import Controllers.ObjectGenerator;
 import DB_Conn.ConnectDB;
 import Modules.*;
+import javafx.collections.ObservableList;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Vector;
 
 public class DataWriter {
     PreparedStatement pst;
@@ -29,6 +34,14 @@ public class DataWriter {
     NearCity nearCity;
     School school;
     Stream stream;
+    Student student;
+    Guardian guardian;
+    AcademicCourse academicCourse;
+    Exam exam;
+    AC_Class ac_class;
+    AC_TypeDetails ac_typeDetails;
+    ACC_Type acc_type;
+    DataReader dataReader;
 
 
     /**
@@ -52,6 +65,14 @@ public class DataWriter {
                 nearCity = ObjectGenerator.getNearCity();
                 school = ObjectGenerator.getSchool();
                 stream = ObjectGenerator.getStream();
+                student = ObjectGenerator.getStudent();
+                guardian = ObjectGenerator.getGuardian();
+                academicCourse = ObjectGenerator.getAcademicCourse();
+                exam = ObjectGenerator.getExam();
+                ac_class = ObjectGenerator.getAc_class();
+                ac_typeDetails = ObjectGenerator.getAc_typeDetails();
+                acc_type = ObjectGenerator.getAcc_type();
+                dataReader = ObjectGenerator.getDataReader();
             });
             readyData.setName("Data Writer");
             readyData.start();
@@ -563,6 +584,162 @@ public class DataWriter {
             e.printStackTrace();
         } finally {
             try {
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return operation;
+    }
+
+    public int saveStudent() {
+        int operation = 0;
+        ResultSet rs = null;
+        try {
+            pst = conn.prepareStatement("INSERT INTO student(fname, lname, nic_number, address, contact_number, email, school_id, grade, near_city_id, gardien_id, status_id) VALUES (?,?,?,?,?,?,?,?,?,?,?)", pst.RETURN_GENERATED_KEYS);
+            pst.setString(1, student.getF_name());
+            pst.setString(2, student.getL_name());
+            pst.setString(3, student.getNic_number());
+            pst.setString(4, student.getAddress());
+            pst.setString(5, student.getContact_number());
+            pst.setString(6, student.getEmail());
+            pst.setInt(7, school.getId());
+            pst.setString(8, student.getGrade());
+            pst.setInt(9, nearCity.getId());
+            pst.setInt(10, guardian.getId());
+            pst.setInt(11, status.getId());
+
+            operation = pst.executeUpdate();
+            rs = pst.getGeneratedKeys();
+            if (rs.next()) {
+                student.setId(rs.getInt(1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return operation;
+    }
+
+    public int saveAcademicCourse() {
+        int operation = 0;
+        ResultSet rs = null;
+        try {
+            pst = conn.prepareStatement("INSERT INTO academic_course(exam_id, stream_id, exam_year) VALUES (?,?,?)", pst.RETURN_GENERATED_KEYS);
+            pst.setInt(1, exam.getId());
+            pst.setInt(2, stream.getId());
+            pst.setString(3, academicCourse.getExam_year());
+
+            operation = pst.executeUpdate();
+            rs = pst.getGeneratedKeys();
+            if (rs.next()) {
+                academicCourse.setId(rs.getInt(1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return operation;
+    }
+
+    public int[] saveAcademicClass(TableView<AU_StudentController.SubjectList> tblSubjectList) {
+        int operation[] = {};
+        ResultSet rs = null;
+        try {
+            conn.setAutoCommit(false);
+            pst = conn.prepareStatement("INSERT INTO ac_class(ac_id, teacher_has_subject_id, status_id) VALUES (?,?,?)", pst.RETURN_GENERATED_KEYS);
+
+            ObservableList<? extends TableColumn<?, ?>> columns = tblSubjectList.getColumns();
+
+            for (int i = 0; i < tblSubjectList.getItems().size(); ++i) {
+
+                pst.setInt(1, academicCourse.getId());
+
+                subject.setId(Integer.parseInt(columns.get(0).getCellObservableValue(i).getValue().toString()));
+                teacher.setId(Integer.parseInt(columns.get(2).getCellObservableValue(i).getValue().toString()));
+                //System.out.println("Subject : " + subject.getId());
+                //System.out.println("Teacher : " + teacher.getId());
+                dataReader.getTHS_IdByName();
+                //System.out.println("THS : " + teacher.getId());
+                pst.setInt(2, teacherHasSubject.getId());
+
+                pst.setInt(3, status.getId());
+                pst.addBatch();
+            }
+
+            operation = pst.executeBatch();
+            conn.commit();
+            conn.setAutoCommit(true);
+
+            //System.out.println("Key List : " + operation);
+            rs = pst.getGeneratedKeys();
+
+            Vector<Integer> ids = new Vector<>();
+            while (rs.next()) {
+                ids.add(rs.getInt(1));
+                //System.out.println("Key : " + rs.getInt(1));
+            }
+            ac_class.setIds(ids);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return operation;
+    }
+
+    public int saveAcademicClassType() {
+        int operation = 0;
+        ResultSet rs = null;
+        try {
+            pst = conn.prepareStatement("INSERT INTO ac_type_details(ac_class_id, tbl_acc_type_id) VALUES (?,?)", pst.RETURN_GENERATED_KEYS);
+            pst.setInt(1, ac_class.getId());
+            pst.setInt(2, acc_type.getId());
+
+            operation = pst.executeUpdate();
+            rs = pst.getGeneratedKeys();
+            if (rs.next()) {
+                ac_typeDetails.setId(rs.getInt(1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
                 if (!pst.isClosed()) {
                     pst.close();
                 }

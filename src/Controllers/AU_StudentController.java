@@ -142,6 +142,8 @@ public class AU_StudentController implements Initializable {
     Guardian guardian;
     Status status;
     Student student;
+    AcademicCourse academicCourse;
+    Exam exam;
 
     HashMap<String, String> actionList = new HashMap<>();
     HashMap<String, SubjectList> subList = new HashMap<>();
@@ -165,6 +167,8 @@ public class AU_StudentController implements Initializable {
             guardian = ObjectGenerator.getGuardian();
             status = ObjectGenerator.getStatus();
             student = ObjectGenerator.getStudent();
+            exam = ObjectGenerator.getExam();
+            academicCourse = ObjectGenerator.getAcademicCourse();
 
             readySubjectInfoTable();
             readyParentTable();
@@ -721,7 +725,40 @@ public class AU_StudentController implements Initializable {
         cmbNearCity.setStyle("-fx-border-color: none");
     }
 
-    public void saveTeacher() {
+    private int saveAcademicCourse() {
+        int saveAcademicCourse = 0;
+        try {
+            exam.setExam(cmbExam.getValue());
+            dataReader.getExamByName();
+
+            stream.setStream(cmbStream.getValue());
+            dataReader.getStreamByName();
+
+            saveAcademicCourse = dataWriter.saveAcademicCourse();
+            if (saveAcademicCourse > 0) {
+
+                //alerts.getSuccessNotify("Stream Registration", "Stream Registration successful");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return saveAcademicCourse;
+    }
+
+    public int[] saveAcademicClass() {
+        int saveAcademicClass[] = {};
+        try {
+            status.setStatus(cmbStatus.getValue());
+            dataReader.getStatusDetailsByStatus();
+
+            saveAcademicClass = dataWriter.saveAcademicClass(tblSubjectInfo);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return saveAcademicClass;
+    }
+
+    public void saveStudent() {
         try {
             if (checkValidate()) {
                 searchSchoolDetailsByName();
@@ -746,7 +783,20 @@ public class AU_StudentController implements Initializable {
                 student.setContact_number(txtMobile.getText());
                 student.setEmail(txtEmail.getText());
 
+                int saveStudent = dataWriter.saveStudent();
+                if (saveStudent > 0) {
 
+                    int saveAcademicCourse = saveAcademicCourse();
+                    if (saveAcademicCourse > 0) {
+
+                        int saveAcademicClass[] = saveAcademicClass();
+                        if (saveAcademicClass.length > 0) {
+
+                            alerts.getSuccessNotify("Stream Registration", "Stream Registration successful");
+                        }
+                    }
+                    //alerts.getSuccessNotify("Stream Registration", "Stream Registration successful");
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();

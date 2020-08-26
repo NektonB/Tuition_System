@@ -40,6 +40,8 @@ public class DataReader {
     School school;
     Stream stream;
     Guardian guardian;
+    AcademicCourse academicCourse;
+    Exam exam;
 
     public DataReader() {
         try {
@@ -60,6 +62,8 @@ public class DataReader {
                 school = ObjectGenerator.getSchool();
                 stream = ObjectGenerator.getStream();
                 guardian = ObjectGenerator.getGuardian();
+                exam = ObjectGenerator.getExam();
+                academicCourse = ObjectGenerator.getAcademicCourse();
 
             });
             readyData.setName("DataReader");
@@ -1010,7 +1014,7 @@ public class DataReader {
             rs = pst.executeQuery();
 
             if (!rs.isBeforeFirst()) {
-                school.resetAll();
+                stream.resetAll();
             }
             while (rs.next()) {
                 stream.setId(rs.getInt(1));
@@ -1134,6 +1138,66 @@ public class DataReader {
             }
             while (rs.next()) {
                 cmbParent.getItems().add(rs.getString(1) + " " + rs.getString(2));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void getExamByName() {
+        ResultSet rs = null;
+        try {
+            pst = conn.prepareStatement("SELECT * FROM exam WHERE exam = ?");
+            pst.setString(1, exam.getExam());
+            rs = pst.executeQuery();
+
+            if (!rs.isBeforeFirst()) {
+                school.resetAll();
+            }
+            while (rs.next()) {
+                exam.setId(rs.getInt(1));
+                exam.setExam(rs.getString(2));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void getTHS_IdByName() {
+        ResultSet rs = null;
+        try {
+            pst = conn.prepareStatement("SELECT * FROM teacher_has_subject WHERE teacher_id = ? AND subject_id = ?");
+            pst.setInt(1, teacher.getId());
+            pst.setInt(2, subject.getId());
+            rs = pst.executeQuery();
+
+            if (!rs.isBeforeFirst()) {
+                teacherHasSubject.resetAll();
+            }
+            while (rs.next()) {
+                teacherHasSubject.setId(rs.getInt(1));
             }
         } catch (Exception e) {
             e.printStackTrace();
