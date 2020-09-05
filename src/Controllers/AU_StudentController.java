@@ -144,6 +144,7 @@ public class AU_StudentController implements Initializable {
     Student student;
     AcademicCourse academicCourse;
     Exam exam;
+    AC_Class ac_class;
 
     HashMap<String, String> actionList = new HashMap<>();
     HashMap<String, SubjectList> subList = new HashMap<>();
@@ -169,6 +170,7 @@ public class AU_StudentController implements Initializable {
             student = ObjectGenerator.getStudent();
             exam = ObjectGenerator.getExam();
             academicCourse = ObjectGenerator.getAcademicCourse();
+            ac_class = ObjectGenerator.getAc_class();
 
             readySubjectInfoTable();
             readyParentTable();
@@ -734,6 +736,8 @@ public class AU_StudentController implements Initializable {
             stream.setStream(cmbStream.getValue());
             dataReader.getStreamByName();
 
+            academicCourse.setExam_year(cmbExamYear.getValue());
+
             saveAcademicCourse = dataWriter.saveAcademicCourse();
             if (saveAcademicCourse > 0) {
 
@@ -756,6 +760,28 @@ public class AU_StudentController implements Initializable {
             e.printStackTrace();
         }
         return saveAcademicClass;
+    }
+
+    public int[] saveAcademicClassTD() {
+        int saveAcademicClassTD[] = {};
+        try {
+
+            saveAcademicClassTD = dataWriter.saveAcademicClassTypeTD(tblSubjectInfo, cmbExam.getValue(), cmbStream.getValue(), cmbExamYear.getValue());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return saveAcademicClassTD;
+    }
+
+    public int[] saveAcademicClassTL() {
+        int saveAcademicClassTD[] = {};
+        try {
+
+            saveAcademicClassTD = dataWriter.saveAcademicClassTypeList(tblSubjectInfo, cmbExam.getValue(), cmbStream.getValue(), cmbExamYear.getValue());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return saveAcademicClassTD;
     }
 
     public void saveStudent() {
@@ -792,7 +818,17 @@ public class AU_StudentController implements Initializable {
                         int saveAcademicClass[] = saveAcademicClass();
                         if (saveAcademicClass.length > 0) {
 
-                            alerts.getSuccessNotify("Stream Registration", "Stream Registration successful");
+                            int[] saveAcademicClassTD = saveAcademicClassTD();
+                            if (saveAcademicClassTD.length > 0) {
+
+                            }else {
+                                int[] saveAcademicClassTL = saveAcademicClassTL();
+                                if (saveAcademicClassTL.length > 0) {
+                                    alerts.getSuccessNotify("Class Registration", "Stream Registration successful");
+                                }
+                                //alerts.getSuccessNotify("Class Registration", "Stream Registration unsuccessful");
+                            }
+                            //alerts.getSuccessNotify("Stream Registration", "Stream Registration successful");
                         }
                     }
                     //alerts.getSuccessNotify("Stream Registration", "Stream Registration successful");

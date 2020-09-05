@@ -5,6 +5,8 @@ import Controllers.Alerts;
 import Controllers.ObjectGenerator;
 import DB_Conn.ConnectDB;
 import Modules.*;
+import com.jfoenix.controls.JFXCheckBox;
+import com.jfoenix.controls.JFXComboBox;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -720,19 +722,46 @@ public class DataWriter {
         return operation;
     }
 
-    public int saveAcademicClassType() {
-        int operation = 0;
+    public int[] saveAcademicClassTypeTD(TableView<AU_StudentController.SubjectList> tblSubjectList, String exam, String stream, String year) {
+        int operation[] = {};
         ResultSet rs = null;
         try {
+            conn.setAutoCommit(false);
             pst = conn.prepareStatement("INSERT INTO ac_type_details(ac_class_id, tbl_acc_type_id) VALUES (?,?)", pst.RETURN_GENERATED_KEYS);
-            pst.setInt(1, ac_class.getId());
-            pst.setInt(2, acc_type.getId());
 
-            operation = pst.executeUpdate();
-            rs = pst.getGeneratedKeys();
-            if (rs.next()) {
-                ac_typeDetails.setId(rs.getInt(1));
+            ObservableList<? extends TableColumn<?, ?>> columns = tblSubjectList.getColumns();
+
+            for (int i = 0; i < tblSubjectList.getItems().size(); ++i) {
+
+                for (int j = 1; j < 4; j++) {
+
+                    int subId = Integer.parseInt(columns.get(0).getCellObservableValue(i).getValue().toString());
+                    int teacherId = Integer.parseInt(columns.get(2).getCellObservableValue(i).getValue().toString());
+
+                    boolean isAlready = dataReader.checkAccTypeID(exam, stream, year, subId, teacherId, j);
+
+                    if (!isAlready) {
+                        //System.out.println("AC Class ID: " + ac_class.getIds().get(i));
+                        pst.setInt(1, ac_class.getIds().get(i));
+                        pst.setInt(2, j);
+
+                        pst.addBatch();
+                    }
+                }
             }
+
+            operation = pst.executeBatch();
+            conn.commit();
+            conn.setAutoCommit(true);
+
+            //System.out.println("Key List : " + operation);
+            rs = pst.getGeneratedKeys();
+            Vector<Integer> ids = new Vector<>();
+            while (rs.next()) {
+                ids.add(rs.getInt(1));
+                //System.out.println("Key : " + rs.getInt(1));
+            }
+            ac_typeDetails.setIds(ids);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -750,4 +779,66 @@ public class DataWriter {
         return operation;
     }
 
+    public int[] saveAcademicClassTypeList(TableView<AU_StudentController.SubjectList> tblSubjectList, String exam, String stream, String year) {
+        int operation[] = {};
+        ResultSet rs = null;
+        try {
+            conn.setAutoCommit(false);
+            pst = conn.prepareStatement("INSERT INTO ac_type_list(absent_count, ac_type_details_id, tbl_student_id) VALUES (?,?,?)", pst.RETURN_GENERATED_KEYS);
+
+            ObservableList<? extends TableColumn<?, ?>> columns = tblSubjectList.getColumns();
+
+            for (int i = 0; i < tblSubjectList.getItems().size(); ++i) {
+
+                for (int j = 0; j < 3; j++) {
+
+                    int subId = Integer.parseInt(columns.get(0).getCellObservableValue(i).getValue().toString());
+                    int teacherId = Integer.parseInt(columns.get(2).getCellObservableValue(i).getValue().toString());
+
+                    dataReader.getAccTypeID(exam, stream, year, subId, teacherId);
+                    //System.out.println("ACT Details: " + ac_typeDetails.getIds().get(j));
+
+                    boolean isAlready = dataReader.checkAccTypeList(ac_typeDetails.getIds().get(j));
+                    boolean isChecked = ((JFXCheckBox) columns.get(4 + j).getCellObservableValue(i).getValue()).isSelected();
+                    //System.out.println("Already: " + (!isAlready));
+                    //System.out.println("Checked: " + (isChecked));
+                    if ((!isAlready) && (isChecked)) {
+                        //System.out.println("AC Class ID: " + ac_class.getIds().get(i));
+                        pst.setInt(1, 0);
+                        pst.setInt(2, ac_typeDetails.getIds().get(j));
+                        pst.setInt(3, student.getId());
+
+                        pst.addBatch();
+                    }
+                }
+            }
+
+            operation = pst.executeBatch();
+            conn.commit();
+            conn.setAutoCommit(true);
+
+            //System.out.println("Key List : " + operation);
+            rs = pst.getGeneratedKeys();
+            Vector<Integer> ids = new Vector<>();
+            while (rs.next()) {
+                ids.add(rs.getInt(1));
+                //System.out.println("Key : " + rs.getInt(1));
+            }
+            //ac_typeDetails.setIds(ids);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return operation;
+    }
 }

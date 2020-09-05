@@ -42,6 +42,9 @@ public class DataReader {
     Guardian guardian;
     AcademicCourse academicCourse;
     Exam exam;
+    ACC_Type acc_type;
+    AC_TypeDetails ac_typeDetails;
+    Student student;
 
     public DataReader() {
         try {
@@ -64,6 +67,9 @@ public class DataReader {
                 guardian = ObjectGenerator.getGuardian();
                 exam = ObjectGenerator.getExam();
                 academicCourse = ObjectGenerator.getAcademicCourse();
+                acc_type = ObjectGenerator.getAcc_type();
+                ac_typeDetails = ObjectGenerator.getAc_typeDetails();
+                student = ObjectGenerator.getStudent();
 
             });
             readyData.setName("DataReader");
@@ -1213,6 +1219,213 @@ public class DataReader {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void getAccType_IdByName() {
+        ResultSet rs = null;
+        try {
+            pst = conn.prepareStatement("SELECT * FROM acc_type WHERE type = ?");
+            pst.setString(1, acc_type.getType());
+            rs = pst.executeQuery();
+
+            if (!rs.isBeforeFirst()) {
+                acc_type.resetAll();
+            }
+            while (rs.next()) {
+                acc_type.setId(rs.getInt(1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void getAccTypeID(String exam, String stream, String year, int subId, int teacherId, int acc_type_id) {
+        ResultSet rs = null;
+        try {
+            pst = conn.prepareStatement("SELECT ac_type_details.id\n" +
+                    "FROM ac_type_details\n" +
+                    "         INNER JOIN acc_type on ac_type_details.tbl_acc_type_id = acc_type.id\n" +
+                    "         INNER JOIN ac_class on ac_type_details.ac_class_id = ac_class.id\n" +
+                    "         INNER JOIN teacher_has_subject ths on ac_class.teacher_has_subject_id = ths.id\n" +
+                    "         INNER JOIN academic_course ac on ac_class.ac_id = ac.id\n" +
+                    "         INNER JOIN stream st on ac.stream_id = st.id\n" +
+                    "         INNER JOIN exam ex on ac.exam_id = ex.id\n" +
+                    "WHERE ex.exam = ?\n" +
+                    "  AND st.stream = ?\n" +
+                    "  AND ac.exam_year = ?\n" +
+                    "  AND ths.subject_id = ?\n" +
+                    "  AND ths.teacher_id = ?\n" +
+                    "  AND acc_type.id = ?");
+            pst.setString(1, exam);
+            pst.setString(2, stream);
+            pst.setString(3, year);
+            pst.setInt(4, subId);
+            pst.setInt(5, teacherId);
+            pst.setInt(6, acc_type_id);
+            rs = pst.executeQuery();
+
+            if (!rs.isBeforeFirst()) {
+                ac_typeDetails.resetAll();
+            }
+            while (rs.next()) {
+                ac_typeDetails.setId(rs.getInt(1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void getAccTypeID(String exam, String stream, String year, int subId, int teacherId) {
+        ResultSet rs = null;
+        try {
+            pst = conn.prepareStatement("SELECT ac_type_details.id\n" +
+                    "FROM ac_type_details\n" +
+                    "         INNER JOIN acc_type on ac_type_details.tbl_acc_type_id = acc_type.id\n" +
+                    "         INNER JOIN ac_class on ac_type_details.ac_class_id = ac_class.id\n" +
+                    "         INNER JOIN teacher_has_subject ths on ac_class.teacher_has_subject_id = ths.id\n" +
+                    "         INNER JOIN academic_course ac on ac_class.ac_id = ac.id\n" +
+                    "         INNER JOIN stream st on ac.stream_id = st.id\n" +
+                    "         INNER JOIN exam ex on ac.exam_id = ex.id\n" +
+                    "WHERE ex.exam = ?\n" +
+                    "  AND st.stream = ?\n" +
+                    "  AND ac.exam_year = ?\n" +
+                    "  AND ths.subject_id = ?\n" +
+                    "  AND ths.teacher_id = ?");
+            pst.setString(1, exam);
+            pst.setString(2, stream);
+            pst.setString(3, year);
+            pst.setInt(4, subId);
+            pst.setInt(5, teacherId);
+            rs = pst.executeQuery();
+
+            if (!rs.isBeforeFirst()) {
+                ac_typeDetails.resetAll();
+            }
+            Vector<Integer> ids = new Vector<>();
+            while (rs.next()) {
+                ids.add(rs.getInt(1));
+                //ac_typeDetails.setId(rs.getInt(1));
+            }
+            ac_typeDetails.setIds(ids);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public boolean checkAccTypeID(String exam, String stream, String year, int subId, int teacherId, int acc_type_id) {
+        boolean isAlready = false;
+        ResultSet rs = null;
+        try {
+            pst = conn.prepareStatement("SELECT ac_type_details.id\n" +
+                    "FROM ac_type_details\n" +
+                    "         INNER JOIN acc_type on ac_type_details.tbl_acc_type_id = acc_type.id\n" +
+                    "         INNER JOIN ac_class on ac_type_details.ac_class_id = ac_class.id\n" +
+                    "         INNER JOIN teacher_has_subject ths on ac_class.teacher_has_subject_id = ths.id\n" +
+                    "         INNER JOIN academic_course ac on ac_class.ac_id = ac.id\n" +
+                    "         INNER JOIN stream st on ac.stream_id = st.id\n" +
+                    "         INNER JOIN exam ex on ac.exam_id = ex.id\n" +
+                    "WHERE ex.exam = ?\n" +
+                    "  AND st.stream = ?\n" +
+                    "  AND ac.exam_year = ?\n" +
+                    "  AND ths.subject_id = ?\n" +
+                    "  AND ths.teacher_id = ?\n" +
+                    "  AND acc_type.id = ?");
+            pst.setString(1, exam);
+            pst.setString(2, stream);
+            pst.setString(3, year);
+            pst.setInt(4, subId);
+            pst.setInt(5, teacherId);
+            pst.setInt(6, acc_type_id);
+            rs = pst.executeQuery();
+
+            if (!rs.isBeforeFirst()) {
+                ac_typeDetails.resetAll();
+            }
+            if (rs.next()) {
+                //ac_typeDetails.setId(rs.getInt(1));
+                isAlready = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return isAlready;
+    }
+
+    public boolean checkAccTypeList(int acc_type_id) {
+        boolean isAlready = false;
+        ResultSet rs = null;
+        try {
+            pst = conn.prepareStatement("SELECT * FROM ac_type_list WHERE ac_type_details_id = ? AND tbl_student_id = ?");
+            pst.setInt(1, acc_type_id);
+            pst.setInt(2, student.getId());
+            rs = pst.executeQuery();
+
+            if (!rs.isBeforeFirst()) {
+                //ac_typeDetails.resetAll();
+            }
+            if (rs.next()) {
+                //ac_typeDetails.setId(rs.getInt(1));
+                isAlready = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return isAlready;
     }
 
 }
