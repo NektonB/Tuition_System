@@ -31,6 +31,7 @@ public class ObjectGenerator {
     private static AC_Class ac_class;
     private static AC_TypeDetails ac_typeDetails;
     private static ACC_Type acc_type;
+    private static AC_TypeList ac_typeList;
 
     private static TextValidator textValidator;
     private static TimeFormatConverter timeFormatConverter;
@@ -239,10 +240,17 @@ public class ObjectGenerator {
         return ac_typeDetails;
     }
 
-    public static ACC_Type getAcc_type() {
+    public static synchronized ACC_Type getAcc_type() {
         if (acc_type == null) {
             acc_type = new ACC_Type();
         }
         return acc_type;
+    }
+
+    public static synchronized AC_TypeList getAc_typeList() {
+        if (ac_typeList == null) {
+            ac_typeList = new AC_TypeList();
+        }
+        return ac_typeList;
     }
 }

@@ -145,6 +145,8 @@ public class AU_StudentController implements Initializable {
     AcademicCourse academicCourse;
     Exam exam;
     AC_Class ac_class;
+    AC_TypeDetails ac_typeDetails;
+    AC_TypeList ac_typeList;
 
     HashMap<String, String> actionList = new HashMap<>();
     HashMap<String, SubjectList> subList = new HashMap<>();
@@ -171,6 +173,8 @@ public class AU_StudentController implements Initializable {
             exam = ObjectGenerator.getExam();
             academicCourse = ObjectGenerator.getAcademicCourse();
             ac_class = ObjectGenerator.getAc_class();
+            ac_typeDetails = ObjectGenerator.getAc_typeDetails();
+            ac_typeList = ObjectGenerator.getAc_typeList();
 
             readySubjectInfoTable();
             readyParentTable();
@@ -738,7 +742,14 @@ public class AU_StudentController implements Initializable {
 
             academicCourse.setExam_year(cmbExamYear.getValue());
 
-            saveAcademicCourse = dataWriter.saveAcademicCourse();
+            boolean isAlready = dataReader.checkAcademicCourse();
+
+            if (isAlready) {
+                saveAcademicCourse = 1;
+            } else {
+                saveAcademicCourse = dataWriter.saveAcademicCourse();
+            }
+
             if (saveAcademicCourse > 0) {
 
                 //alerts.getSuccessNotify("Stream Registration", "Stream Registration successful");
@@ -755,7 +766,7 @@ public class AU_StudentController implements Initializable {
             status.setStatus(cmbStatus.getValue());
             dataReader.getStatusDetailsByStatus();
 
-            saveAcademicClass = dataWriter.saveAcademicClass(tblSubjectInfo);
+            saveAcademicClass = dataWriter.saveACC(tblSubjectInfo);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -766,7 +777,7 @@ public class AU_StudentController implements Initializable {
         int saveAcademicClassTD[] = {};
         try {
 
-            saveAcademicClassTD = dataWriter.saveAcademicClassTypeTD(tblSubjectInfo, cmbExam.getValue(), cmbStream.getValue(), cmbExamYear.getValue());
+            saveAcademicClassTD = dataWriter.saveACCTD(tblSubjectInfo);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -777,7 +788,7 @@ public class AU_StudentController implements Initializable {
         int saveAcademicClassTD[] = {};
         try {
 
-            saveAcademicClassTD = dataWriter.saveAcademicClassTypeList(tblSubjectInfo, cmbExam.getValue(), cmbStream.getValue(), cmbExamYear.getValue());
+            saveAcademicClassTD = dataWriter.saveACCTL(tblSubjectInfo, cmbExam.getValue(), cmbStream.getValue(), cmbExamYear.getValue());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -811,27 +822,34 @@ public class AU_StudentController implements Initializable {
 
                 int saveStudent = dataWriter.saveStudent();
                 if (saveStudent > 0) {
+                    alerts.getSuccessNotify("Student Registration", "Student Registration successful");
 
                     int saveAcademicCourse = saveAcademicCourse();
                     if (saveAcademicCourse > 0) {
+                        alerts.getSuccessNotify("Course Registration", "Course Registration successful");
 
                         int saveAcademicClass[] = saveAcademicClass();
-                        if (saveAcademicClass.length > 0) {
+                        if (ac_class.getIds().size() > 0) {
 
                             int[] saveAcademicClassTD = saveAcademicClassTD();
-                            if (saveAcademicClassTD.length > 0) {
+                            if (ac_typeDetails.getIds().size() > 0) {
 
-                            }else {
                                 int[] saveAcademicClassTL = saveAcademicClassTL();
-                                if (saveAcademicClassTL.length > 0) {
-                                    alerts.getSuccessNotify("Class Registration", "Stream Registration successful");
+                                if (ac_typeList.getIds().size() > 0) {
+
+                                    alerts.getSuccessNotify("Class Registration", "Class Registration successful");
+
+                                    student.resetAll();
+                                    academicCourse.resetAll();
+                                    ac_class.resetAll();
+                                    ac_typeDetails.resetAll();
+                                    ac_typeList.resetAll();
+
+                                    closeMe();
                                 }
-                                //alerts.getSuccessNotify("Class Registration", "Stream Registration unsuccessful");
                             }
-                            //alerts.getSuccessNotify("Stream Registration", "Stream Registration successful");
                         }
                     }
-                    //alerts.getSuccessNotify("Stream Registration", "Stream Registration successful");
                 }
             }
         } catch (Exception e) {

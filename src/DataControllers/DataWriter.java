@@ -6,7 +6,6 @@ import Controllers.ObjectGenerator;
 import DB_Conn.ConnectDB;
 import Modules.*;
 import com.jfoenix.controls.JFXCheckBox;
-import com.jfoenix.controls.JFXComboBox;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -14,7 +13,6 @@ import javafx.scene.control.TableView;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.Vector;
 
 public class DataWriter {
@@ -44,6 +42,7 @@ public class DataWriter {
     AC_TypeDetails ac_typeDetails;
     ACC_Type acc_type;
     DataReader dataReader;
+    AC_TypeList ac_typeList;
 
 
     /**
@@ -75,6 +74,7 @@ public class DataWriter {
                 ac_typeDetails = ObjectGenerator.getAc_typeDetails();
                 acc_type = ObjectGenerator.getAcc_type();
                 dataReader = ObjectGenerator.getDataReader();
+                ac_typeList = ObjectGenerator.getAc_typeList();
             });
             readyData.setName("Data Writer");
             readyData.start();
@@ -666,9 +666,12 @@ public class DataWriter {
         return operation;
     }
 
-    public int[] saveAcademicClass(TableView<AU_StudentController.SubjectList> tblSubjectList) {
+    public int[] saveACC(TableView<AU_StudentController.SubjectList> tblSubjectList) {
         int operation[] = {};
         ResultSet rs = null;
+
+        Vector<Integer> ids = new Vector<>();
+
         try {
             conn.setAutoCommit(false);
             pst = conn.prepareStatement("INSERT INTO ac_class(ac_id, teacher_has_subject_id, status_id) VALUES (?,?,?)", pst.RETURN_GENERATED_KEYS);
@@ -677,18 +680,20 @@ public class DataWriter {
 
             for (int i = 0; i < tblSubjectList.getItems().size(); ++i) {
 
-                pst.setInt(1, academicCourse.getId());
-
                 subject.setId(Integer.parseInt(columns.get(0).getCellObservableValue(i).getValue().toString()));
                 teacher.setId(Integer.parseInt(columns.get(2).getCellObservableValue(i).getValue().toString()));
-                //System.out.println("Subject : " + subject.getId());
-                //System.out.println("Teacher : " + teacher.getId());
                 dataReader.getTHS_IdByName();
-                //System.out.println("THS : " + teacher.getId());
-                pst.setInt(2, teacherHasSubject.getId());
 
-                pst.setInt(3, status.getId());
-                pst.addBatch();
+                boolean isAlready = dataReader.checkACC();
+                if (!isAlready) {
+                    pst.setInt(1, academicCourse.getId());
+                    pst.setInt(2, teacherHasSubject.getId());
+                    pst.setInt(3, status.getId());
+
+                    pst.addBatch();
+                } else {
+                    ids.add(ac_class.getId());
+                }
             }
 
             operation = pst.executeBatch();
@@ -698,13 +703,11 @@ public class DataWriter {
             //System.out.println("Key List : " + operation);
             rs = pst.getGeneratedKeys();
 
-            Vector<Integer> ids = new Vector<>();
             while (rs.next()) {
                 ids.add(rs.getInt(1));
                 //System.out.println("Key : " + rs.getInt(1));
             }
             ac_class.setIds(ids);
-
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -722,9 +725,11 @@ public class DataWriter {
         return operation;
     }
 
-    public int[] saveAcademicClassTypeTD(TableView<AU_StudentController.SubjectList> tblSubjectList, String exam, String stream, String year) {
+    public int[] saveACCTD(TableView<AU_StudentController.SubjectList> tblSubjectList) {
         int operation[] = {};
         ResultSet rs = null;
+
+        Vector<Integer> ids = new Vector<>();
         try {
             conn.setAutoCommit(false);
             pst = conn.prepareStatement("INSERT INTO ac_type_details(ac_class_id, tbl_acc_type_id) VALUES (?,?)", pst.RETURN_GENERATED_KEYS);
@@ -735,10 +740,10 @@ public class DataWriter {
 
                 for (int j = 1; j < 4; j++) {
 
-                    int subId = Integer.parseInt(columns.get(0).getCellObservableValue(i).getValue().toString());
-                    int teacherId = Integer.parseInt(columns.get(2).getCellObservableValue(i).getValue().toString());
+                    //int subId = Integer.parseInt(columns.get(0).getCellObservableValue(i).getValue().toString());
+                    //int teacherId = Integer.parseInt(columns.get(2).getCellObservableValue(i).getValue().toString());
 
-                    boolean isAlready = dataReader.checkAccTypeID(exam, stream, year, subId, teacherId, j);
+                    boolean isAlready = dataReader.checkACCTD(ac_class.getIds().get(i), j);
 
                     if (!isAlready) {
                         //System.out.println("AC Class ID: " + ac_class.getIds().get(i));
@@ -746,6 +751,8 @@ public class DataWriter {
                         pst.setInt(2, j);
 
                         pst.addBatch();
+                    } else {
+                        ids.add(ac_typeDetails.getId());
                     }
                 }
             }
@@ -756,7 +763,7 @@ public class DataWriter {
 
             //System.out.println("Key List : " + operation);
             rs = pst.getGeneratedKeys();
-            Vector<Integer> ids = new Vector<>();
+
             while (rs.next()) {
                 ids.add(rs.getInt(1));
                 //System.out.println("Key : " + rs.getInt(1));
@@ -779,37 +786,45 @@ public class DataWriter {
         return operation;
     }
 
-    public int[] saveAcademicClassTypeList(TableView<AU_StudentController.SubjectList> tblSubjectList, String exam, String stream, String year) {
+    public int[] saveACCTL(TableView<AU_StudentController.SubjectList> tblSubjectList, String exam, String stream, String year) {
         int operation[] = {};
         ResultSet rs = null;
+
+        Vector<Integer> ids = new Vector<>();
         try {
             conn.setAutoCommit(false);
             pst = conn.prepareStatement("INSERT INTO ac_type_list(absent_count, ac_type_details_id, tbl_student_id) VALUES (?,?,?)", pst.RETURN_GENERATED_KEYS);
 
             ObservableList<? extends TableColumn<?, ?>> columns = tblSubjectList.getColumns();
 
+            int k = 0;
+
             for (int i = 0; i < tblSubjectList.getItems().size(); ++i) {
 
                 for (int j = 0; j < 3; j++) {
 
-                    int subId = Integer.parseInt(columns.get(0).getCellObservableValue(i).getValue().toString());
-                    int teacherId = Integer.parseInt(columns.get(2).getCellObservableValue(i).getValue().toString());
+                    //int subId = Integer.parseInt(columns.get(0).getCellObservableValue(i).getValue().toString());
+                    //int teacherId = Integer.parseInt(columns.get(2).getCellObservableValue(i).getValue().toString());
 
-                    dataReader.getAccTypeID(exam, stream, year, subId, teacherId);
+                    //dataReader.getAccTypeID(exam, stream, year, subId, teacherId);
                     //System.out.println("ACT Details: " + ac_typeDetails.getIds().get(j));
 
-                    boolean isAlready = dataReader.checkAccTypeList(ac_typeDetails.getIds().get(j));
+                    boolean isAlready = dataReader.checkACCTL(ac_typeDetails.getIds().get(k), student.getId());
                     boolean isChecked = ((JFXCheckBox) columns.get(4 + j).getCellObservableValue(i).getValue()).isSelected();
                     //System.out.println("Already: " + (!isAlready));
                     //System.out.println("Checked: " + (isChecked));
                     if ((!isAlready) && (isChecked)) {
                         //System.out.println("AC Class ID: " + ac_class.getIds().get(i));
                         pst.setInt(1, 0);
-                        pst.setInt(2, ac_typeDetails.getIds().get(j));
+                        pst.setInt(2, ac_typeDetails.getIds().get(k));
                         pst.setInt(3, student.getId());
 
                         pst.addBatch();
                     }
+                    if (isAlready) {
+                        ids.add(ac_typeList.getId());
+                    }
+                    ++k;
                 }
             }
 
@@ -819,12 +834,12 @@ public class DataWriter {
 
             //System.out.println("Key List : " + operation);
             rs = pst.getGeneratedKeys();
-            Vector<Integer> ids = new Vector<>();
+
             while (rs.next()) {
                 ids.add(rs.getInt(1));
                 //System.out.println("Key : " + rs.getInt(1));
             }
-            //ac_typeDetails.setIds(ids);
+            ac_typeList.setIds(ids);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
