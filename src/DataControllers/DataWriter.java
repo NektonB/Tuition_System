@@ -793,7 +793,7 @@ public class DataWriter {
         Vector<Integer> ids = new Vector<>();
         try {
             conn.setAutoCommit(false);
-            pst = conn.prepareStatement("INSERT INTO ac_type_list(absent_count, ac_type_details_id, tbl_student_id) VALUES (?,?,?)", pst.RETURN_GENERATED_KEYS);
+            pst = conn.prepareStatement("INSERT INTO ac_type_list( tbl_student_id, ac_type_details_id,status,absent_count) VALUES (?,?,?,?)", pst.RETURN_GENERATED_KEYS);
 
             ObservableList<? extends TableColumn<?, ?>> columns = tblSubjectList.getColumns();
 
@@ -815,9 +815,10 @@ public class DataWriter {
                     //System.out.println("Checked: " + (isChecked));
                     if ((!isAlready) && (isChecked)) {
                         //System.out.println("AC Class ID: " + ac_class.getIds().get(i));
-                        pst.setInt(1, 0);
+                        pst.setInt(1, student.getId());
                         pst.setInt(2, ac_typeDetails.getIds().get(k));
-                        pst.setInt(3, student.getId());
+                        pst.setInt(3, 1);
+                        pst.setInt(3, 0);
 
                         pst.addBatch();
                     }

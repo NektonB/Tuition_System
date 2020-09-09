@@ -16,9 +16,7 @@ import javafx.scene.control.TableView;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Vector;
+import java.util.*;
 
 public class DataReader {
 
@@ -1359,6 +1357,430 @@ public class DataReader {
             }
         }
         return isAlready;
+    }
+
+    public void fillStudentTable(TableView tblStudent) {
+        ResultSet rs = null;
+        ObservableList<StudentController.StudentList> studentList = FXCollections.observableArrayList();
+        try {
+            pst = conn.prepareStatement("SELECT student.id,student.fname,student.lname,student.nic_number,student.address,student.contact_number,student.email,status.status FROM student INNER JOIN status on student.status_id = status.id");
+            rs = pst.executeQuery();
+            if (!rs.isBeforeFirst()) {
+                student.resetAll();
+            }
+            while (rs.next()) {
+                studentList.add(
+                        new StudentController.StudentList(
+                                rs.getInt("student.id"),
+                                rs.getString("student.fname") + " " + rs.getString("student.lname"),
+                                rs.getString("student.nic_number"),
+                                rs.getString("student.address"),
+                                rs.getString("student.contact_number"),
+                                rs.getString("student.email"),
+                                rs.getString("status.status")
+                        )
+                );
+            }
+            tblStudent.setItems(studentList);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void getStudentDetailsById() {
+        ResultSet rs = null;
+        try {
+            pst = conn.prepareStatement("SELECT * FROM student INNER JOIN status on student.status_id = status.id INNER JOIN school on student.school_id = school.id INNER JOIN near_city on student.near_city_id = near_city.id INNER JOIN gardien on student.gardien_id = gardien.id WHERE student.id = ?");
+            pst.setInt(1, student.getId());
+            rs = pst.executeQuery();
+
+            if (!rs.isBeforeFirst()) {
+                student.resetAll();
+                status.resetAll();
+                nearCity.resetAll();
+                school.resetAll();
+            }
+            while (rs.next()) {
+                student.setId(rs.getInt("student.id"));
+                student.setF_name(rs.getString("student.fname"));
+                student.setL_name(rs.getString("student.lname"));
+                student.setNic_number(rs.getString("student.nic_number"));
+                student.setAddress(rs.getString("student.address"));
+                student.setContact_number(rs.getString("student.contact_number"));
+                student.setEmail(rs.getString("student.email"));
+                student.setGrade(rs.getString("student.grade"));
+
+                status.setId(rs.getInt("status.id"));
+                status.setStatus(rs.getString("status.status"));
+
+                school.setId(rs.getInt("school.id"));
+                school.setName(rs.getString("school.name"));
+
+                nearCity.setId(rs.getInt("near_city.id"));
+                nearCity.setCity(rs.getString("near_city.city"));
+
+                guardian.setId(rs.getInt("gardien.id"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void fillGuardianTable(TableView tblParent) {
+        ResultSet rs = null;
+        ObservableList<AU_StudentController.ParentList> parentList = FXCollections.observableArrayList();
+        try {
+            pst = conn.prepareStatement("SELECT id, fname, lname, home_number, mobile_number FROM gardien WHERE id = ?");
+            pst.setInt(1, guardian.getId());
+
+            rs = pst.executeQuery();
+            if (!rs.isBeforeFirst()) {
+                student.resetAll();
+            }
+            while (rs.next()) {
+                parentList.add(
+                        new AU_StudentController.ParentList(
+                                rs.getInt("gardien.id"),
+                                rs.getString("gardien.fname") + " " + rs.getString("gardien.lname"),
+                                rs.getString("gardien.home_number"),
+                                rs.getString("gardien.mobile_number")
+                        )
+                );
+            }
+            tblParent.setItems(parentList);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void getACTL_DetailsByStudentId() {
+        ResultSet rs = null;
+        int[][] actl = null;
+
+        try {
+            pst = conn.prepareStatement("SELECT atl.id,atl.ac_type_details_id,atl.status,atd.ac_class_id FROM ac_type_list atl INNER JOIN ac_type_details atd on atl.ac_type_details_id = atd.id WHERE atl.tbl_student_id = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            pst.setInt(1, student.getId());
+            rs = pst.executeQuery();
+
+            if (!rs.isBeforeFirst()) {
+                //school.resetAll();
+            }
+
+            if (rs.last()) {
+                actl = new int[rs.getRow()][4];
+                rs.beforeFirst();
+            }
+
+            int r = 0;
+            while (rs.next()) {
+                actl[r][0] = rs.getInt(1);
+                actl[r][1] = rs.getInt(2);
+                actl[r][2] = rs.getInt(3);
+                actl[r][3] = rs.getInt(4);
+                ++r;
+            }
+
+            /*for (int[] j : actl) {
+                for (int k : j) {
+                    System.out.print(k + " ");
+                }
+                System.out.println("");
+            }*/
+
+            ac_typeList.setActl(actl);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void getACTD_DetailsByStudentId() {
+        ResultSet rs = null;
+        int[][] actd = null;
+
+        try {
+
+            int preElm = 0;
+            Vector<Integer> classId = new Vector<>();
+
+            for (int[] j : ac_typeList.getActl()) {
+
+                int elm = j[3];
+
+                if (elm != preElm) {
+                    classId.add(elm);
+                    preElm = elm;
+                }
+            }
+
+            actd = new int[classId.size() * 3][3];
+
+            ac_class.setIds(classId);
+
+            pst = conn.prepareStatement("SELECT id, ac_class_id, tbl_acc_type_id FROM ac_type_details WHERE ac_class_id = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+
+            int r = 0;
+            for (int elm : classId) {
+
+                pst.setInt(1, elm);
+                rs = pst.executeQuery();
+
+                if (!rs.isBeforeFirst()) {
+                    //school.resetAll();
+                }
+
+                while (rs.next()) {
+                    actd[r][0] = rs.getInt(1);
+                    actd[r][1] = rs.getInt(2);
+                    actd[r][2] = rs.getInt(3);
+                    ++r;
+                }
+
+                /*for (int[] j : actd) {
+                    for (int k : j) {
+                        System.out.print(k + " ");
+                    }
+                    System.out.println("");
+                }*/
+            }
+            ac_typeDetails.setActd(actd);
+
+           /* for (int[] j : actd) {
+                for (int k : j) {
+                    System.out.print(k + " ");
+                }
+                System.out.println("");
+            }*/
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void getACC_DetailsByClassId() {
+        ResultSet rs = null;
+        String[][] acc = null;
+
+        try {
+
+            acc = new String[ac_class.getIds().size()][5];
+
+            pst = conn.prepareStatement("SELECT acc.id,acc.ac_id,sub.id,sub.name,tea.id, concat(tea.fname,' ',tea.lname) teaName FROM ac_class acc INNER JOIN teacher_has_subject ths on acc.teacher_has_subject_id = ths.id INNER JOIN subject sub on ths.subject_id = sub.id INNER JOIN teacher tea on ths.teacher_id = tea.id WHERE acc.id = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+
+            Vector<Integer> classId = ac_class.getIds();
+            int r = 0;
+            for (int elm : classId) {
+
+                pst.setInt(1, elm);
+                rs = pst.executeQuery();
+
+                if (!rs.isBeforeFirst()) {
+                    //school.resetAll();
+                }
+
+                while (rs.next()) {
+                    acc[r][0] = rs.getString(1);
+                    academicCourse.setId(rs.getInt(2));
+                    acc[r][1] = rs.getString(3);
+                    acc[r][2] = rs.getString(4);
+                    acc[r][3] = rs.getString(5);
+                    acc[r][4] = rs.getString(6);
+                    ++r;
+                }
+
+            }
+
+            ac_class.setAcc(acc);
+
+            /*String[][] accd = ac_class.getAcc();
+
+            for (String[] j : accd) {
+                for (String k : j) {
+                    System.out.print(k + " ");
+                }
+                System.out.println("");
+            }*/
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void getAC_DetailsByCourseId() {
+        ResultSet rs = null;
+
+        try {
+
+            pst = conn.prepareStatement("SELECT * FROM academic_course ac INNER JOIN exam ex on ac.exam_id = ex.id INNER JOIN stream st on ac.stream_id = st.id WHERE ac.id = ?");
+
+            pst.setInt(1, academicCourse.getId());
+            rs = pst.executeQuery();
+
+            if (!rs.isBeforeFirst()) {
+                //school.resetAll();
+            }
+
+            while (rs.next()) {
+                academicCourse.setId(rs.getInt("ac.id"));
+                academicCourse.setExam_year(rs.getString("ac.exam_year"));
+
+                exam.setId(rs.getInt("ex.id"));
+                exam.setExam(rs.getString("ex.exam"));
+
+                stream.setId(rs.getInt("st.id"));
+                stream.setStream(rs.getString("st.stream"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void fillSubjectInfoTable(TableView tblSubjectInfo) {
+        ObservableList<AU_StudentController.SubjectList> subjectList = FXCollections.observableArrayList();
+        try {
+            String[][] acc = ac_class.getAcc();
+            int[][] actd = ac_typeDetails.getActd();
+            int[][] actl = ac_typeList.getActl();
+
+            Map<Integer, Integer> classList = new HashMap();
+
+            for (int[] row : actd) {
+                //System.out.println(row[0]);
+                classList.put(row[0], 0);
+            }
+
+            for (int[] row : actl) {
+                //System.out.println(row[1]);
+                classList.put(row[1], row[1]);
+            }
+
+            for (int val : classList.values()) {
+                //System.out.print(val + " ");
+            }
+            System.out.println("");
+
+            int row = 0;
+            int lasPosition = 0;
+            int count = 0;
+
+            for (String[] raw : acc) {
+                //System.out.println(raw[0]);
+                JFXCheckBox cmbTheory = new JFXCheckBox();
+                JFXCheckBox cmbRevision = new JFXCheckBox();
+                JFXCheckBox cmbPaper = new JFXCheckBox();
+
+                int position = 0;
+                int round = 0;
+                for (int val : classList.values()) {
+
+                    if (position == lasPosition) {
+                        System.out.print(val + " ");
+
+                        ++round;
+                        if (round == 3) {
+                            System.out.println(" ");
+                            break;
+                        }
+                    }
+                    ++position;
+                }
+                lasPosition = position;
+
+                subjectList.add(
+                        new AU_StudentController.SubjectList(Integer.parseInt(raw[1]), raw[2], Integer.parseInt(raw[3]), raw[4], cmbTheory, cmbRevision, cmbPaper)
+                );
+            }
+            tblSubjectInfo.setItems(subjectList);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            /*try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }*/
+        }
     }
 
 }

@@ -186,9 +186,12 @@ public class AU_StudentController implements Initializable {
             dataReader.fillSubjectCombo(cmbSubject);
             dataReader.fillParentCombo(cmbParents);
             dataReader.fillStatusCombo(cmbStatus);
+            dataReader.fillGuardianTable(tblParent);
+
             readyGradeCombo();
             readyYearCombo();
             loadContent();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -228,27 +231,23 @@ public class AU_StudentController implements Initializable {
     }
 
     private void loadContent() {
-        if (teacher.getId() > 0) {
-            /*txtFname.setText(teacher.getFname());
-            txtLName.setText(teacher.getLname());
-            txtNIC.setText(teacher.getNic_number());
-            txtHomeNum.setText(teacher.getHome_number());
-            txtMobileNum.setText(teacher.getMobile_number());
-            txtEmail.setText(teacher.getEmail());
-            txtAddress.setText(teacher.getAddress());
+        if (student.getId() > 0) {
+            txtFName.setText(student.getF_name());
+            txtLName.setText(student.getL_name());
+            txtMobile.setText(student.getContact_number());
+            txtNIC.setText(student.getNic_number());
+            txtEmail.setText(student.getEmail());
+            txtAddress.setText(student.getAddress());
+
+            cmbNearCity.setValue(nearCity.getCity());
             cmbStatus.setValue(status.getStatus());
+            cmbSchool.setValue(school.getName());
+            cmbGrade.setValue(student.getGrade());
+            cmbExam.setValue(exam.getExam());
+            cmbExamYear.setValue(academicCourse.getExam_year());
+            cmbStream.setValue(stream.getStream());
 
-            ObservableList<AU_TeacherController.TeacherSubjectsList> subjectsList = null;
-            HashMap<Integer, String> subjects = teacherHasSubject.getSubjectList();
-            Set<Integer> keySet = subjects.keySet();
-
-            for (int key : keySet) {
-                subjectsList = tblTeacher_Subjects.getItems();
-                *//*System.out.println("Sub ID : " + key);
-                System.out.println("Sub Name : " + subjects.get(key));*//*
-                subjectsList.add(new AU_TeacherController.TeacherSubjectsList(key, subjects.get(key)));
-            }
-            tblTeacher_Subjects.setItems(subjectsList);*/
+            dataReader.fillSubjectInfoTable(tblSubjectInfo);
         }
     }
 
@@ -819,6 +818,7 @@ public class AU_StudentController implements Initializable {
                 student.setAddress(txtAddress.getText());
                 student.setContact_number(txtMobile.getText());
                 student.setEmail(txtEmail.getText());
+                student.setGrade(cmbGrade.getValue());
 
                 int saveStudent = dataWriter.saveStudent();
                 if (saveStudent > 0) {
@@ -858,6 +858,10 @@ public class AU_StudentController implements Initializable {
     }
 
     public void closeMe() {
+        student.resetAll();
+        ac_class.resetAll();
+        ac_typeList.resetAll();
+        ac_typeDetails.resetAll();
         Stage stage = (Stage) btnClose.getScene().getWindow();
         stage.close();
     }

@@ -74,7 +74,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TableView fx:id="tblStudent" prefHeight="251.0" prefWidth="925.0">
+                  <TableView fx:id="tblStudent" onKeyReleased="#selectStudent_Key" prefHeight="251.0" prefWidth="925.0">
                      <columns>
                         <TableColumn fx:id="tcId" prefWidth="75.0" text="Id" visible="false" />
                         <TableColumn fx:id="tcName" prefWidth="75.0" text="Name" />

@@ -6,9 +6,12 @@ public class AC_Class {
 
     private int id;
     private Vector<Integer> ids;
+    private String[][] acc;
 
     public void resetAll() {
         setId(0);
+        setIds(null);
+        setAcc(null);
     }
 
     public int getId() {
@@ -25,5 +28,13 @@ public class AC_Class {
 
     public void setIds(Vector<Integer> ids) {
         this.ids = ids;
+    }
+
+    public String[][] getAcc() {
+        return acc;
+    }
+
+    public void setAcc(String[][] acc) {
+        this.acc = acc;
     }
 }
