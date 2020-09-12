@@ -12,7 +12,7 @@ public class Student {
     private String grade = "";
 
     public void resetAll() {
-        int id = 0;
+        setId(0);
         setF_name("");
         setM_name("");
         setL_name("");

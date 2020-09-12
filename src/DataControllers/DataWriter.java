@@ -803,12 +803,6 @@ public class DataWriter {
 
                 for (int j = 0; j < 3; j++) {
 
-                    //int subId = Integer.parseInt(columns.get(0).getCellObservableValue(i).getValue().toString());
-                    //int teacherId = Integer.parseInt(columns.get(2).getCellObservableValue(i).getValue().toString());
-
-                    //dataReader.getAccTypeID(exam, stream, year, subId, teacherId);
-                    //System.out.println("ACT Details: " + ac_typeDetails.getIds().get(j));
-
                     boolean isAlready = dataReader.checkACCTL(ac_typeDetails.getIds().get(k), student.getId());
                     boolean isChecked = ((JFXCheckBox) columns.get(4 + j).getCellObservableValue(i).getValue()).isSelected();
                     //System.out.println("Already: " + (!isAlready));
@@ -818,7 +812,7 @@ public class DataWriter {
                         pst.setInt(1, student.getId());
                         pst.setInt(2, ac_typeDetails.getIds().get(k));
                         pst.setInt(3, 1);
-                        pst.setInt(3, 0);
+                        pst.setInt(4, 0);
 
                         pst.addBatch();
                     }

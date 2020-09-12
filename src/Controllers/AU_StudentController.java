@@ -186,7 +186,6 @@ public class AU_StudentController implements Initializable {
             dataReader.fillSubjectCombo(cmbSubject);
             dataReader.fillParentCombo(cmbParents);
             dataReader.fillStatusCombo(cmbStatus);
-            dataReader.fillGuardianTable(tblParent);
 
             readyGradeCombo();
             readyYearCombo();
@@ -248,6 +247,7 @@ public class AU_StudentController implements Initializable {
             cmbStream.setValue(stream.getStream());
 
             dataReader.fillSubjectInfoTable(tblSubjectInfo);
+            dataReader.fillGuardianTable(tblParent);
         }
     }
 

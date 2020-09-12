@@ -125,7 +125,8 @@ public class DataReader {
         } finally {
             try {
                 pst.close();
-                rs.close();
+                assert rs != null;
+                Objects.requireNonNull(rs).close();
             } catch (Exception e) {
                 //WebOptionPane.showMessageDialog(null, e, "Error", WebOptionPane.ERROR_MESSAGE);
                 e.printStackTrace();
@@ -1452,8 +1453,9 @@ public class DataReader {
         ResultSet rs = null;
         ObservableList<AU_StudentController.ParentList> parentList = FXCollections.observableArrayList();
         try {
-            pst = conn.prepareStatement("SELECT id, fname, lname, home_number, mobile_number FROM gardien WHERE id = ?");
+            pst = conn.prepareStatement("SELECT g.id, g.fname, g.lname, g.home_number, g.mobile_number FROM gardien g INNER JOIN student s on g.id = s.gardien_id WHERE g.id = ? AND s.id = ?");
             pst.setInt(1, guardian.getId());
+            pst.setInt(2, student.getId());
 
             rs = pst.executeQuery();
             if (!rs.isBeforeFirst()) {
@@ -1462,10 +1464,10 @@ public class DataReader {
             while (rs.next()) {
                 parentList.add(
                         new AU_StudentController.ParentList(
-                                rs.getInt("gardien.id"),
-                                rs.getString("gardien.fname") + " " + rs.getString("gardien.lname"),
-                                rs.getString("gardien.home_number"),
-                                rs.getString("gardien.mobile_number")
+                                rs.getInt("g.id"),
+                                rs.getString("g.fname") + " " + rs.getString("g.lname"),
+                                rs.getString("g.home_number"),
+                                rs.getString("g.mobile_number")
                         )
                 );
             }
@@ -1745,14 +1747,21 @@ public class DataReader {
                 JFXCheckBox cmbRevision = new JFXCheckBox();
                 JFXCheckBox cmbPaper = new JFXCheckBox();
 
-                int position = 0;
+                int position = 1;
                 int round = 0;
                 for (int val : classList.values()) {
 
-                    if (position == lasPosition) {
-                        System.out.print(val + " ");
-
+                    if (position > lasPosition) {
                         ++round;
+
+                        if (round == 1 && val > 0) {
+                            cmbTheory.setSelected(true);
+                        } else if (round == 2 && val > 0) {
+                            cmbRevision.setSelected(true);
+                        } else if (round == 3 && val > 0) {
+                            cmbPaper.setSelected(true);
+                        }
+
                         if (round == 3) {
                             System.out.println(" ");
                             break;
@@ -1770,16 +1779,7 @@ public class DataReader {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            /*try {
-                if (!rs.isClosed()) {
-                    rs.close();
-                }
-                if (!pst.isClosed()) {
-                    pst.close();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }*/
+
         }
     }
 
