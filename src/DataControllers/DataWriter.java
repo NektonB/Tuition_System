@@ -667,7 +667,7 @@ public class DataWriter {
     }
 
     public int[] saveACC(TableView<AU_StudentController.SubjectList> tblSubjectList) {
-        int operation[] = {};
+        int[] operation = {};
         ResultSet rs = null;
 
         Vector<Integer> ids = new Vector<>();
@@ -726,7 +726,7 @@ public class DataWriter {
     }
 
     public int[] saveACCTD(TableView<AU_StudentController.SubjectList> tblSubjectList) {
-        int operation[] = {};
+        int[] operation = {};
         ResultSet rs = null;
 
         Vector<Integer> ids = new Vector<>();
@@ -787,13 +787,15 @@ public class DataWriter {
     }
 
     public int[] saveACCTL(TableView<AU_StudentController.SubjectList> tblSubjectList, String exam, String stream, String year) {
-        int operation[] = {};
+        int[] operation = {};
         ResultSet rs = null;
+        PreparedStatement pstUpdate = null;
 
         Vector<Integer> ids = new Vector<>();
         try {
             conn.setAutoCommit(false);
             pst = conn.prepareStatement("INSERT INTO ac_type_list( tbl_student_id, ac_type_details_id,status,absent_count) VALUES (?,?,?,?)", pst.RETURN_GENERATED_KEYS);
+            pstUpdate = conn.prepareStatement("UPDATE ac_type_list SET status = ? WHERE id = ?", pst.RETURN_GENERATED_KEYS);
 
             ObservableList<? extends TableColumn<?, ?>> columns = tblSubjectList.getColumns();
 
@@ -805,17 +807,23 @@ public class DataWriter {
 
                     boolean isAlready = dataReader.checkACCTL(ac_typeDetails.getIds().get(k), student.getId());
                     boolean isChecked = ((JFXCheckBox) columns.get(4 + j).getCellObservableValue(i).getValue()).isSelected();
-                    //System.out.println("Already: " + (!isAlready));
-                    //System.out.println("Checked: " + (isChecked));
+
                     if ((!isAlready) && (isChecked)) {
-                        //System.out.println("AC Class ID: " + ac_class.getIds().get(i));
                         pst.setInt(1, student.getId());
                         pst.setInt(2, ac_typeDetails.getIds().get(k));
                         pst.setInt(3, 1);
                         pst.setInt(4, 0);
 
                         pst.addBatch();
+                    } else {
+                        if (!isChecked) {
+                            pstUpdate.setInt(1, 0);
+                            pstUpdate.setInt(2, ac_typeList.getId());
+
+                            pstUpdate.addBatch();
+                        }
                     }
+
                     if (isAlready) {
                         ids.add(ac_typeList.getId());
                     }
@@ -824,6 +832,10 @@ public class DataWriter {
             }
 
             operation = pst.executeBatch();
+            conn.commit();
+            //conn.setAutoCommit(true);
+
+            operation = pstUpdate.executeBatch();
             conn.commit();
             conn.setAutoCommit(true);
 
@@ -848,6 +860,43 @@ public class DataWriter {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+        return operation;
+    }
+
+    public int updateStudent() {
+        int operation = 0;
+        ResultSet rs = null;
+        try {
+            pst = conn.prepareStatement("UPDATE student SET fname = ?, lname = ?, nic_number = ?, address = ?, contact_number = ?, email = ?, school_id = ?, grade = ?, near_city_id = ?, gardien_id = ?, status_id = ? WHERE id = ?", pst.RETURN_GENERATED_KEYS);
+            pst.setString(1, student.getF_name());
+            pst.setString(2, student.getL_name());
+            pst.setString(3, student.getNic_number());
+            pst.setString(4, student.getAddress());
+            pst.setString(5, student.getContact_number());
+            pst.setString(6, student.getEmail());
+            pst.setInt(7, school.getId());
+            pst.setString(8, student.getGrade());
+            pst.setInt(9, nearCity.getId());
+            pst.setInt(10, guardian.getId());
+            pst.setInt(11, status.getId());
+            pst.setInt(12, student.getId());
+
+            operation = pst.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            /*try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }*/
         }
         return operation;
     }

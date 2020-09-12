@@ -25,7 +25,9 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.net.URL;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Optional;
+import java.util.ResourceBundle;
 
 public class AU_StudentController implements Initializable {
 
@@ -748,11 +750,6 @@ public class AU_StudentController implements Initializable {
             } else {
                 saveAcademicCourse = dataWriter.saveAcademicCourse();
             }
-
-            if (saveAcademicCourse > 0) {
-
-                //alerts.getSuccessNotify("Stream Registration", "Stream Registration successful");
-            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -760,7 +757,7 @@ public class AU_StudentController implements Initializable {
     }
 
     public int[] saveAcademicClass() {
-        int saveAcademicClass[] = {};
+        int[] saveAcademicClass = {};
         try {
             status.setStatus(cmbStatus.getValue());
             dataReader.getStatusDetailsByStatus();
@@ -773,7 +770,7 @@ public class AU_StudentController implements Initializable {
     }
 
     public int[] saveAcademicClassTD() {
-        int saveAcademicClassTD[] = {};
+        int[] saveAcademicClassTD = {};
         try {
 
             saveAcademicClassTD = dataWriter.saveACCTD(tblSubjectInfo);
@@ -784,7 +781,7 @@ public class AU_StudentController implements Initializable {
     }
 
     public int[] saveAcademicClassTL() {
-        int saveAcademicClassTD[] = {};
+        int[] saveAcademicClassTD = {};
         try {
 
             saveAcademicClassTD = dataWriter.saveACCTL(tblSubjectInfo, cmbExam.getValue(), cmbStream.getValue(), cmbExamYear.getValue());
@@ -804,6 +801,7 @@ public class AU_StudentController implements Initializable {
                 dataReader.getStatusDetailsByStatus();
 
                 ObservableList<? extends TableColumn<?, ?>> columns = tblParent.getColumns();
+
                 /*
                  * Search duplicates in the tblSubjectInfo */
                 if (!tblParent.getItems().isEmpty()) {
@@ -820,7 +818,13 @@ public class AU_StudentController implements Initializable {
                 student.setEmail(txtEmail.getText());
                 student.setGrade(cmbGrade.getValue());
 
-                int saveStudent = dataWriter.saveStudent();
+                int saveStudent = 0;
+
+                if (student.getId() > 0) {
+                    saveStudent = dataWriter.updateStudent();
+                } else if (student.getId() == 0) {
+                    saveStudent = dataWriter.saveStudent();
+                }
                 if (saveStudent > 0) {
                     alerts.getSuccessNotify("Student Registration", "Student Registration successful");
 
@@ -828,7 +832,7 @@ public class AU_StudentController implements Initializable {
                     if (saveAcademicCourse > 0) {
                         alerts.getSuccessNotify("Course Registration", "Course Registration successful");
 
-                        int saveAcademicClass[] = saveAcademicClass();
+                        int[] saveAcademicClass = saveAcademicClass();
                         if (ac_class.getIds().size() > 0) {
 
                             int[] saveAcademicClassTD = saveAcademicClassTD();
