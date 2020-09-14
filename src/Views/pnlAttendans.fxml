@@ -4,13 +4,12 @@
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTimePicker?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -38,7 +37,15 @@
                   <Insets left="10.0" right="10.0" top="25.0" />
                </padding>
                <children>
-                  <JFXDatePicker fx:id="dpDate" defaultColor="#6981c9" overLay="true" prefHeight="25.0" prefWidth="340.0" promptText="Date" />
+                  <JFXButton fx:id="btnAddEmployee" onAction="#load_Class" prefHeight="43.0" prefWidth="257.0" ripplerFill="#0777ff" text="Add Class">
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="PLUS" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXDatePicker fx:id="dpDate" defaultColor="#6981c9" overLay="true" prefHeight="25.0" prefWidth="340.0" promptText="Date">
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin></JFXDatePicker>
                   <JFXTimePicker fx:id="tpTime" defaultColor="#6981c9" prefHeight="25.0" prefWidth="320.0" promptText="Time">
                      <VBox.margin>
                         <Insets top="30.0" />
@@ -54,41 +61,6 @@
                         <Insets top="30.0" />
                      </VBox.margin>
                   </JFXComboBox>
-                  <JFXComboBox fx:id="cmbStatus11" focusColor="#6981c9" labelFloat="true" layoutX="20.0" layoutY="225.0" prefHeight="25.0" prefWidth="386.0" promptText="Subject" unFocusColor="#a3a3a3">
-                     <VBox.margin>
-                        <Insets top="30.0" />
-                     </VBox.margin>
-                  </JFXComboBox>
-                  <JFXComboBox fx:id="cmbStatus1" focusColor="#6981c9" labelFloat="true" layoutX="20.0" layoutY="200.0" prefHeight="25.0" prefWidth="386.0" promptText="Teacher" unFocusColor="#a3a3a3">
-                     <VBox.margin>
-                        <Insets top="30.0" />
-                     </VBox.margin>
-                  </JFXComboBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="64.0" prefWidth="257.0">
-                     <children>
-                        <RadioButton mnemonicParsing="false" text="Theory">
-                           <toggleGroup>
-                              <ToggleGroup fx:id="classType" />
-                           </toggleGroup>
-                           <HBox.margin>
-                              <Insets left="10.0" />
-                           </HBox.margin>
-                        </RadioButton>
-                        <RadioButton layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Revision" toggleGroup="$classType">
-                           <HBox.margin>
-                              <Insets left="20.0" />
-                           </HBox.margin>
-                        </RadioButton>
-                        <RadioButton layoutX="68.0" layoutY="10.0" mnemonicParsing="false" text="Paper" toggleGroup="$classType">
-                           <HBox.margin>
-                              <Insets left="20.0" />
-                           </HBox.margin>
-                        </RadioButton>
-                     </children>
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                  </HBox>
                   <HBox alignment="CENTER" layoutX="20.0" layoutY="335.0" prefHeight="64.0" prefWidth="257.0">
                      <children>
                         <JFXButton fx:id="btnAdd1" prefHeight="46.0" prefWidth="126.0" text="Add" />

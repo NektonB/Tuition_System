@@ -5,7 +5,13 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTimePicker;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -34,5 +40,26 @@ public class AttendanceController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+    }
+
+    public void load_Class() {
+        try {
+            Stage productsStage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Views/frmSelectClass.fxml"));
+            Parent frmCustomer = loader.load();
+            //productsStage.setTitle("Add New Employee");
+            Scene scene = new Scene(frmCustomer);
+            productsStage.setScene(scene);
+            productsStage.initStyle(StageStyle.DECORATED);
+            productsStage.setResizable(false);
+            productsStage.initModality(Modality.APPLICATION_MODAL);
+
+            AU_StudentController au = loader.getController();
+
+
+            productsStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
