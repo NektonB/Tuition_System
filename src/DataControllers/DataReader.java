@@ -6,9 +6,6 @@ import DB_Conn.ConnectDB;
 import Modules.*;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXListView;
-import com.jfoenix.controls.JFXTextField;
-import com.sun.istack.internal.NotNull;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableView;
@@ -16,7 +13,10 @@ import javafx.scene.control.TableView;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Vector;
 
 public class DataReader {
 
@@ -465,11 +465,7 @@ public class DataReader {
                 subject.setName(rs.getString(2));
             }
 
-            if (name.contentEquals(subject.getName())) {
-                isAvailable = true;
-            } else {
-                isAvailable = false;
-            }
+            isAvailable = name.contentEquals(subject.getName());
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -1590,7 +1586,7 @@ public class DataReader {
             }
             ac_typeDetails.setActd(actd);
 
-           /* for (int[] j : actd) {
+            /*for (int[] j : actd) {
                 for (int k : j) {
                     System.out.print(k + " ");
                 }
@@ -1729,20 +1725,20 @@ public class DataReader {
 
             for (int[] row : actl) {
                 //System.out.println(row[1]);
-                classList.put(row[1], row[1]);
+                classList.put(row[1], row[2]);
             }
 
-            for (int val : classList.values()) {
-                //System.out.print(val + " ");
+            /*for (int val : classList.values()) {
+                System.out.print(val + " ");
             }
-            System.out.println("");
+            System.out.println("");*/
 
             int row = 0;
             int lasPosition = 0;
             int count = 0;
 
             for (String[] raw : acc) {
-                //System.out.println(raw[0]);
+                System.out.println(raw[0]);
                 JFXCheckBox cmbTheory = new JFXCheckBox();
                 JFXCheckBox cmbRevision = new JFXCheckBox();
                 JFXCheckBox cmbPaper = new JFXCheckBox();
@@ -1763,7 +1759,7 @@ public class DataReader {
                         }
 
                         if (round == 3) {
-                            System.out.println(" ");
+                            //System.out.println(" ");
                             break;
                         }
                     }

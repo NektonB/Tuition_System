@@ -1,6 +1,7 @@
 package Modules;
 
 import java.util.Vector;
+import java.util.stream.Collectors;
 
 public class AC_Class {
 
@@ -27,6 +28,9 @@ public class AC_Class {
     }
 
     public void setIds(Vector<Integer> ids) {
+        if (ids != null) {
+            ids = ids.stream().distinct().collect(Collectors.toCollection(Vector::new));
+        }
         this.ids = ids;
     }
 

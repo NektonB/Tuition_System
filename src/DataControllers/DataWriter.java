@@ -670,7 +670,7 @@ public class DataWriter {
         int[] operation = {};
         ResultSet rs = null;
 
-        Vector<Integer> ids = new Vector<>();
+        Vector<Integer> ids = new Vector();
 
         try {
             conn.setAutoCommit(false);
@@ -809,6 +809,7 @@ public class DataWriter {
                     boolean isChecked = ((JFXCheckBox) columns.get(4 + j).getCellObservableValue(i).getValue()).isSelected();
 
                     if ((!isAlready) && (isChecked)) {
+                        System.out.println("Call");
                         pst.setInt(1, student.getId());
                         pst.setInt(2, ac_typeDetails.getIds().get(k));
                         pst.setInt(3, 1);
@@ -816,7 +817,12 @@ public class DataWriter {
 
                         pst.addBatch();
                     } else {
-                        if (!isChecked) {
+                        if (isChecked) {
+                            pstUpdate.setInt(1, 1);
+                            pstUpdate.setInt(2, ac_typeList.getId());
+
+                            pstUpdate.addBatch();
+                        } else {
                             pstUpdate.setInt(1, 0);
                             pstUpdate.setInt(2, ac_typeList.getId());
 
