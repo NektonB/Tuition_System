@@ -7,9 +7,12 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
@@ -51,16 +54,54 @@
                         <Insets top="30.0" />
                      </VBox.margin>
                   </JFXComboBox>
-                  <JFXButton fx:id="btnAdd" prefHeight="46.0" prefWidth="280.0" text="Add">
+                  <JFXComboBox fx:id="cmbStatus11" focusColor="#6981c9" labelFloat="true" layoutX="20.0" layoutY="225.0" prefHeight="25.0" prefWidth="386.0" promptText="Subject" unFocusColor="#a3a3a3">
                      <VBox.margin>
                         <Insets top="30.0" />
                      </VBox.margin>
-                  </JFXButton>
-                  <JFXButton fx:id="btnSave" layoutX="20.0" layoutY="255.0" prefHeight="46.0" prefWidth="280.0" text="Save">
+                  </JFXComboBox>
+                  <JFXComboBox fx:id="cmbStatus1" focusColor="#6981c9" labelFloat="true" layoutX="20.0" layoutY="200.0" prefHeight="25.0" prefWidth="386.0" promptText="Teacher" unFocusColor="#a3a3a3">
                      <VBox.margin>
-                        <Insets top="20.0" />
+                        <Insets top="30.0" />
                      </VBox.margin>
-                  </JFXButton>
+                  </JFXComboBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="64.0" prefWidth="257.0">
+                     <children>
+                        <RadioButton mnemonicParsing="false" text="Theory">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="classType" />
+                           </toggleGroup>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </RadioButton>
+                        <RadioButton layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Revision" toggleGroup="$classType">
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                        </RadioButton>
+                        <RadioButton layoutX="68.0" layoutY="10.0" mnemonicParsing="false" text="Paper" toggleGroup="$classType">
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                        </RadioButton>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="20.0" layoutY="335.0" prefHeight="64.0" prefWidth="257.0">
+                     <children>
+                        <JFXButton fx:id="btnAdd1" prefHeight="46.0" prefWidth="126.0" text="Add" />
+                        <JFXButton fx:id="btnAdd11" layoutX="84.0" layoutY="19.0" prefHeight="46.0" prefWidth="125.0" text="Save">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </JFXButton>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="30.0" />
+                     </VBox.margin>
+                  </HBox>
                </children>
             </VBox>
          </left>
