@@ -1779,4 +1779,42 @@ public class DataReader {
         }
     }
 
+    public void fillClassTable(TableView tblClass) {
+        ResultSet rs = null;
+        ObservableList<SelectClassController.ClassList> classList = FXCollections.observableArrayList();
+        try {
+            pst = conn.prepareStatement("SELECT atl.id,st.stream,a.exam_year,sub.name,tea.fname,tea.lname,at.type FROM ac_type_list atl INNER JOIN ac_type_details atd on atl.ac_type_details_id = atd.id INNER JOIN ac_class ac on atd.ac_class_id = ac.id INNER JOIN acc_type at on atd.tbl_acc_type_id = at.id INNER JOIN teacher_has_subject ths on ac.teacher_has_subject_id = ths.id INNER JOIN subject sub on ths.subject_id = sub.id INNER JOIN teacher tea on ths.teacher_id = tea.id INNER JOIN academic_course a on ac.ac_id = a.id INNER JOIN exam e on a.exam_id = e.id INNER JOIN stream st on a.stream_id = st.id");
+            rs = pst.executeQuery();
+            if (!rs.isBeforeFirst()) {
+                teacher.resetAll();
+            }
+            while (rs.next()) {
+                classList.add(
+                        new SelectClassController.ClassList(
+                                rs.getInt("atl.id"),
+                                rs.getString("st.stream"),
+                                rs.getString("a.exam_year"),
+                                rs.getString("sub.name"),
+                                (rs.getString("tea.fname") + " " + rs.getString("tea.lname")),
+                                rs.getString("at.type")
+                        )
+                );
+            }
+            tblClass.setItems(classList);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 }

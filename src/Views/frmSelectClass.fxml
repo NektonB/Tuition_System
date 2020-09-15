@@ -51,6 +51,7 @@
                   </HBox>
                   <TableView fx:id="tblClass" prefHeight="329.0" prefWidth="700.0">
                      <columns>
+                        <TableColumn fx:id="tcId" prefWidth="75.0" text="Id" visible="false"/>
                         <TableColumn fx:id="tcStream" prefWidth="100.0" text="Stream"/>
                         <TableColumn fx:id="tcExamYeear" prefWidth="100.0" text="Exam Year"/>
                         <TableColumn fx:id="tcSubject" prefWidth="150.0" text="Subject"/>
