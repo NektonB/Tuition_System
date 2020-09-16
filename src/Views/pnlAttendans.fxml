@@ -49,27 +49,29 @@
                            <Insets top="30.0"/>
                        </VBox.margin>
                    </JFXTimePicker>
+                   <JFXTextField fx:id="txtIndexNumber" promptText="Index Number"/>
                    <JFXComboBox fx:id="cmbStudent" focusColor="#6981c9" labelFloat="true" prefHeight="25.0"
                                 prefWidth="386.0" promptText="Student" unFocusColor="#a3a3a3">
                        <VBox.margin>
                            <Insets top="30.0"/>
                        </VBox.margin>
                    </JFXComboBox>
-                  <JFXComboBox fx:id="cmbStatus" focusColor="#6981c9" labelFloat="true" layoutX="20.0" layoutY="115.0" prefHeight="25.0" prefWidth="386.0" promptText="Status" unFocusColor="#a3a3a3">
-                     <VBox.margin>
-                        <Insets top="30.0" />
-                     </VBox.margin>
-                  </JFXComboBox>
-                  <HBox alignment="CENTER" layoutX="20.0" layoutY="335.0" prefHeight="64.0" prefWidth="257.0">
-                      <children>
-                          <JFXButton fx:id="btnAdd" prefHeight="46.0" prefWidth="126.0" text="Add"/>
-                          <JFXButton fx:id="btnSave" layoutX="84.0" layoutY="19.0" prefHeight="46.0" prefWidth="125.0"
-                                     text="Save">
-                              <HBox.margin>
-                                  <Insets left="5.0"/>
-                              </HBox.margin>
-                          </JFXButton>
-                      </children>
+                   <JFXComboBox fx:id="cmbStatus" focusColor="#6981c9" labelFloat="true" layoutX="20.0" layoutY="115.0"
+                                prefHeight="25.0" prefWidth="386.0" promptText="Status" unFocusColor="#a3a3a3">
+                       <VBox.margin>
+                           <Insets top="30.0"/>
+                       </VBox.margin>
+                   </JFXComboBox>
+                   <HBox alignment="CENTER" layoutX="20.0" layoutY="335.0" prefHeight="64.0" prefWidth="257.0">
+                       <children>
+                           <JFXButton fx:id="btnAdd" prefHeight="46.0" prefWidth="126.0" text="Add"/>
+                           <JFXButton fx:id="btnSave" layoutX="84.0" layoutY="19.0" prefHeight="46.0" prefWidth="125.0"
+                                      text="Save">
+                               <HBox.margin>
+                                   <Insets left="5.0"/>
+                               </HBox.margin>
+                           </JFXButton>
+                       </children>
                      <VBox.margin>
                         <Insets top="30.0" />
                      </VBox.margin>
@@ -78,16 +80,16 @@
             </VBox>
          </left>
          <center>
-            <TableView fx:id="tblAttendence" prefHeight="218.0" prefWidth="450.0" BorderPane.alignment="CENTER">
-                <columns>
-                    <TableColumn fx:id="tcSId" prefWidth="75.0" text="Column X" visible="false"/>
-                    <TableColumn fx:id="tcStudent" prefWidth="316.0" text="Student"/>
-                    <TableColumn fx:id="tcStatus" prefWidth="330.0" text="Status"/>
-                </columns>
-               <columnResizePolicy>
-                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
-               </columnResizePolicy>
-            </TableView>
+             <TableView fx:id="tblAttendance" prefHeight="218.0" prefWidth="450.0" BorderPane.alignment="CENTER">
+                 <columns>
+                     <TableColumn fx:id="tcSId" prefWidth="75.0" text="Column X" visible="false"/>
+                     <TableColumn fx:id="tcStudent" prefWidth="316.0" text="Student"/>
+                     <TableColumn fx:id="tcStatus" prefWidth="330.0" text="Status"/>
+                 </columns>
+                 <columnResizePolicy>
+                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                 </columnResizePolicy>
+             </TableView>
          </center>
       </BorderPane>
    </children>

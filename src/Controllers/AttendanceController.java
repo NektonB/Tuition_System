@@ -1,9 +1,6 @@
 package Controllers;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXDatePicker;
-import com.jfoenix.controls.JFXTimePicker;
+import com.jfoenix.controls.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -43,6 +40,9 @@ public class AttendanceController implements Initializable {
     private JFXTimePicker tpTime;
 
     @FXML
+    private JFXTextField txtIndexNumber;
+
+    @FXML
     private JFXComboBox<?> cmbStudent;
 
     @FXML
@@ -55,7 +55,7 @@ public class AttendanceController implements Initializable {
     private JFXButton btnSave;
 
     @FXML
-    private TableView<?> tblAttendence;
+    private TableView<?> tblAttendance;
 
     @FXML
     private TableColumn<?, ?> tcSId;
@@ -69,7 +69,11 @@ public class AttendanceController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        try {
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void load_Class() {
