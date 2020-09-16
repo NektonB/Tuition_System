@@ -2,6 +2,7 @@ package Modules;
 
 public class Student {
     private int id;
+    private String indexNumber = "";
     private String f_name = "";
     private String m_name = "";
     private String l_name = "";
@@ -13,6 +14,7 @@ public class Student {
 
     public void resetAll() {
         setId(0);
+        setIndexNumber("");
         setF_name("");
         setM_name("");
         setL_name("");
@@ -94,5 +96,13 @@ public class Student {
 
     public void setGrade(String grade) {
         this.grade = grade;
+    }
+
+    public String getIndexNumber() {
+        return indexNumber;
+    }
+
+    public void setIndexNumber(String indexNumber) {
+        this.indexNumber = indexNumber;
     }
 }

@@ -35,6 +35,9 @@ public class AU_StudentController implements Initializable {
     private Label lblTitle;
 
     @FXML
+    private JFXTextField txtIndexNumber;
+
+    @FXML
     private FontAwesomeIconView btnClose;
 
     @FXML
@@ -709,7 +712,7 @@ public class AU_StudentController implements Initializable {
 
     public boolean checkValidate() {
         boolean validate = false;
-        if (!txtFName.getText().isEmpty() && !txtLName.getText().isEmpty() && !txtNIC.getText().isEmpty() && !cmbStatus.getValue().isEmpty() && !cmbSchool.getValue().isEmpty() && !cmbNearCity.getValue().isEmpty()) {
+        if (!txtIndexNumber.getText().isEmpty() && !txtFName.getText().isEmpty() && !txtLName.getText().isEmpty() && !txtNIC.getText().isEmpty() && !cmbStatus.getValue().isEmpty() && !cmbSchool.getValue().isEmpty() && !cmbNearCity.getValue().isEmpty()) {
             validate = true;
         } else {
             txtFName.setStyle("-fx-border-color: crimson");
@@ -810,6 +813,7 @@ public class AU_StudentController implements Initializable {
                     }
                 }
 
+                student.setIndexNumber(txtIndexNumber.getText());
                 student.setF_name(txtFName.getText());
                 student.setL_name(txtLName.getText());
                 student.setNic_number(txtNIC.getText());

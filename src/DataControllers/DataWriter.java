@@ -600,18 +600,19 @@ public class DataWriter {
         int operation = 0;
         ResultSet rs = null;
         try {
-            pst = conn.prepareStatement("INSERT INTO student(fname, lname, nic_number, address, contact_number, email, school_id, grade, near_city_id, gardien_id, status_id) VALUES (?,?,?,?,?,?,?,?,?,?,?)", pst.RETURN_GENERATED_KEYS);
-            pst.setString(1, student.getF_name());
-            pst.setString(2, student.getL_name());
-            pst.setString(3, student.getNic_number());
-            pst.setString(4, student.getAddress());
-            pst.setString(5, student.getContact_number());
-            pst.setString(6, student.getEmail());
-            pst.setInt(7, school.getId());
-            pst.setString(8, student.getGrade());
-            pst.setInt(9, nearCity.getId());
-            pst.setInt(10, guardian.getId());
-            pst.setInt(11, status.getId());
+            pst = conn.prepareStatement("INSERT INTO student(index_number,fname, lname, nic_number, address, contact_number, email, school_id, grade, near_city_id, gardien_id, status_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)", pst.RETURN_GENERATED_KEYS);
+            pst.setString(1, student.getIndexNumber());
+            pst.setString(2, student.getF_name());
+            pst.setString(3, student.getL_name());
+            pst.setString(4, student.getNic_number());
+            pst.setString(5, student.getAddress());
+            pst.setString(6, student.getContact_number());
+            pst.setString(7, student.getEmail());
+            pst.setInt(8, school.getId());
+            pst.setString(9, student.getGrade());
+            pst.setInt(10, nearCity.getId());
+            pst.setInt(11, guardian.getId());
+            pst.setInt(12, status.getId());
 
             operation = pst.executeUpdate();
             rs = pst.getGeneratedKeys();
@@ -874,19 +875,20 @@ public class DataWriter {
         int operation = 0;
         ResultSet rs = null;
         try {
-            pst = conn.prepareStatement("UPDATE student SET fname = ?, lname = ?, nic_number = ?, address = ?, contact_number = ?, email = ?, school_id = ?, grade = ?, near_city_id = ?, gardien_id = ?, status_id = ? WHERE id = ?", pst.RETURN_GENERATED_KEYS);
-            pst.setString(1, student.getF_name());
-            pst.setString(2, student.getL_name());
-            pst.setString(3, student.getNic_number());
-            pst.setString(4, student.getAddress());
-            pst.setString(5, student.getContact_number());
-            pst.setString(6, student.getEmail());
-            pst.setInt(7, school.getId());
-            pst.setString(8, student.getGrade());
-            pst.setInt(9, nearCity.getId());
-            pst.setInt(10, guardian.getId());
-            pst.setInt(11, status.getId());
-            pst.setInt(12, student.getId());
+            pst = conn.prepareStatement("UPDATE student SET index_number = ?, fname = ?, lname = ?, nic_number = ?, address = ?, contact_number = ?, email = ?, school_id = ?, grade = ?, near_city_id = ?, gardien_id = ?, status_id = ? WHERE id = ?", pst.RETURN_GENERATED_KEYS);
+            pst.setString(1, student.getIndexNumber());
+            pst.setString(2, student.getF_name());
+            pst.setString(3, student.getL_name());
+            pst.setString(4, student.getNic_number());
+            pst.setString(5, student.getAddress());
+            pst.setString(6, student.getContact_number());
+            pst.setString(7, student.getEmail());
+            pst.setInt(8, school.getId());
+            pst.setString(9, student.getGrade());
+            pst.setInt(10, nearCity.getId());
+            pst.setInt(11, guardian.getId());
+            pst.setInt(12, status.getId());
+            pst.setInt(13, student.getId());
 
             operation = pst.executeUpdate();
 
