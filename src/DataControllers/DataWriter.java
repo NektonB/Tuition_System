@@ -43,6 +43,8 @@ public class DataWriter {
     ACC_Type acc_type;
     DataReader dataReader;
     AC_TypeList ac_typeList;
+    AC_Attendance ac_attendance;
+    ACA_Details aca_details;
 
 
     /**
@@ -75,6 +77,8 @@ public class DataWriter {
                 acc_type = ObjectGenerator.getAcc_type();
                 dataReader = ObjectGenerator.getDataReader();
                 ac_typeList = ObjectGenerator.getAc_typeList();
+                ac_attendance = ObjectGenerator.getAc_attendance();
+                aca_details = ObjectGenerator.getAca_details();
             });
             readyData.setName("Data Writer");
             readyData.start();
@@ -905,6 +909,147 @@ public class DataWriter {
             } catch (Exception e) {
                 e.printStackTrace();
             }*/
+        }
+        return operation;
+    }
+
+    public int saveAttendance() {
+        int operation = 0;
+        ResultSet rs = null;
+        try {
+            pst = conn.prepareStatement("INSERT INTO ac_attendence(date, time, tbl_user_id, tbl_ac_type_details_id) VALUES (?,?,?,?)", pst.RETURN_GENERATED_KEYS);
+            pst.setString(1, ac_attendance.getDate());
+            pst.setString(2, ac_attendance.getTime());
+            pst.setInt(3, user.getId());
+            pst.setInt(4, ac_typeDetails.getId());
+
+            operation = pst.executeUpdate();
+            rs = pst.getGeneratedKeys();
+            if (rs.next()) {
+                ac_attendance.setId(rs.getInt(1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return operation;
+    }
+
+    public int saveAttendanceDetails() {
+        int operation = 0;
+        ResultSet rs = null;
+        Vector<Integer> ids = new Vector();
+        try {
+            pst = conn.prepareStatement("INSERT INTO aca_details(ac_attendence_id, student_id, status) VALUES (?,?,?)", pst.RETURN_GENERATED_KEYS);
+            pst.setInt(1, ac_attendance.getId());
+            pst.setInt(2, student.getId());
+            pst.setString(3, aca_details.getStatus());
+
+            operation = pst.executeUpdate();
+            /*rs = pst.getGeneratedKeys();
+            while (rs.next()) {
+                ids.add(rs.getInt(1));
+            }
+            aca_details.setIds(ids);*/
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+                /*if (!rs.isClosed()) {
+                    rs.close();
+                }*/
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return operation;
+    }
+
+    public int[] saveAllAttendanceDetails() {
+        int[] operation = {};
+        ResultSet rs = null;
+        PreparedStatement pstStudentList;
+        Vector<Integer> ids = new Vector();
+        try {
+            conn.setAutoCommit(false);
+
+            pst = conn.prepareStatement("INSERT INTO aca_details(ac_attendence_id, student_id, status) VALUES (?,?,?)", pst.RETURN_GENERATED_KEYS);
+
+            pstStudentList = conn.prepareStatement("SELECT tbl_student_id FROM ac_type_list WHERE ac_type_details_id = ? AND status = '1' ");
+            pstStudentList.setInt(1, ac_typeDetails.getId());
+            rs = pstStudentList.executeQuery();
+            while (rs.next()) {
+                student.setId(rs.getInt(1));
+                boolean isAlready = dataReader.checkAttendanceDetails();
+                if (!isAlready) {
+                    pst.setInt(1, ac_attendance.getId());
+                    pst.setInt(2, rs.getInt(1));
+                    pst.setString(3, "Not Attended");
+                    pst.addBatch();
+                }
+            }
+
+
+            operation = pst.executeBatch();
+            conn.commit();
+            conn.setAutoCommit(true);
+            /*rs = pst.getGeneratedKeys();
+            while (rs.next()) {
+                ids.add(rs.getInt(1));
+            }
+            aca_details.setIds(ids);*/
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+                /*if (!rs.isClosed()) {
+                    rs.close();
+                }*/
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return operation;
+    }
+
+    public int updateAttendanceDetails() {
+        int operation = 0;
+        ResultSet rs = null;
+        try {
+            pst = conn.prepareStatement("UPDATE aca_details SET status = ? WHERE id = ?");
+            pst.setString(1, aca_details.getStatus());
+            pst.setInt(2, aca_details.getId());
+
+            operation = pst.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+                /*if (!rs.isClosed()) {
+                    rs.close();
+                }*/
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         return operation;
     }

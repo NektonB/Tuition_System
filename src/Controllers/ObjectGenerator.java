@@ -32,6 +32,8 @@ public class ObjectGenerator {
     private static AC_TypeDetails ac_typeDetails;
     private static ACC_Type acc_type;
     private static AC_TypeList ac_typeList;
+    private static AC_Attendance ac_attendance;
+    private static ACA_Details aca_details;
 
     private static TextValidator textValidator;
     private static TimeFormatConverter timeFormatConverter;
@@ -252,5 +254,19 @@ public class ObjectGenerator {
             ac_typeList = new AC_TypeList();
         }
         return ac_typeList;
+    }
+
+    public static synchronized AC_Attendance getAc_attendance() {
+        if (ac_attendance == null) {
+            ac_attendance = new AC_Attendance();
+        }
+        return ac_attendance;
+    }
+
+    public static synchronized ACA_Details getAca_details() {
+        if (aca_details == null) {
+            aca_details = new ACA_Details();
+        }
+        return aca_details;
     }
 }

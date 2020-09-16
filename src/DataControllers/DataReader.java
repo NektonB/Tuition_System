@@ -45,6 +45,8 @@ public class DataReader {
     Student student;
     AC_Class ac_class;
     AC_TypeList ac_typeList;
+    AC_Attendance ac_attendance;
+    ACA_Details aca_details;
 
     public DataReader() {
         try {
@@ -72,6 +74,8 @@ public class DataReader {
                 student = ObjectGenerator.getStudent();
                 ac_class = ObjectGenerator.getAc_class();
                 ac_typeList = ObjectGenerator.getAc_typeList();
+                ac_attendance = ObjectGenerator.getAc_attendance();
+                aca_details = ObjectGenerator.getAca_details();
 
             });
             readyData.setName("DataReader");
@@ -1466,6 +1470,7 @@ public class DataReader {
             }
             while (rs.next()) {
                 student.setId(rs.getInt("student.id"));
+                student.setIndexNumber(rs.getString("student.index_number"));
                 student.setF_name(rs.getString("student.fname"));
                 student.setL_name(rs.getString("student.lname"));
                 student.setNic_number(rs.getString("student.nic_number"));
@@ -1484,6 +1489,110 @@ public class DataReader {
                 nearCity.setCity(rs.getString("near_city.city"));
 
                 guardian.setId(rs.getInt("gardien.id"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void getStudentDetailsByIndexNumber() {
+        ResultSet rs = null;
+        try {
+            //pst = conn.prepareStatement("SELECT * FROM student INNER JOIN status on student.status_id = status.id INNER JOIN school on student.school_id = school.id INNER JOIN near_city on student.near_city_id = near_city.id INNER JOIN gardien on student.gardien_id = gardien.id WHERE student.id = ?");
+            pst = conn.prepareStatement("SELECT * FROM student WHERE index_number = ?");
+            pst.setString(1, student.getIndexNumber());
+            rs = pst.executeQuery();
+
+            if (!rs.isBeforeFirst()) {
+                student.resetAll();
+                /*status.resetAll();
+                nearCity.resetAll();
+                school.resetAll();*/
+            }
+            while (rs.next()) {
+                student.setId(rs.getInt("id"));
+                student.setF_name(rs.getString("fname"));
+                student.setL_name(rs.getString("lname"));
+                student.setNic_number(rs.getString("nic_number"));
+                student.setAddress(rs.getString("address"));
+                student.setContact_number(rs.getString("contact_number"));
+                student.setEmail(rs.getString("email"));
+                student.setGrade(rs.getString("grade"));
+
+                /*status.setId(rs.getInt("status.id"));
+                status.setStatus(rs.getString("status.status"));
+
+                school.setId(rs.getInt("school.id"));
+                school.setName(rs.getString("school.name"));
+
+                nearCity.setId(rs.getInt("near_city.id"));
+                nearCity.setCity(rs.getString("near_city.city"));
+
+                guardian.setId(rs.getInt("gardien.id"));*/
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void getStudentDetailsByName() {
+        ResultSet rs = null;
+        try {
+            //pst = conn.prepareStatement("SELECT * FROM student INNER JOIN status on student.status_id = status.id INNER JOIN school on student.school_id = school.id INNER JOIN near_city on student.near_city_id = near_city.id INNER JOIN gardien on student.gardien_id = gardien.id WHERE student.id = ?");
+            pst = conn.prepareStatement("SELECT * FROM student WHERE fname = ? AND lname = ?");
+            pst.setString(1, student.getF_name());
+            pst.setString(2, student.getL_name());
+            rs = pst.executeQuery();
+
+            if (!rs.isBeforeFirst()) {
+                student.resetAll();
+                /*status.resetAll();
+                nearCity.resetAll();
+                school.resetAll();*/
+            }
+            while (rs.next()) {
+                student.setId(rs.getInt("id"));
+                student.setIndexNumber(rs.getString("index_number"));
+                student.setF_name(rs.getString("fname"));
+                student.setL_name(rs.getString("lname"));
+                student.setNic_number(rs.getString("nic_number"));
+                student.setAddress(rs.getString("address"));
+                student.setContact_number(rs.getString("contact_number"));
+                student.setEmail(rs.getString("email"));
+                student.setGrade(rs.getString("grade"));
+
+                /*status.setId(rs.getInt("status.id"));
+                status.setStatus(rs.getString("status.status"));
+
+                school.setId(rs.getInt("school.id"));
+                school.setName(rs.getString("school.name"));
+
+                nearCity.setId(rs.getInt("near_city.id"));
+                nearCity.setCity(rs.getString("near_city.city"));
+
+                guardian.setId(rs.getInt("gardien.id"));*/
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -1839,15 +1948,15 @@ public class DataReader {
         ResultSet rs = null;
         ObservableList<SelectClassController.ClassList> classList = FXCollections.observableArrayList();
         try {
-            pst = conn.prepareStatement("SELECT atl.id,st.stream,a.exam_year,sub.name,tea.fname,tea.lname,at.type FROM ac_type_list atl INNER JOIN ac_type_details atd on atl.ac_type_details_id = atd.id INNER JOIN ac_class ac on atd.ac_class_id = ac.id INNER JOIN acc_type at on atd.tbl_acc_type_id = at.id INNER JOIN teacher_has_subject ths on ac.teacher_has_subject_id = ths.id INNER JOIN subject sub on ths.subject_id = sub.id INNER JOIN teacher tea on ths.teacher_id = tea.id INNER JOIN academic_course a on ac.ac_id = a.id INNER JOIN exam e on a.exam_id = e.id INNER JOIN stream st on a.stream_id = st.id");
+            pst = conn.prepareStatement("SELECT atd.id,st.stream,a.exam_year,sub.name,tea.fname,tea.lname,at.type FROM ac_type_list atl INNER JOIN ac_type_details atd on atl.ac_type_details_id = atd.id INNER JOIN ac_class ac on atd.ac_class_id = ac.id INNER JOIN acc_type at on atd.tbl_acc_type_id = at.id INNER JOIN teacher_has_subject ths on ac.teacher_has_subject_id = ths.id INNER JOIN subject sub on ths.subject_id = sub.id INNER JOIN teacher tea on ths.teacher_id = tea.id INNER JOIN academic_course a on ac.ac_id = a.id INNER JOIN exam e on a.exam_id = e.id INNER JOIN stream st on a.stream_id = st.id");
             rs = pst.executeQuery();
             if (!rs.isBeforeFirst()) {
-                teacher.resetAll();
+                //teacher.resetAll();
             }
             while (rs.next()) {
                 classList.add(
                         new SelectClassController.ClassList(
-                                rs.getInt("atl.id"),
+                                rs.getInt("atd.id"),
                                 rs.getString("st.stream"),
                                 rs.getString("a.exam_year"),
                                 rs.getString("sub.name"),
@@ -1905,7 +2014,7 @@ public class DataReader {
         ResultSet rs = null;
         ObservableList<SelectClassController.ClassList> classList = FXCollections.observableArrayList();
         try {
-            pst = conn.prepareStatement("SELECT atl.id,st.stream,a.exam_year,sub.name,tea.fname,tea.lname,at.type FROM ac_type_list atl INNER JOIN ac_type_details atd on atl.ac_type_details_id = atd.id INNER JOIN ac_class ac on atd.ac_class_id = ac.id INNER JOIN acc_type at on atd.tbl_acc_type_id = at.id INNER JOIN teacher_has_subject ths on ac.teacher_has_subject_id = ths.id INNER JOIN subject sub on ths.subject_id = sub.id INNER JOIN teacher tea on ths.teacher_id = tea.id INNER JOIN academic_course a on ac.ac_id = a.id INNER JOIN exam e on a.exam_id = e.id INNER JOIN stream st on a.stream_id = st.id WHERE st.stream = ?");
+            pst = conn.prepareStatement("SELECT atd.id,st.stream,a.exam_year,sub.name,tea.fname,tea.lname,at.type FROM ac_type_list atl INNER JOIN ac_type_details atd on atl.ac_type_details_id = atd.id INNER JOIN ac_class ac on atd.ac_class_id = ac.id INNER JOIN acc_type at on atd.tbl_acc_type_id = at.id INNER JOIN teacher_has_subject ths on ac.teacher_has_subject_id = ths.id INNER JOIN subject sub on ths.subject_id = sub.id INNER JOIN teacher tea on ths.teacher_id = tea.id INNER JOIN academic_course a on ac.ac_id = a.id INNER JOIN exam e on a.exam_id = e.id INNER JOIN stream st on a.stream_id = st.id WHERE st.stream = ?");
             pst.setString(1, stream.getStream());
             rs = pst.executeQuery();
             if (!rs.isBeforeFirst()) {
@@ -1914,7 +2023,7 @@ public class DataReader {
             while (rs.next()) {
                 classList.add(
                         new SelectClassController.ClassList(
-                                rs.getInt("atl.id"),
+                                rs.getInt("atd.id"),
                                 rs.getString("st.stream"),
                                 rs.getString("a.exam_year"),
                                 rs.getString("sub.name"),
@@ -1944,7 +2053,7 @@ public class DataReader {
         ResultSet rs = null;
         ObservableList<SelectClassController.ClassList> classList = FXCollections.observableArrayList();
         try {
-            pst = conn.prepareStatement("SELECT atl.id,st.stream,a.exam_year,sub.name,tea.fname,tea.lname,at.type FROM ac_type_list atl INNER JOIN ac_type_details atd on atl.ac_type_details_id = atd.id INNER JOIN ac_class ac on atd.ac_class_id = ac.id INNER JOIN acc_type at on atd.tbl_acc_type_id = at.id INNER JOIN teacher_has_subject ths on ac.teacher_has_subject_id = ths.id INNER JOIN subject sub on ths.subject_id = sub.id INNER JOIN teacher tea on ths.teacher_id = tea.id INNER JOIN academic_course a on ac.ac_id = a.id INNER JOIN exam e on a.exam_id = e.id INNER JOIN stream st on a.stream_id = st.id WHERE st.stream = ? AND a.exam_year = ?");
+            pst = conn.prepareStatement("SELECT atd.id,st.stream,a.exam_year,sub.name,tea.fname,tea.lname,at.type FROM ac_type_list atl INNER JOIN ac_type_details atd on atl.ac_type_details_id = atd.id INNER JOIN ac_class ac on atd.ac_class_id = ac.id INNER JOIN acc_type at on atd.tbl_acc_type_id = at.id INNER JOIN teacher_has_subject ths on ac.teacher_has_subject_id = ths.id INNER JOIN subject sub on ths.subject_id = sub.id INNER JOIN teacher tea on ths.teacher_id = tea.id INNER JOIN academic_course a on ac.ac_id = a.id INNER JOIN exam e on a.exam_id = e.id INNER JOIN stream st on a.stream_id = st.id WHERE st.stream = ? AND a.exam_year = ?");
             pst.setString(1, stream.getStream());
             pst.setString(2, academicCourse.getExam_year());
 
@@ -1955,7 +2064,7 @@ public class DataReader {
             while (rs.next()) {
                 classList.add(
                         new SelectClassController.ClassList(
-                                rs.getInt("atl.id"),
+                                rs.getInt("atd.id"),
                                 rs.getString("st.stream"),
                                 rs.getString("a.exam_year"),
                                 rs.getString("sub.name"),
@@ -1985,7 +2094,7 @@ public class DataReader {
         ResultSet rs = null;
         ObservableList<SelectClassController.ClassList> classList = FXCollections.observableArrayList();
         try {
-            pst = conn.prepareStatement("SELECT atl.id,st.stream,a.exam_year,sub.name,tea.fname,tea.lname,at.type FROM ac_type_list atl INNER JOIN ac_type_details atd on atl.ac_type_details_id = atd.id INNER JOIN ac_class ac on atd.ac_class_id = ac.id INNER JOIN acc_type at on atd.tbl_acc_type_id = at.id INNER JOIN teacher_has_subject ths on ac.teacher_has_subject_id = ths.id INNER JOIN subject sub on ths.subject_id = sub.id INNER JOIN teacher tea on ths.teacher_id = tea.id INNER JOIN academic_course a on ac.ac_id = a.id INNER JOIN exam e on a.exam_id = e.id INNER JOIN stream st on a.stream_id = st.id WHERE st.stream = ? AND a.exam_year = ? AND sub.name = ?");
+            pst = conn.prepareStatement("SELECT atd.id,st.stream,a.exam_year,sub.name,tea.fname,tea.lname,at.type FROM ac_type_list atl INNER JOIN ac_type_details atd on atl.ac_type_details_id = atd.id INNER JOIN ac_class ac on atd.ac_class_id = ac.id INNER JOIN acc_type at on atd.tbl_acc_type_id = at.id INNER JOIN teacher_has_subject ths on ac.teacher_has_subject_id = ths.id INNER JOIN subject sub on ths.subject_id = sub.id INNER JOIN teacher tea on ths.teacher_id = tea.id INNER JOIN academic_course a on ac.ac_id = a.id INNER JOIN exam e on a.exam_id = e.id INNER JOIN stream st on a.stream_id = st.id WHERE st.stream = ? AND a.exam_year = ? AND sub.name = ?");
             pst.setString(1, stream.getStream());
             pst.setString(2, academicCourse.getExam_year());
             pst.setString(3, subject.getName());
@@ -1997,7 +2106,7 @@ public class DataReader {
             while (rs.next()) {
                 classList.add(
                         new SelectClassController.ClassList(
-                                rs.getInt("atl.id"),
+                                rs.getInt("atd.id"),
                                 rs.getString("st.stream"),
                                 rs.getString("a.exam_year"),
                                 rs.getString("sub.name"),
@@ -2027,7 +2136,7 @@ public class DataReader {
         ResultSet rs = null;
         ObservableList<SelectClassController.ClassList> classList = FXCollections.observableArrayList();
         try {
-            pst = conn.prepareStatement("SELECT atl.id,st.stream,a.exam_year,sub.name,tea.fname,tea.lname,at.type FROM ac_type_list atl INNER JOIN ac_type_details atd on atl.ac_type_details_id = atd.id INNER JOIN ac_class ac on atd.ac_class_id = ac.id INNER JOIN acc_type at on atd.tbl_acc_type_id = at.id INNER JOIN teacher_has_subject ths on ac.teacher_has_subject_id = ths.id INNER JOIN subject sub on ths.subject_id = sub.id INNER JOIN teacher tea on ths.teacher_id = tea.id INNER JOIN academic_course a on ac.ac_id = a.id INNER JOIN exam e on a.exam_id = e.id INNER JOIN stream st on a.stream_id = st.id WHERE st.stream = ? AND a.exam_year = ? AND sub.name = ? AND st.stream = ?");
+            pst = conn.prepareStatement("SELECT atd.id,st.stream,a.exam_year,sub.name,tea.fname,tea.lname,at.type FROM ac_type_list atl INNER JOIN ac_type_details atd on atl.ac_type_details_id = atd.id INNER JOIN ac_class ac on atd.ac_class_id = ac.id INNER JOIN acc_type at on atd.tbl_acc_type_id = at.id INNER JOIN teacher_has_subject ths on ac.teacher_has_subject_id = ths.id INNER JOIN subject sub on ths.subject_id = sub.id INNER JOIN teacher tea on ths.teacher_id = tea.id INNER JOIN academic_course a on ac.ac_id = a.id INNER JOIN exam e on a.exam_id = e.id INNER JOIN stream st on a.stream_id = st.id WHERE st.stream = ? AND a.exam_year = ? AND sub.name = ? AND st.stream = ?");
             pst.setString(1, stream.getStream());
             pst.setString(2, academicCourse.getExam_year());
             pst.setString(3, subject.getName());
@@ -2040,7 +2149,7 @@ public class DataReader {
             while (rs.next()) {
                 classList.add(
                         new SelectClassController.ClassList(
-                                rs.getInt("atl.id"),
+                                rs.getInt("atd.id"),
                                 rs.getString("st.stream"),
                                 rs.getString("a.exam_year"),
                                 rs.getString("sub.name"),
@@ -2070,7 +2179,7 @@ public class DataReader {
         ResultSet rs = null;
         ObservableList<SelectClassController.ClassList> classList = FXCollections.observableArrayList();
         try {
-            pst = conn.prepareStatement("SELECT atl.id,st.stream,a.exam_year,sub.name,tea.fname,tea.lname,at.type FROM ac_type_list atl INNER JOIN ac_type_details atd on atl.ac_type_details_id = atd.id INNER JOIN ac_class ac on atd.ac_class_id = ac.id INNER JOIN acc_type at on atd.tbl_acc_type_id = at.id INNER JOIN teacher_has_subject ths on ac.teacher_has_subject_id = ths.id INNER JOIN subject sub on ths.subject_id = sub.id INNER JOIN teacher tea on ths.teacher_id = tea.id INNER JOIN academic_course a on ac.ac_id = a.id INNER JOIN exam e on a.exam_id = e.id INNER JOIN stream st on a.stream_id = st.id WHERE st.stream = ? AND a.exam_year = ? AND sub.name = ? AND st.stream = ? AND at.type = ?");
+            pst = conn.prepareStatement("SELECT atd.id,st.stream,a.exam_year,sub.name,tea.fname,tea.lname,at.type FROM ac_type_list atl INNER JOIN ac_type_details atd on atl.ac_type_details_id = atd.id INNER JOIN ac_class ac on atd.ac_class_id = ac.id INNER JOIN acc_type at on atd.tbl_acc_type_id = at.id INNER JOIN teacher_has_subject ths on ac.teacher_has_subject_id = ths.id INNER JOIN subject sub on ths.subject_id = sub.id INNER JOIN teacher tea on ths.teacher_id = tea.id INNER JOIN academic_course a on ac.ac_id = a.id INNER JOIN exam e on a.exam_id = e.id INNER JOIN stream st on a.stream_id = st.id WHERE st.stream = ? AND a.exam_year = ? AND sub.name = ? AND st.stream = ? AND at.type = ?");
             pst.setString(1, stream.getStream());
             pst.setString(2, academicCourse.getExam_year());
             pst.setString(3, subject.getName());
@@ -2084,7 +2193,7 @@ public class DataReader {
             while (rs.next()) {
                 classList.add(
                         new SelectClassController.ClassList(
-                                rs.getInt("atl.id"),
+                                rs.getInt("atd.id"),
                                 rs.getString("st.stream"),
                                 rs.getString("a.exam_year"),
                                 rs.getString("sub.name"),
@@ -2094,6 +2203,137 @@ public class DataReader {
                 );
             }
             tblClass.setItems(classList);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public boolean checkAttendance() {
+        boolean isAlready = false;
+        ResultSet rs = null;
+        try {
+            pst = conn.prepareStatement("SELECT id FROM ac_attendence WHERE date = ? AND tbl_ac_type_details_id = ?");
+            pst.setString(1, ac_attendance.getDate());
+            pst.setInt(2, ac_typeDetails.getId());
+            rs = pst.executeQuery();
+
+            if (!rs.isBeforeFirst()) {
+                //ac_attendance.resetAll();
+            }
+            if (rs.next()) {
+                ac_attendance.setId(rs.getInt(1));
+                isAlready = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return isAlready;
+    }
+
+    public boolean checkAttendanceDetails() {
+        boolean isAlready = false;
+        ResultSet rs = null;
+        try {
+            pst = conn.prepareStatement("SELECT id FROM aca_details WHERE ac_attendence_id = ? AND student_id = ?");
+            pst.setInt(1, ac_attendance.getId());
+            pst.setInt(2, student.getId());
+            rs = pst.executeQuery();
+
+            if (!rs.isBeforeFirst()) {
+                //aca_details.resetAll();
+            }
+            if (rs.next()) {
+                aca_details.setId(rs.getInt(1));
+                isAlready = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return isAlready;
+    }
+
+    public void fillAttendanceTable(TableView tblAttendance) {
+        ResultSet rs = null;
+        ObservableList<AttendanceController.AttendList> attendList = FXCollections.observableArrayList();
+        try {
+            pst = conn.prepareStatement("SELECT aca_details.id,s.fname,s.lname,aca_details.status FROM aca_details INNER JOIN ac_attendence aca on aca_details.ac_attendence_id = aca.id INNER JOIN student s on aca_details.student_id = s.id WHERE aca.date = ? AND aca.tbl_ac_type_details_id = ?");
+            pst.setString(1, ac_attendance.getDate());
+            pst.setInt(2, ac_typeDetails.getId());
+            rs = pst.executeQuery();
+            if (!rs.isBeforeFirst()) {
+                teacher.resetAll();
+            }
+            while (rs.next()) {
+                attendList.add(
+                        new AttendanceController.AttendList(
+                                rs.getInt("aca_details.id"),
+                                rs.getString("s.fname") + " " + rs.getString("s.lname"),
+                                rs.getString("aca_details.status")
+                        )
+                );
+            }
+            tblAttendance.setItems(attendList);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void fillStudentCombo(JFXComboBox cmbStudent) {
+        ResultSet rs = null;
+        cmbStudent.getItems().clear();
+        try {
+            pst = conn.prepareStatement("SELECT fname,lname FROM student");
+            rs = pst.executeQuery();
+            if (!rs.isBeforeFirst()) {
+
+            }
+            while (rs.next()) {
+                cmbStudent.getItems().add(rs.getString(1) + " " + rs.getString(2));
+            }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

@@ -65,6 +65,7 @@ public class SelectClassController implements Initializable {
     Subject subject;
     Teacher teacher;
     ACC_Type acc_type;
+    AC_TypeDetails ac_typeDetails;
 
     Label lblExam;
     Label lblSubject;
@@ -82,6 +83,7 @@ public class SelectClassController implements Initializable {
             subject = ObjectGenerator.getSubject();
             teacher = ObjectGenerator.getTeacher();
             acc_type = ObjectGenerator.getAcc_type();
+            ac_typeDetails = ObjectGenerator.getAc_typeDetails();
 
             readyClassTable();
             dataReader.fillClassTable(tblClass);
@@ -172,11 +174,12 @@ public class SelectClassController implements Initializable {
         }
     }
 
-    public void selectTeacher() {
+    public void selectClass() {
         try {
             if (!tblClass.getItems().isEmpty()) {
                 SelectClassController.ClassList classList = tblClass.getSelectionModel().getSelectedItem();
-                ac_typeList.setId(classList.getId());
+
+                ac_typeDetails.setId(classList.getId());
                 stream.setStream(classList.getStream());
                 academicCourse.setExam_year(classList.getExamYear());
                 subject.setName(classList.getSubject());
@@ -204,12 +207,12 @@ public class SelectClassController implements Initializable {
 
     public void selectTeacher_Key(KeyEvent event) {
         if (event.getCode().equals(KeyCode.ENTER)) {
-            selectTeacher();
+            selectClass();
         }
     }
 
     public void closeMe() {
-        if (ac_typeList.getId() > 0) {
+        if (ac_typeDetails.getId() > 0) {
             Stage stage = (Stage) tblClass.getScene().getWindow();
             stage.close();
         }
