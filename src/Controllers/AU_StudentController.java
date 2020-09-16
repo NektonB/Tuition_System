@@ -697,13 +697,18 @@ public class AU_StudentController implements Initializable {
     public void load_parent() {
         try {
             Stage productsStage = new Stage();
-            Parent frmCustomer = FXMLLoader.load(getClass().getClassLoader().getResource("Views/frmParant.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Views/frmParant.fxml"));
+            Parent frmCustomer = loader.load();
             //productsStage.setTitle("Add New Employee");
             Scene scene = new Scene(frmCustomer);
             productsStage.setScene(scene);
             productsStage.initStyle(StageStyle.UNDECORATED);
             productsStage.setResizable(false);
             productsStage.initModality(Modality.APPLICATION_MODAL);
+
+            ParantController pc = loader.getController();
+            pc.loadContent(cmbParents);
+
             productsStage.show();
         } catch (Exception e) {
             e.printStackTrace();

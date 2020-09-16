@@ -978,6 +978,32 @@ public class DataWriter {
         return operation;
     }
 
+    public int updateAttendanceDetails() {
+        int operation = 0;
+        ResultSet rs = null;
+        try {
+            pst = conn.prepareStatement("UPDATE aca_details SET status = ? WHERE id = ?");
+            pst.setString(1, aca_details.getStatus());
+            pst.setInt(2, aca_details.getId());
+
+            operation = pst.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+                /*if (!rs.isClosed()) {
+                    rs.close();
+                }*/
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return operation;
+    }
+
     public int[] saveAllAttendanceDetails() {
         int[] operation = {};
         ResultSet rs = null;
@@ -1001,7 +1027,6 @@ public class DataWriter {
                     pst.addBatch();
                 }
             }
-
 
             operation = pst.executeBatch();
             conn.commit();
@@ -1028,15 +1053,21 @@ public class DataWriter {
         return operation;
     }
 
-    public int updateAttendanceDetails() {
+    public int saveParent() {
         int operation = 0;
         ResultSet rs = null;
         try {
-            pst = conn.prepareStatement("UPDATE aca_details SET status = ? WHERE id = ?");
-            pst.setString(1, aca_details.getStatus());
-            pst.setInt(2, aca_details.getId());
+            pst = conn.prepareStatement("INSERT INTO gardien(fname, lname, home_number, mobile_number) VALUES (?,?,?,?)", pst.RETURN_GENERATED_KEYS);
+            pst.setString(1, guardian.getF_name());
+            pst.setString(2, guardian.getL_name());
+            pst.setString(3, guardian.getHome_number());
+            pst.setString(4, guardian.getMobile_number());
 
             operation = pst.executeUpdate();
+            rs = pst.getGeneratedKeys();
+            if (rs.next()) {
+                guardian.setId(rs.getInt(1));
+            }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -1044,9 +1075,41 @@ public class DataWriter {
                 if (!pst.isClosed()) {
                     pst.close();
                 }
-                /*if (!rs.isClosed()) {
+                if (!rs.isClosed()) {
                     rs.close();
-                }*/
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return operation;
+    }
+
+    public int updateParent() {
+        int operation = 0;
+        ResultSet rs = null;
+        try {
+            pst = conn.prepareStatement("UPDATE gardien SET fname = ?, lname = ?, home_number = ?, mobile_number = ? WHERE id = ?", pst.RETURN_GENERATED_KEYS);
+            pst.setString(1, guardian.getF_name());
+            pst.setString(2, guardian.getL_name());
+            pst.setString(3, guardian.getHome_number());
+            pst.setString(4, guardian.getMobile_number());
+
+            operation = pst.executeUpdate();
+            rs = pst.getGeneratedKeys();
+            if (rs.next()) {
+                guardian.setId(rs.getInt(1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }

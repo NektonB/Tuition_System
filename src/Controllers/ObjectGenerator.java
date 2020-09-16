@@ -34,6 +34,11 @@ public class ObjectGenerator {
     private static AC_TypeList ac_typeList;
     private static AC_Attendance ac_attendance;
     private static ACA_Details aca_details;
+    private static AC_Payment ac_payment;
+    private static ACP_Details acp_details;
+    private static TeacherPayment teacherPayment;
+    private static TP_Details tp_details;
+
 
     private static TextValidator textValidator;
     private static TimeFormatConverter timeFormatConverter;
@@ -268,5 +273,33 @@ public class ObjectGenerator {
             aca_details = new ACA_Details();
         }
         return aca_details;
+    }
+
+    public static synchronized AC_Payment getAc_payment() {
+        if (ac_payment == null) {
+            ac_payment = new AC_Payment();
+        }
+        return ac_payment;
+    }
+
+    public static synchronized ACP_Details getAcp_details() {
+        if (acp_details == null) {
+            acp_details = new ACP_Details();
+        }
+        return acp_details;
+    }
+
+    public static synchronized TeacherPayment getTeacherPayment() {
+        if (teacherPayment == null) {
+            teacherPayment = new TeacherPayment();
+        }
+        return teacherPayment;
+    }
+
+    public static synchronized TP_Details getTp_details() {
+        if (tp_details == null) {
+            tp_details = new TP_Details();
+        }
+        return tp_details;
     }
 }

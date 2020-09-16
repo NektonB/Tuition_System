@@ -20,67 +20,68 @@
                                 <Font name="System Bold" size="14.0"/>
                             </font>
                         </Label>
-               </children>
-            </Pane>
-         </top>
-         <left>
-            <VBox prefHeight="500.0" prefWidth="277.0" BorderPane.alignment="CENTER">
-               <padding>
-                  <Insets left="10.0" right="10.0" top="25.0" />
-               </padding>
-                <children>
-                    <JFXButton fx:id="btnSelectClass" onAction="#load_Class" prefHeight="43.0" prefWidth="257.0"
-                               ripplerFill="#0777ff" text="Select Class">
-                        <graphic>
-                            <FontAwesomeIconView fill="WHITE" glyphName="PLUS"/>
-                        </graphic>
-                    </JFXButton>
-                    <Label fx:id="lblExam" text="Exam"/>
-                    <Label fx:id="lblSubject" text="Subject"/>
-                    <Label fx:id="lblTeacher" text="Teacher"/>
-                    <Label fx:id="lblClass" text="Class"/>
-                    <JFXDatePicker fx:id="dpDate" defaultColor="#6981c9" overLay="true" prefHeight="25.0"
-                                   prefWidth="340.0" promptText="Date">
-                        <VBox.margin>
-                            <Insets top="15.0"/>
-                        </VBox.margin>
-                    </JFXDatePicker>
-                    <JFXTimePicker fx:id="tpTime" defaultColor="#6981c9" prefHeight="25.0" prefWidth="320.0"
-                                   promptText="Time">
-                        <VBox.margin>
-                            <Insets top="30.0"/>
-                        </VBox.margin>
-                    </JFXTimePicker>
-                    <JFXTextField fx:id="txtIndexNumber" onKeyReleased="#markAttendance_Key" promptText="Index Number">
-                        <VBox.margin>
-                            <Insets top="30.0"/>
-                        </VBox.margin>
-                    </JFXTextField>
-                    <JFXComboBox fx:id="cmbStudent" focusColor="#6981c9" labelFloat="true" prefHeight="25.0"
-                                 prefWidth="386.0" promptText="Student" unFocusColor="#a3a3a3">
-                        <VBox.margin>
-                            <Insets top="30.0"/>
-                        </VBox.margin>
-                    </JFXComboBox>
-                    <JFXComboBox fx:id="cmbStatus" focusColor="#6981c9" labelFloat="true" prefHeight="25.0"
-                                 prefWidth="386.0" promptText="Status" unFocusColor="#a3a3a3">
-                        <VBox.margin>
-                            <Insets top="30.0"/>
-                        </VBox.margin>
-                    </JFXComboBox>
-                   <HBox alignment="CENTER" layoutX="20.0" layoutY="335.0" prefHeight="64.0" prefWidth="257.0">
-                       <children>
-                           <JFXButton fx:id="btnAdd" onAction="#markAttendance" prefHeight="46.0" prefWidth="126.0"
-                                      text="Mark"/>
-                           <JFXButton fx:id="btnSave" layoutX="84.0" layoutY="19.0" onAction="#finishMark"
-                                      prefHeight="46.0" prefWidth="125.0" text="Finish Mark">
-                               <HBox.margin>
-                                   <Insets left="5.0"/>
-                               </HBox.margin>
-                           </JFXButton>
-                       </children>
-                       <VBox.margin>
-                           <Insets top="10.0"/>
+                    </children>
+                </Pane>
+            </top>
+            <left>
+                <VBox prefHeight="500.0" prefWidth="277.0" BorderPane.alignment="CENTER">
+                    <padding>
+                        <Insets left="10.0" right="10.0" top="25.0"/>
+                    </padding>
+                    <children>
+                        <JFXButton fx:id="btnSelectClass" onAction="#load_Class" prefHeight="43.0" prefWidth="257.0"
+                                   ripplerFill="#0777ff" text="Select Class">
+                            <graphic>
+                                <FontAwesomeIconView fill="WHITE" glyphName="PLUS"/>
+                            </graphic>
+                        </JFXButton>
+                        <Label fx:id="lblExam" text="Exam"/>
+                        <Label fx:id="lblSubject" text="Subject"/>
+                        <Label fx:id="lblTeacher" text="Teacher"/>
+                        <Label fx:id="lblClass" text="Class"/>
+                        <JFXDatePicker fx:id="dpDate" defaultColor="#6981c9" overLay="true" prefHeight="25.0"
+                                       prefWidth="340.0" promptText="Date">
+                            <VBox.margin>
+                                <Insets top="15.0"/>
+                            </VBox.margin>
+                        </JFXDatePicker>
+                        <JFXTimePicker fx:id="tpTime" defaultColor="#6981c9" prefHeight="25.0" prefWidth="320.0"
+                                       promptText="Time">
+                            <VBox.margin>
+                                <Insets top="30.0"/>
+                            </VBox.margin>
+                        </JFXTimePicker>
+                        <JFXTextField fx:id="txtIndexNumber" onKeyReleased="#markAttendance_Key"
+                                      promptText="Index Number">
+                            <VBox.margin>
+                                <Insets top="30.0"/>
+                            </VBox.margin>
+                        </JFXTextField>
+                        <JFXComboBox fx:id="cmbStudent" focusColor="#6981c9" labelFloat="true" prefHeight="25.0"
+                                     prefWidth="386.0" promptText="Student" unFocusColor="#a3a3a3">
+                            <VBox.margin>
+                                <Insets top="30.0"/>
+                            </VBox.margin>
+                        </JFXComboBox>
+                        <JFXComboBox fx:id="cmbStatus" focusColor="#6981c9" labelFloat="true" prefHeight="25.0"
+                                     prefWidth="386.0" promptText="Status" unFocusColor="#a3a3a3">
+                            <VBox.margin>
+                                <Insets top="30.0"/>
+                            </VBox.margin>
+                        </JFXComboBox>
+                        <HBox alignment="CENTER" layoutX="20.0" layoutY="335.0" prefHeight="64.0" prefWidth="257.0">
+                            <children>
+                                <JFXButton fx:id="btnAdd" onAction="#markAttendance" prefHeight="46.0" prefWidth="126.0"
+                                           text="Mark"/>
+                                <JFXButton fx:id="btnSave" layoutX="84.0" layoutY="19.0" onAction="#finishMark"
+                                           prefHeight="46.0" prefWidth="125.0" text="Finish Mark">
+                                    <HBox.margin>
+                                        <Insets left="5.0"/>
+                                    </HBox.margin>
+                                </JFXButton>
+                            </children>
+                            <VBox.margin>
+                                <Insets top="10.0"/>
                      </VBox.margin>
                   </HBox>
                </children>
