@@ -1,14 +1,19 @@
 package Controllers;
 
 import DataControllers.DataReader;
+import Modules.*;
 import com.jfoenix.controls.JFXComboBox;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -30,31 +35,60 @@ public class SelectClassController implements Initializable {
     @FXML
     private JFXComboBox<String> cmbClassType;
 
-    DataReader dataReader;
-    Alerts alerts;
     @FXML
     private TableView<ClassList> tblClass;
+
     @FXML
     private TableColumn<ClassList, Integer> tcId;
+
     @FXML
     private TableColumn<ClassList, String> tcStream;
+
     @FXML
     private TableColumn<ClassList, String> tcExamYeear;
+
     @FXML
     private TableColumn<ClassList, String> tcSubject;
+
     @FXML
     private TableColumn<ClassList, String> tcTeacher;
+
     @FXML
     private TableColumn<ClassList, String> tcClassType;
+
+    DataReader dataReader;
+    Alerts alerts;
+
+    AC_TypeList ac_typeList;
+    Stream stream;
+    AcademicCourse academicCourse;
+    Subject subject;
+    Teacher teacher;
+    ACC_Type acc_type;
+
+    Label lblExam;
+    Label lblSubject;
+    Label lblTeacher;
+    Label lblClassType;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
             alerts = ObjectGenerator.getAlerts();
             dataReader = ObjectGenerator.getDataReader();
+            ac_typeList = ObjectGenerator.getAc_typeList();
+            stream = ObjectGenerator.getStream();
+            academicCourse = ObjectGenerator.getAcademicCourse();
+            subject = ObjectGenerator.getSubject();
+            teacher = ObjectGenerator.getTeacher();
+            acc_type = ObjectGenerator.getAcc_type();
 
             readyClassTable();
             dataReader.fillClassTable(tblClass);
+            dataReader.fillStreamCombo(cmbStatus);
+            dataReader.fillExamYearCombo(cmbExamYear);
+            dataReader.fillSubjectCombo(cmbSubject);
+            dataReader.fillClassTypeCombo(cmbClassType);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -67,6 +101,118 @@ public class SelectClassController implements Initializable {
         tcSubject.setCellValueFactory(new PropertyValueFactory<>("subject"));
         tcTeacher.setCellValueFactory(new PropertyValueFactory<>("teacher"));
         tcClassType.setCellValueFactory(new PropertyValueFactory<>("classType"));
+    }
+
+    public void filterClassTableByStream() {
+        if (!cmbStatus.getValue().equals("")) {
+            try {
+                stream.setStream(cmbStatus.getValue());
+                dataReader.fillClassTableByStream(tblClass);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void filterClassTableByExamYear() {
+        if (!cmbStatus.getValue().equals("") && !cmbExamYear.getValue().equals("")) {
+            try {
+                stream.setStream(cmbStatus.getValue());
+                academicCourse.setExam_year(cmbExamYear.getValue());
+                dataReader.fillClassTableByExamYear(tblClass);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void filterClassTableBySubject() {
+        if (!cmbStatus.getValue().equals("") && !cmbExamYear.getValue().equals("") && !cmbSubject.getValue().equals("")) {
+            try {
+                stream.setStream(cmbStatus.getValue());
+                academicCourse.setExam_year(cmbExamYear.getValue());
+                subject.setName(cmbSubject.getValue());
+                dataReader.fillTeacherCombo(cmbTeacher, cmbSubject);
+
+                dataReader.fillClassTableBySubject(tblClass);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void filterClassTableByTeacher() {
+        if (!cmbStatus.getValue().equals("") && !cmbExamYear.getValue().equals("") && !cmbSubject.getValue().equals("") && !cmbTeacher.getValue().equals("")) {
+            try {
+                stream.setStream(cmbStatus.getValue());
+                academicCourse.setExam_year(cmbExamYear.getValue());
+                subject.setName(cmbSubject.getValue());
+                teacher.setFname(cmbTeacher.getValue());
+
+                dataReader.fillClassTableByTeacher(tblClass);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void filterClassTableByClassType() {
+        if (!cmbStatus.getValue().equals("") && !cmbExamYear.getValue().equals("") && !cmbSubject.getValue().equals("") && !cmbTeacher.getValue().equals("") && !cmbClassType.getValue().equals("")) {
+            try {
+                stream.setStream(cmbStatus.getValue());
+                academicCourse.setExam_year(cmbExamYear.getValue());
+                subject.setName(cmbSubject.getValue());
+                teacher.setFname(cmbTeacher.getValue());
+                acc_type.setType(cmbClassType.getValue());
+
+                dataReader.fillClassTableByClassType(tblClass);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void selectTeacher() {
+        try {
+            if (!tblClass.getItems().isEmpty()) {
+                SelectClassController.ClassList classList = tblClass.getSelectionModel().getSelectedItem();
+                ac_typeList.setId(classList.getId());
+                stream.setStream(classList.getStream());
+                academicCourse.setExam_year(classList.getExamYear());
+                subject.setName(classList.getSubject());
+                teacher.setFname(classList.getTeacher());
+                acc_type.setType(classList.getClassType());
+
+                lblExam.setText(stream.getStream() + " / " + academicCourse.getExam_year());
+                lblSubject.setText(subject.getName());
+                lblTeacher.setText(teacher.getFname());
+                lblClassType.setText(acc_type.getType());
+
+                closeMe();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadComponents(Label lblExam, Label lblSubject, Label lblTeacher, Label lblClassType) {
+        this.lblExam = lblExam;
+        this.lblSubject = lblSubject;
+        this.lblTeacher = lblTeacher;
+        this.lblClassType = lblClassType;
+    }
+
+    public void selectTeacher_Key(KeyEvent event) {
+        if (event.getCode().equals(KeyCode.ENTER)) {
+            selectTeacher();
+        }
+    }
+
+    public void closeMe() {
+        if (ac_typeList.getId() > 0) {
+            Stage stage = (Stage) tblClass.getScene().getWindow();
+            stage.close();
+        }
     }
 
     public static class ClassList {

@@ -9,6 +9,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -17,6 +20,21 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AttendanceController implements Initializable {
+
+    @FXML
+    private JFXButton btnSelectClass;
+
+    @FXML
+    private Label lblExam;
+
+    @FXML
+    private Label lblSubject;
+
+    @FXML
+    private Label lblTeacher;
+
+    @FXML
+    private Label lblClass;
 
     @FXML
     private JFXDatePicker dpDate;
@@ -36,6 +54,18 @@ public class AttendanceController implements Initializable {
     @FXML
     private JFXButton btnSave;
 
+    @FXML
+    private TableView<?> tblAttendence;
+
+    @FXML
+    private TableColumn<?, ?> tcSId;
+
+    @FXML
+    private TableColumn<?, ?> tcStudent;
+
+    @FXML
+    private TableColumn<?, ?> tcStatus;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -54,9 +84,8 @@ public class AttendanceController implements Initializable {
             productsStage.setResizable(false);
             productsStage.initModality(Modality.APPLICATION_MODAL);
 
-            AU_StudentController au = loader.getController();
-
-
+            SelectClassController scc = loader.getController();
+            scc.loadComponents(lblExam, lblSubject, lblTeacher, lblClass);
             productsStage.show();
         } catch (Exception e) {
             e.printStackTrace();

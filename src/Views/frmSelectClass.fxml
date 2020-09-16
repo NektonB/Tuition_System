@@ -14,42 +14,44 @@
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="81.0" prefWidth="669.0">
                      <children>
-                        <JFXComboBox fx:id="cmbStatus" focusColor="#6767cd" labelFloat="true" prefHeight="35.0"
-                                     prefWidth="123.0" promptText="Steam" unFocusColor="#a3a3a3">
+                        <JFXComboBox fx:id="cmbStatus" focusColor="#6767cd" labelFloat="true"
+                                     onHidden="#filterClassTableByStream" prefHeight="35.0" prefWidth="123.0"
+                                     promptText="Steam" unFocusColor="#a3a3a3">
                            <HBox.margin>
                               <Insets left="10.0"/>
                            </HBox.margin>
                         </JFXComboBox>
-                        <JFXComboBox fx:id="cmbExamYear" focusColor="#6747cd" labelFloat="true" prefHeight="35.0"
-                                     prefWidth="109.0" promptText="Exam Year" unFocusColor="#a3a3a3">
+                        <JFXComboBox fx:id="cmbExamYear" focusColor="#6747cd" labelFloat="true"
+                                     onHidden="#filterClassTableByExamYear" prefHeight="35.0" prefWidth="109.0"
+                                     promptText="Exam Year" unFocusColor="#a3a3a3">
                            <HBox.margin>
                               <Insets left="10.0"/>
                            </HBox.margin>
                         </JFXComboBox>
                         <JFXComboBox fx:id="cmbSubject" focusColor="#6747cd" labelFloat="true" layoutX="182.0"
-                                     layoutY="10.0" prefHeight="35.0" prefWidth="127.0" promptText="Subject"
-                                     unFocusColor="#a3a3a3">
+                                     layoutY="10.0" onHidden="#filterClassTableBySubject" prefHeight="35.0"
+                                     prefWidth="127.0" promptText="Subject" unFocusColor="#a3a3a3">
                            <HBox.margin>
                               <Insets left="10.0"/>
                            </HBox.margin>
                         </JFXComboBox>
                         <JFXComboBox fx:id="cmbTeacher" focusColor="#6747cd" labelFloat="true" layoutX="345.0"
-                                     layoutY="10.0" prefHeight="35.0" prefWidth="168.0" promptText="Teacher"
-                                     unFocusColor="#a3a3a3">
+                                     layoutY="10.0" onHidden="#filterClassTableByTeacher" prefHeight="35.0"
+                                     prefWidth="168.0" promptText="Teacher" unFocusColor="#a3a3a3">
                            <HBox.margin>
                               <Insets left="10.0"/>
                            </HBox.margin>
                         </JFXComboBox>
                         <JFXComboBox fx:id="cmbClassType" focusColor="#6747cd" labelFloat="true" layoutX="369.0"
-                                     layoutY="10.0" prefHeight="35.0" prefWidth="168.0" promptText="Class Type"
-                                     unFocusColor="#a3a3a3">
+                                     layoutY="10.0" onHidden="#filterClassTableByClassType" prefHeight="35.0"
+                                     prefWidth="168.0" promptText="Class Type" unFocusColor="#a3a3a3">
                            <HBox.margin>
                               <Insets left="10.0" right="5.0"/>
                            </HBox.margin>
                         </JFXComboBox>
                      </children>
                   </HBox>
-                  <TableView fx:id="tblClass" prefHeight="329.0" prefWidth="700.0">
+                  <TableView fx:id="tblClass" onKeyReleased="#selectTeacher_Key" prefHeight="329.0" prefWidth="700.0">
                      <columns>
                         <TableColumn fx:id="tcId" prefWidth="75.0" text="Id" visible="false"/>
                         <TableColumn fx:id="tcStream" prefWidth="100.0" text="Stream"/>

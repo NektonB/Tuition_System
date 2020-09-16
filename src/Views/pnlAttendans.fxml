@@ -33,7 +33,7 @@
                            <FontAwesomeIconView fill="WHITE" glyphName="PLUS"/>
                        </graphic>
                    </JFXButton>
-                   <Label fx:id="lblClass" text="Exam"/>
+                   <Label fx:id="lblExam" text="Exam"/>
                    <Label fx:id="lblSubject" text="Subject"/>
                    <Label fx:id="lblTeacher" text="Teacher"/>
                    <Label fx:id="lblClass" text="Class"/>
