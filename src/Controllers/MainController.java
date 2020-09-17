@@ -85,6 +85,12 @@ public class MainController implements Initializable {
         rootPane.getChildren().setAll(pane);
     }
 
+    public void loadClassPayment(ActionEvent event) throws IOException {
+        StackPane pane = FXMLLoader.load(getClass().getClassLoader().getResource("Views/pnlClassPayment.fxml"));
+        rootPane.getChildren().setAll(pane);
+
+    }
+
 
     //Load User form (PopUp)**********************
     public void loadUser() {
