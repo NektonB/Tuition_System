@@ -53,14 +53,33 @@ public class AttendanceController implements Initializable {
     @FXML
     private JFXTextField txtIndexNumber;
 
-    DateFormatConverter dateFormatConverter;
-    TimeFormatConverter timeFormatConverter;
-
     @FXML
     private JFXButton btnAdd;
 
     @FXML
     private JFXButton btnSave;
+
+    @FXML
+    private JFXComboBox<String> cmbStudent;
+
+    @FXML
+    private JFXComboBox<String> cmbStatus;
+
+    @FXML
+    private TableView<AttendList> tblAttendance;
+
+    @FXML
+    private TableColumn<AttendList, Integer> tcSId;
+
+    @FXML
+    private TableColumn<AttendList, String> tcStudent;
+
+    @FXML
+    private TableColumn<AttendList, String> tcStatus;
+
+    DateFormatConverter dateFormatConverter;
+    TimeFormatConverter timeFormatConverter;
+
     Alerts alerts;
     DataWriter dataWriter;
     DataReader dataReader;
@@ -68,18 +87,6 @@ public class AttendanceController implements Initializable {
     ACA_Details aca_details;
     User user;
     Student student;
-    @FXML
-    private JFXComboBox<String> cmbStudent;
-    @FXML
-    private JFXComboBox<String> cmbStatus;
-    @FXML
-    private TableView<AttendList> tblAttendance;
-    @FXML
-    private TableColumn<AttendList, Integer> tcSId;
-    @FXML
-    private TableColumn<AttendList, String> tcStudent;
-    @FXML
-    private TableColumn<AttendList, String> tcStatus;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

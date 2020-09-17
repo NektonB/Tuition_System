@@ -45,6 +45,10 @@ public class DataWriter {
     AC_TypeList ac_typeList;
     AC_Attendance ac_attendance;
     ACA_Details aca_details;
+    AC_Payment ac_payment;
+    ACP_Details acp_details;
+    TeacherPayment teacherPayment;
+    TP_Details tp_details;
 
 
     /**
@@ -79,6 +83,10 @@ public class DataWriter {
                 ac_typeList = ObjectGenerator.getAc_typeList();
                 ac_attendance = ObjectGenerator.getAc_attendance();
                 aca_details = ObjectGenerator.getAca_details();
+                ac_payment = ObjectGenerator.getAc_payment();
+                acp_details = ObjectGenerator.getAcp_details();
+                teacherPayment = ObjectGenerator.getTeacherPayment();
+                tp_details = ObjectGenerator.getTp_details();
             });
             readyData.setName("Data Writer");
             readyData.start();
@@ -1099,6 +1107,153 @@ public class DataWriter {
             rs = pst.getGeneratedKeys();
             if (rs.next()) {
                 guardian.setId(rs.getInt(1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return operation;
+    }
+
+    public int saveClassPayment() {
+        int operation = 0;
+        ResultSet rs = null;
+        try {
+            pst = conn.prepareStatement("INSERT INTO ac_payment(ac_type_details_id, year, month, user_id) VALUES (?,?,?,?)", pst.RETURN_GENERATED_KEYS);
+            pst.setInt(1, ac_typeDetails.getId());
+            pst.setString(2, ac_payment.getYear());
+            pst.setString(3, ac_payment.getMonth());
+            pst.setInt(4, user.getId());
+
+            operation = pst.executeUpdate();
+            rs = pst.getGeneratedKeys();
+            if (rs.next()) {
+                ac_payment.setId(rs.getInt(1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return operation;
+    }
+
+    public int saveCP_Details() {
+        int operation = 0;
+        ResultSet rs = null;
+        try {
+            pst = conn.prepareStatement("INSERT INTO acp_details(ac_payment_id, date, time, student_id, pay_status) VALUES (?,?,?,?,?)", pst.RETURN_GENERATED_KEYS);
+            pst.setInt(1, ac_payment.getId());
+            pst.setString(2, acp_details.getDate());
+            pst.setString(3, acp_details.getTime());
+            pst.setInt(4, student.getId());
+            pst.setString(5, acp_details.getPayStatus());
+
+            operation = pst.executeUpdate();
+            rs = pst.getGeneratedKeys();
+            if (rs.next()) {
+                acp_details.setId(rs.getInt(1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return operation;
+    }
+
+    public int updateCP_Details() {
+        int operation = 0;
+        ResultSet rs = null;
+        try {
+            pst = conn.prepareStatement("UPDATE acp_details SET pay_status = ? WHERE id = ?", pst.RETURN_GENERATED_KEYS);
+            pst.setString(1, acp_details.getPayStatus());
+            pst.setInt(2, acp_details.getId());
+
+            operation = pst.executeUpdate();
+            rs = pst.getGeneratedKeys();
+            if (rs.next()) {
+                acp_details.setId(rs.getInt(1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return operation;
+    }
+
+    public int[] saveAll_CP_Details() {
+        int[] operation = {};
+        ResultSet rs = null;
+        PreparedStatement pstStudentList;
+        try {
+            conn.setAutoCommit(false);
+
+            pst = conn.prepareStatement("INSERT INTO acp_details(ac_payment_id, date, time, student_id, pay_status) VALUES (?,?,?,?,?)", pst.RETURN_GENERATED_KEYS);
+
+            pstStudentList = conn.prepareStatement("SELECT tbl_student_id FROM ac_type_list WHERE ac_type_details_id = ? AND status = '1' ");
+            pstStudentList.setInt(1, ac_typeDetails.getId());
+            rs = pstStudentList.executeQuery();
+            while (rs.next()) {
+
+                student.setId(rs.getInt(1));
+                boolean isAlready = dataReader.checkCP_Details();
+
+                if (!isAlready) {
+                    pst.setInt(1, ac_payment.getId());
+                    pst.setString(2, acp_details.getDate());
+                    pst.setString(3, acp_details.getTime());
+                    pst.setInt(4, student.getId());
+                    pst.setString(5, "Not Payed");
+                    pst.addBatch();
+                }
+            }
+
+            operation = pst.executeBatch();
+            conn.commit();
+            conn.setAutoCommit(true);
+
+            rs = pst.getGeneratedKeys();
+            if (rs.next()) {
+                acp_details.setId(rs.getInt(1));
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -47,6 +47,10 @@ public class DataReader {
     AC_TypeList ac_typeList;
     AC_Attendance ac_attendance;
     ACA_Details aca_details;
+    AC_Payment ac_payment;
+    ACP_Details acp_details;
+    TeacherPayment teacherPayment;
+    TP_Details tp_details;
 
     public DataReader() {
         try {
@@ -76,6 +80,10 @@ public class DataReader {
                 ac_typeList = ObjectGenerator.getAc_typeList();
                 ac_attendance = ObjectGenerator.getAc_attendance();
                 aca_details = ObjectGenerator.getAca_details();
+                ac_payment = ObjectGenerator.getAc_payment();
+                acp_details = ObjectGenerator.getAcp_details();
+                teacherPayment = ObjectGenerator.getTeacherPayment();
+                tp_details = ObjectGenerator.getTp_details();
 
             });
             readyData.setName("DataReader");
@@ -2348,6 +2356,115 @@ public class DataReader {
                 e.printStackTrace();
             }
         }
+    }
+
+    public boolean checkClassPayment() {
+        boolean isAlready = false;
+        ResultSet rs = null;
+        try {
+            pst = conn.prepareStatement("SELECT id FROM ac_payment WHERE year = ? AND month = ? AND ac_type_details_id = ?");
+            pst.setString(1, ac_payment.getYear());
+            pst.setString(2, ac_payment.getMonth());
+            pst.setInt(3, ac_typeDetails.getId());
+            rs = pst.executeQuery();
+
+            if (!rs.isBeforeFirst()) {
+                //ac_attendance.resetAll();
+            }
+            if (rs.next()) {
+                ac_payment.setId(rs.getInt(1));
+                isAlready = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return isAlready;
+    }
+
+    public void fillClassFeesTable(TableView tblClassPayment) {
+        ResultSet rs = null;
+        ObservableList<ClassPaymentController.PaymentList> paymentLists = FXCollections.observableArrayList();
+        try {
+            pst = conn.prepareStatement("SELECT acpd.id,s.id,s.fname,s.lname,acpd.pay_status FROM acp_details acpd INNER JOIN ac_payment acp on acpd.ac_payment_id = acp.id INNER JOIN student s on acpd.student_id = s.id WHERE acp.ac_type_details_id = ? AND acp.year = ? AND acp.month = ? ");
+            pst.setInt(1, ac_typeDetails.getId());
+            pst.setString(2, ac_payment.getYear());
+            pst.setString(3, ac_payment.getMonth());
+
+            rs = pst.executeQuery();
+            if (!rs.isBeforeFirst()) {
+                teacher.resetAll();
+            }
+            while (rs.next()) {
+                paymentLists.add(
+                        new ClassPaymentController.PaymentList(
+                                rs.getInt("acpd.id"),
+                                rs.getInt("s.id"),
+                                rs.getString("s.fname") + " " + rs.getString("s.lname"),
+                                rs.getString("acpd.pay_status")
+                        )
+                );
+            }
+            tblClassPayment.setItems(paymentLists);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public boolean checkCP_Details() {
+        boolean isAlready = false;
+        ResultSet rs = null;
+        try {
+            pst = conn.prepareStatement("SELECT acpd.id FROM acp_details acpd INNER JOIN ac_payment acp on acpd.ac_payment_id = acp.id INNER JOIN student s on acpd.student_id = s.id WHERE acp.year = ? AND acp.month = ? AND acp.ac_type_details_id = ? AND s.id = ?");
+            pst.setString(1, ac_payment.getYear());
+            pst.setString(2, ac_payment.getMonth());
+            pst.setInt(3, ac_typeDetails.getId());
+            pst.setInt(4, student.getId());
+            rs = pst.executeQuery();
+
+            if (!rs.isBeforeFirst()) {
+                //ac_attendance.resetAll();
+            }
+            if (rs.next()) {
+                acp_details.setId(rs.getInt(1));
+                isAlready = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return isAlready;
     }
 
 }

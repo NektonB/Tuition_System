@@ -1,31 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.*?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import java.net.URL?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-
-<StackPane prefHeight="532.0" prefWidth="925.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <BorderPane prefHeight="200.0" prefWidth="200.0">
-         <top>
-            <Pane prefHeight="32.0" prefWidth="925.0" style="-fx-background-color: #2D75E8;" BorderPane.alignment="CENTER">
-               <children>
-                  <Label layoutX="13.0" layoutY="5.0" text="Home/Class Payment" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Label>
+<?import java.net.URL?>
+<StackPane xmlns:fx="http://javafx.com/fxml/1" onKeyReleased="#payAll_Key" prefHeight="532.0" prefWidth="925.0"
+           xmlns="http://javafx.com/javafx/8.0.171" fx:controller="Controllers.ClassPaymentController">
+    <children>
+        <BorderPane prefHeight="200.0" prefWidth="200.0">
+            <top>
+                <Pane prefHeight="32.0" prefWidth="925.0" style="-fx-background-color: #2D75E8;"
+                      BorderPane.alignment="CENTER">
+                    <children>
+                        <Label layoutX="13.0" layoutY="5.0" text="Home/Class Payment" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="14.0"/>
+                            </font>
+                        </Label>
                </children>
             </Pane>
          </top>
@@ -35,11 +29,12 @@
                   <Insets left="10.0" right="10.0" top="15.0" />
                </padding>
                <children>
-                  <JFXButton fx:id="btnSelectClass" prefHeight="43.0" prefWidth="257.0" ripplerFill="#0777ff" text="Select Class">
-                     <graphic>
-                        <FontAwesomeIconView fill="WHITE" glyphName="PLUS" />
-                     </graphic>
-                  </JFXButton>
+                   <JFXButton fx:id="btnSelectClass" onAction="#load_Class" prefHeight="43.0" prefWidth="257.0"
+                              ripplerFill="#0777ff" text="Select Class">
+                       <graphic>
+                           <FontAwesomeIconView fill="WHITE" glyphName="PLUS"/>
+                       </graphic>
+                   </JFXButton>
                   <Label fx:id="lblExam" text="Exam">
                      <VBox.margin>
                         <Insets left="10.0" top="15.0" />
@@ -55,58 +50,51 @@
                         <Insets left="10.0" />
                      </VBox.margin>
                   </Label>
-                  <Label fx:id="lblClass" text="Class">
-                     <VBox.margin>
-                        <Insets left="10.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label fx:id="lblClass1" layoutX="20.0" layoutY="119.0" text="Steam ">
-                     <VBox.margin>
-                        <Insets left="10.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label fx:id="lblClass11" layoutX="20.0" layoutY="136.0" text="Year">
-                     <VBox.margin>
-                        <Insets left="10.0" />
-                     </VBox.margin>
-                  </Label>
-                  <JFXComboBox fx:id="cmbStudent" focusColor="#6981c9" labelFloat="true" prefHeight="25.0" prefWidth="386.0" promptText="Year" unFocusColor="#a3a3a3">
-                     <VBox.margin>
-                        <Insets top="15.0" />
-                     </VBox.margin>
-                  </JFXComboBox>
-                  <JFXComboBox fx:id="cmbStatus" focusColor="#6981c9" labelFloat="true" prefHeight="25.0" prefWidth="386.0" promptText="Month" unFocusColor="#a3a3a3">
-                     <VBox.margin>
-                        <Insets top="30.0" />
-                     </VBox.margin>
-                  </JFXComboBox>
-                  <JFXComboBox fx:id="cmbStatus11" focusColor="#6981c9" labelFloat="true" layoutX="20.0" layoutY="325.0" prefHeight="25.0" prefWidth="386.0" promptText="Index No" unFocusColor="#a3a3a3">
-                     <VBox.margin>
-                        <Insets top="30.0" />
-                     </VBox.margin>
-                  </JFXComboBox>
-                  <JFXComboBox fx:id="cmbStatus1" focusColor="#6981c9" labelFloat="true" layoutX="20.0" layoutY="260.0" prefHeight="25.0" prefWidth="386.0" promptText="Student" unFocusColor="#a3a3a3">
-                     <VBox.margin>
-                        <Insets top="30.0" />
-                     </VBox.margin>
-                  </JFXComboBox>
-                  <Label fx:id="lblClass12" layoutX="20.0" layoutY="141.0" text="Attendance Count" textFill="#725757">
-                     <padding>
-                        <Insets top="30.0" />
-                     </padding>
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Label>
-                  <HBox alignment="CENTER" layoutX="20.0" layoutY="335.0" prefHeight="64.0" prefWidth="257.0">
-                     <children>
-                        <JFXButton fx:id="btnAdd" prefHeight="46.0" prefWidth="126.0" text="Pay" />
-                        <JFXButton fx:id="btnSave" layoutX="84.0" layoutY="19.0" prefHeight="46.0" prefWidth="125.0" text="Pay All">
-                           <HBox.margin>
-                              <Insets left="5.0" />
-                           </HBox.margin>
-                        </JFXButton>
-                     </children>
+                   <Label fx:id="lblClass" text="Class">
+                       <VBox.margin>
+                           <Insets left="10.0"/>
+                       </VBox.margin>
+                   </Label>
+                   <JFXComboBox fx:id="cmbYear" focusColor="#6981c9" labelFloat="true" prefHeight="25.0"
+                                prefWidth="386.0" promptText="Year" unFocusColor="#a3a3a3">
+                       <VBox.margin>
+                           <Insets top="15.0"/>
+                       </VBox.margin>
+                   </JFXComboBox>
+                   <JFXComboBox fx:id="cmbMonth" focusColor="#6981c9" labelFloat="true" prefHeight="25.0"
+                                prefWidth="386.0" promptText="Month" unFocusColor="#a3a3a3">
+                       <VBox.margin>
+                           <Insets top="30.0"/>
+                       </VBox.margin>
+                   </JFXComboBox>
+                   <JFXTextField fx:id="txtIndexNumber" onKeyReleased="#payFees_Key" promptText="Index Number">
+                       <VBox.margin>
+                           <Insets top="30.0"/>
+                       </VBox.margin>
+                   </JFXTextField>
+                   <JFXComboBox fx:id="cmbStudent" focusColor="#6981c9" labelFloat="true" layoutX="20.0" layoutY="260.0"
+                                prefHeight="25.0" prefWidth="386.0" promptText="Student" unFocusColor="#a3a3a3">
+                       <VBox.margin>
+                           <Insets top="30.0"/>
+                       </VBox.margin>
+                   </JFXComboBox>
+                   <JFXComboBox fx:id="cmbStatus" focusColor="#6981c9" labelFloat="true" prefHeight="25.0"
+                                prefWidth="386.0" promptText="Pay Status" unFocusColor="#a3a3a3">
+                       <VBox.margin>
+                           <Insets top="30.0"/>
+                       </VBox.margin>
+                   </JFXComboBox>
+                   <HBox alignment="CENTER" layoutX="20.0" layoutY="335.0" prefHeight="64.0" prefWidth="257.0">
+                       <children>
+                           <JFXButton fx:id="btnPay" onAction="#payFees" prefHeight="46.0" prefWidth="126.0"
+                                      text="Pay"/>
+                           <JFXButton fx:id="btnPayAll" layoutX="84.0" layoutY="19.0" onAction="#payAll"
+                                      prefHeight="46.0" prefWidth="125.0" text="Pay All">
+                               <HBox.margin>
+                                   <Insets left="5.0"/>
+                               </HBox.margin>
+                           </JFXButton>
+                       </children>
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
@@ -115,17 +103,18 @@
             </VBox>
          </left>
          <center>
-            <TableView fx:id="tblAttendance" prefHeight="218.0" prefWidth="450.0" BorderPane.alignment="CENTER">
-               <columns>
-                  <TableColumn fx:id="tcSId" prefWidth="75.0" text="Id" visible="false" />
-                  <TableColumn fx:id="tcStudent" prefWidth="316.0" text="Payment ID" />
-                  <TableColumn fx:id="tcStatus" prefWidth="330.0" text="Student" />
-                  <TableColumn fx:id="tcStudent1" prefWidth="316.0" text="Student" />
-               </columns>
-               <columnResizePolicy>
-                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-               </columnResizePolicy>
-            </TableView>
+             <TableView fx:id="tblClassPayment" onKeyReleased="#selectPayDetail_key" prefHeight="218.0"
+                        prefWidth="450.0" BorderPane.alignment="CENTER">
+                 <columns>
+                     <TableColumn fx:id="tcPaymentId" prefWidth="316.0" text="Payment ID" visible="false"/>
+                     <TableColumn fx:id="tcSId" prefWidth="75.0" text="Student ID" visible="false"/>
+                     <TableColumn fx:id="tcStudent" prefWidth="330.0" text="Student"/>
+                     <TableColumn fx:id="tcStatus" prefWidth="316.0" text="Student"/>
+                 </columns>
+                 <columnResizePolicy>
+                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                 </columnResizePolicy>
+             </TableView>
          </center>
       </BorderPane>
    </children>
