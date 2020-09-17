@@ -3,7 +3,6 @@ package Controllers;
 import eu.hansolo.enzo.notification.Notification;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
 import javafx.stage.StageStyle;
 
 import java.awt.*;

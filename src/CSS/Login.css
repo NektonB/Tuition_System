@@ -1,32 +1,32 @@
-.parant{
+.parant {
     -fx-background-color: white;
 }
 
-.sidebar{
+.sidebar {
     -fx-background-color: #6747CD;
 }
 
-.contentbar{
+.contentbar {
     -fx-background-color: #fff;
 }
 
-.forgotBtn{
+.forgotBtn {
     -fx-text-fill: #a3a3a3;
 }
 
-.forgotBtn:hover{
+.forgotBtn:hover {
     -fx-text-fill: #6747CD;
     -fx-underline: true;
 }
 
-.loginBtn{
+.loginBtn {
     -fx-background-color: #6747CD;
     -fx-text-fill: #fff;
     -fx-background-radius: 5px;
     -fx-border-radius: 5px;
 }
 
-.loginBtn:hover{
+.loginBtn:hover {
     -fx-background-color: transparent;
     -fx-text-fill: #6747CD;
     -fx-border-color: #6747CD;
@@ -34,7 +34,7 @@
     -fx-background-radius: 5px;
 }
 
-.Register_form{
+.Register_form {
     -fx-background-color: #f1f1ff;
 }
 

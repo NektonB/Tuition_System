@@ -4,7 +4,7 @@ public class School {
     private int id;
     private String name = "";
 
-    public void resetAll(){
+    public void resetAll() {
         setId(0);
         setName("");
     }

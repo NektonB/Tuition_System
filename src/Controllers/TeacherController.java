@@ -1,13 +1,8 @@
 package Controllers;
 
 import DataControllers.DataReader;
-import Modules.Employee;
 import Modules.Teacher;
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXTextArea;
-import com.jfoenix.controls.JFXTextField;
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -16,7 +11,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -29,46 +27,33 @@ import java.util.ResourceBundle;
 
 public class TeacherController implements Initializable {
 
-    @FXML
-    private TextField txtSearch;
-
-    @FXML
-    private ComboBox<String> cmbOption;
-
-    @FXML
-    private JFXButton btnAdd;
-
-    @FXML
-    private TableView<TeachersList> tblTeacher;
-
-    @FXML
-    private TableColumn<TeachersList, Integer> tcId;
-
-    @FXML
-    private TableColumn<TeachersList, String> tcName;
-
-    @FXML
-    private TableColumn<TeachersList, String> tcNIC;
-
-    @FXML
-    private TableColumn<TeachersList, String> tcAddress;
-
-    @FXML
-    private TableColumn<TeachersList, String> tcContact;
-
-    @FXML
-    private TableColumn<TeachersList, String> tcEmail;
-
-    @FXML
-    private TableColumn<TeachersList, String> tcSubject;
-
-    @FXML
-    private TableColumn<TeachersList, String> tcStatus;
-
     DataReader dataReader;
     Alerts alerts;
-
     Teacher teacher;
+    @FXML
+    private TextField txtSearch;
+    @FXML
+    private ComboBox<String> cmbOption;
+    @FXML
+    private JFXButton btnAdd;
+    @FXML
+    private TableView<TeachersList> tblTeacher;
+    @FXML
+    private TableColumn<TeachersList, Integer> tcId;
+    @FXML
+    private TableColumn<TeachersList, String> tcName;
+    @FXML
+    private TableColumn<TeachersList, String> tcNIC;
+    @FXML
+    private TableColumn<TeachersList, String> tcAddress;
+    @FXML
+    private TableColumn<TeachersList, String> tcContact;
+    @FXML
+    private TableColumn<TeachersList, String> tcEmail;
+    @FXML
+    private TableColumn<TeachersList, String> tcSubject;
+    @FXML
+    private TableColumn<TeachersList, String> tcStatus;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -199,96 +184,96 @@ public class TeacherController implements Initializable {
             return id.get();
         }
 
-        public SimpleIntegerProperty idProperty() {
-            return id;
-        }
-
         public void setId(int id) {
             this.id.set(id);
+        }
+
+        public SimpleIntegerProperty idProperty() {
+            return id;
         }
 
         public String getName() {
             return name.get();
         }
 
-        public SimpleStringProperty nameProperty() {
-            return name;
-        }
-
         public void setName(String name) {
             this.name.set(name);
+        }
+
+        public SimpleStringProperty nameProperty() {
+            return name;
         }
 
         public String getNic() {
             return nic.get();
         }
 
-        public SimpleStringProperty nicProperty() {
-            return nic;
-        }
-
         public void setNic(String nic) {
             this.nic.set(nic);
+        }
+
+        public SimpleStringProperty nicProperty() {
+            return nic;
         }
 
         public String getAddress() {
             return address.get();
         }
 
-        public SimpleStringProperty addressProperty() {
-            return address;
-        }
-
         public void setAddress(String address) {
             this.address.set(address);
+        }
+
+        public SimpleStringProperty addressProperty() {
+            return address;
         }
 
         public String getMobile() {
             return mobile.get();
         }
 
-        public SimpleStringProperty mobileProperty() {
-            return mobile;
-        }
-
         public void setMobile(String mobile) {
             this.mobile.set(mobile);
+        }
+
+        public SimpleStringProperty mobileProperty() {
+            return mobile;
         }
 
         public String getEmail() {
             return email.get();
         }
 
-        public SimpleStringProperty emailProperty() {
-            return email;
-        }
-
         public void setEmail(String email) {
             this.email.set(email);
+        }
+
+        public SimpleStringProperty emailProperty() {
+            return email;
         }
 
         public String getSubjects() {
             return subjects.get();
         }
 
-        public SimpleStringProperty subjectsProperty() {
-            return subjects;
-        }
-
         public void setSubjects(String subjects) {
             this.subjects.set(subjects);
+        }
+
+        public SimpleStringProperty subjectsProperty() {
+            return subjects;
         }
 
         public String getStatus() {
             return status.get();
         }
 
-        public SimpleStringProperty statusProperty() {
-            return status;
-        }
-
         public void setStatus(String status) {
             this.status.set(status);
+        }
+
+        public SimpleStringProperty statusProperty() {
+            return status;
         }
     }
 

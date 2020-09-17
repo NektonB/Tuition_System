@@ -27,35 +27,27 @@ import java.util.ResourceBundle;
 
 public class UserRegistration implements Initializable {
 
-    @FXML
-    private JFXTextField txt_nic;
-
-    @FXML
-    private JFXPasswordField txt_password;
-
-    @FXML
-    private Label lbl_update_user;
-
-    @FXML
-    private JFXButton btn_login;
-
-    @FXML
-    private JFXTextField txt_userName;
-
-    @FXML
-    private JFXComboBox<String> cmb_status;
-
-    @FXML
-    private JFXComboBox<String> cmb_userType;
-
     DataReader dataReader;
     DataWriter dataWriter;
     Alerts alerts;
-
     User user;
     UserType userType;
     Employee employee;
     Status status;
+    @FXML
+    private JFXTextField txt_nic;
+    @FXML
+    private JFXPasswordField txt_password;
+    @FXML
+    private Label lbl_update_user;
+    @FXML
+    private JFXButton btn_login;
+    @FXML
+    private JFXTextField txt_userName;
+    @FXML
+    private JFXComboBox<String> cmb_status;
+    @FXML
+    private JFXComboBox<String> cmb_userType;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

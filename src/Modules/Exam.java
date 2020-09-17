@@ -5,7 +5,7 @@ public class Exam {
     private int id;
     private String exam = "";
 
-    public void resetAll(){
+    public void resetAll() {
         setId(0);
         setExam("");
     }

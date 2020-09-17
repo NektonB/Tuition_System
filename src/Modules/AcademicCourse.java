@@ -5,7 +5,7 @@ public class AcademicCourse {
     private int id;
     private String exam_year = "";
 
-    public void resetAll(){
+    public void resetAll() {
         setId(0);
         setExam_year("");
     }

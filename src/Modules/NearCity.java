@@ -5,7 +5,7 @@ public class NearCity {
     private int id;
     private String city = "";
 
-    public void resetAll(){
+    public void resetAll() {
         setId(0);
         setCity("");
     }

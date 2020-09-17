@@ -20,13 +20,12 @@ import java.util.ResourceBundle;
 public class ParantController implements Initializable {
 
     DataReader dataReader;
-
-    @FXML
-    private FontAwesomeIconView btnClose;
     DataWriter dataWriter;
     Alerts alerts;
     Guardian guardian;
     JFXComboBox<String> cmbParents;
+    @FXML
+    private FontAwesomeIconView btnClose;
     @FXML
     private Label lblFrameTitle;
     @FXML

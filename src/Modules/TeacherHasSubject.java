@@ -1,7 +1,6 @@
 package Modules;
 
 import java.util.HashMap;
-import java.util.Vector;
 
 public class TeacherHasSubject {
     private int id;

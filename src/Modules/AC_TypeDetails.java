@@ -8,7 +8,7 @@ public class AC_TypeDetails {
     private Vector<Integer> ids;
     private int[][] actd;
 
-    public void resetAll(){
+    public void resetAll() {
         setId(0);
         setIds(null);
         setActd(null);

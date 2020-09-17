@@ -31,113 +31,9 @@ import java.util.ResourceBundle;
 
 public class AU_StudentController implements Initializable {
 
-    @FXML
-    private Label lblTitle;
-
-    @FXML
-    private JFXTextField txtIndexNumber;
-
-    @FXML
-    private FontAwesomeIconView btnClose;
-
-    @FXML
-    private JFXTextField txtFName;
-
-    @FXML
-    private JFXTextField txtLName;
-
-    @FXML
-    private JFXTextField txtNIC;
-
-    @FXML
-    private JFXTextArea txtAddress;
-
-    @FXML
-    private JFXTextField txtMobile;
-
-    @FXML
-    private JFXTextField txtEmail;
-
-    @FXML
-    private JFXComboBox<String> cmbNearCity;
-
-    @FXML
-    private JFXComboBox<String> cmbSchool;
-
-    @FXML
-    private JFXComboBox<String> cmbStream;
-
-    @FXML
-    private JFXComboBox<String> cmbGrade;
-
-    @FXML
-    private JFXComboBox<String> cmbExamYear;
-
-    @FXML
-    private JFXComboBox<String> cmbSubject;
-
-    @FXML
-    private JFXComboBox<String> cmbTeacher;
-
-    @FXML
-    private JFXComboBox<String> cmbExam;
-
-    @FXML
-    private JFXComboBox<String> cmbStatus;
-
-    @FXML
-    private TableView<SubjectList> tblSubjectInfo;
-
-    @FXML
-    private TableColumn<SubjectList, Integer> tcSubId;
-
-    @FXML
-    private TableColumn<SubjectList, String> tcSubject;
-
-    @FXML
-    private TableColumn<SubjectList, Integer> tcTeacherId;
-
-    @FXML
-    private TableColumn<SubjectList, String> tcTeacher;
-
-    @FXML
-    private TableColumn<SubjectList, JFXCheckBox> tcTheory;
-
-    @FXML
-    private TableColumn<SubjectList, JFXCheckBox> tcRevision;
-
-    @FXML
-    private TableColumn<SubjectList, JFXCheckBox> tcPaper;
-
-    @FXML
-    private JFXComboBox<String> cmbParents;
-
-    @FXML
-    private FontAwesomeIconView btnAddParent;
-
-    @FXML
-    private TableView<ParentList> tblParent;
-
-    @FXML
-    private TableColumn<ParentList, Integer> tcId;
-
-    @FXML
-    private TableColumn<ParentList, String> tcName;
-
-    @FXML
-    private TableColumn<ParentList, String> tcHome;
-
-    @FXML
-    private TableColumn<ParentList, String> tcMobile;
-
-    @FXML
-    private JFXButton btnSave;
-
-
     DataReader dataReader;
     DataWriter dataWriter;
     Alerts alerts;
-
     NearCity nearCity;
     UserType userType;
     School school;
@@ -152,12 +48,78 @@ public class AU_StudentController implements Initializable {
     AC_Class ac_class;
     AC_TypeDetails ac_typeDetails;
     AC_TypeList ac_typeList;
-
     HashMap<String, String> actionList = new HashMap<>();
     HashMap<String, SubjectList> subList = new HashMap<>();
-
     HashMap<Integer, String> actionListP = new HashMap<>();
     HashMap<Integer, ParentList> guaList = new HashMap<>();
+    @FXML
+    private Label lblTitle;
+    @FXML
+    private JFXTextField txtIndexNumber;
+    @FXML
+    private FontAwesomeIconView btnClose;
+    @FXML
+    private JFXTextField txtFName;
+    @FXML
+    private JFXTextField txtLName;
+    @FXML
+    private JFXTextField txtNIC;
+    @FXML
+    private JFXTextArea txtAddress;
+    @FXML
+    private JFXTextField txtMobile;
+    @FXML
+    private JFXTextField txtEmail;
+    @FXML
+    private JFXComboBox<String> cmbNearCity;
+    @FXML
+    private JFXComboBox<String> cmbSchool;
+    @FXML
+    private JFXComboBox<String> cmbStream;
+    @FXML
+    private JFXComboBox<String> cmbGrade;
+    @FXML
+    private JFXComboBox<String> cmbExamYear;
+    @FXML
+    private JFXComboBox<String> cmbSubject;
+    @FXML
+    private JFXComboBox<String> cmbTeacher;
+    @FXML
+    private JFXComboBox<String> cmbExam;
+    @FXML
+    private JFXComboBox<String> cmbStatus;
+    @FXML
+    private TableView<SubjectList> tblSubjectInfo;
+    @FXML
+    private TableColumn<SubjectList, Integer> tcSubId;
+    @FXML
+    private TableColumn<SubjectList, String> tcSubject;
+    @FXML
+    private TableColumn<SubjectList, Integer> tcTeacherId;
+    @FXML
+    private TableColumn<SubjectList, String> tcTeacher;
+    @FXML
+    private TableColumn<SubjectList, JFXCheckBox> tcTheory;
+    @FXML
+    private TableColumn<SubjectList, JFXCheckBox> tcRevision;
+    @FXML
+    private TableColumn<SubjectList, JFXCheckBox> tcPaper;
+    @FXML
+    private JFXComboBox<String> cmbParents;
+    @FXML
+    private FontAwesomeIconView btnAddParent;
+    @FXML
+    private TableView<ParentList> tblParent;
+    @FXML
+    private TableColumn<ParentList, Integer> tcId;
+    @FXML
+    private TableColumn<ParentList, String> tcName;
+    @FXML
+    private TableColumn<ParentList, String> tcHome;
+    @FXML
+    private TableColumn<ParentList, String> tcMobile;
+    @FXML
+    private JFXButton btnSave;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -902,48 +864,48 @@ public class AU_StudentController implements Initializable {
             return subId.get();
         }
 
-        public SimpleIntegerProperty subIdProperty() {
-            return subId;
-        }
-
         public void setSubId(int subId) {
             this.subId.set(subId);
+        }
+
+        public SimpleIntegerProperty subIdProperty() {
+            return subId;
         }
 
         public String getSubject() {
             return subject.get();
         }
 
-        public SimpleStringProperty subjectProperty() {
-            return subject;
-        }
-
         public void setSubject(String subject) {
             this.subject.set(subject);
+        }
+
+        public SimpleStringProperty subjectProperty() {
+            return subject;
         }
 
         public int getTeacherId() {
             return teacherId.get();
         }
 
-        public SimpleIntegerProperty teacherIdProperty() {
-            return teacherId;
-        }
-
         public void setTeacherId(int teacherId) {
             this.teacherId.set(teacherId);
+        }
+
+        public SimpleIntegerProperty teacherIdProperty() {
+            return teacherId;
         }
 
         public String getTeacher() {
             return teacher.get();
         }
 
-        public SimpleStringProperty teacherProperty() {
-            return teacher;
-        }
-
         public void setTeacher(String teacher) {
             this.teacher.set(teacher);
+        }
+
+        public SimpleStringProperty teacherProperty() {
+            return teacher;
         }
 
         public JFXCheckBox getCbTheory() {
@@ -988,48 +950,48 @@ public class AU_StudentController implements Initializable {
             return id.get();
         }
 
-        public SimpleIntegerProperty idProperty() {
-            return id;
-        }
-
         public void setId(int id) {
             this.id.set(id);
+        }
+
+        public SimpleIntegerProperty idProperty() {
+            return id;
         }
 
         public String getName() {
             return name.get();
         }
 
-        public SimpleStringProperty nameProperty() {
-            return name;
-        }
-
         public void setName(String name) {
             this.name.set(name);
+        }
+
+        public SimpleStringProperty nameProperty() {
+            return name;
         }
 
         public String getHome() {
             return home.get();
         }
 
-        public SimpleStringProperty homeProperty() {
-            return home;
-        }
-
         public void setHome(String home) {
             this.home.set(home);
+        }
+
+        public SimpleStringProperty homeProperty() {
+            return home;
         }
 
         public String getMobile() {
             return mobile.get();
         }
 
-        public SimpleStringProperty mobileProperty() {
-            return mobile;
-        }
-
         public void setMobile(String mobile) {
             this.mobile.set(mobile);
+        }
+
+        public SimpleStringProperty mobileProperty() {
+            return mobile;
         }
     }
 

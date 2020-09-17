@@ -5,7 +5,7 @@ public class ACC_Type {
     private int id;
     private String type = "";
 
-    public void resetAll(){
+    public void resetAll() {
         setId(0);
         setType("");
     }

@@ -2,99 +2,93 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-
-<StackPane prefHeight="532.0" prefWidth="925.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.StudentController">
-   <children>
-      <BorderPane prefHeight="200.0" prefWidth="200.0">
-         <top>
-            <GridPane prefHeight="88.0" prefWidth="925.0" BorderPane.alignment="TOP_LEFT">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints maxHeight="91.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="87.0" minHeight="8.0" prefHeight="52.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <Pane prefHeight="50.0" prefWidth="925.0" style="-fx-background-color: #2D75E8;">
-                     <children>
-                        <Label layoutX="13.0" layoutY="5.0" text="Home/Student" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </Pane>
-                  <HBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="925.0" GridPane.rowIndex="1">
-                     <padding>
-                        <Insets left="10.0" />
-                     </padding>
-                     <children>
-                        <FontAwesomeIconView fill="#503ec6" glyphName="SEARCH" size="17" wrappingWidth="21.142857551574707" />
-                        <TextField fx:id="txt_search" prefHeight="30.0" prefWidth="372.0" style="-fx-border-color: #3F2B63;" />
-                        <ComboBox fx:id="cmb_option" prefHeight="32.0" prefWidth="150.0">
-                           <HBox.margin>
-                              <Insets left="5.0" />
-                           </HBox.margin>
-                        </ComboBox>
-                        <JFXButton fx:id="btnAdd" onAction="#loadAU_Student" prefHeight="35.0" prefWidth="163.0" ripplerFill="#0777ff" text="Add Student">
-                           <HBox.margin>
-                              <Insets left="10.0" />
-                           </HBox.margin>
-                           <graphic>
-                              <FontAwesomeIconView fill="WHITE" glyphName="PLUS" />
-                           </graphic>
-                        </JFXButton>
-                     </children>
-                  </HBox>
-               </children>
-            </GridPane>
-         </top>
-         <center>
-            <GridPane prefHeight="436.0" prefWidth="925.0" BorderPane.alignment="CENTER">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <TableView fx:id="tblStudent" onKeyReleased="#selectStudent_Key" prefHeight="251.0" prefWidth="925.0">
-                     <columns>
-                        <TableColumn fx:id="tcId" prefWidth="75.0" text="Id" visible="false" />
-                        <TableColumn fx:id="tcName" prefWidth="75.0" text="Name" />
-                        <TableColumn fx:id="tcNIC" prefWidth="75.0" text="NIC number" />
-                        <TableColumn fx:id="tcAddress" prefWidth="75.0" text="Address" />
-                        <TableColumn fx:id="tcMobile" prefWidth="75.0" text="Mobile Number" />
-                        <TableColumn fx:id="tcEmail" prefWidth="75.0" text="Email" />
-                        <TableColumn fx:id="tcStatus" prefWidth="75.0" text="Status" />
-                     </columns>
-                     <columnResizePolicy>
-                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                     </columnResizePolicy>
-                  </TableView>
-               </children>
-            </GridPane>
-         </center>
-      </BorderPane>
-   </children>
-   <stylesheets>
-      <URL value="@../CSS/Table.css" />
-      <URL value="@../CSS/Scence.css" />
-   </stylesheets>
+<?import java.net.URL?>
+<StackPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="532.0" prefWidth="925.0"
+           xmlns="http://javafx.com/javafx/8.0.171" fx:controller="Controllers.StudentController">
+    <children>
+        <BorderPane prefHeight="200.0" prefWidth="200.0">
+            <top>
+                <GridPane prefHeight="88.0" prefWidth="925.0" BorderPane.alignment="TOP_LEFT">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints maxHeight="91.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES"/>
+                        <RowConstraints maxHeight="87.0" minHeight="8.0" prefHeight="52.0" vgrow="SOMETIMES"/>
+                    </rowConstraints>
+                    <children>
+                        <Pane prefHeight="50.0" prefWidth="925.0" style="-fx-background-color: #2D75E8;">
+                            <children>
+                                <Label layoutX="13.0" layoutY="5.0" text="Home/Student" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="14.0"/>
+                                    </font>
+                                </Label>
+                            </children>
+                        </Pane>
+                        <HBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="925.0" GridPane.rowIndex="1">
+                            <padding>
+                                <Insets left="10.0"/>
+                            </padding>
+                            <children>
+                                <FontAwesomeIconView fill="#503ec6" glyphName="SEARCH" size="17"
+                                                     wrappingWidth="21.142857551574707"/>
+                                <TextField fx:id="txt_search" prefHeight="30.0" prefWidth="372.0"
+                                           style="-fx-border-color: #3F2B63;"/>
+                                <ComboBox fx:id="cmb_option" prefHeight="32.0" prefWidth="150.0">
+                                    <HBox.margin>
+                                        <Insets left="5.0"/>
+                                    </HBox.margin>
+                                </ComboBox>
+                                <JFXButton fx:id="btnAdd" onAction="#loadAU_Student" prefHeight="35.0" prefWidth="163.0"
+                                           ripplerFill="#0777ff" text="Add Student">
+                                    <HBox.margin>
+                                        <Insets left="10.0"/>
+                                    </HBox.margin>
+                                    <graphic>
+                                        <FontAwesomeIconView fill="WHITE" glyphName="PLUS"/>
+                                    </graphic>
+                                </JFXButton>
+                            </children>
+                        </HBox>
+                    </children>
+                </GridPane>
+            </top>
+            <center>
+                <GridPane prefHeight="436.0" prefWidth="925.0" BorderPane.alignment="CENTER">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                    </rowConstraints>
+                    <children>
+                        <TableView fx:id="tblStudent" onKeyReleased="#selectStudent_Key" prefHeight="251.0"
+                                   prefWidth="925.0">
+                            <columns>
+                                <TableColumn fx:id="tcId" prefWidth="75.0" text="Id" visible="false"/>
+                                <TableColumn fx:id="tcName" prefWidth="75.0" text="Name"/>
+                                <TableColumn fx:id="tcNIC" prefWidth="75.0" text="NIC number"/>
+                                <TableColumn fx:id="tcAddress" prefWidth="75.0" text="Address"/>
+                                <TableColumn fx:id="tcMobile" prefWidth="75.0" text="Mobile Number"/>
+                                <TableColumn fx:id="tcEmail" prefWidth="75.0" text="Email"/>
+                                <TableColumn fx:id="tcStatus" prefWidth="75.0" text="Status"/>
+                            </columns>
+                            <columnResizePolicy>
+                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                            </columnResizePolicy>
+                        </TableView>
+                    </children>
+                </GridPane>
+            </center>
+        </BorderPane>
+    </children>
+    <stylesheets>
+        <URL value="@../CSS/Table.css"/>
+        <URL value="@../CSS/Scence.css"/>
+    </stylesheets>
 </StackPane>

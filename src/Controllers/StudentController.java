@@ -2,10 +2,8 @@ package Controllers;
 
 import DataControllers.DataReader;
 import Modules.AC_Class;
-import Modules.Guardian;
 import Modules.Student;
 import com.jfoenix.controls.JFXButton;
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
@@ -29,44 +27,32 @@ import java.util.ResourceBundle;
 
 public class StudentController implements Initializable {
 
-    @FXML
-    private TextField txt_search;
-
-    @FXML
-    private ComboBox<?> cmb_option;
-
-    @FXML
-    private JFXButton btnAdd;
-
-    @FXML
-    private TableView<StudentList> tblStudent;
-
-    @FXML
-    private TableColumn<StudentList, Integer> tcId;
-
-    @FXML
-    private TableColumn<StudentList, String> tcName;
-
-    @FXML
-    private TableColumn<StudentList, String> tcNIC;
-
-    @FXML
-    private TableColumn<StudentList, String> tcAddress;
-
-    @FXML
-    private TableColumn<StudentList, String> tcMobile;
-
-    @FXML
-    private TableColumn<StudentList, String> tcEmail;
-
-    @FXML
-    private TableColumn<StudentList, String> tcStatus;
-
     DataReader dataReader;
     Alerts alerts;
-
     Student student;
     AC_Class ac_class;
+    @FXML
+    private TextField txt_search;
+    @FXML
+    private ComboBox<?> cmb_option;
+    @FXML
+    private JFXButton btnAdd;
+    @FXML
+    private TableView<StudentList> tblStudent;
+    @FXML
+    private TableColumn<StudentList, Integer> tcId;
+    @FXML
+    private TableColumn<StudentList, String> tcName;
+    @FXML
+    private TableColumn<StudentList, String> tcNIC;
+    @FXML
+    private TableColumn<StudentList, String> tcAddress;
+    @FXML
+    private TableColumn<StudentList, String> tcMobile;
+    @FXML
+    private TableColumn<StudentList, String> tcEmail;
+    @FXML
+    private TableColumn<StudentList, String> tcStatus;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -165,84 +151,84 @@ public class StudentController implements Initializable {
             return id.get();
         }
 
-        public SimpleIntegerProperty idProperty() {
-            return id;
-        }
-
         public void setId(int id) {
             this.id.set(id);
+        }
+
+        public SimpleIntegerProperty idProperty() {
+            return id;
         }
 
         public String getName() {
             return name.get();
         }
 
-        public SimpleStringProperty nameProperty() {
-            return name;
-        }
-
         public void setName(String name) {
             this.name.set(name);
+        }
+
+        public SimpleStringProperty nameProperty() {
+            return name;
         }
 
         public String getNic() {
             return nic.get();
         }
 
-        public SimpleStringProperty nicProperty() {
-            return nic;
-        }
-
         public void setNic(String nic) {
             this.nic.set(nic);
+        }
+
+        public SimpleStringProperty nicProperty() {
+            return nic;
         }
 
         public String getAddress() {
             return address.get();
         }
 
-        public SimpleStringProperty addressProperty() {
-            return address;
-        }
-
         public void setAddress(String address) {
             this.address.set(address);
+        }
+
+        public SimpleStringProperty addressProperty() {
+            return address;
         }
 
         public String getMobileNumber() {
             return mobileNumber.get();
         }
 
-        public SimpleStringProperty mobileNumberProperty() {
-            return mobileNumber;
-        }
-
         public void setMobileNumber(String mobileNumber) {
             this.mobileNumber.set(mobileNumber);
+        }
+
+        public SimpleStringProperty mobileNumberProperty() {
+            return mobileNumber;
         }
 
         public String getEmail() {
             return email.get();
         }
 
-        public SimpleStringProperty emailProperty() {
-            return email;
-        }
-
         public void setEmail(String email) {
             this.email.set(email);
+        }
+
+        public SimpleStringProperty emailProperty() {
+            return email;
         }
 
         public String getStatus() {
             return status.get();
         }
 
-        public SimpleStringProperty statusProperty() {
-            return status;
-        }
-
         public void setStatus(String status) {
             this.status.set(status);
+        }
+
+        public SimpleStringProperty statusProperty() {
+            return status;
         }
     }
 

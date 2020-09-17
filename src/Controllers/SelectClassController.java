@@ -20,45 +20,8 @@ import java.util.ResourceBundle;
 
 public class SelectClassController implements Initializable {
 
-    @FXML
-    private JFXComboBox<String> cmbStatus;
-
-    @FXML
-    private JFXComboBox<String> cmbExamYear;
-
-    @FXML
-    private JFXComboBox<String> cmbSubject;
-
-    @FXML
-    private JFXComboBox<String> cmbTeacher;
-
-    @FXML
-    private JFXComboBox<String> cmbClassType;
-
-    @FXML
-    private TableView<ClassList> tblClass;
-
-    @FXML
-    private TableColumn<ClassList, Integer> tcId;
-
-    @FXML
-    private TableColumn<ClassList, String> tcStream;
-
-    @FXML
-    private TableColumn<ClassList, String> tcExamYeear;
-
-    @FXML
-    private TableColumn<ClassList, String> tcSubject;
-
-    @FXML
-    private TableColumn<ClassList, String> tcTeacher;
-
-    @FXML
-    private TableColumn<ClassList, String> tcClassType;
-
     DataReader dataReader;
     Alerts alerts;
-
     AC_TypeList ac_typeList;
     Stream stream;
     AcademicCourse academicCourse;
@@ -66,11 +29,34 @@ public class SelectClassController implements Initializable {
     Teacher teacher;
     ACC_Type acc_type;
     AC_TypeDetails ac_typeDetails;
-
     Label lblExam;
     Label lblSubject;
     Label lblTeacher;
     Label lblClassType;
+    @FXML
+    private JFXComboBox<String> cmbStatus;
+    @FXML
+    private JFXComboBox<String> cmbExamYear;
+    @FXML
+    private JFXComboBox<String> cmbSubject;
+    @FXML
+    private JFXComboBox<String> cmbTeacher;
+    @FXML
+    private JFXComboBox<String> cmbClassType;
+    @FXML
+    private TableView<ClassList> tblClass;
+    @FXML
+    private TableColumn<ClassList, Integer> tcId;
+    @FXML
+    private TableColumn<ClassList, String> tcStream;
+    @FXML
+    private TableColumn<ClassList, String> tcExamYeear;
+    @FXML
+    private TableColumn<ClassList, String> tcSubject;
+    @FXML
+    private TableColumn<ClassList, String> tcTeacher;
+    @FXML
+    private TableColumn<ClassList, String> tcClassType;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

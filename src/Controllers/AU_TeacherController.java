@@ -24,71 +24,56 @@ import javafx.stage.Stage;
 
 import java.awt.*;
 import java.net.URL;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Optional;
+import java.util.ResourceBundle;
+import java.util.Set;
 
 public class AU_TeacherController implements Initializable {
-
-    @FXML
-    private Label lblTitle;
-
-    @FXML
-    private FontAwesomeIconView btnClose;
-
-    @FXML
-    private JFXTextField txtFname;
-
-    @FXML
-    private JFXTextField txtNIC;
-
-    @FXML
-    private JFXTextField txtMobileNum;
-
-    @FXML
-    private JFXTextArea txtAddress;
-
-    @FXML
-    private JFXTextField txtLName;
-
-    @FXML
-    private JFXTextField txtHomeNum;
-
-    @FXML
-    private JFXTextField txtEmail;
-
-    @FXML
-    private JFXComboBox<String> cmbStatus;
-
-    @FXML
-    private JFXComboBox<String> cmbSubjects;
-
-    @FXML
-    private TableView<TeacherSubjectsList> tblTeacher_Subjects;
-
-    @FXML
-    private TableColumn<TeacherSubjectsList, Integer> tcSubjectId;
-
-    @FXML
-    private TableColumn<TeacherSubjectsList, String> tcSubjectName;
-
-    @FXML
-    private JFXButton btnSU;
 
     DataWriter dataWriter;
     DataReader dataReader;
     Alerts alerts;
     DateFormatConverter dateFormatConverter;
-
-
     Status status;
     Teacher teacher;
     TeacherHasSubject teacherHasSubject;
     Subject subject;
     User user;
     UserType userType;
-
     TableView tblTeacher;
     HashMap<Integer, String> actionList = new HashMap<>();
     HashMap<Integer, String> subList = new HashMap<>();
+    @FXML
+    private Label lblTitle;
+    @FXML
+    private FontAwesomeIconView btnClose;
+    @FXML
+    private JFXTextField txtFname;
+    @FXML
+    private JFXTextField txtNIC;
+    @FXML
+    private JFXTextField txtMobileNum;
+    @FXML
+    private JFXTextArea txtAddress;
+    @FXML
+    private JFXTextField txtLName;
+    @FXML
+    private JFXTextField txtHomeNum;
+    @FXML
+    private JFXTextField txtEmail;
+    @FXML
+    private JFXComboBox<String> cmbStatus;
+    @FXML
+    private JFXComboBox<String> cmbSubjects;
+    @FXML
+    private TableView<TeacherSubjectsList> tblTeacher_Subjects;
+    @FXML
+    private TableColumn<TeacherSubjectsList, Integer> tcSubjectId;
+    @FXML
+    private TableColumn<TeacherSubjectsList, String> tcSubjectName;
+    @FXML
+    private JFXButton btnSU;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -429,24 +414,24 @@ public class AU_TeacherController implements Initializable {
             return id.get();
         }
 
-        public SimpleIntegerProperty idProperty() {
-            return id;
-        }
-
         public void setId(int id) {
             this.id.set(id);
+        }
+
+        public SimpleIntegerProperty idProperty() {
+            return id;
         }
 
         public String getName() {
             return name.get();
         }
 
-        public SimpleStringProperty nameProperty() {
-            return name;
-        }
-
         public void setName(String name) {
             this.name.set(name);
+        }
+
+        public SimpleStringProperty nameProperty() {
+            return name;
         }
     }
 }

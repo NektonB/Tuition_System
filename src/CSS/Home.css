@@ -2,16 +2,16 @@
     -fx-background-color: rgba(68, 62, 116, 0.96);
 }
 
-.headerAria{
+.headerAria {
     -fx-background-color: rgba(68, 62, 116, 0.96);
 
 }
 
-.homeFooter{
+.homeFooter {
     -fx-background-color: rgba(68, 62, 116, 0.96);
 }
 
-.logOutButton{
+.logOutButton {
     -fx-cursor: hand;
     -fx-background-radius: 0;
     -fx-font-weight: bold;

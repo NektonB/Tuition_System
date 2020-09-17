@@ -1,72 +1,52 @@
 package Controllers;
 
 import DataControllers.DataReader;
-import DataControllers.DataWriter;
 import Modules.Employee;
-import Modules.Status;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXTextArea;
-import com.jfoenix.controls.JFXTextField;
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
-import javafx.beans.property.ListPropertyBase;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class EmployeeController implements Initializable {
 
-    @FXML
-    private TextField txtSearch;
-
-    @FXML
-    private ComboBox<String> cmbOption;
-
-    @FXML
-    private TableView<EmployeeList> tblEmployee;
-
-    @FXML
-    private TableColumn<EmployeeList, Integer> tcId;
-
-    @FXML
-    private TableColumn<EmployeeList, String> tcName;
-
-    @FXML
-    private TableColumn<EmployeeList, String> tcNIC;
-
-    @FXML
-    private TableColumn<EmployeeList, String> tcAddress;
-
-    @FXML
-    private TableColumn<EmployeeList, String> tcContact;
-
-    @FXML
-    private TableColumn<EmployeeList, String> tcStatus;
-
     DataReader dataReader;
     Alerts alerts;
-
     Employee employee;
+    @FXML
+    private TextField txtSearch;
+    @FXML
+    private ComboBox<String> cmbOption;
+    @FXML
+    private TableView<EmployeeList> tblEmployee;
+    @FXML
+    private TableColumn<EmployeeList, Integer> tcId;
+    @FXML
+    private TableColumn<EmployeeList, String> tcName;
+    @FXML
+    private TableColumn<EmployeeList, String> tcNIC;
+    @FXML
+    private TableColumn<EmployeeList, String> tcAddress;
+    @FXML
+    private TableColumn<EmployeeList, String> tcContact;
+    @FXML
+    private TableColumn<EmployeeList, String> tcStatus;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -194,72 +174,72 @@ public class EmployeeController implements Initializable {
             return address.get();
         }
 
-        public SimpleStringProperty addressProperty() {
-            return address;
-        }
-
         public void setAddress(String address) {
             this.address.set(address);
+        }
+
+        public SimpleStringProperty addressProperty() {
+            return address;
         }
 
         public int getId() {
             return id.get();
         }
 
-        public SimpleIntegerProperty idProperty() {
-            return id;
-        }
-
         public void setId(int id) {
             this.id.set(id);
+        }
+
+        public SimpleIntegerProperty idProperty() {
+            return id;
         }
 
         public String getName() {
             return name.get();
         }
 
-        public SimpleStringProperty nameProperty() {
-            return name;
-        }
-
         public void setName(String name) {
             this.name.set(name);
+        }
+
+        public SimpleStringProperty nameProperty() {
+            return name;
         }
 
         public String getNic() {
             return nic.get();
         }
 
-        public SimpleStringProperty nicProperty() {
-            return nic;
-        }
-
         public void setNic(String nic) {
             this.nic.set(nic);
+        }
+
+        public SimpleStringProperty nicProperty() {
+            return nic;
         }
 
         public String getContact() {
             return contact.get();
         }
 
-        public SimpleStringProperty contactProperty() {
-            return contact;
-        }
-
         public void setContact(String contact) {
             this.contact.set(contact);
+        }
+
+        public SimpleStringProperty contactProperty() {
+            return contact;
         }
 
         public String getStatus() {
             return status.get();
         }
 
-        public SimpleStringProperty statusProperty() {
-            return status;
-        }
-
         public void setStatus(String status) {
             this.status.set(status);
+        }
+
+        public SimpleStringProperty statusProperty() {
+            return status;
         }
     }
 }

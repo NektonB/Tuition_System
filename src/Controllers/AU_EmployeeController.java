@@ -15,8 +15,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -24,42 +22,30 @@ import java.util.ResourceBundle;
 
 public class AU_EmployeeController implements Initializable {
 
-    @FXML
-    private FontAwesomeIconView btnClose;
-
-    @FXML
-    private JFXTextField txtFirstName;
-
-    @FXML
-    private JFXTextField txtLastName;
-
-    @FXML
-    private JFXTextField txtNIC;
-
-    @FXML
-    private JFXTextArea txtAddress;
-
-    @FXML
-    private JFXTextField txtContactNum;
-
-    @FXML
-    private JFXComboBox<String> cmbStatus;
-
-    @FXML
-    private JFXButton btnSave;
-
-    @FXML
-    private Label lblFrameTitle;
-
-
     DataWriter dataWriter;
     DataReader dataReader;
     Alerts alerts;
-
     Employee employee;
     Status status;
-
     TableView tblEmployee;
+    @FXML
+    private FontAwesomeIconView btnClose;
+    @FXML
+    private JFXTextField txtFirstName;
+    @FXML
+    private JFXTextField txtLastName;
+    @FXML
+    private JFXTextField txtNIC;
+    @FXML
+    private JFXTextArea txtAddress;
+    @FXML
+    private JFXTextField txtContactNum;
+    @FXML
+    private JFXComboBox<String> cmbStatus;
+    @FXML
+    private JFXButton btnSave;
+    @FXML
+    private Label lblFrameTitle;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

@@ -26,50 +26,37 @@ import java.util.ResourceBundle;
 
 public class UserUpdate implements Initializable {
 
-    @FXML
-    private JFXTextField txt_nic;
-
-    @FXML
-    private JFXPasswordField txt_password;
-
-    @FXML
-    private Label lblRegister;
-
-    @FXML
-    private JFXButton btn_login;
-
-    @FXML
-    private JFXTextField txt_userName;
-
-    @FXML
-    private JFXComboBox<String> cmb_status;
-
-    @FXML
-    private JFXComboBox<String> cmb_userType;
-
-    @FXML
-    private TableView<UserList> tblUser;
-
-    @FXML
-    private TableColumn<UserList, Integer> tcID;
-
-    @FXML
-    private TableColumn<UserList, String> tcNIC;
-
-    @FXML
-    private TableColumn<UserList, String> tcUserName;
-
-    @FXML
-    private TableColumn<UserList, String> tcStatus;
-
     DataReader dataReader;
     DataWriter dataWriter;
     Alerts alerts;
-
     User user;
     UserType userType;
     Employee employee;
     Status status;
+    @FXML
+    private JFXTextField txt_nic;
+    @FXML
+    private JFXPasswordField txt_password;
+    @FXML
+    private Label lblRegister;
+    @FXML
+    private JFXButton btn_login;
+    @FXML
+    private JFXTextField txt_userName;
+    @FXML
+    private JFXComboBox<String> cmb_status;
+    @FXML
+    private JFXComboBox<String> cmb_userType;
+    @FXML
+    private TableView<UserList> tblUser;
+    @FXML
+    private TableColumn<UserList, Integer> tcID;
+    @FXML
+    private TableColumn<UserList, String> tcNIC;
+    @FXML
+    private TableColumn<UserList, String> tcUserName;
+    @FXML
+    private TableColumn<UserList, String> tcStatus;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -215,48 +202,48 @@ public class UserUpdate implements Initializable {
             return id.get();
         }
 
-        public SimpleIntegerProperty idProperty() {
-            return id;
-        }
-
         public void setId(int id) {
             this.id.set(id);
+        }
+
+        public SimpleIntegerProperty idProperty() {
+            return id;
         }
 
         public String getNic() {
             return nic.get();
         }
 
-        public SimpleStringProperty nicProperty() {
-            return nic;
-        }
-
         public void setNic(String nic) {
             this.nic.set(nic);
+        }
+
+        public SimpleStringProperty nicProperty() {
+            return nic;
         }
 
         public String getUserName() {
             return userName.get();
         }
 
-        public SimpleStringProperty userNameProperty() {
-            return userName;
-        }
-
         public void setUserName(String userName) {
             this.userName.set(userName);
+        }
+
+        public SimpleStringProperty userNameProperty() {
+            return userName;
         }
 
         public String getStatus() {
             return status.get();
         }
 
-        public SimpleStringProperty statusProperty() {
-            return status;
-        }
-
         public void setStatus(String status) {
             this.status.set(status);
+        }
+
+        public SimpleStringProperty statusProperty() {
+            return status;
         }
     }
 }
