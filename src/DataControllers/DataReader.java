@@ -804,20 +804,23 @@ public class DataReader {
         ResultSet rs = null;
         ObservableList<UserUpdate.UserList> userLists = FXCollections.observableArrayList();
         try {
-            pst = conn.prepareStatement("SELECT user.id, employee.nic_number, user.name, status.status FROM user INNER JOIN user_type ut on user.user_type_id = ut.id INNER JOIN employee on user.employee_id = employee.id INNER JOIN status on user.status_id = status.id");
+            pst = conn.prepareStatement("SELECT user.id, employee.nic_number, user.name, status.status,ut.type FROM user INNER JOIN user_type ut on user.user_type_id = ut.id INNER JOIN employee on user.employee_id = employee.id INNER JOIN status on user.status_id = status.id");
             rs = pst.executeQuery();
             if (!rs.isBeforeFirst()) {
-                teacher.resetAll();
+                //teacher.resetAll();
             }
             while (rs.next()) {
-                userLists.add(
-                        new UserUpdate.UserList(
-                                rs.getInt("user.id"),
-                                rs.getString("employee.nic_number"),
-                                rs.getString("user.name"),
-                                rs.getString("status.status")
-                        )
-                );
+
+                if (!rs.getString("ut.type").equals("Super Admin")) {
+                    userLists.add(
+                            new UserUpdate.UserList(
+                                    rs.getInt("user.id"),
+                                    rs.getString("employee.nic_number"),
+                                    rs.getString("user.name"),
+                                    rs.getString("status.status")
+                            )
+                    );
+                }
             }
             tblUser.setItems(userLists);
         } catch (Exception e) {
@@ -2571,6 +2574,38 @@ public class DataReader {
                 if (!pst.isClosed()) {
                     pst.close();
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void getUserByUNandPW(String userName, String password) {
+        ResultSet rs = null;
+        try {
+            pst = conn.prepareStatement("SELECT user.id,user.name,user.password,ut.id,ut.type FROM user INNER JOIN user_type ut on user.user_type_id = ut.id INNER JOIN status s on user.status_id = s.id WHERE user.name = ? AND user.password = ? AND  s.status = 'ACTIVE'");
+            pst.setString(1, userName);
+            pst.setString(2, password);
+            rs = pst.executeQuery();
+
+            if (!rs.isBeforeFirst()) {
+                user.resetAll();
+                userType.resetAll();
+            }
+            while (rs.next()) {
+                user.setId(rs.getInt("user.id"));
+                user.setUserName(rs.getString("user.name"));
+                user.setPassword(rs.getString("user.password"));
+
+                userType.setId(rs.getInt("ut.id"));
+                userType.setType(rs.getString("ut.type"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                pst.close();
+                rs.close();
             } catch (Exception e) {
                 e.printStackTrace();
             }

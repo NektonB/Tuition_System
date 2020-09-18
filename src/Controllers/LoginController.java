@@ -49,7 +49,7 @@ public class LoginController implements Initializable {
         String userName = txtUserName.getText();
         String password = txtPassword.getText();
 
-        /*dataReader.getUserByUNandPW(userName, password);
+        dataReader.getUserByUNandPW(userName, password);
 
         if (!txtUserName.getText().isEmpty() && !txtPassword.getText().isEmpty()) {
             if (userName.equals(user.getUserName()) && password.equals(user.getPassword())) {
@@ -60,9 +60,9 @@ public class LoginController implements Initializable {
             } else if (user.getUserName() == "" || user.getPassword() == "") {
                 alerts.getWarningAlert("Warning", "Something went wrong", "Could not found your login information !.\nPlease connect your system administrator.");
             }
-        }*/
-        loadMain();
-        closeMe(btnLogin);
+        }
+        /*loadMain();
+        closeMe(btnLogin);*/
     }
 
     public void closeMe(JFXButton btnLogin) {

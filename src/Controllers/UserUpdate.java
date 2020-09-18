@@ -194,7 +194,7 @@ public class UserUpdate implements Initializable {
         public UserList(int id, String nic, String userName, String status) {
             this.id = new SimpleIntegerProperty(id);
             this.nic = new SimpleStringProperty(nic);
-            this.userName = new SimpleStringProperty(nic);
+            this.userName = new SimpleStringProperty(userName);
             this.status = new SimpleStringProperty(status);
         }
 
