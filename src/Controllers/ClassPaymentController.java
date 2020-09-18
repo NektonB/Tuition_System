@@ -31,8 +31,6 @@ import java.util.ResourceBundle;
 
 public class ClassPaymentController implements Initializable {
 
-    DateFormatConverter dateFormatConverter;
-    TimeFormatConverter timeFormatConverter;
     Alerts alerts;
     DataWriter dataWriter;
     DataReader dataReader;
@@ -79,8 +77,6 @@ public class ClassPaymentController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            dateFormatConverter = ObjectGenerator.getDateFormatConverter();
-            timeFormatConverter = ObjectGenerator.getTimeFormatConverter();
             dataWriter = ObjectGenerator.getDataWriter();
             dataReader = ObjectGenerator.getDataReader();
             user = ObjectGenerator.getUser();
@@ -237,7 +233,7 @@ public class ClassPaymentController implements Initializable {
                 lblClass.setText("Class");
                 txtIndexNumber.setText("");
                 cmbStudent.setValue("");
-                tblClassPayment.getItems().removeAll();
+                tblClassPayment.getItems().clear();
             }
         } catch (Exception e) {
             e.printStackTrace();

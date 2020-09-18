@@ -1271,4 +1271,99 @@ public class DataWriter {
         }
         return operation;
     }
+
+    public int saveTeacherPayment() {
+        int operation = 0;
+        ResultSet rs = null;
+        try {
+            pst = conn.prepareStatement("INSERT INTO teacher_paymet(teacher_id, year, month, user_id) VALUES (?,?,?,?)", pst.RETURN_GENERATED_KEYS);
+            pst.setInt(1, teacher.getId());
+            pst.setString(2, teacherPayment.getYear());
+            pst.setString(3, teacherPayment.getMonth());
+            pst.setInt(4, user.getId());
+
+            operation = pst.executeUpdate();
+            rs = pst.getGeneratedKeys();
+            if (rs.next()) {
+                teacherPayment.setId(rs.getInt(1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return operation;
+    }
+
+    public int saveTP_Details() {
+        int operation = 0;
+        ResultSet rs = null;
+        try {
+            pst = conn.prepareStatement("INSERT INTO tp_details(teacher_paymet_id, ac_type_details_id, date, time, pay_amount) VALUES (?,?,?,?,?)", pst.RETURN_GENERATED_KEYS);
+            pst.setInt(1, teacherPayment.getId());
+            pst.setInt(2, ac_typeDetails.getId());
+            pst.setString(3, tp_details.getDate());
+            pst.setString(4, tp_details.getTime());
+            pst.setDouble(5, tp_details.getPayAmount());
+
+            operation = pst.executeUpdate();
+            rs = pst.getGeneratedKeys();
+            if (rs.next()) {
+                tp_details.setId(rs.getInt(1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return operation;
+    }
+
+    public int updateTP_Details() {
+        int operation = 0;
+        ResultSet rs = null;
+        try {
+            pst = conn.prepareStatement("Update tp_details SET pay_amount = ? WHERE id = ?", pst.RETURN_GENERATED_KEYS);
+            pst.setDouble(1, tp_details.getPayAmount());
+            pst.setInt(2, tp_details.getId());
+
+            operation = pst.executeUpdate();
+            rs = pst.getGeneratedKeys();
+            if (rs.next()) {
+                tp_details.setId(rs.getInt(1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return operation;
+    }
 }

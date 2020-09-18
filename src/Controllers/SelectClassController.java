@@ -33,6 +33,7 @@ public class SelectClassController implements Initializable {
     Label lblSubject;
     Label lblTeacher;
     Label lblClassType;
+    JFXComboBox<String> cmbTeacher01;
     @FXML
     private JFXComboBox<String> cmbStatus;
     @FXML
@@ -175,6 +176,7 @@ public class SelectClassController implements Initializable {
                 lblExam.setText(stream.getStream() + " / " + academicCourse.getExam_year());
                 lblSubject.setText(subject.getName());
                 lblTeacher.setText(teacher.getFname());
+                cmbTeacher01.setValue(teacher.getFname());
                 lblClassType.setText(acc_type.getType());
 
                 closeMe();
@@ -189,6 +191,14 @@ public class SelectClassController implements Initializable {
         this.lblSubject = lblSubject;
         this.lblTeacher = lblTeacher;
         this.lblClassType = lblClassType;
+    }
+
+    public void loadComponents(Label lblExam, Label lblSubject, Label lblTeacher, Label lblClassType, JFXComboBox<String> cmbTeacher) {
+        this.lblExam = lblExam;
+        this.lblSubject = lblSubject;
+        this.lblTeacher = lblTeacher;
+        this.lblClassType = lblClassType;
+        this.cmbTeacher01 = cmbTeacher;
     }
 
     public void selectTeacher_Key(KeyEvent event) {

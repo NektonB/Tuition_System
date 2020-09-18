@@ -5,7 +5,7 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.*?>
 <?import java.net.URL?>
 <StackPane xmlns:fx="http://javafx.com/fxml/1" onKeyReleased="#payAll_Key" prefHeight="532.0" prefWidth="925.0"
            xmlns="http://javafx.com/javafx/8.0.171" fx:controller="Controllers.ClassPaymentController">
@@ -35,25 +35,37 @@
                                 <FontAwesomeIconView fill="WHITE" glyphName="PLUS"/>
                             </graphic>
                         </JFXButton>
-                        <Label fx:id="lblExam" text="Exam">
+                        <Label fx:id="lblExam" text="Exam" textFill="#0400ff">
                             <VBox.margin>
                                 <Insets left="10.0" top="15.0"/>
                             </VBox.margin>
+                            <font>
+                                <Font name="System Bold" size="15.0"/>
+                            </font>
                         </Label>
-                        <Label fx:id="lblSubject" text="Subject">
+                        <Label fx:id="lblSubject" text="Subject" textFill="#0400ff">
                             <VBox.margin>
                                 <Insets left="10.0"/>
                             </VBox.margin>
+                            <font>
+                                <Font name="System Bold" size="15.0"/>
+                            </font>
                         </Label>
-                        <Label fx:id="lblTeacher" text="Teacher">
+                        <Label fx:id="lblTeacher" text="Teacher" textFill="#0400ff">
                             <VBox.margin>
                                 <Insets left="10.0"/>
                             </VBox.margin>
+                            <font>
+                                <Font name="System Bold" size="15.0"/>
+                            </font>
                         </Label>
-                        <Label fx:id="lblClass" text="Class">
+                        <Label fx:id="lblClass" text="Class" textFill="#0400ff">
                             <VBox.margin>
                                 <Insets left="10.0"/>
                             </VBox.margin>
+                            <font>
+                                <Font name="System Bold" size="15.0"/>
+                            </font>
                         </Label>
                         <JFXComboBox fx:id="cmbYear" focusColor="#6981c9" labelFloat="true" prefHeight="25.0"
                                      prefWidth="386.0" promptText="Year" unFocusColor="#a3a3a3">
@@ -73,8 +85,8 @@
                             </VBox.margin>
                         </JFXTextField>
                         <JFXComboBox fx:id="cmbStudent" focusColor="#6981c9" labelFloat="true" layoutX="20.0"
-                                     layoutY="260.0"
-                                     prefHeight="25.0" prefWidth="386.0" promptText="Student" unFocusColor="#a3a3a3">
+                                     layoutY="260.0" prefHeight="25.0" prefWidth="386.0" promptText="Student"
+                                     unFocusColor="#a3a3a3">
                             <VBox.margin>
                                 <Insets top="30.0"/>
                             </VBox.margin>

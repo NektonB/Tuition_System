@@ -2467,4 +2467,114 @@ public class DataReader {
         return isAlready;
     }
 
+    public boolean checkTeacherPayment() {
+        boolean isAlready = false;
+        ResultSet rs = null;
+        try {
+            pst = conn.prepareStatement("SELECT id FROM teacher_paymet WHERE teacher_id = ? AND year = ? AND month = ?");
+            pst.setInt(1, teacher.getId());
+            pst.setString(2, teacherPayment.getYear());
+            pst.setString(3, teacherPayment.getMonth());
+            rs = pst.executeQuery();
+
+            if (!rs.isBeforeFirst()) {
+                //ac_attendance.resetAll();
+            }
+            if (rs.next()) {
+                teacherPayment.setId(rs.getInt(1));
+                isAlready = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return isAlready;
+    }
+
+    public boolean checkTP_Details() {
+        boolean isAlready = false;
+        ResultSet rs = null;
+        try {
+            pst = conn.prepareStatement("SELECT tpd.id FROM tp_details tpd INNER JOIN teacher_paymet tp on tpd.teacher_paymet_id = tp.id WHERE tp.teacher_id = ? AND tp.year = ? AND tp.month = ? AND tpd.ac_type_details_id = ?");
+            pst.setInt(1, teacher.getId());
+            pst.setString(2, teacherPayment.getYear());
+            pst.setString(3, teacherPayment.getMonth());
+            pst.setInt(4, ac_typeDetails.getId());
+            rs = pst.executeQuery();
+
+            if (!rs.isBeforeFirst()) {
+                //ac_attendance.resetAll();
+            }
+            if (rs.next()) {
+                tp_details.setId(rs.getInt(1));
+                isAlready = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return isAlready;
+    }
+
+    public void fillTeacherPaymentTable(TableView tblTeacherPayment) {
+        ResultSet rs = null;
+        ObservableList<TeacherPaymentController.PaymentList> paymentLists = FXCollections.observableArrayList();
+        try {
+            pst = conn.prepareStatement("SELECT tpd.id,t.id,t.fname,t.lname,tpd.pay_amount FROM tp_details tpd INNER JOIN teacher_paymet tp on tpd.teacher_paymet_id = tp.id INNER JOIN teacher t on tp.teacher_id = t.id WHERE tp.teacher_id = ? AND tp.year = ? AND tp.month = ? AND tpd.ac_type_details_id = ?");
+            pst.setInt(1, teacher.getId());
+            pst.setString(2, teacherPayment.getYear());
+            pst.setString(3, teacherPayment.getMonth());
+            pst.setInt(4, ac_typeDetails.getId());
+
+            rs = pst.executeQuery();
+            if (!rs.isBeforeFirst()) {
+                teacher.resetAll();
+            }
+            while (rs.next()) {
+                paymentLists.add(
+                        new TeacherPaymentController.PaymentList(
+                                rs.getInt("tpd.id"),
+                                rs.getInt("t.id"),
+                                rs.getString("t.fname") + " " + rs.getString("t.lname"),
+                                rs.getDouble("tpd.pay_amount")
+                        )
+                );
+            }
+            tblTeacherPayment.setItems(paymentLists);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 }
