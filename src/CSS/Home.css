@@ -1,14 +1,20 @@
 .sideMenu {
-    -fx-background-color: rgba(68, 62, 116, 0.96);
+    -fx-background-color: #293039;
+    -fx-border-style: solid;
+    -fx-border-width: 1px 0px 0px 0px;
+    -fx-border-color: #ecb23f;
 }
 
 .headerAria {
-    -fx-background-color: rgba(68, 62, 116, 0.96);
+    -fx-background-color:#293039;
+    -fx-border-style: solid;
+    -fx-border-width: 0px 0px 1px 0px;
+    -fx-border-color: #ecb23f;
 
 }
 
 .homeFooter {
-    -fx-background-color: rgba(68, 62, 116, 0.96);
+    -fx-background-color: #293039;
 }
 
 .logOutButton {
@@ -20,11 +26,11 @@
 }
 
 .logOutButton:hover {
-    -fx-background-color: rgba(107, 59, 156, 0.82);
+    -fx-background-color: #2A1C42;
 }
 
 .logOutButton:pressed {
-    -fx-background-color: rgba(117, 76, 143, 0.78);
+    -fx-background-color: #222b36;
     -fx-text-fill: white;
 }
 
@@ -39,21 +45,22 @@
     -fx-scale-x: 1;
     -fx-scale-y: 1;
     -fx-font-weight: bold;
-    -fx-text-fill: #f9f6ff;
+    -fx-text-fill: #ecb23f;
     -fx-background-color: transparent;
 }
 
 .sideMenuButton:hover {
-    -fx-background-color: #2A1C42;
+    -fx-background-color: #222b36;
 }
 
 .sideMenuButton:pressed {
-    -fx-background-color: #7156DD;
+
+    -fx-background-color: #1b132a;
     -fx-text-fill: white;
 }
 
 .glyph-icon1 {
-    -fx-fill: #f9f6ff;
+    -fx-fill: #cd931f;
 }
 
 .sideMenuButton:pressed .glyph-icon1 {
