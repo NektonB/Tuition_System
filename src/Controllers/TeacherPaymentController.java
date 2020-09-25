@@ -305,4 +305,20 @@ public class TeacherPaymentController implements Initializable {
             return amount;
         }
     }
+
+    public void loadPaymentCal() {
+        try {
+            Stage productsStage = new Stage();
+            Parent user = FXMLLoader.load(getClass().getClassLoader().getResource("Views/frmCalPayment.fxml"));
+            productsStage.setTitle("Payment Calculate");
+            Scene scene = new Scene(user);
+            productsStage.setScene(scene);
+            productsStage.initStyle(StageStyle.UTILITY);
+            productsStage.setResizable(false);
+            productsStage.initModality(Modality.APPLICATION_MODAL);
+            productsStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

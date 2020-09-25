@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="282.0" prefWidth="317.0" stylesheets="@../CSS/Scence.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="56.0" prefWidth="450.0" style="-fx-background-color: #293039;">
+               <children>
+                  <Label text="Calculate Teacher Payment" textFill="#fcb76e">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <JFXTextField focusColor="#d78e45" labelFloat="true" promptText="Value of Class Fee (LKR)" unFocusColor="#6f6262">
+               <VBox.margin>
+                  <Insets left="5.0" right="5.0" top="22.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold Italic" size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField focusColor="#d78e45" labelFloat="true" layoutX="15.0" layoutY="88.0" promptText="Number Of Card (LKR)" unFocusColor="#6f6262">
+               <font>
+                  <Font name="System Bold Italic" size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="5.0" right="5.0" top="25.0" />
+               </VBox.margin>
+            </JFXTextField>
+            <JFXTextField focusColor="#d78e45" labelFloat="true" layoutX="15.0" layoutY="143.0" promptText="Presentage (%)" unFocusColor="#6f6262">
+               <font>
+                  <Font name="System Bold Italic" size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="5.0" right="5.0" top="25.0" />
+               </VBox.margin>
+            </JFXTextField>
+            <JFXButton fx:id="btnAdd1" contentDisplay="CENTER" prefHeight="39.0" prefWidth="433.0" ripplerFill="#61666b" text="Cal Amount">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="25.0" />
+               </VBox.margin>
+            </JFXButton>
+         </children>
+      </VBox>
+   </children>
+</StackPane>

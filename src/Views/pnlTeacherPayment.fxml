@@ -36,52 +36,70 @@
                         <Insets left="10.0" right="10.0" top="15.0" />
                     </padding>
                     <children>
-                        <JFXButton fx:id="btnSelectClass" onAction="#load_Class" prefHeight="43.0" prefWidth="257.0" ripplerFill="#61666b" text="Select Class">
+                        <JFXButton fx:id="btnSelectClass" onAction="#load_Class" prefHeight="37.0" prefWidth="257.0" ripplerFill="#61666b" text="Select Class">
                             <graphic>
                                 <FontAwesomeIconView fill="#ea9e47" glyphName="PLUS" />
                             </graphic>
                             <VBox.margin>
-                                <Insets top="10.0" />
+                                <Insets />
                             </VBox.margin>
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                         </JFXButton>
-                        <Label fx:id="lblExam" text="Exam" textFill="#b95f11">
-                            <VBox.margin>
-                                <Insets left="10.0" top="15.0" />
-                            </VBox.margin>
-                            <font>
-                                <Font name="System Bold" size="15.0" />
-                            </font>
-                        </Label>
-                        <Label fx:id="lblSubject" text="Subject" textFill="#b95f11">
-                            <VBox.margin>
-                                <Insets left="10.0" />
-                            </VBox.margin>
-                            <font>
-                                <Font name="System Bold" size="15.0" />
-                            </font>
-                        </Label>
-                        <Label fx:id="lblTeacher" text="Teacher" textFill="#b95f11">
-                            <VBox.margin>
-                                <Insets left="10.0" />
-                            </VBox.margin>
-                            <font>
-                                <Font name="System Bold" size="15.0" />
-                            </font>
-                        </Label>
-                        <Label fx:id="lblClass" text="Class" textFill="#b95f11">
-                            <VBox.margin>
-                                <Insets left="10.0" />
-                            </VBox.margin>
-                            <font>
-                                <Font name="System Bold" size="15.0" />
-                            </font>
-                        </Label>
+                  <VBox prefHeight="77.0" prefWidth="257.0">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="257.0">
+                           <children>
+                                    <Label fx:id="lblExam" text="Exam" textFill="#b95f11">
+                                        <font>
+                                            <Font name="System Bold" size="15.0" />
+                                        </font>
+                                    </Label>
+                                    <Label fx:id="lblSubject" text="Subject" textFill="#b95f11">
+                                        <font>
+                                            <Font name="System Bold" size="15.0" />
+                                        </font>
+                                 <HBox.margin>
+                                    <Insets left="100.0" />
+                                 </HBox.margin>
+                                    </Label>
+                           </children>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="31.0" prefWidth="257.0">
+                           <children>
+                                    <Label fx:id="lblTeacher" text="Teacher" textFill="#b95f11">
+                                        <font>
+                                            <Font name="System Bold" size="15.0" />
+                                        </font>
+                                    </Label>
+                                    <Label fx:id="lblClass" text="Class" textFill="#b95f11">
+                                        <font>
+                                            <Font name="System Bold" size="15.0" />
+                                        </font>
+                                 <HBox.margin>
+                                    <Insets left="83.0" />
+                                 </HBox.margin>
+                                    </Label>
+                           </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </VBox>
                         <JFXComboBox fx:id="cmbYear" focusColor="#cd9d2d" labelFloat="true" prefHeight="25.0" prefWidth="386.0" promptText="Year" styleClass="cmbBox" unFocusColor="#a3a3a3">
                             <VBox.margin>
-                                <Insets top="30.0" />
+                                <Insets top="20.0" />
                             </VBox.margin>
                         </JFXComboBox>
                         <JFXComboBox fx:id="cmbMonth" focusColor="#cd9d2d" labelFloat="true" prefHeight="25.0" prefWidth="386.0" promptText="Month" styleClass="cmbBox" unFocusColor="#a3a3a3">
@@ -94,14 +112,26 @@
                                 <Insets top="30.0" />
                             </VBox.margin>
                         </JFXComboBox>
-                        <JFXTextField fx:id="txtPayAmount" focusColor="#cd9d2d" labelFloat="true" onKeyReleased="#pay_Key" promptText="Payment Value" unFocusColor="#a3a3a3">
-                            <VBox.margin>
-                                <Insets top="30.0" />
-                            </VBox.margin>
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                        </JFXTextField>
+                  <HBox alignment="CENTER_LEFT" prefHeight="67.0" prefWidth="257.0">
+                     <children>
+                        <JFXButton fx:id="btnAdd1" onAction="#loadPaymentCal" prefHeight="39.0" prefWidth="112.0" ripplerFill="#61666b" text="Cal Amount">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </JFXButton>
+                              <JFXTextField fx:id="txtPayAmount" focusColor="#cd9d2d" labelFloat="true" onKeyReleased="#pay_Key" prefHeight="30.0" prefWidth="130.0" promptText="Payment Value" unFocusColor="#a3a3a3">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                              </JFXTextField>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </HBox>
                         <HBox alignment="CENTER" layoutX="20.0" layoutY="335.0" prefHeight="64.0" prefWidth="257.0">
                             <children>
                                 <JFXButton fx:id="btnAdd" onAction="#pay" prefHeight="46.0" prefWidth="126.0" ripplerFill="#61666b" text="Add Payment">
@@ -118,7 +148,7 @@
                                 </JFXButton>
                             </children>
                             <VBox.margin>
-                                <Insets top="25.0" />
+                                <Insets top="20.0" />
                             </VBox.margin>
                         </HBox>
                     </children>
