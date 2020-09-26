@@ -135,4 +135,52 @@ public class MainController implements Initializable {
         }
     }
 
+    public void loadClassPay() {
+        try {
+            Stage productsStage = new Stage();
+            Parent user = FXMLLoader.load(getClass().getClassLoader().getResource("Views/frmStudentClassFee.fxml"));
+            productsStage.setTitle("Student Class Fees Report");
+            Scene scene = new Scene(user);
+            productsStage.setScene(scene);
+            productsStage.initStyle(StageStyle.UTILITY);
+            productsStage.setResizable(false);
+            productsStage.initModality(Modality.APPLICATION_MODAL);
+            productsStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadClassAttendance() {
+        try {
+            Stage productsStage = new Stage();
+            Parent user = FXMLLoader.load(getClass().getClassLoader().getResource("Views/frmStudentAttendanceReport.fxml"));
+            productsStage.setTitle("Class Attendance Report");
+            Scene scene = new Scene(user);
+            productsStage.setScene(scene);
+            productsStage.initStyle(StageStyle.UTILITY);
+            productsStage.setResizable(false);
+            productsStage.initModality(Modality.APPLICATION_MODAL);
+            productsStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadTeacherPaymentReport() {
+        try {
+            Stage productsStage = new Stage();
+            Parent user = FXMLLoader.load(getClass().getClassLoader().getResource("Views/frmTeacherPayemntReport.fxml"));
+            productsStage.setTitle("Teacher Payment Report");
+            Scene scene = new Scene(user);
+            productsStage.setScene(scene);
+            productsStage.initStyle(StageStyle.UTILITY);
+            productsStage.setResizable(false);
+            productsStage.initModality(Modality.APPLICATION_MODAL);
+            productsStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

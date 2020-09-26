@@ -22,7 +22,7 @@
             <top>
                 <Pane prefHeight="32.0" prefWidth="925.0" style="-fx-background-color: #293039;" BorderPane.alignment="CENTER">
                     <children>
-                        <Label layoutX="13.0" layoutY="5.0" text="Home/Class Payment" textFill="WHITE">
+                        <Label layoutX="13.0" layoutY="5.0" text="Home/Class Payment" textFill="#fcb76e">
                             <font>
                                 <Font name="System Bold" size="14.0" />
                             </font>
