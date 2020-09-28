@@ -17,13 +17,24 @@ public class ReportViewer {
         conn = ConnectDB.getConn();
     }
 
-    public void getPaidInvoice(String invoiceId, String viewType) {
+    public void getClassAttendance(String Stream, String ExamYear, String Subject, String ClassType, String Date, String TeacherName, String viewType) {
         try {
-            String path = "C:\\Program Files\\Common Files\\ICSv2\\Reports\\Paid_Invoice.jrxml";
+            String path = "C:\\Program Files\\Common Files\\Tuition_System\\Reports\\ClassAttendance.jrxml";
+
             JasperReport RI = JasperCompileManager.compileReport(path);
             Map<String, Object> parameter = new HashMap<>();
-            parameter.put("InvoiceNumber", invoiceId);
+
+            parameter.put("Stream", Stream);
+            parameter.put("ExamYear", ExamYear);
+            parameter.put("Subject", Subject);
+            parameter.put("ClassType", ClassType);
+            parameter.put("Date", Date);
+            String[] name = TeacherName.split(" ");
+            parameter.put("TeacherFname", name[0]);
+            parameter.put("TeacherFname", name[1]);
+
             JasperPrint printIt = JasperFillManager.fillReport(RI, parameter, conn);
+
             if (viewType.equals("PRINT")) {
                 JasperPrintManager.printReport(printIt, false);
                 //JasperPrintManager.printReport(printIt, false);

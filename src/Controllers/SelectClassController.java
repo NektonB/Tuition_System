@@ -176,7 +176,9 @@ public class SelectClassController implements Initializable {
                 lblExam.setText(stream.getStream() + " / " + academicCourse.getExam_year());
                 lblSubject.setText(subject.getName());
                 lblTeacher.setText(teacher.getFname());
-                cmbTeacher01.setValue(teacher.getFname());
+                if (cmbTeacher01 != null) {
+                    cmbTeacher01.setValue(teacher.getFname());
+                }
                 lblClassType.setText(acc_type.getType());
 
                 closeMe();
