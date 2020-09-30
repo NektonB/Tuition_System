@@ -1,101 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.*?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#saveParent_Key" prefHeight="334.0" prefWidth="621.0" style="-fx-border-color: #ecb23f; -fx-border-width: 2px;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ParantController">
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<StackPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+           minWidth="-Infinity" onKeyReleased="#saveParent_Key" prefHeight="334.0"
+           prefWidth="621.0" style="-fx-border-color: #ecb23f; -fx-border-width: 2px;"
+           xmlns="http://javafx.com/javafx/8.0.171" fx:controller="Controllers.ParantController">
     <children>
         <BorderPane prefHeight="200.0" prefWidth="200.0">
             <center>
                 <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                     <BorderPane.margin>
-                        <Insets />
+                        <Insets/>
                     </BorderPane.margin>
                     <padding>
-                        <Insets left="10.0" right="10.0" />
+                        <Insets left="10.0" right="10.0"/>
                     </padding>
                     <children>
-                        <VBox layoutX="6.0" prefHeight="499.0" prefWidth="369.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <VBox layoutX="6.0" prefHeight="499.0" prefWidth="369.0" AnchorPane.bottomAnchor="0.0"
+                              AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <children>
                                 <HBox alignment="CENTER_LEFT" prefHeight="53.0" prefWidth="600.0">
                                     <children>
-                                        <ImageView fitHeight="38.0" fitWidth="44.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+                                        <ImageView fitHeight="38.0" fitWidth="44.0" opacity="0.7" pickOnBounds="true"
+                                                   preserveRatio="true">
                                             <image>
-                                                <Image url="@../Graphics/icons8_mortarboard_100px_1.png" />
+                                                <Image url="@../Graphics/icons8_mortarboard_100px_1.png"/>
                                             </image>
                                         </ImageView>
-                                        <Label fx:id="lblFrameTitle" prefHeight="25.0" prefWidth="152.0" text="Add New Parant" textFill="#5b5454">
+                                        <Label fx:id="lblFrameTitle" prefHeight="25.0" prefWidth="152.0"
+                                               text="Add New Parant" textFill="#5b5454">
                                             <font>
-                                                <Font name="System Bold" size="16.0" />
+                                                <Font name="System Bold" size="16.0"/>
                                             </font>
                                             <HBox.margin>
-                                                <Insets left="8.0" top="10.0" />
+                                                <Insets left="8.0" top="10.0"/>
                                             </HBox.margin>
                                         </Label>
-                                        <FontAwesomeIconView fx:id="btnClose" fill="#756f6f" glyphName="CLOSE" onMouseReleased="#closeMe" size="18">
+                                        <FontAwesomeIconView fx:id="btnClose" fill="#756f6f" glyphName="CLOSE"
+                                                             onMouseReleased="#closeMe" size="18">
                                             <HBox.margin>
-                                                <Insets left="170.0" />
+                                                <Insets left="170.0"/>
                                             </HBox.margin>
                                             <cursor>
-                                                <Cursor fx:constant="HAND" />
+                                                <Cursor fx:constant="HAND"/>
                                             </cursor>
                                         </FontAwesomeIconView>
                                     </children>
                                 </HBox>
-                                <JFXTextField fx:id="txtFirstName" focusColor="#cd9d2d" labelFloat="true" promptText="First Name" unFocusColor="#a3a3a3">
+                                <JFXTextField fx:id="txtFirstName" focusColor="#cd9d2d" labelFloat="true"
+                                              promptText="First Name" unFocusColor="#a3a3a3">
                                     <VBox.margin>
-                                        <Insets top="20.0" />
+                                        <Insets top="20.0"/>
                                     </VBox.margin>
                                     <font>
-                                        <Font name="System Bold" size="14.0" />
+                                        <Font name="System Bold" size="14.0"/>
                                     </font>
                                 </JFXTextField>
-                                <JFXTextField fx:id="txtLastName" focusColor="#cd9d2d" labelFloat="true" promptText="Last Name" unFocusColor="#a3a3a3">
+                                <JFXTextField fx:id="txtLastName" focusColor="#cd9d2d" labelFloat="true"
+                                              promptText="Last Name" unFocusColor="#a3a3a3">
                                     <font>
-                                        <Font name="System Bold" size="14.0" />
-                                    </font>
-                                    <VBox.margin>
-                                        <Insets top="20.0" />
-                                    </VBox.margin>
-                                </JFXTextField>
-                                <JFXTextField fx:id="txtHomeNum" focusColor="#cd9d2d" labelFloat="true" promptText="Home Phone" unFocusColor="#a3a3a3">
-                                    <font>
-                                        <Font name="System Bold" size="14.0" />
+                                        <Font name="System Bold" size="14.0"/>
                                     </font>
                                     <VBox.margin>
-                                        <Insets top="20.0" />
+                                        <Insets top="20.0"/>
                                     </VBox.margin>
                                 </JFXTextField>
-                                <JFXTextField fx:id="txtContactNum" focusColor="#cd9d2d" labelFloat="true" promptText="Mobile Number" unFocusColor="#a3a3a3">
+                                <JFXTextField fx:id="txtHomeNum" focusColor="#cd9d2d" labelFloat="true"
+                                              promptText="Home Phone" unFocusColor="#a3a3a3">
                                     <font>
-                                        <Font name="System Bold" size="14.0" />
+                                        <Font name="System Bold" size="14.0"/>
                                     </font>
                                     <VBox.margin>
-                                        <Insets top="20.0" />
+                                        <Insets top="20.0"/>
                                     </VBox.margin>
                                 </JFXTextField>
-                                <JFXButton fx:id="btnSave" buttonType="RAISED" onAction="#saveParent" prefHeight="53.0" prefWidth="384.0" ripplerFill="#61666b" style="-fx-background-color: #293039;" text="Save" textFill="#ea9e47">
+                                <JFXTextField fx:id="txtContactNum" focusColor="#cd9d2d" labelFloat="true"
+                                              promptText="Mobile Number" unFocusColor="#a3a3a3">
                                     <font>
-                                        <Font name="System Bold" size="14.0" />
+                                        <Font name="System Bold" size="14.0"/>
+                                    </font>
+                                    <VBox.margin>
+                                        <Insets top="20.0"/>
+                                    </VBox.margin>
+                                </JFXTextField>
+                                <JFXButton fx:id="btnSave" buttonType="RAISED" onAction="#saveParent" prefHeight="53.0"
+                                           prefWidth="384.0" ripplerFill="#61666b"
+                                           style="-fx-background-color: #293039;" text="Save" textFill="#ea9e47">
+                                    <font>
+                                        <Font name="System Bold" size="14.0"/>
                                     </font>
                                     <cursor>
-                                        <Cursor fx:constant="HAND" />
+                                        <Cursor fx:constant="HAND"/>
                                     </cursor>
                                     <VBox.margin>
-                                        <Insets top="15.0" />
+                                        <Insets top="15.0"/>
                                     </VBox.margin>
                                 </JFXButton>
                             </children>
@@ -104,11 +110,13 @@
                 </AnchorPane>
             </center>
             <left>
-                <Pane prefHeight="445.0" prefWidth="214.0" style="-fx-background-color: #293039;" BorderPane.alignment="CENTER">
+                <Pane prefHeight="445.0" prefWidth="214.0" style="-fx-background-color: #293039;"
+                      BorderPane.alignment="CENTER">
                     <children>
-                        <ImageView fitHeight="111.0" fitWidth="111.0" layoutX="52.0" layoutY="120.0" pickOnBounds="true" smooth="false">
+                        <ImageView fitHeight="111.0" fitWidth="111.0" layoutX="52.0" layoutY="120.0" pickOnBounds="true"
+                                   smooth="false">
                             <image>
-                                <Image url="@../Graphics/icons8_mortarboard_100px_2.png" />
+                                <Image url="@../Graphics/icons8_mortarboard_100px_2.png"/>
                             </image>
                         </ImageView>
                     </children>

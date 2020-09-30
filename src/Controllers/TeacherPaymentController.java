@@ -244,6 +244,27 @@ public class TeacherPaymentController implements Initializable {
         tblTeacherPayment.getItems().clear();
     }
 
+    public void loadPaymentCal() {
+        try {
+            Stage productsStage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Views/frmCalPayment.fxml"));
+            Parent user = loader.load();
+            productsStage.setTitle("Payment Calculate");
+            Scene scene = new Scene(user);
+            productsStage.setScene(scene);
+            productsStage.initStyle(StageStyle.UTILITY);
+            productsStage.setResizable(false);
+            productsStage.initModality(Modality.APPLICATION_MODAL);
+
+            TPC_Controller tpcc = loader.getController();
+            tpcc.loadComponent(txtPayAmount);
+
+            productsStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static class PaymentList {
         SimpleIntegerProperty payId;
         SimpleIntegerProperty teacherId;
@@ -303,22 +324,6 @@ public class TeacherPaymentController implements Initializable {
 
         public SimpleDoubleProperty amountProperty() {
             return amount;
-        }
-    }
-
-    public void loadPaymentCal() {
-        try {
-            Stage productsStage = new Stage();
-            Parent user = FXMLLoader.load(getClass().getClassLoader().getResource("Views/frmCalPayment.fxml"));
-            productsStage.setTitle("Payment Calculate");
-            Scene scene = new Scene(user);
-            productsStage.setScene(scene);
-            productsStage.initStyle(StageStyle.UTILITY);
-            productsStage.setResizable(false);
-            productsStage.initModality(Modality.APPLICATION_MODAL);
-            productsStage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 }

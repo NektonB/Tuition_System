@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import java.net.URL?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
-
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="407.0" prefWidth="754.0" style="-fx-border-color: #ecb23f; -fx-border-width: 2px;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.SelectClassController">
+<StackPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+           minWidth="-Infinity"
+           prefHeight="407.0" prefWidth="754.0"
+           style="-fx-border-color: #ecb23f; -fx-border-width: 2px;" xmlns="http://javafx.com/javafx/8.0.171"
+           fx:controller="Controllers.SelectClassController">
     <children>
         <BorderPane prefHeight="200.0" prefWidth="200.0">
             <center>
@@ -18,41 +17,55 @@
                     <children>
                         <HBox alignment="CENTER_LEFT" prefHeight="81.0" prefWidth="669.0">
                             <children>
-                                <JFXComboBox fx:id="cmbStatus" focusColor="#cd9d2d" labelFloat="true" onHidden="#filterClassTableByStream" prefHeight="35.0" prefWidth="123.0" promptText="Steam" styleClass="cmbBox" unFocusColor="#a3a3a3">
+                                <JFXComboBox fx:id="cmbStatus" focusColor="#cd9d2d" labelFloat="true"
+                                             onHidden="#filterClassTableByStream" prefHeight="35.0" prefWidth="123.0"
+                                             promptText="Steam" styleClass="cmbBox" unFocusColor="#a3a3a3">
                                     <HBox.margin>
-                                        <Insets left="10.0" />
+                                        <Insets left="10.0"/>
                                     </HBox.margin>
                                 </JFXComboBox>
-                                <JFXComboBox fx:id="cmbExamYear" focusColor="#cd9d2d" labelFloat="true" onHidden="#filterClassTableByExamYear" prefHeight="35.0" prefWidth="109.0" promptText="Exam Year" styleClass="cmbBox" unFocusColor="#a3a3a3">
+                                <JFXComboBox fx:id="cmbExamYear" focusColor="#cd9d2d" labelFloat="true"
+                                             onHidden="#filterClassTableByExamYear" prefHeight="35.0" prefWidth="109.0"
+                                             promptText="Exam Year" styleClass="cmbBox" unFocusColor="#a3a3a3">
                                     <HBox.margin>
-                                        <Insets left="10.0" />
+                                        <Insets left="10.0"/>
                                     </HBox.margin>
                                 </JFXComboBox>
-                                <JFXComboBox fx:id="cmbSubject" focusColor="#cd9d2d" labelFloat="true" layoutX="182.0" layoutY="10.0" onHidden="#filterClassTableBySubject" prefHeight="35.0" prefWidth="127.0" promptText="Subject" styleClass="cmbBox" unFocusColor="#a3a3a3">
+                                <JFXComboBox fx:id="cmbSubject" focusColor="#cd9d2d" labelFloat="true" layoutX="182.0"
+                                             layoutY="10.0" onHidden="#filterClassTableBySubject" prefHeight="35.0"
+                                             prefWidth="127.0" promptText="Subject" styleClass="cmbBox"
+                                             unFocusColor="#a3a3a3">
                                     <HBox.margin>
-                                        <Insets left="10.0" />
+                                        <Insets left="10.0"/>
                                     </HBox.margin>
                                 </JFXComboBox>
-                                <JFXComboBox fx:id="cmbTeacher" focusColor="#cd9d2d" labelFloat="true" layoutX="345.0" layoutY="10.0" onHidden="#filterClassTableByTeacher" prefHeight="35.0" prefWidth="168.0" promptText="Teacher" styleClass="cmbBox" unFocusColor="#a3a3a3">
+                                <JFXComboBox fx:id="cmbTeacher" focusColor="#cd9d2d" labelFloat="true" layoutX="345.0"
+                                             layoutY="10.0" onHidden="#filterClassTableByTeacher" prefHeight="35.0"
+                                             prefWidth="168.0" promptText="Teacher" styleClass="cmbBox"
+                                             unFocusColor="#a3a3a3">
                                     <HBox.margin>
-                                        <Insets left="10.0" />
+                                        <Insets left="10.0"/>
                                     </HBox.margin>
                                 </JFXComboBox>
-                                <JFXComboBox fx:id="cmbClassType" focusColor="#cd9d2d" labelFloat="true" layoutX="369.0" layoutY="10.0" onHidden="#filterClassTableByClassType" prefHeight="35.0" prefWidth="168.0" promptText="Class Type" styleClass="cmbBox" unFocusColor="#a3a3a3">
+                                <JFXComboBox fx:id="cmbClassType" focusColor="#cd9d2d" labelFloat="true" layoutX="369.0"
+                                             layoutY="10.0" onHidden="#filterClassTableByClassType" prefHeight="35.0"
+                                             prefWidth="168.0" promptText="Class Type" styleClass="cmbBox"
+                                             unFocusColor="#a3a3a3">
                                     <HBox.margin>
-                                        <Insets left="10.0" right="5.0" />
+                                        <Insets left="10.0" right="5.0"/>
                                     </HBox.margin>
                                 </JFXComboBox>
                             </children>
                         </HBox>
-                        <TableView fx:id="tblClass" onKeyReleased="#selectTeacher_Key" prefHeight="329.0" prefWidth="700.0">
+                        <TableView fx:id="tblClass" onKeyReleased="#selectTeacher_Key" prefHeight="329.0"
+                                   prefWidth="700.0">
                             <columns>
-                                <TableColumn fx:id="tcId" prefWidth="75.0" text="Id" />
-                                <TableColumn fx:id="tcStream" prefWidth="100.0" text="Stream" />
-                                <TableColumn fx:id="tcExamYeear" prefWidth="100.0" text="Exam Year" />
-                                <TableColumn fx:id="tcSubject" prefWidth="150.0" text="Subject" />
-                                <TableColumn fx:id="tcTeacher" prefWidth="250.0" text="Teacher" />
-                                <TableColumn fx:id="tcClassType" prefWidth="120.0" text="Class Type" />
+                                <TableColumn fx:id="tcId" prefWidth="75.0" text="Id"/>
+                                <TableColumn fx:id="tcStream" prefWidth="100.0" text="Stream"/>
+                                <TableColumn fx:id="tcExamYeear" prefWidth="100.0" text="Exam Year"/>
+                                <TableColumn fx:id="tcSubject" prefWidth="150.0" text="Subject"/>
+                                <TableColumn fx:id="tcTeacher" prefWidth="250.0" text="Teacher"/>
+                                <TableColumn fx:id="tcClassType" prefWidth="120.0" text="Class Type"/>
                             </columns>
                         </TableView>
                     </children>
@@ -60,9 +73,9 @@
             </center>
         </BorderPane>
     </children>
-   <stylesheets>
-      <URL value="@../CSS/Login.css" />
-      <URL value="@../CSS/Table.css" />
-      <URL value="@../CSS/combo.css" />
-   </stylesheets>
+    <stylesheets>
+        <URL value="@../CSS/Login.css"/>
+        <URL value="@../CSS/Table.css"/>
+        <URL value="@../CSS/combo.css"/>
+    </stylesheets>
 </StackPane>

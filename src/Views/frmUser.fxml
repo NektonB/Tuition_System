@@ -1,81 +1,96 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXComboBox?>
-<?import com.jfoenix.controls.JFXPasswordField?>
-<?import com.jfoenix.controls.JFXTextField?>
-<?import javafx.scene.Cursor?>
+<?import com.jfoenix.controls.*?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#saveUser_Key" onMouseMoved="#resetBoarders" prefHeight="566.0" prefWidth="800.0" styleClass="parant" stylesheets="@../CSS/Login.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.UserRegistration">
+<?import javafx.scene.text.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+            minWidth="-Infinity" onKeyReleased="#saveUser_Key" onMouseMoved="#resetBoarders" prefHeight="566.0"
+            prefWidth="800.0" styleClass="parant" stylesheets="@../CSS/Login.css"
+            xmlns="http://javafx.com/javafx/8.0.171" fx:controller="Controllers.UserRegistration">
     <children>
-        <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="566.0" prefWidth="400.0" styleClass="sidebar">
+        <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+              prefHeight="566.0" prefWidth="400.0" styleClass="sidebar">
             <children>
                 <ImageView fitHeight="132.0" fitWidth="134.0" pickOnBounds="true" smooth="false">
                     <image>
-                        <Image url="@../Graphics/icons8_mortarboard_100px_2.png" />
+                        <Image url="@../Graphics/icons8_mortarboard_100px_2.png"/>
                     </image>
                 </ImageView>
                 <Label text="User Managment" textFill="#f59a32">
                     <font>
-                        <Font name="Ebrima Bold" size="14.0" />
+                        <Font name="Ebrima Bold" size="14.0"/>
                     </font>
                 </Label>
             </children>
         </VBox>
-        <Pane layoutX="400.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="566.0" prefWidth="400.0">
+        <Pane layoutX="400.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+              prefHeight="566.0" prefWidth="400.0">
             <children>
-                <ImageView fitHeight="104.0" fitWidth="86.0" layoutX="22.0" layoutY="16.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="104.0" fitWidth="86.0" layoutX="22.0" layoutY="16.0" opacity="0.7"
+                           pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../Graphics/icons8_mortarboard_100px_1.png" />
+                        <Image url="@../Graphics/icons8_mortarboard_100px_1.png"/>
                     </image>
                 </ImageView>
                 <Label layoutX="33.0" layoutY="99.0" text="User Registration" textFill="#545454">
                     <font>
-                        <Font name="Impact" size="24.0" />
+                        <Font name="Impact" size="24.0"/>
                     </font>
                 </Label>
                 <Label layoutX="33.0" layoutY="135.0" text="Fill the form for Register" textFill="#a3a3a3">
                     <font>
-                        <Font name="Ebrima Bold" size="14.0" />
+                        <Font name="Ebrima Bold" size="14.0"/>
                     </font>
                 </Label>
-                <JFXTextField fx:id="txt_nic" focusColor="#cd9d2d" labelFloat="true" layoutX="57.0" layoutY="181.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="300.0" promptText="Employee NIC" unFocusColor="#a3a3a3">
+                <JFXTextField fx:id="txt_nic" focusColor="#cd9d2d" labelFloat="true" layoutX="57.0" layoutY="181.0"
+                              maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                              prefHeight="35.0" prefWidth="300.0" promptText="Employee NIC" unFocusColor="#a3a3a3">
                     <font>
-                        <Font size="13.0" />
+                        <Font size="13.0"/>
                     </font>
                 </JFXTextField>
-                <JFXPasswordField fx:id="txt_password" focusColor="#cd9d2d" labelFloat="true" layoutX="55.0" layoutY="345.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="300.0" promptText="Password" unFocusColor="#a3a3a3">
+                <JFXPasswordField fx:id="txt_password" focusColor="#cd9d2d" labelFloat="true" layoutX="55.0"
+                                  layoutY="345.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                                  minWidth="-Infinity" prefHeight="35.0" prefWidth="300.0" promptText="Password"
+                                  unFocusColor="#a3a3a3">
                     <font>
-                        <Font size="13.0" />
+                        <Font size="13.0"/>
                     </font>
                 </JFXPasswordField>
-                <Label fx:id="lbl_update_user" layoutX="215.0" layoutY="465.0" onMouseClicked="#loadUserUpdate" styleClass="forgotBtn" text="Update exiting User" textFill="#a3a3a3">
+                <Label fx:id="lbl_update_user" layoutX="215.0" layoutY="465.0" onMouseClicked="#loadUserUpdate"
+                       styleClass="forgotBtn" text="Update exiting User" textFill="#a3a3a3">
                     <font>
-                        <Font name="Ebrima Bold" size="14.0" />
+                        <Font name="Ebrima Bold" size="14.0"/>
                     </font>
                     <cursor>
-                        <Cursor fx:constant="HAND" />
+                        <Cursor fx:constant="HAND"/>
                     </cursor>
                 </Label>
-                <JFXButton fx:id="btn_login" buttonType="RAISED" layoutX="58.0" layoutY="498.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#saveUser" prefHeight="50.0" prefWidth="300.0" ripplerFill="#0777ff" styleClass="loginBtn" text="Register">
+                <JFXButton fx:id="btn_login" buttonType="RAISED" layoutX="58.0" layoutY="498.0" maxHeight="-Infinity"
+                           maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#saveUser"
+                           prefHeight="50.0" prefWidth="300.0" ripplerFill="#0777ff" styleClass="loginBtn"
+                           text="Register">
                     <font>
-                        <Font name="System Bold" size="14.0" />
+                        <Font name="System Bold" size="14.0"/>
                     </font>
                 </JFXButton>
-                <JFXTextField fx:id="txt_userName" focusColor="#cd9d2d" labelFloat="true" layoutX="58.0" layoutY="237.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="300.0" promptText="User Name" unFocusColor="#a3a3a3">
+                <JFXTextField fx:id="txt_userName" focusColor="#cd9d2d" labelFloat="true" layoutX="58.0" layoutY="237.0"
+                              maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                              prefHeight="35.0" prefWidth="300.0" promptText="User Name" unFocusColor="#a3a3a3">
                     <font>
-                        <Font size="13.0" />
+                        <Font size="13.0"/>
                     </font>
                 </JFXTextField>
-                <JFXComboBox fx:id="cmb_status" focusColor="#cd9d2d" labelFloat="true" layoutX="58.0" layoutY="403.0" prefHeight="35.0" prefWidth="300.0" promptText="Status" unFocusColor="#a3a3a3" />
-                <JFXComboBox fx:id="cmb_userType" focusColor="#cd9d2d" labelFloat="true" layoutX="57.0" layoutY="295.0" prefHeight="25.0" prefWidth="300.0" promptText="User Type" unFocusColor="#a3a3a3" />
+                <JFXComboBox fx:id="cmb_status" focusColor="#cd9d2d" labelFloat="true" layoutX="58.0" layoutY="403.0"
+                             prefHeight="35.0" prefWidth="300.0" promptText="Status" unFocusColor="#a3a3a3"/>
+                <JFXComboBox fx:id="cmb_userType" focusColor="#cd9d2d" labelFloat="true" layoutX="57.0" layoutY="295.0"
+                             prefHeight="25.0" prefWidth="300.0" promptText="User Type" unFocusColor="#a3a3a3"/>
             </children>
         </Pane>
     </children>

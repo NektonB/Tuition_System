@@ -26,7 +26,8 @@
                   </Label>
                </children>
             </HBox>
-            <JFXComboBox fx:id="cmbStream" focusColor="#e18e3b" labelFloat="true" prefHeight="25.0" prefWidth="382.0"
+            <JFXComboBox fx:id="cmbStream" focusColor="#e18e3b" labelFloat="true" prefHeight="25.0"
+                         prefWidth="382.0"
                          promptText="-Select Stream-" unFocusColor="#6f6262">
                <VBox.margin>
                   <Insets left="10.0" right="10.0" top="30.0"/>
@@ -62,7 +63,8 @@
                   <Insets left="10.0" right="10.0" top="30.0"/>
                </VBox.margin>
             </JFXTextField>
-            <JFXButton fx:id="bntView" graphicTextGap="8.0" onAction="#viewReport" prefHeight="39.0" prefWidth="359.0"
+            <JFXButton fx:id="bntView" graphicTextGap="8.0" onAction="#viewReport" prefHeight="39.0"
+                       prefWidth="359.0"
                        style="-fx-background-color: #293039; -fx-background-radius: 5px; -fx-border-radius: 5px;"
                        text="View Report" textFill="#eaa04c">
                <VBox.margin>
