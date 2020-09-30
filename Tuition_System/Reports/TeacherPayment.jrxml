@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.14.0.final using JasperReports Library version 6.14.0-2ab0d8625be255bf609c78e1181801213e51db8f  -->
+<jasperReport xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="TeacherPayment" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20"
+              topMargin="20" bottomMargin="20" uuid="631a7095-fed6-4c58-b4e0-3da94c18edd0">
+    <property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+    <property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="203"/>
+    <property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="792"/>
+    <property name="com.jaspersoft.studio.data.defaultdataadapter" value="TuitionDB"/>
+    <parameter name="Year" class="java.lang.String"/>
+    <parameter name="Month" class="java.lang.String"/>
+    <parameter name="TeacherFname" class="java.lang.String"/>
+    <parameter name="TeacherLname" class="java.lang.String"/>
+    <queryString language="SQL">
+        <![CDATA[SELECT tuition_db.teacher_paymet.`month` PayMonth,
+	tuition_db.teacher_paymet.`year` PayYear,
+	tuition_db.tp_details.date PaymentDate,
+	tuition_db.tp_details.time PaymentTime,
+	tuition_db.tp_details.pay_amount PayAmount,
+	tuition_db.acc_type.type ClassType,
+	tuition_db.stream.stream Stream,
+	tuition_db.exam.exam Exam,
+	tuition_db.academic_course.exam_year ExamYear,
+	tuition_db.teacher.fname TeacherFname,
+	tuition_db.teacher.lname TeacherLname,
+	tuition_db.teacher.nic_number TeacherNIC,
+	tuition_db.subject.name SubjectName
+FROM tuition_db.tp_details
+	INNER JOIN tuition_db.teacher_paymet ON 
+	 tuition_db.tp_details.teacher_paymet_id = tuition_db.teacher_paymet.id 
+	INNER JOIN tuition_db.ac_type_details ON 
+	 tuition_db.tp_details.ac_type_details_id = tuition_db.ac_type_details.id 
+	INNER JOIN tuition_db.acc_type ON 
+	 tuition_db.ac_type_details.tbl_acc_type_id = tuition_db.acc_type.id 
+	INNER JOIN tuition_db.ac_class ON 
+	 tuition_db.ac_type_details.ac_class_id = tuition_db.ac_class.id 
+	INNER JOIN tuition_db.academic_course ON 
+	 tuition_db.ac_class.ac_id = tuition_db.academic_course.id 
+	INNER JOIN tuition_db.stream ON 
+	 tuition_db.academic_course.stream_id = tuition_db.stream.id 
+	INNER JOIN tuition_db.exam ON 
+	 tuition_db.academic_course.exam_id = tuition_db.exam.id 
+	INNER JOIN tuition_db.teacher_has_subject ON 
+	 tuition_db.ac_class.teacher_has_subject_id = tuition_db.teacher_has_subject.id 
+	INNER JOIN tuition_db.teacher ON 
+	 tuition_db.teacher_paymet.teacher_id = tuition_db.teacher.id 
+	 AND tuition_db.teacher_has_subject.teacher_id = tuition_db.teacher.id 
+	INNER JOIN tuition_db.subject ON 
+	 tuition_db.teacher_has_subject.subject_id = tuition_db.subject.id WHERE 
+	 tuition_db.teacher.fname =  $P{TeacherFname} 
+	 AND tuition_db.teacher.lname =  $P{TeacherLname} 
+	 AND tuition_db.teacher_paymet.`year` =  $P{Year} 
+	 AND tuition_db.teacher_paymet.`month` =  $P{Month} ]]>
+    </queryString>
+    <field name="PayMonth" class="java.lang.String">
+        <property name="com.jaspersoft.studio.field.name" value="month"/>
+        <property name="com.jaspersoft.studio.field.label" value="PayMonth"/>
+        <property name="com.jaspersoft.studio.field.tree.path" value="teacher_paymet"/>
+    </field>
+    <field name="PayYear" class="java.lang.String">
+        <property name="com.jaspersoft.studio.field.name" value="year"/>
+        <property name="com.jaspersoft.studio.field.label" value="PayYear"/>
+        <property name="com.jaspersoft.studio.field.tree.path" value="teacher_paymet"/>
+    </field>
+    <field name="PaymentDate" class="java.sql.Date">
+        <property name="com.jaspersoft.studio.field.name" value="date"/>
+        <property name="com.jaspersoft.studio.field.label" value="PaymentDate"/>
+        <property name="com.jaspersoft.studio.field.tree.path" value="tp_details"/>
+    </field>
+    <field name="PaymentTime" class="java.sql.Time">
+        <property name="com.jaspersoft.studio.field.name" value="time"/>
+        <property name="com.jaspersoft.studio.field.label" value="PaymentTime"/>
+        <property name="com.jaspersoft.studio.field.tree.path" value="tp_details"/>
+    </field>
+    <field name="PayAmount" class="java.lang.Double">
+        <property name="com.jaspersoft.studio.field.name" value="pay_amount"/>
+        <property name="com.jaspersoft.studio.field.label" value="PayAmount"/>
+        <property name="com.jaspersoft.studio.field.tree.path" value="tp_details"/>
+    </field>
+    <field name="ClassType" class="java.lang.String">
+        <property name="com.jaspersoft.studio.field.name" value="type"/>
+        <property name="com.jaspersoft.studio.field.label" value="ClassType"/>
+        <property name="com.jaspersoft.studio.field.tree.path" value="acc_type"/>
+    </field>
+    <field name="Stream" class="java.lang.String">
+        <property name="com.jaspersoft.studio.field.name" value="stream"/>
+        <property name="com.jaspersoft.studio.field.label" value="Stream"/>
+        <property name="com.jaspersoft.studio.field.tree.path" value="stream"/>
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="Exam" class="java.lang.String">
+        <property name="com.jaspersoft.studio.field.name" value="exam"/>
+        <property name="com.jaspersoft.studio.field.label" value="Exam"/>
+        <property name="com.jaspersoft.studio.field.tree.path" value="exam"/>
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="ExamYear" class="java.lang.String">
+        <property name="com.jaspersoft.studio.field.name" value="exam_year"/>
+        <property name="com.jaspersoft.studio.field.label" value="ExamYear"/>
+        <property name="com.jaspersoft.studio.field.tree.path" value="academic_course"/>
+    </field>
+    <field name="TeacherFname" class="java.lang.String">
+        <property name="com.jaspersoft.studio.field.name" value="fname"/>
+        <property name="com.jaspersoft.studio.field.label" value="TeacherFname"/>
+        <property name="com.jaspersoft.studio.field.tree.path" value="teacher"/>
+    </field>
+    <field name="TeacherLname" class="java.lang.String">
+        <property name="com.jaspersoft.studio.field.name" value="lname"/>
+        <property name="com.jaspersoft.studio.field.label" value="TeacherLname"/>
+        <property name="com.jaspersoft.studio.field.tree.path" value="teacher"/>
+    </field>
+    <field name="TeacherNIC" class="java.lang.String">
+        <property name="com.jaspersoft.studio.field.name" value="nic_number"/>
+        <property name="com.jaspersoft.studio.field.label" value="TeacherNIC"/>
+        <property name="com.jaspersoft.studio.field.tree.path" value="teacher"/>
+    </field>
+    <field name="SubjectName" class="java.lang.String">
+        <property name="com.jaspersoft.studio.field.name" value="name"/>
+        <property name="com.jaspersoft.studio.field.label" value="SubjectName"/>
+        <property name="com.jaspersoft.studio.field.tree.path" value="subject"/>
+    </field>
+    <variable name="TotalCount" class="java.lang.Integer" calculation="Count">
+        <variableExpression><![CDATA[$F{TeacherNIC}]]></variableExpression>
+        <initialValueExpression><![CDATA[0]]></initialValueExpression>
+    </variable>
+    <variable name="AttendedCount" class="java.lang.Integer" calculation="Sum">
+        <variableExpression><![CDATA[($F{PayAmount} > 0 ? 1 : 0)]]></variableExpression>
+    </variable>
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+    <title>
+        <band height="73" splitType="Stretch">
+            <staticText>
+                <reportElement x="186" y="0" width="184" height="30" uuid="c4a31adf-56ec-40da-882f-d6352511e8c0"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="16" isBold="true" isUnderline="false"/>
+                </textElement>
+                <text><![CDATA[Teacher Payments]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="0" y="40" width="176" height="15" uuid="6b431997-50f0-4728-89bf-12bd6b4c1478">
+                    <property name="com.jaspersoft.studio.unit.height" value="px"/>
+                </reportElement>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font isBold="true"/>
+                </textElement>
+                <textFieldExpression>
+                    <![CDATA[$F{Exam} + " / " + $F{ExamYear} + " / " + $F{Stream}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="390" y="40" width="164" height="15" uuid="96583e55-fbb6-4ce6-8477-f05bf6444f9b">
+                    <property name="com.jaspersoft.studio.unit.width" value="px"/>
+                    <property name="com.jaspersoft.studio.unit.height" value="px"/>
+                </reportElement>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Date : "+ $F{PayYear} + " / " + $F{PayMonth}]]></textFieldExpression>
+            </textField>
+            <line>
+                <reportElement x="0" y="72" width="555" height="1" uuid="3b61eeb5-d5bb-4ca1-aa2d-ed5e87efcb0d">
+                    <property name="com.jaspersoft.studio.unit.height" value="px"/>
+                    <property name="com.jaspersoft.studio.unit.width" value="px"/>
+                </reportElement>
+                <graphicElement>
+                    <pen lineStyle="Dashed"/>
+                </graphicElement>
+            </line>
+            <textField>
+                <reportElement x="0" y="55" width="278" height="15" uuid="5ee8e6f0-f2eb-45af-b8a3-27d64d2194ad">
+                    <property name="com.jaspersoft.studio.unit.height" value="px"/>
+                </reportElement>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{TeacherFname} + " " + $F{TeacherLname}]]></textFieldExpression>
+            </textField>
+        </band>
+    </title>
+    <pageHeader>
+        <band height="35" splitType="Stretch"/>
+    </pageHeader>
+    <columnHeader>
+        <band height="21" splitType="Stretch">
+            <staticText>
+                <reportElement x="0" y="4" width="120" height="15" uuid="9827c857-e211-4f8f-8a78-3f18e4889239">
+                    <property name="com.jaspersoft.studio.spreadsheet.connectionID"
+                              value="6317f99c-aab4-4303-95cf-1812c94b7caf"/>
+                    <property name="com.jaspersoft.studio.unit.height" value="px"/>
+                    <property name="com.jaspersoft.studio.unit.width" value="px"/>
+                </reportElement>
+                <textElement textAlignment="Left" verticalAlignment="Middle"/>
+                <text><![CDATA[Index Number]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="120" y="4" width="240" height="15" uuid="f1b971c1-bf10-4cb2-9e64-2fe884983fdd">
+                    <property name="com.jaspersoft.studio.spreadsheet.connectionID"
+                              value="783b863e-3cba-4385-9ab0-14f6c2f94118"/>
+                    <property name="com.jaspersoft.studio.unit.height" value="px"/>
+                    <property name="com.jaspersoft.studio.unit.width" value="px"/>
+                </reportElement>
+                <textElement textAlignment="Left" verticalAlignment="Middle"/>
+                <text><![CDATA[Student Name]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="475" y="4" width="80" height="15" uuid="e56a0cb7-cbdc-4a10-8d21-1b45a8cf6f9b">
+                    <property name="com.jaspersoft.studio.spreadsheet.connectionID"
+                              value="a618ee44-3cc0-4e83-a457-558a3b7ddea4"/>
+                    <property name="com.jaspersoft.studio.unit.height" value="px"/>
+                    <property name="com.jaspersoft.studio.unit.width" value="px"/>
+                </reportElement>
+                <textElement textAlignment="Left" verticalAlignment="Middle"/>
+                <text><![CDATA[Status]]></text>
+            </staticText>
+            <line>
+                <reportElement x="0" y="20" width="555" height="1" uuid="9efca418-24da-4076-b41c-09c1efb30d98">
+                    <property name="com.jaspersoft.studio.unit.height" value="px"/>
+                    <property name="com.jaspersoft.studio.unit.width" value="px"/>
+                </reportElement>
+                <graphicElement>
+                    <pen lineStyle="Solid"/>
+                </graphicElement>
+            </line>
+            <staticText>
+                <reportElement x="360" y="4" width="115" height="15" uuid="f575706b-8095-45bd-abbe-27f445b90a8a">
+                    <property name="com.jaspersoft.studio.spreadsheet.connectionID"
+                              value="e72ec1cd-c984-4f30-9c3d-8cfc18ddc81b"/>
+                    <property name="com.jaspersoft.studio.unit.height" value="px"/>
+                </reportElement>
+                <textElement textAlignment="Left" verticalAlignment="Middle"/>
+                <text><![CDATA[Contact Number]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+    <detail>
+        <band height="15" splitType="Stretch">
+            <textField>
+                <reportElement isPrintRepeatedValues="false" x="0" y="0" width="120" height="15" forecolor="#000000"
+                               uuid="836e59c8-341c-4f45-8be0-9db25ba14a1e">
+                    <property name="com.jaspersoft.studio.spreadsheet.connectionID"
+                              value="6317f99c-aab4-4303-95cf-1812c94b7caf"/>
+                    <property name="com.jaspersoft.studio.unit.height" value="px"/>
+                    <property name="com.jaspersoft.studio.unit.width" value="px"/>
+                </reportElement>
+                <textElement textAlignment="Left" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{IndexNumber}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="120" y="0" width="240" height="15" uuid="3e7b7325-a3e3-4475-9fe1-880d0334cd1c">
+                    <property name="com.jaspersoft.studio.spreadsheet.connectionID"
+                              value="783b863e-3cba-4385-9ab0-14f6c2f94118"/>
+                    <property name="com.jaspersoft.studio.unit.height" value="px"/>
+                    <property name="com.jaspersoft.studio.unit.width" value="px"/>
+                </reportElement>
+                <textElement textAlignment="Left" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{StudentFname}+ " " + $F{StudentLname}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement key="" x="475" y="0" width="80" height="15" uuid="c5a7e26e-5ec9-4683-8f35-5a89b96250de">
+                    <property name="com.jaspersoft.studio.spreadsheet.connectionID"
+                              value="a618ee44-3cc0-4e83-a457-558a3b7ddea4"/>
+                    <property name="com.jaspersoft.studio.unit.height" value="px"/>
+                    <property name="com.jaspersoft.studio.unit.width" value="px"/>
+                </reportElement>
+                <textElement textAlignment="Left" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{PayStatus}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="360" y="0" width="115" height="15" uuid="202819a8-6305-40ed-855b-12eb0b44ea91">
+                    <property name="com.jaspersoft.studio.spreadsheet.connectionID"
+                              value="e72ec1cd-c984-4f30-9c3d-8cfc18ddc81b"/>
+                    <property name="com.jaspersoft.studio.unit.height" value="px"/>
+                </reportElement>
+                <textElement textAlignment="Left" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{StudentMobileNum}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+    <columnFooter>
+        <band splitType="Stretch">
+            <property name="com.jaspersoft.studio.unit.height" value="px"/>
+        </band>
+    </columnFooter>
+    <pageFooter>
+        <band splitType="Stretch">
+            <property name="com.jaspersoft.studio.unit.height" value="px"/>
+        </band>
+    </pageFooter>
+    <summary>
+        <band height="58" splitType="Stretch">
+            <line>
+                <reportElement x="0" y="9" width="555" height="1" uuid="d34dcb72-a8ce-4a58-a0f3-a97674e8e146">
+                    <property name="com.jaspersoft.studio.unit.height" value="px"/>
+                    <property name="com.jaspersoft.studio.unit.width" value="px"/>
+                </reportElement>
+                <graphicElement>
+                    <pen lineStyle="Dashed"/>
+                </graphicElement>
+            </line>
+            <textField>
+                <reportElement x="402" y="13" width="150" height="15" uuid="40dc5d63-5345-4cff-94af-f263709fa7e3">
+                    <property name="com.jaspersoft.studio.unit.height" value="px"/>
+                    <property name="com.jaspersoft.studio.unit.width" value="px"/>
+                </reportElement>
+                <textElement textAlignment="Left" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA["Total Count 	: " + $V{TotalCount}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="402" y="28" width="150" height="15" uuid="74c385df-08b3-42ab-a750-9ec60f774cbb">
+                    <property name="com.jaspersoft.studio.unit.height" value="px"/>
+                    <property name="com.jaspersoft.studio.unit.width" value="px"/>
+                </reportElement>
+                <textElement textAlignment="Left" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA["Payed 		: "+$V{AttendedCount}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="402" y="43" width="150" height="15" uuid="17fcadbb-9fef-409d-822a-299c91188234">
+                    <property name="com.jaspersoft.studio.unit.height" value="px"/>
+                    <property name="com.jaspersoft.studio.unit.width" value="px"/>
+                </reportElement>
+                <textElement textAlignment="Left" verticalAlignment="Middle"/>
+                <textFieldExpression>
+                    <![CDATA["Not Payed 	: " + ($V{TotalCount} - $V{AttendedCount})]]></textFieldExpression>
+            </textField>
+        </band>
+    </summary>
+</jasperReport>

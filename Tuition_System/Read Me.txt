@@ -1,0 +1,1 @@
+Copy this whole directory to c:\program files\common files directory.
