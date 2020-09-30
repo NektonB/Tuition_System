@@ -154,7 +154,7 @@ public class MainController implements Initializable {
     public void loadClassAttendance() {
         try {
             Stage productsStage = new Stage();
-            Parent user = FXMLLoader.load(getClass().getClassLoader().getResource("Views/frmStudentAttendanceReport.fxml"));
+            Parent user = FXMLLoader.load(getClass().getClassLoader().getResource("Views/frmSAR.fxml"));
             productsStage.setTitle("Class Attendance Report");
             Scene scene = new Scene(user);
             productsStage.setScene(scene);
@@ -170,7 +170,7 @@ public class MainController implements Initializable {
     public void loadTeacherPaymentReport() {
         try {
             Stage productsStage = new Stage();
-            Parent user = FXMLLoader.load(getClass().getClassLoader().getResource("Views/frmTeacherPayemntReport.fxml"));
+            Parent user = FXMLLoader.load(getClass().getClassLoader().getResource("Views/frmTPR.fxml"));
             productsStage.setTitle("Teacher Payment Report");
             Scene scene = new Scene(user);
             productsStage.setScene(scene);
