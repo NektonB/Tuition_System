@@ -11,7 +11,7 @@ import javafx.fxml.Initializable;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AttendanceReportController implements Initializable {
+public class CAR_Controller implements Initializable {
 
     DataReader dataReader;
     Alerts alerts;
