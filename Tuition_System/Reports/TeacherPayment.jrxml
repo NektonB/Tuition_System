@@ -52,7 +52,7 @@ FROM tuition_db.tp_details
 	 tuition_db.teacher.fname =  $P{TeacherFname} 
 	 AND tuition_db.teacher.lname =  $P{TeacherLname} 
 	 AND tuition_db.teacher_paymet.`year` =  $P{Year} 
-	 AND tuition_db.teacher_paymet.`month` =  $P{Month} ]]>
+	 AND tuition_db.teacher_paymet.`month` =  $P{Month}]]>
     </queryString>
     <field name="PayMonth" class="java.lang.String">
         <property name="com.jaspersoft.studio.field.name" value="month"/>
@@ -121,12 +121,15 @@ FROM tuition_db.tp_details
         <property name="com.jaspersoft.studio.field.label" value="SubjectName"/>
         <property name="com.jaspersoft.studio.field.tree.path" value="subject"/>
     </field>
-    <variable name="TotalCount" class="java.lang.Integer" calculation="Count">
-        <variableExpression><![CDATA[$F{TeacherNIC}]]></variableExpression>
+    <variable name="TotalClaaCount" class="java.lang.Integer" calculation="Count">
+        <variableExpression><![CDATA[$F{SubjectName}]]></variableExpression>
         <initialValueExpression><![CDATA[0]]></initialValueExpression>
     </variable>
     <variable name="AttendedCount" class="java.lang.Integer" calculation="Sum">
         <variableExpression><![CDATA[($F{PayAmount} > 0 ? 1 : 0)]]></variableExpression>
+    </variable>
+    <variable name="TotalAmount" class="java.lang.Double" calculation="Sum">
+        <variableExpression><![CDATA[$F{PayAmount}]]></variableExpression>
     </variable>
     <background>
         <band splitType="Stretch"/>
@@ -238,17 +241,6 @@ FROM tuition_db.tp_details
     <detail>
         <band height="15" splitType="Stretch">
             <textField>
-                <reportElement isPrintRepeatedValues="false" x="0" y="0" width="120" height="15" forecolor="#000000"
-                               uuid="836e59c8-341c-4f45-8be0-9db25ba14a1e">
-                    <property name="com.jaspersoft.studio.spreadsheet.connectionID"
-                              value="6317f99c-aab4-4303-95cf-1812c94b7caf"/>
-                    <property name="com.jaspersoft.studio.unit.height" value="px"/>
-                    <property name="com.jaspersoft.studio.unit.width" value="px"/>
-                </reportElement>
-                <textElement textAlignment="Left" verticalAlignment="Middle"/>
-                <textFieldExpression><![CDATA[$F{IndexNumber}]]></textFieldExpression>
-            </textField>
-            <textField>
                 <reportElement x="120" y="0" width="240" height="15" uuid="3e7b7325-a3e3-4475-9fe1-880d0334cd1c">
                     <property name="com.jaspersoft.studio.spreadsheet.connectionID"
                               value="783b863e-3cba-4385-9ab0-14f6c2f94118"/>
@@ -256,7 +248,7 @@ FROM tuition_db.tp_details
                     <property name="com.jaspersoft.studio.unit.width" value="px"/>
                 </reportElement>
                 <textElement textAlignment="Left" verticalAlignment="Middle"/>
-                <textFieldExpression><![CDATA[$F{StudentFname}+ " " + $F{StudentLname}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{SubjectName}]]></textFieldExpression>
             </textField>
             <textField>
                 <reportElement key="" x="475" y="0" width="80" height="15" uuid="c5a7e26e-5ec9-4683-8f35-5a89b96250de">
@@ -266,7 +258,7 @@ FROM tuition_db.tp_details
                     <property name="com.jaspersoft.studio.unit.width" value="px"/>
                 </reportElement>
                 <textElement textAlignment="Left" verticalAlignment="Middle"/>
-                <textFieldExpression><![CDATA[$F{PayStatus}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{PayAmount}]]></textFieldExpression>
             </textField>
             <textField>
                 <reportElement x="360" y="0" width="115" height="15" uuid="202819a8-6305-40ed-855b-12eb0b44ea91">
@@ -275,7 +267,7 @@ FROM tuition_db.tp_details
                     <property name="com.jaspersoft.studio.unit.height" value="px"/>
                 </reportElement>
                 <textElement textAlignment="Left" verticalAlignment="Middle"/>
-                <textFieldExpression><![CDATA[$F{StudentMobileNum}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{ClassType}]]></textFieldExpression>
             </textField>
         </band>
     </detail>
@@ -285,12 +277,19 @@ FROM tuition_db.tp_details
         </band>
     </columnFooter>
     <pageFooter>
-        <band splitType="Stretch">
+        <band height="15" splitType="Stretch">
             <property name="com.jaspersoft.studio.unit.height" value="px"/>
+            <textField>
+                <reportElement x="173" y="0" width="211" height="15" uuid="901252ef-3fba-45b9-80cf-6ddc00b1921a">
+                    <property name="com.jaspersoft.studio.unit.height" value="px"/>
+                </reportElement>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$V{PAGE_NUMBER} + " of " + ($V{PAGE_COUNT} - 1)]]></textFieldExpression>
+            </textField>
         </band>
     </pageFooter>
     <summary>
-        <band height="58" splitType="Stretch">
+        <band height="43" splitType="Stretch">
             <line>
                 <reportElement x="0" y="9" width="555" height="1" uuid="d34dcb72-a8ce-4a58-a0f3-a97674e8e146">
                     <property name="com.jaspersoft.studio.unit.height" value="px"/>
@@ -305,25 +304,20 @@ FROM tuition_db.tp_details
                     <property name="com.jaspersoft.studio.unit.height" value="px"/>
                     <property name="com.jaspersoft.studio.unit.width" value="px"/>
                 </reportElement>
-                <textElement textAlignment="Left" verticalAlignment="Middle"/>
-                <textFieldExpression><![CDATA["Total Count 	: " + $V{TotalCount}]]></textFieldExpression>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font isBold="true" isItalic="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Class Count 	: " + $V{TotalClaaCount}]]></textFieldExpression>
             </textField>
             <textField>
                 <reportElement x="402" y="28" width="150" height="15" uuid="74c385df-08b3-42ab-a750-9ec60f774cbb">
                     <property name="com.jaspersoft.studio.unit.height" value="px"/>
                     <property name="com.jaspersoft.studio.unit.width" value="px"/>
                 </reportElement>
-                <textElement textAlignment="Left" verticalAlignment="Middle"/>
-                <textFieldExpression><![CDATA["Payed 		: "+$V{AttendedCount}]]></textFieldExpression>
-            </textField>
-            <textField>
-                <reportElement x="402" y="43" width="150" height="15" uuid="17fcadbb-9fef-409d-822a-299c91188234">
-                    <property name="com.jaspersoft.studio.unit.height" value="px"/>
-                    <property name="com.jaspersoft.studio.unit.width" value="px"/>
-                </reportElement>
-                <textElement textAlignment="Left" verticalAlignment="Middle"/>
-                <textFieldExpression>
-                    <![CDATA["Not Payed 	: " + ($V{TotalCount} - $V{AttendedCount})]]></textFieldExpression>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font isBold="true" isItalic="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Payed Amount 	: "+ $V{TotalAmount}]]></textFieldExpression>
             </textField>
         </band>
     </summary>

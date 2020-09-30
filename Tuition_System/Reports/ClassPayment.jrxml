@@ -80,7 +80,7 @@ WHERE
 	 AND tuition_db.subject.name = $P{Subject} 
 	 AND tuition_db.teacher.fname = $P{TeacherFname} 
 	 AND tuition_db.teacher.lname = $P{TeacherLname} 
-	 AND tuition_db.acc_type.type = $P{ClassType} AND tuition_db.ac_payment.`year` =  $P{PayYear} AND tuition_db.ac_payment.`month` =  $P{PayMonth} ]]>
+	 AND tuition_db.acc_type.type = $P{ClassType} AND tuition_db.ac_payment.`year` =  $P{PayYear} AND tuition_db.ac_payment.`month` =  $P{PayMonth}]]>
     </queryString>
     <field name="ClassYear" class="java.lang.String">
         <property name="com.jaspersoft.studio.field.name" value="year"/>
@@ -335,8 +335,15 @@ WHERE
         </band>
     </columnFooter>
     <pageFooter>
-        <band splitType="Stretch">
+        <band height="15" splitType="Stretch">
             <property name="com.jaspersoft.studio.unit.height" value="px"/>
+            <textField>
+                <reportElement x="173" y="0" width="211" height="15" uuid="40685274-e7ce-48dd-ba3f-e2fe2caa7979">
+                    <property name="com.jaspersoft.studio.unit.height" value="px"/>
+                </reportElement>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$V{PAGE_NUMBER} + " of " + ($V{PAGE_COUNT} - 1)]]></textFieldExpression>
+            </textField>
         </band>
     </pageFooter>
     <summary>
@@ -355,7 +362,9 @@ WHERE
                     <property name="com.jaspersoft.studio.unit.height" value="px"/>
                     <property name="com.jaspersoft.studio.unit.width" value="px"/>
                 </reportElement>
-                <textElement textAlignment="Left" verticalAlignment="Middle"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font isBold="true" isItalic="true"/>
+                </textElement>
                 <textFieldExpression><![CDATA["Total Count 	: " + $V{TotalCount}]]></textFieldExpression>
             </textField>
             <textField>
@@ -363,7 +372,9 @@ WHERE
                     <property name="com.jaspersoft.studio.unit.height" value="px"/>
                     <property name="com.jaspersoft.studio.unit.width" value="px"/>
                 </reportElement>
-                <textElement textAlignment="Left" verticalAlignment="Middle"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font isBold="true" isItalic="true"/>
+                </textElement>
                 <textFieldExpression><![CDATA["Payed 		: "+$V{AttendedCount}]]></textFieldExpression>
             </textField>
             <textField>
@@ -371,7 +382,9 @@ WHERE
                     <property name="com.jaspersoft.studio.unit.height" value="px"/>
                     <property name="com.jaspersoft.studio.unit.width" value="px"/>
                 </reportElement>
-                <textElement textAlignment="Left" verticalAlignment="Middle"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font isBold="true" isItalic="true"/>
+                </textElement>
                 <textFieldExpression>
                     <![CDATA["Not Payed 	: " + ($V{TotalCount} - $V{AttendedCount})]]></textFieldExpression>
             </textField>
