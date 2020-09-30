@@ -9,8 +9,8 @@
     <property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="203"/>
     <property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="792"/>
     <property name="com.jaspersoft.studio.data.defaultdataadapter" value="TuitionDB"/>
-    <parameter name="Year" class="java.lang.String"/>
-    <parameter name="Month" class="java.lang.String"/>
+    <parameter name="PayYear" class="java.lang.String"/>
+    <parameter name="PayMonth" class="java.lang.String"/>
     <parameter name="TeacherFname" class="java.lang.String"/>
     <parameter name="TeacherLname" class="java.lang.String"/>
     <queryString language="SQL">
@@ -51,8 +51,8 @@ FROM tuition_db.tp_details
 	 tuition_db.teacher_has_subject.subject_id = tuition_db.subject.id WHERE 
 	 tuition_db.teacher.fname =  $P{TeacherFname} 
 	 AND tuition_db.teacher.lname =  $P{TeacherLname} 
-	 AND tuition_db.teacher_paymet.`year` =  $P{Year} 
-	 AND tuition_db.teacher_paymet.`month` =  $P{Month}]]>
+	 AND tuition_db.teacher_paymet.`year` =  $P{PayYear} 
+	 AND tuition_db.teacher_paymet.`month` =  $P{PayMonth}]]>
     </queryString>
     <field name="PayMonth" class="java.lang.String">
         <property name="com.jaspersoft.studio.field.name" value="month"/>

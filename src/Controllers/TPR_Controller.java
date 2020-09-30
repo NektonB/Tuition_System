@@ -12,23 +12,11 @@ import javafx.scene.input.KeyEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class CPR_Controller implements Initializable {
+public class TPR_Controller implements Initializable {
 
     DataReader dataReader;
     Alerts alerts;
     ReportViewer reportViewer;
-
-    @FXML
-    private JFXComboBox<String> cmbStream;
-
-    @FXML
-    private JFXComboBox<String> cmbExamYear;
-
-    @FXML
-    private JFXComboBox<String> cmbSubject;
-
-    @FXML
-    private JFXComboBox<String> cmbClassType;
 
     @FXML
     private JFXComboBox<String> cmbYear;
@@ -42,7 +30,6 @@ public class CPR_Controller implements Initializable {
     @FXML
     private JFXButton btnView;
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
@@ -50,10 +37,6 @@ public class CPR_Controller implements Initializable {
             dataReader = ObjectGenerator.getDataReader();
             reportViewer = ObjectGenerator.getReportViewer();
 
-            dataReader.fillStreamCombo(cmbStream);
-            dataReader.fillExamYearCombo(cmbExamYear);
-            dataReader.fillSubjectCombo(cmbSubject);
-            dataReader.fillClassTypeCombo(cmbClassType);
             fillYearCombo();
             fillMonthCombo();
         } catch (Exception e) {
@@ -71,7 +54,7 @@ public class CPR_Controller implements Initializable {
 
     public void viewReport() {
         try {
-            reportViewer.getClassPayment(cmbStream.getValue(), cmbExamYear.getValue(), cmbSubject.getValue(), cmbClassType.getValue(), cmbYear.getValue(), cmbMonth.getValue(), txtTeacherName.getText(), "VIEW");
+            reportViewer.getTeacherPayment(cmbYear.getValue(), cmbMonth.getValue(), txtTeacherName.getText(), "VIEW");
         } catch (Exception e) {
             e.printStackTrace();
         }
