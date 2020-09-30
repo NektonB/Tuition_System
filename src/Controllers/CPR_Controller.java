@@ -6,6 +6,8 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -65,6 +67,20 @@ public class CPR_Controller implements Initializable {
 
     private void fillMonthCombo() {
         cmbMonth.getItems().addAll("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
+    }
+
+    public void viewReport() {
+        try {
+            reportViewer.getClassPayment(cmbStream.getValue(), cmbExamYear.getValue(), cmbSubject.getValue(), cmbClassType.getValue(), cmbYear.getValue(), cmbMonth.getValue(), txtTeacherName.getText(), "VIEW");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void viewReport_Key(KeyEvent event) {
+        if (event.getCode().equals(KeyCode.ENTER)) {
+            viewReport();
+        }
     }
 
 }

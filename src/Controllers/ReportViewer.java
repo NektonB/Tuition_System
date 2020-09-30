@@ -60,9 +60,9 @@ public class ReportViewer {
         }
     }
 
-    public void getClassPayment(String Stream, String ExamYear, String Subject, String ClassType, String Date, String TeacherName, String viewType) {
+    public void getClassPayment(String Stream, String ExamYear, String Subject, String ClassType, String payYear, String payMonth, String TeacherName, String viewType) {
         try {
-            String path = "C:\\Program Files\\Common Files\\Tuition_System\\Reports\\ClassAttendance.jrxml";
+            String path = "C:\\Program Files\\Common Files\\Tuition_System\\Reports\\ClassPayment.jrxml";
 
             JasperReport RI = JasperCompileManager.compileReport(path);
             Map<String, Object> parameter = new HashMap<>();
@@ -71,7 +71,8 @@ public class ReportViewer {
             parameter.put("ExamYear", ExamYear);
             parameter.put("Subject", Subject);
             parameter.put("ClassType", ClassType);
-            parameter.put("Date", Date);
+            parameter.put("PayYear", payYear);
+            parameter.put("PayMonth", payMonth);
             String[] name = TeacherName.split(" ");
             parameter.put("TeacherFname", name[0]);
             parameter.put("TeacherLname", name[1]);

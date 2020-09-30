@@ -138,7 +138,7 @@ public class MainController implements Initializable {
     public void loadClassPay() {
         try {
             Stage productsStage = new Stage();
-            Parent user = FXMLLoader.load(getClass().getClassLoader().getResource("Views/frmStudentClassFee.fxml"));
+            Parent user = FXMLLoader.load(getClass().getClassLoader().getResource("Views/frmCPR.fxml"));
             productsStage.setTitle("Student Class Fees Report");
             Scene scene = new Scene(user);
             productsStage.setScene(scene);

@@ -7,6 +7,8 @@ import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -55,6 +57,12 @@ public class CAR_Controller implements Initializable {
             reportViewer.getClassAttendance(cmbStream.getValue(), cmbExamYear.getValue(), cmbSubject.getValue(), cmbClassType.getValue(), dpDate.getValue().toString(), txtTeacherName.getText(), "VIEW");
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public void viewReport_Key(KeyEvent event) {
+        if (event.getCode().equals(KeyCode.ENTER)) {
+            viewReport();
         }
     }
 
