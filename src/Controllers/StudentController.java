@@ -6,6 +6,7 @@ import Modules.Student;
 import com.jfoenix.controls.JFXButton;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -34,7 +35,7 @@ public class StudentController implements Initializable {
     @FXML
     private TextField txt_search;
     @FXML
-    private ComboBox<?> cmb_option;
+    private ComboBox<String> cmb_option;
     @FXML
     private JFXButton btnAdd;
     @FXML
@@ -64,10 +65,15 @@ public class StudentController implements Initializable {
             student = ObjectGenerator.getStudent();
             readyStudentTable();
             dataReader.fillStudentTable(tblStudent);
-            //fillcmbOption();
+            fillcmbOption();
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void fillcmbOption() {
+        cmb_option.setItems(FXCollections.observableArrayList("First Name", "Index Number"));
+        cmb_option.setValue("First Name");
     }
 
     private void readyStudentTable() {
@@ -125,6 +131,34 @@ public class StudentController implements Initializable {
             productsStage.show();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public void filterStudentTableByIndexNumber(KeyEvent event) {
+        try {
+            student.setIndexNumber(txt_search.getText());
+            dataReader.filterStudentTableByIndexNumber(tblStudent);
+            student.resetAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void filterStudentTableByName(KeyEvent event) {
+        try {
+            student.setF_name(txt_search.getText());
+            dataReader.filterStudentTableByName(tblStudent);
+            student.resetAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void txtSearchKeyReleased(KeyEvent event) {
+        if (cmb_option.getValue().equals("First Name")) {
+            filterStudentTableByName(event);
+        } else if (cmb_option.getValue().equals("Index Number")) {
+            filterStudentTableByIndexNumber(event);
         }
     }
 

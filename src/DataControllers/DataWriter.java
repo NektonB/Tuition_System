@@ -822,7 +822,7 @@ public class DataWriter {
                     boolean isChecked = ((JFXCheckBox) columns.get(4 + j).getCellObservableValue(i).getValue()).isSelected();
 
                     if ((!isAlready) && (isChecked)) {
-                        System.out.println("Call");
+                        //System.out.println("Call");
                         pst.setInt(1, student.getId());
                         pst.setInt(2, ac_typeDetails.getIds().get(k));
                         pst.setInt(3, 1);

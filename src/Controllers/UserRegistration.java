@@ -79,7 +79,7 @@ public class UserRegistration implements Initializable {
     public boolean checkValidate() {
         boolean validate = false;
         if (!txt_userName.getText().isEmpty() && !txt_nic.getText().isEmpty() && !txt_password.getText().isEmpty() && !cmb_userType.getValue().isEmpty() && !cmb_status.getValue().isEmpty()) {
-            System.out.println("Ok");
+            //System.out.println("Ok");
             employee.setNic_number(txt_nic.getText());
             dataReader.getEmployeeDetailsByNIC();
             if (employee.getId() > 0) {

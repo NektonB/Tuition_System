@@ -37,8 +37,9 @@
                             <children>
                                 <FontAwesomeIconView fill="#61666b" glyphName="SEARCH" size="17"
                                                      wrappingWidth="21.142857551574707"/>
-                                <TextField fx:id="txt_search" prefHeight="30.0" prefWidth="372.0"
-                                           promptText="Type to Search" style="-fx-border-color: #ecb23f;">
+                                <TextField fx:id="txt_search" onKeyReleased="#txtSearchKeyReleased" prefHeight="30.0"
+                                           prefWidth="372.0" promptText="Type to Search"
+                                           style="-fx-border-color: #ecb23f;">
                                     <font>
                                         <Font size="13.0"/>
                                     </font>

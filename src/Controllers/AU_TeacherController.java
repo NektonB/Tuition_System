@@ -184,7 +184,7 @@ public class AU_TeacherController implements Initializable {
     public void saveSubjects() {
         if (!cmbSubjects.getValue().isEmpty()) {
             boolean isAvailable = dataReader.checkSubjectIsAvailable(cmbSubjects.getValue());
-            System.out.println(isAvailable);
+            //System.out.println(isAvailable);
             if (isAvailable) {
                 Toolkit.getDefaultToolkit().beep();
                 alerts.getWarningNotify("Subject Registration", "Careful Chief..!\n" + cmbSubjects.getValue() + " is already available");
@@ -366,7 +366,7 @@ public class AU_TeacherController implements Initializable {
                             }
                         }
 
-                        if (operation > 0) {
+                        if (operation > 0 || updateTeacher > 0) {
                             teacher.resetAll();
                             status.resetAll();
 

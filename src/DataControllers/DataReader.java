@@ -1466,6 +1466,86 @@ public class DataReader {
         }
     }
 
+    public void filterStudentTableByName(TableView tblStudent) {
+        ResultSet rs = null;
+        ObservableList<StudentController.StudentList> studentList = FXCollections.observableArrayList();
+        try {
+            pst = conn.prepareStatement("SELECT student.id,student.fname,student.lname,student.nic_number,student.address,student.contact_number,student.email,status.status FROM student INNER JOIN status on student.status_id = status.id WHERE student.fname LIKE ?");
+            pst.setString(1, student.getF_name() + "%");
+            rs = pst.executeQuery();
+            if (!rs.isBeforeFirst()) {
+                student.resetAll();
+            }
+            while (rs.next()) {
+                studentList.add(
+                        new StudentController.StudentList(
+                                rs.getInt("student.id"),
+                                rs.getString("student.fname") + " " + rs.getString("student.lname"),
+                                rs.getString("student.nic_number"),
+                                rs.getString("student.address"),
+                                rs.getString("student.contact_number"),
+                                rs.getString("student.email"),
+                                rs.getString("status.status")
+                        )
+                );
+            }
+            tblStudent.setItems(studentList);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void filterStudentTableByIndexNumber(TableView tblStudent) {
+        ResultSet rs = null;
+        ObservableList<StudentController.StudentList> studentList = FXCollections.observableArrayList();
+        try {
+            pst = conn.prepareStatement("SELECT student.id,student.fname,student.lname,student.nic_number,student.address,student.contact_number,student.email,status.status FROM student INNER JOIN status on student.status_id = status.id WHERE student.index_number LIKE ?");
+            pst.setString(1, student.getIndexNumber() + "%");
+            rs = pst.executeQuery();
+            if (!rs.isBeforeFirst()) {
+                student.resetAll();
+            }
+            while (rs.next()) {
+                studentList.add(
+                        new StudentController.StudentList(
+                                rs.getInt("student.id"),
+                                rs.getString("student.fname") + " " + rs.getString("student.lname"),
+                                rs.getString("student.nic_number"),
+                                rs.getString("student.address"),
+                                rs.getString("student.contact_number"),
+                                rs.getString("student.email"),
+                                rs.getString("status.status")
+                        )
+                );
+            }
+            tblStudent.setItems(studentList);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+                if (!pst.isClosed()) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     public void getStudentDetailsById() {
         ResultSet rs = null;
         try {
@@ -1914,7 +1994,7 @@ public class DataReader {
             int count = 0;
 
             for (String[] raw : acc) {
-                System.out.println(raw[0]);
+                //System.out.println(raw[0]);
                 JFXCheckBox cmbTheory = new JFXCheckBox();
                 JFXCheckBox cmbRevision = new JFXCheckBox();
                 JFXCheckBox cmbPaper = new JFXCheckBox();
