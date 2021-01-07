@@ -64,7 +64,6 @@ public class MainController implements Initializable {
         }
     }
 
-
     public void loadEmployee(ActionEvent event) throws IOException {
         if (userType.getType().equals("Admin") || userType.getType().equals("Super Admin")) {
             StackPane pane = FXMLLoader.load(getClass().getClassLoader().getResource("Views/pnlEmployee.fxml"));
@@ -98,9 +97,19 @@ public class MainController implements Initializable {
     }
 
     public void loadClassPayment(ActionEvent event) throws IOException {
-        StackPane pane = FXMLLoader.load(getClass().getClassLoader().getResource("Views/pnlClassPayment.fxml"));
-        rootPane.getChildren().setAll(pane);
+        /*StackPane pane = FXMLLoader.load(getClass().getClassLoader().getResource("Views/pnlClassPayment.fxml"));
+        rootPane.getChildren().setAll(pane);*/
 
+        Stage classPaymentStage = new Stage();
+        Parent user = FXMLLoader.load(getClass().getClassLoader().getResource("Views/pnlClassPayment.fxml"));
+        classPaymentStage.setTitle("Class Payments");
+        Scene scene = new Scene(user);
+        classPaymentStage.setScene(scene);
+        classPaymentStage.initStyle(StageStyle.UTILITY);
+        //productsStage.getIcons().add(new Image("/images/Main_01.png"));
+        classPaymentStage.setResizable(false);
+        classPaymentStage.initModality(Modality.APPLICATION_MODAL);
+        classPaymentStage.show();
     }
 
     public void loadTeacherPayment(ActionEvent event) throws IOException {
