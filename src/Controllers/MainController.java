@@ -105,10 +105,10 @@ public class MainController implements Initializable {
         classPaymentStage.setTitle("Class Payments");
         Scene scene = new Scene(user);
         classPaymentStage.setScene(scene);
-        classPaymentStage.initStyle(StageStyle.UTILITY);
+        classPaymentStage.initStyle(StageStyle.DECORATED);
         //productsStage.getIcons().add(new Image("/images/Main_01.png"));
         classPaymentStage.setResizable(false);
-        classPaymentStage.initModality(Modality.APPLICATION_MODAL);
+        classPaymentStage.initModality(Modality.WINDOW_MODAL);
         classPaymentStage.show();
     }
 
