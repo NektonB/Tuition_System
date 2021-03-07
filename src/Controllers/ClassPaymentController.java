@@ -113,7 +113,7 @@ public class ClassPaymentController implements Initializable {
     }
 
     private void filStatusCombo() {
-        cmbStatus.getItems().addAll("Payed", "Not Payed");
+        cmbStatus.getItems().addAll("Payed", "Half Payed", "Free Card", "Not Payed");
         cmbStatus.setValue("Payed");
     }
 

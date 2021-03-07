@@ -30,7 +30,6 @@ public class MainController implements Initializable {
     User user;
     UserType userType;
 
-
     @FXML
     private StackPane rootPane;
 
